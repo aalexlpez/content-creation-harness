@@ -1,0 +1,11 @@
+1
+00:00:01,000 --> 00:00:03,000
+Prueba de edición y sincronización.
+
+2
+00:00:06,000 --> 00:00:08,000
+Comprueba la voz y el encuadre.
+
+3
+00:00:12,000 --> 00:00:14,000
+Revisión final. Vídeo de ensayo.
