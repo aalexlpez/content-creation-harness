@@ -1,1 +1,1 @@
-publicacion_id,plataforma,fecha_observacion,metric_key,valor,unidad,denominador,ventana,fuente,disponibilidad
+publicacion_id,plataforma,fecha_observacion,ventana,metrica,valor,unidad,denominador,fuente,disponibilidad

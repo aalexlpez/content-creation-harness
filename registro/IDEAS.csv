@@ -1,1 +1,1 @@
-idea_id,proyecto_id,fecha,procedencia,problema,prueba
+idea_id,proyecto_id,fecha,titulo,pilar,formato,procedencia,problema,prueba,puntuacion,estado

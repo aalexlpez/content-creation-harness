@@ -1,26 +1,23 @@
 {
-  "version": "0.2-propuesta-v3.1",
-  "status": "PENDIENTE_B0_NO_USAR_COMO_FINAL",
-  "name": "Alexander | Desarrollador (identidad provisional del creador)",
-  "distinct_from_product_web_theme": true,
-  "colors": {
-    "background": "#0B1020",
-    "surface": "#17243A",
-    "text_primary": "#F3F7FF",
-    "text_secondary": "#B9CAE2",
-    "accent_primary": "#54E0EA",
-    "accent_secondary": "#AD8BFF",
-    "accent_result": "#D9F77A"
+  "version": "temp-0.3",
+  "estado": "PROVISIONAL",
+  "nombre_mostrado": "Alexander | Desarrollador",
+  "alias": null,
+  "colores": {
+    "fondo": "#0B1020",
+    "panel": "#17243A",
+    "texto_principal": "#F3F7FF",
+    "texto_secundario": "#B9CAE2",
+    "acento_principal": "#54E0EA",
+    "acento_secundario": "#AD8BFF",
+    "acento_resultado": "#D9F77A"
   },
-  "typography": {
-    "display": "PENDIENTE",
-    "body": "PENDIENTE"
+  "tipografia": {
+    "subtitulo": "Inter Semibold",
+    "rotulo": "Inter Bold",
+    "acento": "Crimson Text + Mr Dafoe (en prueba)"
   },
-  "audio_signature": "PENDIENTE",
-  "motion_house_style": "morph continuo, UI protagonista, rótulos breves, sonido motivado por interacción",
-  "references_are_motion_only": true,
-  "brand_owner": "Alexander",
-  "brand_scope": "Marca personal audiovisual; independiente de MiMiniApp",
-  "social_handle": "PENDIENTE_VERIFICACION",
-  "product_MiMiniApp_is_creator_brand": false
+  "firma_sonora": null,
+  "movimiento": "interfaz por capas, transformaciones con continuidad, rótulos breves, sonido ligado a la interacción",
+  "independiente_de_proyectos": true
 }

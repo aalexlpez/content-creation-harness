@@ -1,0 +1,37 @@
+# Medios: pesados y personales. Su rastro va en MEDIOS.csv (marco.py medios).
+videos/*/media/
+*.mp4
+*.mov
+*.MOV
+*.MP4
+*.mkv
+*.m4v
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.srt.bak
+
+# HyperFrames y Node
+node_modules/
+videos/*/hyperframes/**/renders/
+videos/*/hyperframes/**/output/
+
+# Python
+__pycache__/
+*.pyc
+
+# Configuración local
+marco.local.json
+.claude/settings.local.json
+.env
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+*.tmp
+.tmp-*
+.vscode/
+.idea/

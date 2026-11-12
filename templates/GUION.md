@@ -1,41 +1,52 @@
-# Guion {{VIDEO}}
+# {{VIDEO}} · {{TITULO}}
+
+Guion y dirección de montaje. Cómo rellenarlo: [GUIONES](../../guias/GUIONES.md) · [EDICION](../../guias/EDICION.md).
 
 ## Control
 
 - Video: {{VIDEO}}
 - Proyecto: {{PROYECTO}}
 - Idea: {{IDEA}}
-- Version: v01
+- Semana: {{SEMANA}}
 - Modo: {{MODO}}
+- Version: v01
 
 ## Brief
 
-- Audiencia, pilar y objetivo:
-- Serie y campaña si aplican:
-- Formato, promesa y alcance:
-- Prueba visual esperada y CTA:
-- Dos ganchos máximo, motivo de elección y lectura cronometrada:
-- Ritmo de montaje y tratamiento de imagen (cámara, pantalla y color a probar):
-- Música de fondo o silencio (carácter, entrada, bajada y salida):
-- Jerarquía de texto (subtítulo, rótulo y frase de acento) y perfil visual (TEMP o versión aprobada):
+- Audiencia: PENDIENTE
+- Objetivo: PENDIENTE
+- Pilar: PENDIENTE
+- Familia: PENDIENTE
+- Promesa: PENDIENTE
+- Prueba_visual: PENDIENTE
+- CTA: PENDIENTE
+- Duracion: PENDIENTE
+- Ritmo: PENDIENTE
+- Musica: PENDIENTE
+- Texto_en_pantalla: PENDIENTE
+- Color: PENDIENTE
+- Perfil_visual: TEMP
+
+## Ganchos
+
+| gancho | texto | tipo | puntos | elegido |
+|---|---|---|---|---|
 
 ## Escenas
 
-| escena_id | duración/TC | voz literal | visual y rótulo | prueba/claim | sonido y toma |
-|---|---|---|---|---|---|
-
-En «visual y rótulo» indica plano o corte, texto exacto, estilo, posición y permanencia. En «sonido y toma» indica entrada, salida o bajada de música, efecto puntual o silencio y la toma necesaria. Ancla cada intervención a un TC aproximado y a una palabra o acción visible. En borrador marca los recursos por acreditar.
+| escena | tiempo | voz literal | imagen y texto en pantalla | sonido | toma o recurso | claim |
+|---|---|---|---|---|---|---|
 
 ## Claims
 
-| claim_id | tipo | estado | prueba y límites |
+| claim_id | tipo | afirmación | prueba y límites |
 |---|---|---|---|
 
-Tipos P (producto/prueba propia), E (externa), O (opinión), H (hipótesis explícita), X (sin verificar). Si la pieza carece de afirmaciones verificables, registrar una fila SIN-CLAIMS / O / CONFORME con justificación.
+## Notas de revisión
 
 ## OK-2
 
 - Aprobador: PENDIENTE
-- Fecha: PENDIENTE
-- Evidencia: PENDIENTE
-- Huella: PENDIENTE
+- Fecha:
+- Evidencia:
+- Huella:

@@ -1,52 +1,44 @@
-# Cierre {{VIDEO}}
+# {{VIDEO}} · Cierre
+
+Máster, control de calidad, derechos y publicación. Referencias: [TECNICA](../../guias/TECNICA.md) · [FLUJO](../../guias/FLUJO.md).
 
 ## Control
 
-- Revision_cierre: v01
-- Ruta_master: PENDIENTE
+- Master: PENDIENTE
 - Master_sha256: PENDIENTE
-- Version_master: PENDIENTE
-- Huella_corte: PENDIENTE
+- Version_master: v01
 
 ## Derechos
 
-| recurso | destinos autorizados | estado | procedencia, prueba y condiciones |
+| recurso | tipo | origen y licencia | destinos cubiertos |
 |---|---|---|---|
-
-Incluir URL/autor, fecha, licencia/archivo de prueba, atribución, vigencia, permiso de reutilización/archivo y recursos propios. Para salida pública registrar cada recurso o una declaración sustentada de medios propios.
 
 ## QC
 
 - Tecnico: PENDIENTE
-- Visual: PENDIENTE
+- Imagen: PENDIENTE
 - Audio: PENDIENTE
+- Textos: PENDIENTE
 - Derechos: PENDIENTE
-- Evidencia: PENDIENTE
-- Portada, subtítulos, recorte y revisión móvil:
-- Hallazgos y resolución:
+- Movil: PENDIENTE
+- Hallazgos:
 
 ## Plan de publicación
 
-| publicacion_id | plataforma | archivo | sha256 | copy, portada y alcance | recursos |
-|---|---|---|---|---|---|
+| publicacion_id | plataforma | archivo | copy, portada y notas |
+|---|---|---|---|
 
 ## OK-3
 
 - Aprobador: PENDIENTE
-- Fecha: PENDIENTE
-- Evidencia: PENDIENTE
-- Huella: PENDIENTE
-
-## Autorización de publicación
-
-| publicacion_id | huella OK-3 | aprobador | fecha | evidencia | perfil público | cuenta |
-|---|---|---|---|---|---|---|
+- Fecha:
+- Evidencia:
+- Huella:
 
 ## Publicaciones
 
-| publicacion_id | estado | fecha | URL | evidencia o incidencia |
-|---|---|---|---|---|
+| publicacion_id | fecha | url | notas |
+|---|---|---|---|
 
 ## Aprendizaje
 
-Consultar registro/METRICAS.csv por publicacion_id. Registrar aquí decisiones de contenido, con ventanas y alcance. Si se archivan medios, consultar ARCHIVO.json.

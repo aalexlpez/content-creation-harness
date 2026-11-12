@@ -1,5 +1,5 @@
-plataforma,alias_candidato,estado_verificacion,url_perfil_confirmada,fecha_verificacion,evidencia,responsable,tipo_cuenta
-Instagram,,PENDIENTE,,,,,
-Facebook,,PENDIENTE,,,,,
-TikTok,,PENDIENTE,,,,,
-YouTube,,PENDIENTE,,,,,
+plataforma,alias,estado,url,fecha_verificacion,evidencia
+YouTube,,PENDIENTE,,,
+TikTok,,PENDIENTE,,,
+Instagram,,PENDIENTE,,,
+Facebook,,PENDIENTE,,,

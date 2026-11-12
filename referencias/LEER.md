@@ -1,5 +1,10 @@
-# Referencias de consulta
+# Referencias visuales
 
-Los nueve originales se conservan en [el legado](../legado/v3.5/referencias/LEER.md). Las ocho imágenes activas cubren composición, rotulación y transición de interfaz. El PNG 083529 es idéntico a 083527 y queda disponible en el legado. La licencia de publicación no está acreditada. Estudiar técnica, sin copiar identidades, imágenes o marcas. El [piloto técnico anterior](../legado/v3.5/evidencia_tecnica/piloto_hyperframes_8s.mp4) es una prueba previa del flujo. La [guía de set](set/guia_set_grabacion.md) conserva ajustes de referencia sujetos a ensayo.
+Capturas de publicaciones de terceros guardadas para **estudiar técnica**: composición, rótulos y transición de interfaz. No tienen licencia de uso: no se copian ni aparecen en los vídeos, y no se toman como paleta ni identidad.
 
-La [guía de dirección de edición](DIRECCION_DE_EDICION.md) reúne las referencias aportadas para música, efectos, tipografía, color y acentos visuales. Úsalas para proponer el montaje desde el guion.
+| Carpeta | Qué muestra | Para qué sirve |
+|---|---|---|
+| `tecnologia/` (5 PNG) | Creador a cámara en un set oscuro con índice de capítulos y rótulos laterales | A-roll con rótulos informativos y luz de fondo (patrón F-01) |
+| `ui_motion/` (3 JPG) | Maqueta de app flotante con efecto vidrio sobre un fondo fotográfico | Interfaz cinematográfica por capas (AV-002, patrón U-01) |
+
+**Pendiente:** las seis capturas de tipografía y ajustes de color en las que se basa [EDICION](../guias/EDICION.md) siguen en la biblioteca de ChatGPT de Ale. Para que cualquier agente pueda verlas, guárdalas en `referencias/edicion/`.

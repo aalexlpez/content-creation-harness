@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python scripts/marco.py:*)",
+      "Bash(python3 scripts/marco.py:*)",
+      "Bash(py -3 scripts/marco.py:*)",
+      "Bash(python -m unittest:*)",
+      "Bash(python3 -m unittest:*)"
+    ]
+  }
+}

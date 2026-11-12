@@ -1,15 +1,23 @@
-# Proyecto {{PROYECTO}}
+# {{NOMBRE}}
 
 ## Control
 
 - Proyecto: {{PROYECTO}}
-- Creador: Alexander
-- Estado: PROPUESTA
+- Estado: ACTIVO
 
-## Contexto
+## Qué es
 
-Propósito, audiencia, pruebas propias, versión, fuentes y límites. Distinguir el tema editorial del producto, sus perfiles y su diseño. Serie/campaña opcional.
+Propósito, para quién es y en qué estado está.
 
-## Evidencia
+## Qué se puede demostrar hoy
 
-Añadir enlaces al material autorizado y registrar qué claims permiten probar. Las decisiones editoriales personales se aprueban aparte.
+| demo | dónde | estado | notas |
+|---|---|---|---|
+
+Solo cuenta lo que funciona de verdad y se puede grabar. Lo que está en desarrollo se presenta como proceso, no como producto.
+
+## Límites y claims
+
+Qué se puede afirmar con prueba propia y qué no.
+
+## Referencias

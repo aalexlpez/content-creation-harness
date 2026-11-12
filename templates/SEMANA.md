@@ -1,5 +1,7 @@
 # Semana {{SEMANA}}
 
+Planificación del lote. Criterios de selección: [EDITORIAL](../../guias/EDITORIAL.md).
+
 ## Control
 
 - Semana: {{SEMANA}}
@@ -8,23 +10,21 @@
 
 ## Lote
 
-| idea_id | proyecto_id | horas | motivo |
+| idea_id | video_id | horas | motivo |
 |---|---|---|---|
-{{LOTE}}
 
 ## OK-1
 
 - Aprobador: PENDIENTE
-- Fecha: PENDIENTE
-- Evidencia: PENDIENTE
-- Huella: PENDIENTE
+- Fecha:
+- Evidencia:
+- Huella:
 
 ## Seguimiento
 
-Los expedientes se localizan por idea e ID global en [videos](../../videos/). Apunta aquí incidencias de capacidad o reprogramaciones. Las antiguas asignaciones pasan a la retrospectiva, fuera del lote activo.
-
 ## Retrospectiva
 
-- Horas reales y desviaciones:
-- Publicaciones y observaciones por ID:
-- Aprendizaje y siguiente hipótesis:
+- Horas reales:
+- Qué funcionó:
+- Qué falló:
+- Siguiente hipótesis:

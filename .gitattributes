@@ -1,0 +1,23 @@
+# Texto siempre en UTF-8 con LF, en cualquier sistema.
+* text=auto eol=lf
+
+# Binarios: Git no debe tocarlos nunca.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.mp4 binary
+*.mov binary
+*.mkv binary
+*.wav binary
+*.mp3 binary
+*.m4a binary
+*.aac binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.zip binary
