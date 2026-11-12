@@ -8,6 +8,7 @@ from pathlib import Path
 
 from nucleo import (
     CAB_CUENTAS, CAB_IDEAS, CAB_METRICAS, ESTADOS_IDEA, PLATAFORMAS, RE_FECHA, RE_PUBLICACION,
+    REDES_ENLAZABLES, REDES_POST_ENLACE,
     RE_SEMANA, RE_SHA, RE_VIDEO, VACIOS, Doc, ErrorMarco, corta, escribir_csv, escribir_texto,
     exigir, fecha_iso, fila_tabla, huella, idea_id, leer_csv, leer_texto, proyecto_id, rel,
     semana_id, sha_archivo, siguiente_id, video_id, hoy,
@@ -302,6 +303,8 @@ def _aprobar_ok3(raiz, v: Video, aprobador, evidencia, master):
         exigir(plan, "OK-3: el plan de publicación está vacío")
     for f in plan:
         _comprobar_publicacion_id(v.vid, f.get("publicacion_id", ""), f.get("plataforma", ""))
+    for f in plan:
+        _comprobar_enlace_post(v.vid, f, plan)
     v.cierre.poner_campo("Control", "Master", ruta_master)
     v.cierre.poner_campo("Control", "Master_sha256", sha_archivo(archivo))
     h = huella_ok3(v)
@@ -316,9 +319,28 @@ def _aprobar_ok3(raiz, v: Video, aprobador, evidencia, master):
 
 def _comprobar_publicacion_id(vid: str, pub: str, plataforma: str) -> None:
     m = RE_PUBLICACION.fullmatch(pub)
-    exigir(m, f"publicacion_id inválido {pub!r} (formato {vid}-YT-01; redes YT, TT, IG, FB)")
+    exigir(m, f"publicacion_id inválido {pub!r} (formato {vid}-YT-01; redes YT, TT, IG, FB, X)")
     exigir(m[1] == vid, f"{pub} no pertenece a {vid}")
     exigir(plataforma == PLATAFORMAS[m[2]], f"{pub}: la plataforma debe ser {PLATAFORMAS[m[2]]}, no {plataforma!r}")
+
+
+def red_de(pub: str) -> str:
+    m = RE_PUBLICACION.fullmatch(pub or "")
+    return m[2] if m else ""
+
+
+def _comprobar_enlace_post(vid: str, fila: dict, plan: list[dict]) -> None:
+    """Un post de X no lleva vídeo: en `archivo` va la publicación de TikTok o Instagram a la que enlaza."""
+    pub = fila.get("publicacion_id", "")
+    if red_de(pub) not in REDES_POST_ENLACE:
+        return
+    destino = fila.get("archivo", "")
+    redes = " o ".join(PLATAFORMAS[r] for r in sorted(REDES_ENLAZABLES, reverse=True))
+    exigir(red_de(destino) in REDES_ENLAZABLES and RE_PUBLICACION.fullmatch(destino)[1] == vid,
+           f"{pub}: en X no se sube el vídeo; en «archivo» va la publicación de {redes} a la que enlaza "
+           f"(por ejemplo {vid}-TT-01), no {destino!r}")
+    exigir(any(f.get("publicacion_id") == destino for f in plan),
+           f"{pub}: enlaza a {destino}, que no está en el plan de publicación")
 
 
 # ---------------------------------------------------------------- estados
@@ -523,7 +545,13 @@ def _validar_estado(raiz, v: Video, errores, avisos, lista_cuentas, prefijo=""):
             plan[f["publicacion_id"]] = f
         except ErrorMarco as ex:
             errores.append(prefijo + str(ex))
+    for f in plan.values():
+        try:
+            _comprobar_enlace_post(v.vid, f, list(plan.values()))
+        except ErrorMarco as ex:
+            errores.append(prefijo + str(ex))
     publicadas = 0
+    con_url = {f.get("publicacion_id", ""): f for f in v.cierre.tabla("Publicaciones") if f.get("url")}
     for f in v.cierre.tabla("Publicaciones"):
         pub = f.get("publicacion_id", "")
         if pub not in plan:
@@ -545,6 +573,12 @@ def _validar_estado(raiz, v: Video, errores, avisos, lista_cuentas, prefijo=""):
             plataforma = plan[pub]["plataforma"]
             if lista_cuentas.get(plataforma, {}).get("estado") != "VERIFICADA":
                 errores.append(prefijo + f"{pub}: la cuenta de {plataforma} no está VERIFICADA en marca/CUENTAS.csv")
+            if red_de(pub) in REDES_POST_ENLACE:
+                destino = plan[pub].get("archivo", "")
+                if destino in plan and destino not in con_url:
+                    errores.append(prefijo + f"{pub}: el post de X enlaza a {destino}, que aún no tiene URL publicada")
+                elif destino in con_url and f.get("fecha") and con_url[destino].get("fecha", "") > f["fecha"]:
+                    errores.append(prefijo + f"{pub}: el post de X tiene fecha anterior a {destino}, al que enlaza")
     if e in PUBLICADOS and not publicadas:
         errores.append(prefijo + f"el estado {e} exige al menos una publicación con URL en CIERRE")
     if e in PUBLICADOS and v.modo == "ENSAYO":

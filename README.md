@@ -1,8 +1,8 @@
 # Marco de contenido de Alexander
 
-Sistema para planificar, escribir, producir y medir vídeos verticales cortos (YouTube Shorts, TikTok, Reels) trabajando entre Alexander y Claude. Todo es texto versionado en Git más un pequeño CLI en Python que crea expedientes, registra aprobaciones y comprueba que nada se rompa.
+Sistema para planificar, escribir, producir y medir vídeos verticales cortos (YouTube Shorts, TikTok, Reels, Facebook y posts de X que enlazan al vídeo) trabajando entre Alexander y Claude. Todo es texto versionado en Git más un pequeño CLI en Python que crea expedientes, registra aprobaciones y comprueba que nada se rompa.
 
-**Versión 5.0.0** · Python 3.11+ (solo biblioteca estándar) · Windows, macOS y Linux.
+**Versión 5.1.0** · Python 3.11+ (solo biblioteca estándar) · Windows, macOS y Linux.
 
 ## Arranque en 5 minutos
 

@@ -18,6 +18,7 @@ idea ──► semana (OK-1) ──► guion (OK-2) ──► rodaje y montaje �
 | 6. Animación y montaje | Claude (HyperFrames) y Ale (CapCut/Shotcut) | `PRODUCCION.md` |
 | 7. Máster y QC | Ale revisa en el móvil y aprueba (**OK-3**) | `CIERRE.md` · `marco.py aprobar OK-3 VID-0001 --master media/entregas/…` |
 | 8. Publicación | Ale publica; Claude registra la URL | `CIERRE.md` → Publicaciones · `marco.py mover VID-0001 PUBLICADO` |
+| 8b. Post en X | Claude redacta; Ale publica después del vídeo enlazado | `CIERRE.md` → Plan y Publicaciones (ver [Posts en X](#posts-en-x)) |
 | 9. Métricas | Ale aporta datos; Claude los registra | `registro/METRICAS.csv` a +48h y +7d |
 | 10. Retrospectiva | Ambos | `SEMANA.md` → Retrospectiva |
 
@@ -62,6 +63,26 @@ Mantén al día `Siguiente_paso` (`--siguiente "…"`). Es lo primero que se lee
 - **Republicar o añadir una red**: añade una fila nueva al plan (`VID-0001-IG-02`). Si el plan cambia antes de publicar, renueva el OK-3.
 - **Reprogramar** un vídeo a otra semana: mueve la fila del lote a la semana nueva, cambia `Semana` en el GUION y anota el motivo en `Seguimiento` de las dos semanas. Una idea solo puede estar en un lote.
 
+## Posts en X
+
+En X **no se sube el vídeo**. Se publica un post propio que lleva al vídeo ya publicado en TikTok o Instagram (DIST-X-001).
+
+| Paso | Qué se hace |
+|---|---|
+| Plan | Una fila `VID-NNNN-X-NN` con plataforma `X`. En la columna `archivo` va la publicación a la que enlaza (`VID-NNNN-TT-01` o `VID-NNNN-IG-01`), que tiene que estar en el mismo plan. En `copy, portada y notas`, el texto exacto del post |
+| OK-3 | El post entra en la huella del plan como cualquier otra fila: si cambia su texto o su enlace, el OK-3 se renueva |
+| Publicar | Ale publica primero el vídeo de destino y después el post, pegando la URL real de ese vídeo |
+| Registrar | URL del post en Publicaciones, con una fecha igual o posterior a la del vídeo enlazado |
+| Medir | Métricas del post en `METRICAS.csv` con la plataforma `X` (por ejemplo, clics en el enlace) |
+
+El validador rechaza un post de X que apunte a un archivo de vídeo, a YouTube o Facebook, o a una publicación que no esté en el plan. También rechaza que se registre como publicado antes que su vídeo.
+
+Cómo escribir el post:
+- Es un texto para X, no la descripción de TikTok copiada. Una frase con la idea central del vídeo y el enlace.
+- Sin hashtags de relleno. Como mucho uno, si de verdad sirve para encontrarlo.
+- La cuenta es `@soycerobytes`. Al mencionar el vídeo, usa el identificador de la red de destino ([IDENTIDAD](../marca/IDENTIDAD.md)).
+- Mismas reglas de claims que el guion: el post no promete nada que el vídeo no enseñe.
+
 ## Identificadores
 
 | Elemento | Formato | Ejemplo |
@@ -69,7 +90,7 @@ Mantén al día `Siguiente_paso` (`--siguiente "…"`). Es lo primero que se lee
 | Idea | `I-NNNN` | I-0007 |
 | Semana | ISO `AAAA-WNN` | 2026-W46 |
 | Vídeo | `VID-NNNN` | VID-0003 |
-| Publicación | `VID-NNNN-RED-NN` (red: YT, TT, IG, FB) | VID-0003-TT-01 |
+| Publicación | `VID-NNNN-RED-NN` (red: YT, TT, IG, FB, X) | VID-0003-TT-01 |
 | Proyecto | minúsculas con guiones | miminiapp |
 
 Los IDs los asigna el CLI y no cambian aunque el vídeo cambie de semana.

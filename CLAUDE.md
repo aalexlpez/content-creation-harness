@@ -1,6 +1,6 @@
 # Instrucciones para Claude
 
-Este repositorio es el marco con el que **Alexander** (Ale) produce vídeos verticales cortos para YouTube Shorts, TikTok, Instagram Reels y Facebook con ayuda de Claude. Ale dirige, graba, aprueba y publica. Claude propone, escribe, organiza, comprueba y prepara.
+Este repositorio es el marco con el que **Alexander** (Ale) produce vídeos verticales cortos para YouTube Shorts, TikTok, Instagram Reels y Facebook, más posts en X que enlazan al vídeo de TikTok o Instagram, con ayuda de Claude. Ale dirige, graba, aprueba y publica. Claude propone, escribe, organiza, comprueba y prepara.
 
 ## Al empezar una sesión
 

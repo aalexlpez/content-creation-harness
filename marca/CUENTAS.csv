@@ -1,5 +1,6 @@
 plataforma,alias,estado,url,fecha_verificacion,evidencia
-YouTube,,PENDIENTE,,,
-TikTok,,PENDIENTE,,,
-Instagram,,PENDIENTE,,,
-Facebook,,PENDIENTE,,,
+YouTube,soy.cerobytes,VERIFICADA,https://www.youtube.com/@soy.cerobytes,2026-11-12,"Ale en chat, 2026-11-12: «Este es el canal de youtube: https://www.youtube.com/@soy.cerobytes». Canal «Alexander» visible"
+TikTok,cerobytes,VERIFICADA,https://www.tiktok.com/@cerobytes,2026-11-12,"Ale en chat, 2026-11-12: «el que realmente quiero, es el de cerobytes de tiktok». Perfil público sin vídeos"
+Instagram,cer0bytes,VERIFICADA,https://www.instagram.com/cer0bytes/,2026-11-12,"Ale en chat, 2026-11-12: «cer0bytes de instagram». Perfil público (@cer0bytes)"
+Facebook,cerobytes,VERIFICADA,https://www.facebook.com/p/cerobytes-61596111701428/,2026-11-12,"Ale en chat, 2026-11-12: enlace https://www.facebook.com/share/1EgxNNjrtD/. Resuelve al perfil «cerobytes», sin nombre de usuario propio"
+X,soycerobytes,VERIFICADA,https://x.com/soycerobytes,2026-11-12,"Ale en chat, 2026-11-12: «X: @soycerobytes». Perfil público «cerobytes»"

@@ -7,29 +7,27 @@
 - El creador es **Alexander**, desarrollador, y se presenta como persona (CREATOR-IDENTITY-001).
 - MiMiniApp y otros proyectos son proyectos de Alexander. No son el nombre de las cuentas, ni el canal, ni deciden los colores de los vídeos.
 - Bien: «Soy Alexander. Estoy construyendo MiMiniApp, una web de pequeñas herramientas…». Mal: «Somos MiMiniApp» o `@miminiapp` en las cuentas personales.
-- Hasta tener alias verificado: nombre mostrado **«Alexander | Desarrollador»**, sin `@` en vídeos, portadas ni subtítulos.
+- El nombre del canal es **cerobytes** (CREATOR-ALIAS-003). Alexander sigue presentándose como persona: «Soy Alexander…».
 
-## Alias (pendiente: CREATOR-ALIAS-002)
+## Alias (CREATOR-ALIAS-003)
 
-Objetivo: el mismo `@alias` en YouTube, TikTok, Instagram y Facebook.
+No hubo un alias libre en todas las redes. Ale eligió el 2026-11-12 quedarse con estos, y no se buscan otros:
 
-Criterios: empieza por Alex, fácil de decir y escribir en español, 14 caracteres como máximo, sin tildes, puntos, guiones ni números, que no ate a una sola app o lenguaje y que se pueda registrar en las cuatro redes.
+| Red | Identificador | URL |
+|---|---|---|
+| YouTube | `@soy.cerobytes` | https://www.youtube.com/@soy.cerobytes |
+| TikTok | `@cerobytes` | https://www.tiktok.com/@cerobytes |
+| Instagram | `@cer0bytes` (con el número cero) | https://www.instagram.com/cer0bytes/ |
+| Facebook | perfil «cerobytes», sin nombre de usuario propio | https://www.facebook.com/p/cerobytes-61596111701428/ |
+| X (solo posts con enlace, DIST-X-001) | `@soycerobytes` | https://x.com/soycerobytes |
 
-| Prioridad | Candidato | A favor | En contra |
-|---|---|---|---|
-| 1 | `alexenbeta` | Personal y memorable, cuenta un proceso | «beta» puede envejecer mal |
-| 2 | `alexcompila` | Vínculo claro con programar | Algo técnico para el público general |
-| 3 | `alexcreabits` | Tecnológico, admite varios proyectos | Menos natural al decirlo |
-| 4 | `alexiterativo` | Experimentación continua | Concepto menos inmediato |
+Detalle verificado en `marca/CUENTAS.csv`.
 
-Una búsqueda sin resultados **no** demuestra que esté libre. La prueba es intentar guardarlo en cada red:
+Cómo se nombra, ya que los identificadores no coinciden:
 
-1. Instagram → Editar perfil → Nombre de usuario → guardar.
-2. TikTok → Editar perfil → Nombre de usuario (solo se puede cambiar cada 30 días).
-3. YouTube Studio → Personalización → Identificador.
-4. Facebook → la página o el perfil profesional elegido → nombre de usuario.
-
-Si falla en una, se prueba el siguiente candidato. No se abren cuentas con nombres distintos. Al confirmar, se rellena `marca/CUENTAS.csv` (alias, URL, fecha, evidencia, estado `VERIFICADA`) y se cierra la decisión en [DECISIONES](../registro/DECISIONES.md).
+- **Voz**: «cerobytes», sin decir arroba ni deletrear.
+- **Máster**: sin `@` grabado en la imagen. Si hace falta firma, se escribe «cerobytes» a secas, que vale en todas las redes.
+- **Copy, descripción y tarjetas finales de cada red**: el identificador exacto de esa red, según la tabla. En Instagram es `@cer0bytes`, nunca `@cerobytes`.
 
 ## Perfil TEMP
 

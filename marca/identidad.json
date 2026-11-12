@@ -2,7 +2,14 @@
   "version": "temp-0.3",
   "estado": "PROVISIONAL",
   "nombre_mostrado": "Alexander | Desarrollador",
-  "alias": null,
+  "alias": {
+    "canal": "cerobytes",
+    "youtube": "@soy.cerobytes",
+    "tiktok": "@cerobytes",
+    "instagram": "@cer0bytes",
+    "facebook": "cerobytes",
+    "x": "@soycerobytes"
+  },
   "colores": {
     "fondo": "#0B1020",
     "panel": "#17243A",

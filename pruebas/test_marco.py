@@ -65,6 +65,11 @@ class Base(unittest.TestCase):
                 shutil.copy2(origen, self.r / nombre)
         (self.r / "semanas").mkdir()
         (self.r / "videos").mkdir()
+        # Las pruebas parten de cuentas sin verificar, sea cual sea el estado real del repositorio.
+        escribir_csv(self.r / "marca" / "CUENTAS.csv", CAB_CUENTAS,
+                     [{"plataforma": p, "alias": "", "estado": "PENDIENTE", "url": "",
+                       "fecha_verificacion": "", "evidencia": ""}
+                      for p in ("YouTube", "TikTok", "Instagram", "Facebook", "X")])
 
     def tearDown(self):
         self._tmp.cleanup()
@@ -92,7 +97,7 @@ class Base(unittest.TestCase):
         filas = leer_csv(ruta, CAB_CUENTAS)
         for f in filas:
             if f["plataforma"] == plataforma:
-                f.update(alias="alexenbeta", estado="VERIFICADA", url="https://www.youtube.com/@alexenbeta",
+                f.update(alias="prueba", estado="VERIFICADA", url=f"https://ejemplo.com/{plataforma}",
                          fecha_verificacion="2026-11-12", evidencia="captura")
         escribir_csv(ruta, CAB_CUENTAS, filas)
 
@@ -271,6 +276,72 @@ class FlujoNormal(Base):
         with self.assertRaisesRegex(ErrorMarco, "motivo"):
             reglas.mover(self.r, vid, "BLOQUEADO")
         reglas.mover(self.r, vid, "BLOQUEADO", bloqueo="Falta la miniapp")
+        self.assertConforme()
+
+
+class PostsX(Base):
+    """En X no se sube el vídeo: se publica un post que enlaza a la publicación de TikTok o Instagram."""
+
+    def plan(self, vid, *filas):
+        doc = Doc(self.r / "videos" / vid / "CIERRE.md")
+        for fila in filas:
+            doc.anadir_linea("Plan de publicación", fila)
+        doc.guardar()
+
+    def publicar(self, vid, *filas):
+        doc = Doc(self.r / "videos" / vid / "CIERRE.md")
+        for fila in filas:
+            doc.anadir_linea("Publicaciones", fila)
+        doc.guardar()
+
+    def test_plan_x_exige_enlace_a_tiktok_o_instagram(self):
+        vid = self.preparar(ensayo=True)
+        rellenar_cierre(self.r, vid, plan=False)
+        self.plan(vid,
+                  f"| {vid}-YT-01 | YouTube | media/entregas/m.mp4 | copy |",
+                  f"| {vid}-X-01 | X | media/entregas/m.mp4 | post |",
+                  f"| {vid}-X-02 | X | {vid}-YT-01 | post |",
+                  f"| {vid}-X-03 | X | {vid}-IG-01 | post |")
+        errores = "\n".join(self.errores())
+        self.assertIn(f"{vid}-X-01: en X no se sube el vídeo", errores)
+        self.assertIn(f"{vid}-X-02: en X no se sube el vídeo", errores)
+        self.assertIn(f"{vid}-X-03: enlaza a {vid}-IG-01, que no está en el plan", errores)
+        rellenar_guion(self.r, vid)
+        reglas.aprobar(self.r, "OK-2", vid, "chat")
+        crear_master(self.r, vid)
+        with self.assertRaisesRegex(ErrorMarco, "en X no se sube el vídeo"):
+            reglas.aprobar(self.r, "OK-3", vid, "chat", master="media/entregas/m.mp4")
+
+    def test_post_x_despues_del_video_enlazado(self):
+        vid = self.preparar()
+        rellenar_guion(self.r, vid)
+        reglas.aprobar(self.r, "OK-1", SEMANA, "chat")
+        reglas.aprobar(self.r, "OK-2", vid, "chat")
+        master = crear_master(self.r, vid)
+        rellenar_cierre(self.r, vid, plan=False)
+        self.plan(vid,
+                  f"| {vid}-TT-01 | TikTok | media/entregas/m.mp4 | copy |",
+                  f"| {vid}-X-01 | X | {vid}-TT-01 | post con el enlace |")
+        self.assertConforme()
+        reglas.aprobar(self.r, "OK-3", vid, "chat", master=master)
+        self.verificar_cuenta("TikTok")
+        self.verificar_cuenta("X")
+
+        self.publicar(vid, f"| {vid}-X-01 | 2026-11-13 | https://x.com/prueba/status/1 | |")
+        self.assertIn(f"{vid}-X-01: el post de X enlaza a {vid}-TT-01, que aún no tiene URL publicada",
+                      "\n".join(self.errores()))
+
+        self.publicar(vid, f"| {vid}-TT-01 | 2026-11-14 | https://www.tiktok.com/@prueba/video/1 | |")
+        self.assertIn(f"{vid}-X-01: el post de X tiene fecha anterior a {vid}-TT-01",
+                      "\n".join(self.errores()))
+
+        cierre = self.r / "videos" / vid / "CIERRE.md"
+        cierre.write_text(cierre.read_text(encoding="utf-8").replace("| 2026-11-14 |", "| 2026-11-13 |"),
+                          encoding="utf-8")
+        reglas.mover(self.r, vid, "PUBLICADO")
+        self.assertConforme()
+        with open(self.r / "registro" / "METRICAS.csv", "a", encoding="utf-8", newline="\n") as f:
+            f.write(f"{vid}-X-01,X,2026-11-15,+48h,Clics en el enlace,3,clics,,X Analytics,DISPONIBLE\n")
         self.assertConforme()
 
 

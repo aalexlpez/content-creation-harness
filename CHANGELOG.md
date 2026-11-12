@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.1.0 · 12 de noviembre de 2026
+
+- **Posts en X** (DIST-X-001): X entra en el plan de publicación como `VID-NNNN-X-NN`. No lleva vídeo: en `archivo` va la publicación de TikTok o Instagram a la que enlaza. El validador y el OK-3 rechazan enlaces a archivos, a otras redes o a publicaciones fuera del plan. También rechazan un post registrado antes que su vídeo. Se aceptan métricas con la plataforma `X`.
+- Cuenta de X en `marca/CUENTAS.csv`.
+- **Corregido:** las pruebas dependían del estado real de `CUENTAS.csv`. Ahora parten siempre de cuentas sin verificar.
+
 ## 5.0.0 · 12 de noviembre de 2026
 
 Marco limpio para empezar a producir, pensado para trabajar entre Alexander y Claude.

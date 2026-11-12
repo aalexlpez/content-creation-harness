@@ -23,11 +23,14 @@ RE_IDEA = re.compile(r"I-\d{4}")
 RE_VIDEO = re.compile(r"VID-\d{4}")
 RE_SEMANA = re.compile(r"(\d{4})-W(\d{2})")
 RE_PROYECTO = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
-RE_PUBLICACION = re.compile(r"(VID-\d{4})-(YT|TT|IG|FB)-(\d{2})")
+RE_PUBLICACION = re.compile(r"(VID-\d{4})-(YT|TT|IG|FB|X)-(\d{2})")
 RE_FECHA = re.compile(r"\d{4}-\d{2}-\d{2}")
 RE_SHA = re.compile(r"[0-9a-f]{64}")
 
-PLATAFORMAS = {"YT": "YouTube", "TT": "TikTok", "IG": "Instagram", "FB": "Facebook"}
+PLATAFORMAS = {"YT": "YouTube", "TT": "TikTok", "IG": "Instagram", "FB": "Facebook", "X": "X"}
+# En X no se sube el vídeo: se publica un post que enlaza a la publicación de una de estas redes.
+REDES_POST_ENLACE = {"X"}
+REDES_ENLAZABLES = {"TT", "IG"}
 VACIOS = {"", "PENDIENTE", "-", "—"}
 
 CAB_IDEAS = ["idea_id", "proyecto_id", "fecha", "titulo", "pilar", "formato",

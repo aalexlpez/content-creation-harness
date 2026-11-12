@@ -93,6 +93,7 @@ Compara el mismo fotograma del original y del exportado en el mismo reproductor.
 ## Publicación
 
 - La sube Ale, red por red, con el copy y la portada del plan.
+- En X no se sube el vídeo: el post con el enlace se publica después del vídeo de TikTok o Instagram al que lleva ([FLUJO → Posts en X](FLUJO.md#posts-en-x)).
 - Al publicar, Ale da la URL real y Claude la añade en CIERRE → Publicaciones con la fecha. Si una red falla, anota la causa en `notas` y sigue con las demás.
 - Una cuenta solo puede usarse si está `VERIFICADA` en `marca/CUENTAS.csv`.
 - Divulgación: si el vídeo promociona un producto propio, revisa las normas de contenido de marca de cada red.
