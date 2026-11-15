@@ -50,7 +50,7 @@ HyperFrames es el motor de animación principal (AV-001). Si falla en una prueba
 - Sin `frame.md` de marca definitiva hasta que exista una identidad aprobada. Mientras tanto, perfil TEMP.
 - Documentación: [HyperFrames en GitHub](https://github.com/heygen-com/hyperframes).
 
-**Estado:** sin instalar en el PC de Ale. La instalación necesita su autorización.
+**Estado:** probado en el PC de Ale el 2026-11-13 con la CLI 0.9.42 por `npx` (Windows, Node 26, Chrome del sistema), con la telemetría desactivada. Un render de prueba de 2 s a 1080×1920 y 30 fps tardó 28 s, de los que 22 s son arranque. Falta probarlo con metraje de cámara.
 
 ## Montaje (CapCut Desktop gratis o Shotcut)
 
