@@ -4,9 +4,9 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 ## Control
 
-- Estado: BORRADOR
+- Estado: CANCELADO
 - Bloqueo: NINGUNO
-- Siguiente_paso: Ale: montar en CapCut Desktop siguiendo `EDICION_CAPCUT.md` (guion v02)
+- Siguiente_paso: Ensayo cerrado el 2026-11-16; lo sustituye un nuevo ensayo de la miniapp 1
 - Perfil_visual: v2
 - Perfil_tecnico: 1080x1920 · 30 fps · H.264 · SDR BT.709 · AAC 48 kHz
 - Editor: CapCut Desktop (versión gratis). El montaje v01 con ffmpeg y HyperFrames se descartó el 2026-11-15 y está en `media/descartado/`
@@ -66,3 +66,4 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 - 2026-11-12 · Estado → BORRADOR
 - 2026-11-13 · Ingesta, corte de cámara y montaje v01 (guion v02)
 - 2026-11-15 · Se descarta el montaje v01 (ffmpeg + HyperFrames); Ale monta en CapCut con el guion v02
+- 2026-11-16 · Estado → CANCELADO
