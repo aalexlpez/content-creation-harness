@@ -1,6 +1,6 @@
 # Dirección de edición
 
-Cómo se decide el montaje desde el guion: texto en pantalla, música y efectos, color, movimiento y portada. Los valores concretos son **candidatos de prueba** del perfil TEMP. La identidad pública definitiva (tipografías, paleta, logo y firma sonora) la aprueba Ale aparte ([IDENTIDAD](../marca/IDENTIDAD.md)).
+Cómo se decide el montaje desde el guion: texto en pantalla, música y efectos, color, movimiento y portada. Los valores concretos son **candidatos de prueba**. La identidad v2 (AV-006) está aprobada «por ahora»; la firma sonora sigue pendiente ([IDENTIDAD](../marca/IDENTIDAD.md)).
 
 ## Qué entrega Claude con cada guion
 
@@ -23,21 +23,13 @@ Una **propuesta principal** que se pueda seguir en CapCut. Una variante solo si 
 
 ## Texto en pantalla
 
-| Nivel | Uso | Pauta TEMP |
+| Nivel | Uso | Pauta v2 |
 |---|---|---|
-| Subtítulo | Transcribe la voz | Sans serif clara (Inter Medium o Semibold), posición estable, buen contraste, animación discreta. Revisa eñes, tildes y cifras en el móvil |
-| Rótulo | Añade información: nombre, paso, cifra | Misma familia, más peso. Dirige la mirada a la demo |
-| Acento | Gancho, resultado o remate | Combinación expresiva, una frase corta con una o dos palabras en manuscrita. Separado de subtítulos, cara e interfaz |
+| Subtítulo | Transcribe la voz | Plus Jakarta Sans Bold, mayúsculas, una línea y posición estable. La palabra que suena se invierte (caja blanco roto con texto negro). Revisa eñes, tildes y cifras en el celular |
+| Rótulo | Añade información: nombre, paso, cifra | Plus Jakarta Sans Bold sobre un bloque azul marino con el símbolo «/». Dirige la mirada a la demo |
+| Acento | Gancho, resultado o remate | Una frase corta; la palabra clave en Plus Jakarta Sans ExtraBold dentro de una caja blanco roto. Separado de subtítulos, cara e interfaz |
 
-Combinaciones de acento para probar:
-
-| Combinación | Cuándo | Cuidado |
-|---|---|---|
-| Crimson Text + Mr Dafoe | Remate personal o revelación. Primera opción | — |
-| Bodoni Moda + Engagement | Título dramático sobre fondo limpio | Los trazos finos pueden perderse en móvil: revisa el MP4 |
-| Anton + Aguafina Script | Golpe visual de mucha energía | Alternativa libre a Acid TM, que exige revisar su licencia para vídeo ([Type Mania](https://typemania.eu/products/acid-tm)) |
-
-Fichas: [Inter](https://fonts.google.com/specimen/Inter) · [Crimson Text](https://fonts.google.com/specimen/Crimson+Text) · [Mr Dafoe](https://fonts.google.com/specimen/Mr+Dafoe) · [Bodoni Moda](https://fonts.google.com/specimen/Bodoni+Moda) · [Engagement](https://fonts.google.com/specimen/Engagement) · [Aguafina Script](https://fonts.google.com/specimen/Aguafina+Script) · [Anton](https://fonts.google.com/specimen/Anton). Todas están en Google Fonts, con licencia abierta (OFL, Apache o UFL según la fuente: confírmalo en su ficha). Anota en Derechos la fuente y de dónde salió el archivo. Hay que comprobar si están disponibles en CapCut Desktop o hay que instalarlas.
+La identidad v2 no tiene color de acento: el énfasis se logra por inversión de contraste, peso o tamaño. Colores, símbolo y kit: [IDENTIDAD](../marca/IDENTIDAD.md). La tipografía es Plus Jakarta Sans (AV-007, licencia OFL): los archivos están en `marca/fuentes/plus-jakarta-sans/`. Anota en Derechos la fuente y de dónde salió el archivo. En CapCut hay que instalarla en el sistema y comprobar que la reconoce.
 
 ## Música y efectos
 
@@ -62,7 +54,7 @@ Las capturas se etiquetaban «Frío» y «Cálido» al revés de lo que sugiere 
 
 ## Movimiento e interfaz
 
-Decisión vigente (AV-002): interfaz cinematográfica por capas en vez de una grabación de pantalla plana, **cuando aporte**. Las animaciones se hacen nuevas para cada vídeo; lo que se reutiliza es el estilo y el flujo de trabajo (AV-003).
+Decisión vigente (AV-002): interfaz cinematográfica por capas en vez de una grabación de pantalla plana, **cuando aporte**. Las animaciones se hacen nuevas para cada vídeo; lo que se reutiliza es el estilo y el flujo de trabajo (AV-003). Motivo de la identidad v2: la barra diagonal «/», con barridos inclinados ≈ 29° respecto a la vertical, superficies planas y sin degradados ni resplandores.
 
 Patrones de referencia:
 

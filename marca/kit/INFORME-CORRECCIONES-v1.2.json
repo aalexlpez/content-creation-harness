@@ -1,0 +1,87 @@
+{
+  "marca": "cerobytes",
+  "version_assets": "1.2",
+  "basado_en": "v1.1",
+  "fecha": "2026-11-16",
+  "estado": "kit corregido, no equivale a maestro tipográfico original",
+  "incidencias": {
+    "MG-02": {
+      "estado": "corregida",
+      "archivo": "svg/rotulo-inferior-video-9x16.svg",
+      "canvas_px": [
+        1080,
+        1920
+      ],
+      "recorte_rect_y_antes": [
+        1595,
+        1765
+      ],
+      "recorte_rect_y_despues": [
+        1130,
+        1300
+      ],
+      "inicio_zona_red_referencia_y": 1420,
+      "margen_px": 120,
+      "nota": "La zona reservada es una referencia de trabajo, no universal para todas las apps y dispositivos."
+    },
+    "LOGO-OSCURO": {
+      "estado": "corregida",
+      "archivo": "svg/logo-oscuro.svg",
+      "barra_antes": "#003571",
+      "barra_despues": "#F5F6F8",
+      "fondo_referencia": "#0B0B0D",
+      "nota": "La barra azul sigue únicamente en las variantes etiquetadas referencia."
+    },
+    "TIPOGRAFIA": {
+      "estado": "resuelta en SVG / condicionada en exportaciones",
+      "tipografia_preferida": "Satoshi",
+      "familia_en_svg": "Satoshi, Inter, Arial, sans-serif",
+      "png_tipografia": "Inter (fallback por ausencia de Satoshi local)",
+      "archivos_svg_actualizados": [
+        "rotulo-inferior-video-9x16.svg",
+        "plantilla-portada-9x16.svg",
+        "pie-marca-1600x220.svg",
+        "pantalla-inicio-9x16.svg",
+        "tarjeta-perfil-social-1600x640.svg",
+        "rotulo-inferior-video-16x9.svg",
+        "cabecera-perfil-1500x500.svg",
+        "hero-web-1600x850.svg",
+        "banner-youtube-2560x1440.svg",
+        "lockup-horizontal-oscuro.svg",
+        "cabecera-repositorio-1280x320.svg",
+        "plantilla-miniatura-16x9.svg",
+        "cabecera-web-1600x180.svg",
+        "pantalla-cierre-9x16.svg"
+      ],
+      "nota": "No se distribuyen fuentes. Instalar Satoshi desde Fontshare y volver a exportar PNG para obtener Satoshi exacta."
+    },
+    "WORDMARK": {
+      "estado": "limitacion pendiente de diseno",
+      "origen": "trazado reconstruido desde imagen IA",
+      "maestro_original": "no disponible",
+      "modificabilidad": "curvas SVG editables, texto no editable",
+      "nota": "Requiere un redibujo, revisión óptica y aprobación para denominarlo maestro definitivo."
+    }
+  },
+  "svg_total": 37,
+  "png_total": 53,
+  "png_regenerados": [
+    "banner-youtube-2560x1440-2560.png",
+    "cabecera-perfil-1500x500-1500.png",
+    "cabecera-repositorio-1280x320-1280.png",
+    "cabecera-web-1600x180-1600.png",
+    "hero-web-1600x850-1600.png",
+    "lockup-horizontal-oscuro-1920.png",
+    "logo-oscuro-1024.png",
+    "logo-oscuro-2000.png",
+    "logo-oscuro-512.png",
+    "pantalla-cierre-9x16-1080.png",
+    "pantalla-inicio-9x16-1080.png",
+    "pie-marca-1600x220-1600.png",
+    "plantilla-miniatura-16x9-1280.png",
+    "plantilla-portada-9x16-1080.png",
+    "rotulo-inferior-video-16x9-1920.png",
+    "rotulo-inferior-video-9x16-1080.png",
+    "tarjeta-perfil-social-1600x640-1600.png"
+  ]
+}

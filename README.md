@@ -23,7 +23,7 @@ En Windows, si `python` abre la Microsoft Store, usa `py -3 scripts/marco.py ...
 ```
 CLAUDE.md            instrucciones para Claude (y AGENTS.md para otros agentes)
 guias/               FLUJO · EDITORIAL · GUIONES · EDICION · TECNICA · SET
-marca/               identidad provisional, tokens y cuentas por red
+marca/               identidad v2, kit de logos, tokens y cuentas por red
 proyectos/<id>/      qué se puede demostrar de cada proyecto (miminiapp, canal…)
 registro/            IDEAS.csv · DECISIONES.md · METRICAS.csv
 semanas/AAAA-WNN/    SEMANA.md: lote, horas, hipótesis, OK-1, retrospectiva

@@ -7,7 +7,7 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 - Estado: BORRADOR
 - Bloqueo: NINGUNO
 - Siguiente_paso: Redactar brief, ganchos y escenas
-- Perfil_visual: TEMP
+- Perfil_visual: v2
 - Perfil_tecnico: 1080x1920 · 30 fps · H.264 · SDR BT.709 · AAC 48 kHz
 - Editor: PENDIENTE
 

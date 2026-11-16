@@ -18,7 +18,7 @@ Un guion de este marco es a la vez **texto para decir** y **plan de montaje**. C
 | Musica | Carácter, entrada, bajada bajo la voz y salida, o «voz sola» |
 | Texto_en_pantalla | Jerarquía: subtítulo, rótulo y frase de acento |
 | Color | Tratamiento de la toma de cámara. La captura de pantalla conserva su color |
-| Perfil_visual | TEMP mientras no haya identidad aprobada |
+| Perfil_visual | v2 (identidad aprobada, ver [IDENTIDAD](../marca/IDENTIDAD.md)) |
 
 **Bloquea el guion** si no hay una promesa concreta o no se sabe cómo se va a demostrar.
 
@@ -65,7 +65,8 @@ Un guion de este marco es a la vez **texto para decir** y **plan de montaje**. C
 
 ## 4. Voz y estilo
 
-- Primera persona, natural y concreta: «he creado», «voy a probar», «todavía no funciona».
+- Primera persona, natural y concreta: «creé», «voy a probar», «todavía no funciona».
+- **Español latinoamericano** (CONTENIDO-LATAM-001): «celular», «link», «computadora» y pretérito simple («abandonaste», no «has abandonado»). Nada de expresiones de España.
 - Frases cortas y una idea por pantalla. Nada de tono de gurú.
 - Evita absolutos que no puedes demostrar: «todas», «nunca», «gratis para siempre».
 - El texto en pantalla no repite la voz palabra por palabra. Los subtítulos sí transcriben la voz.
@@ -110,7 +111,7 @@ Si el vídeo no afirma nada comprobable, deja una fila `SIN-CLAIMS | O | — | P
 
 ## 8. Ejemplo (ficticio)
 
-Demo de 20 s de una miniapp que quita duplicados. Perfil TEMP, música pendiente de acreditar.
+Demo de 20 s de una miniapp que quita duplicados. Perfil v2, música pendiente de acreditar.
 
 **Ganchos**
 

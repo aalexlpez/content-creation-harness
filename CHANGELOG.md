@@ -1,5 +1,14 @@
 # Changelog
 
+## Sin publicar
+
+- **Identidad visual v2** (AV-006): cerobytes «creative tech» (wordmark en minúsculas con barra diagonal, paleta de cuatro colores y Plus Jakarta Sans, AV-007). Sustituye al perfil TEMP y a la v1 (PR-002). El **kit vectorial v1.2** vive en `marca/kit/` (37 SVG y 53 PNG, reconstrucción no maestra: el wordmark es vectorial pero no es el diseño maestro original) y se documenta en `marca/IDENTIDAD.md`.
+- **Tipografía** Plus Jakarta Sans (Google Fonts, OFL) en `marca/fuentes/plus-jakarta-sans/`, en lugar de Satoshi (AV-007). Se exportaron de nuevo los 15 PNG con texto del kit.
+- Rótulo inferior 9:16 **ajustado** (`marca/kit/*/rotulo-inferior-video-9x16-ajustado.*`): desplazado 100 px sobre el kit v1.2 para no pisar la banda de subtítulos.
+- **Español latinoamericano** en voz, guiones y textos en pantalla (CONTENIDO-LATAM-001).
+- La ficha de Plan B del repositorio `soycerobytes/miminiapp` pasa a ser la fuente de verdad (PROD-17).
+- **Experimento:** `videos/VID-0001/GUION_BEATS.md` propone un guion por momentos, edición simple y prompts de motion graphics. Contradice D-EDICION y otras reglas hasta que se formalice.
+
 ## 5.1.0 · 12 de noviembre de 2026
 
 - **Posts en X** (DIST-X-001): X entra en el plan de publicación como `VID-NNNN-X-NN`. No lleva vídeo: en `archivo` va la publicación de TikTok o Instagram a la que enlaza. El validador y el OK-3 rechazan enlaces a archivos, a otras redes o a publicaciones fuera del plan. También rechazan un post registrado antes que su vídeo. Se aceptan métricas con la plataforma `X`.

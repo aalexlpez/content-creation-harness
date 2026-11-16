@@ -1,30 +1,319 @@
 {
-  "version": "temp-0.3",
-  "estado": "PROVISIONAL",
-  "nombre_mostrado": "Alexander | Desarrollador",
+  "version": "2.0",
+  "estado": "APROBADA",
+  "fecha_actualizacion": "2026-11-16",
+  "origen": {
+    "documento_referencia": "Tablero de identidad visual _cerobytes(1).png",
+    "tipo": "tablero conceptual de identidad visual",
+    "nota": "Esta especificación documenta el concepto seleccionado; el tablero no equivale a archivos maestros editables ni a un manual técnico cerrado.",
+    "sustituye_version": [
+      "temp-0.3",
+      "1.0 (PR-002, aprobada y sustituida el 2026-11-16)"
+    ]
+  },
+  "nombre_mostrado": "cerobytes",
+  "nombre_personal_asociado": "Alexander | Desarrollador",
   "alias": {
     "canal": "cerobytes",
     "youtube": "@soy.cerobytes",
     "tiktok": "@cerobytes",
     "instagram": "@cer0bytes",
     "facebook": "cerobytes",
-    "x": "@soycerobytes"
+    "x": "@soycerobytes",
+    "estado": "VERIFICADOS_EN_marca/CUENTAS.csv"
+  },
+  "marca": {
+    "tipo": "marca personal",
+    "nombre": "cerobytes",
+    "perfil": "creador de contenido tecnológico, desarrollador y constructor de proyectos digitales",
+    "personalidad": [
+      "creativa",
+      "tecnológica",
+      "minimalista",
+      "moderna",
+      "clara",
+      "profesional"
+    ],
+    "independiente_de_proyectos": true,
+    "proyecto_relacionado": "MiMiniApp",
+    "relacion_con_proyectos": "MiMiniApp y otros proyectos se presentan bajo cerobytes, pero no definen su identidad visual principal."
+  },
+  "identidad_visual": {
+    "concepto": "wordmark contundente acompañado por una barra diagonal independiente",
+    "direccion": "creative tech / tech creator",
+    "estilo": [
+      "minimalismo tecnológico",
+      "contraste alto",
+      "composición editorial ordenada",
+      "formas simples",
+      "acentos diagonales",
+      "uso generoso de espacio negativo"
+    ],
+    "motivo_reconocible": "/",
+    "orientacion": "digital-first",
+    "efectos": "preferir acabados planos y limpios; cualquier matiz tonal de la barra debe definirse en los archivos maestros"
   },
   "colores": {
-    "fondo": "#0B1020",
-    "panel": "#17243A",
-    "texto_principal": "#F3F7FF",
-    "texto_secundario": "#B9CAE2",
-    "acento_principal": "#54E0EA",
-    "acento_secundario": "#AD8BFF",
-    "acento_resultado": "#D9F77A"
+    "negro": "#0B0B0D",
+    "gris_carbon": "#1E2937",
+    "azul_marino_profundo": "#0D213F",
+    "blanco_roto": "#F5F6F8",
+    "acento_principal": "#0D213F",
+    "acento_secundario": null,
+    "acento_resultado": null,
+    "paleta_reducida": true,
+    "tema_claro": {
+      "fondo": "#F5F6F8",
+      "texto_principal": "#0B0B0D",
+      "texto_secundario": "#1E2937",
+      "marca_destacada": "#0D213F"
+    },
+    "tema_oscuro": {
+      "fondo": "#0D213F",
+      "fondo_alternativo": "#0B0B0D",
+      "texto_principal": "#F5F6F8",
+      "superficies": "#1E2937",
+      "marca_destacada": "#F5F6F8"
+    },
+    "nota_color_barra": "En el kit v1.2 logo-oscuro.svg lleva la barra blanca (#F5F6F8); #003571 queda solo en los archivos *-azul-referencia, que no se recomiendan sobre negro (≈1,6:1). Es una referencia provisional, no un color oficial.",
+    "colores_anteriores_descartados": [
+      "#54E0EA",
+      "#AD8BFF",
+      "#D9F77A"
+    ],
+    "barra_azul_provisional": "#003571",
+    "texto_secundario_sobre_marino_kit": "#B7C0CC",
+    "sin_acento_oficial": "El énfasis en vídeo se hace por inversión de contraste (caja blanco roto con texto negro), peso o tamaño."
   },
   "tipografia": {
-    "subtitulo": "Inter Semibold",
-    "rotulo": "Inter Bold",
-    "acento": "Crimson Text + Mr Dafoe (en prueba)"
+    "familia_principal": "Plus Jakarta Sans",
+    "uso": [
+      "logotipo (referencia visual)",
+      "titulares",
+      "rótulos",
+      "textos de interfaz y piezas sociales"
+    ],
+    "pesos_exactos": "PROPUESTOS_SIN_APROBAR: 500 (secundario), 700 (subtítulos y rótulos), 800 (frases de impacto). No existe el 900.",
+    "interletraje_exactos": "POR_DEFINIR",
+    "fuentes_secundarias": null,
+    "tratamiento_anterior_descartado": "Satoshi (AV-007) y Crimson Text + Mr Dafoe como acento de marca",
+    "nota": "La fuente está en el proyecto con su OFL.txt. Los SVG del kit la declaran y los PNG con texto se exportaron con ella el 2026-11-16. El wordmark del kit son contornos vectoriales, no texto.",
+    "incluida_en_kit": false,
+    "familia_en_svg": "'Plus Jakarta Sans', Inter, Arial, sans-serif",
+    "descarga": "Google Fonts (Plus_Jakarta_Sans.zip, descargado por Ale el 2026-11-16)",
+    "reemplaza": {
+      "familia": "Satoshi",
+      "decision": "AV-007"
+    },
+    "licencia": "SIL OFL 1.1 (Google Fonts)",
+    "ubicacion": "marca/fuentes/plus-jakarta-sans/",
+    "incluida_en_proyecto": true
+  },
+  "logo": {
+    "tipo_principal": "wordmark con isotipo",
+    "texto": "cerobytes",
+    "caja": "minúsculas",
+    "simbolo": {
+      "forma": "barra diagonal inclinada /",
+      "significado_propuesto": "creación, desarrollo, dirección y avance",
+      "ubicacion": "a la izquierda del wordmark en composición principal",
+      "uso_independiente": true,
+      "aplicaciones": [
+        "avatar",
+        "favicon",
+        "icono de perfil",
+        "marca de agua",
+        "elemento de separación o acento visual"
+      ],
+      "geometria": {
+        "path": "M 73 4 L 109 4 L 36 134 L 0 134 Z",
+        "ancho": 36,
+        "alto": 130,
+        "inclinacion_respecto_a_la_vertical_grados": 29.3
+      }
+    },
+    "variantes": [
+      {
+        "nombre": "principal clara",
+        "fondo": "#F5F6F8",
+        "wordmark": "#0B0B0D",
+        "simbolo": "#0D213F"
+      },
+      {
+        "nombre": "oscura",
+        "fondo": "#0B0B0D",
+        "wordmark": "#F5F6F8",
+        "simbolo": "azul de la identidad; tono final pendiente de definir"
+      },
+      {
+        "nombre": "navy",
+        "fondo": "#0D213F",
+        "wordmark": "#F5F6F8",
+        "simbolo": "#F5F6F8"
+      },
+      {
+        "nombre": "isotipo independiente",
+        "fondo": "#0D213F",
+        "simbolo": "#F5F6F8",
+        "texto": null
+      }
+    ],
+    "configuraciones": [
+      "horizontal con símbolo a la izquierda",
+      "isotipo centrado para avatar y favicon",
+      "lockup horizontal con descriptor separado por línea"
+    ],
+    "monograma_cb": "NO_FORMA_PARTE_DEL_CONCEPTO_ELEGIDO",
+    "maestro_vectorial": "NO_EXISTE_KIT_V1.2_ES_RECONSTRUCCION",
+    "marca_registrada": {
+      "simbolo_registro_visible_en_mockup": true,
+      "registro_verificado": false,
+      "regla": "No incorporar el símbolo ® a los materiales reales salvo que exista registro de marca aplicable y confirmado."
+    },
+    "procedencia_wordmark": "Vectorial, pero no es el diseño maestro original: reconstrucción trazada a partir de un tablero generado con IA. Curvas editables, no texto vivo. Para llamarlo maestro hace falta revisar curvas, espaciado, tamaños pequeños y criterios ópticos."
+  },
+  "mensajeria": {
+    "descripcion_corta": "Tecnología, desarrollo y proyectos útiles para el día a día.",
+    "titular_web_ejemplo": "Ideas, desarrollo y proyectos útiles.",
+    "descriptor_horizontal": "TECH / PROYECTOS / IDEAS",
+    "categorias_ampliadas": [
+      "TECNOLOGÍA",
+      "DESARROLLO",
+      "PROYECTOS",
+      "IDEAS"
+    ],
+    "universo_de_marca": [
+      "CREATIVE",
+      "TECHNOLOGY",
+      "CONTENT",
+      "DEVELOPMENT",
+      "PROJECTS",
+      "IDEAS"
+    ],
+    "tono": [
+      "claro",
+      "directo",
+      "técnico accesible",
+      "creativo",
+      "centrado en construir y compartir"
+    ]
+  },
+  "pilares_de_contenido": {
+    "contenido": {
+      "referencia": "YouTube / Reels / Shorts",
+      "descripcion": "Divulgación y creación de contenido sobre procesos e ideas."
+    },
+    "desarrollo": {
+      "referencia": "Proyectos / Código",
+      "descripcion": "Construcción de productos y soluciones digitales."
+    },
+    "ideas": {
+      "referencia": "Herramientas / Experimentos",
+      "descripcion": "Exploración de herramientas, pruebas y experimentos creativos."
+    }
+  },
+  "aplicaciones": {
+    "redes": [
+      "avatar",
+      "banner de YouTube",
+      "foto y cabecera de perfil",
+      "miniaturas",
+      "marca de agua"
+    ],
+    "video": [
+      "Shorts",
+      "Reels",
+      "TikTok",
+      "apertura y cierre de videos",
+      "rótulos de identidad"
+    ],
+    "web": [
+      "cabecera",
+      "hero",
+      "favicon",
+      "tarjetas de proyecto"
+    ],
+    "desarrollo": [
+      "repositorios",
+      "documentación",
+      "presentaciones de proyectos"
+    ],
+    "tamanos_icono_mostrados_en_tablero_px": [
+      512,
+      192,
+      64
+    ],
+    "nota": "El tablero ilustra usos y dimensiones, pero no contiene todavía recursos exportables finales de cada formato."
+  },
+  "direccion_de_composicion": {
+    "fondos": [
+      "superficies claras en blanco roto",
+      "franjas profundas en azul marino",
+      "alternativa negra para logotipo invertido"
+    ],
+    "elementos": [
+      "barra diagonal repetida con moderación",
+      "divisores finos",
+      "bloques de texto con jerarquía",
+      "fotografía arquitectónica o tecnológica sobria en maquetas"
+    ],
+    "exclusiones": [
+      "circuitos",
+      "redes de nodos",
+      "hexágonos",
+      "bocadillos",
+      "cerebros",
+      "mallas neuronales",
+      "degradado violeta-azul",
+      "efectos de ciencia ficción recargados"
+    ]
+  },
+  "movimiento": {
+    "estado": "PROPUESTA_SIN_APROBAR",
+    "propuesta": "La barra diagonal como motivo; entradas con barrido diagonal inclinado ≈29° respecto a la vertical; superficies planas sin degradados ni resplandores.",
+    "detalle": "videos/VID-0001/GUION_BEATS.md, sección 4",
+    "referencia_anterior": "interfaz por capas, transformaciones con continuidad, rótulos breves, sonido ligado a la interacción"
   },
   "firma_sonora": null,
-  "movimiento": "interfaz por capas, transformaciones con continuidad, rótulos breves, sonido ligado a la interacción",
-  "independiente_de_proyectos": true
+  "activos_pendientes": [
+    "maestro vectorial oficial del logo (el kit v1.2 es una reconstrucción)",
+    "definición exacta del azul de la barra diagonal",
+    "reglas de tamaño mínimo y área de protección",
+    "confirmar pesos e interletraje de Plus Jakarta Sans",
+    "aprobación del tratamiento de movimiento",
+    "firma sonora",
+    "verificación legal de registro de marca, si corresponde"
+  ],
+  "notas_de_fidelidad": [
+    "Los colores hexadecimales, el nombre Satoshi y las composiciones principales se tomaron del tablero facilitado.",
+    "Los identificadores sociales provienen de temp-0.3 y no están confirmados por el nuevo tablero.",
+    "Los textos y pilares de contenido se organizaron a partir de frases visibles del tablero.",
+    "Las explicaciones simbólicas y las pautas de implementación son propuestas documentales, no especificaciones técnicas medidas del logo.",
+    "No se consideran datos reales las métricas, insignias de verificación ni símbolos de registro mostrados en ejemplos gráficos."
+  ],
+  "aprobada": {
+    "fecha": "2026-11-16",
+    "decision": "AV-006",
+    "alcance": "Dirección visual y kit vectorial v1.1 para trabajar por ahora. El kit es una reconstrucción vectorial, no un archivo maestro.",
+    "evidencia": "Ale en chat, 2026-11-16: «toda la iconografía que elegí por ahora. No es perfecta, pero quiero trabajar con esta por ahora»"
+  },
+  "kit": {
+    "version": "1.2",
+    "ruta": "marca/kit/",
+    "svg": 37,
+    "png": 53,
+    "inventario": "marca/kit/manifest-v1.2.json",
+    "notas": "marca/kit/LEEME-v1.2.txt",
+    "referencia_conceptual": "marca/kit/referencia/tablero-cerobytes-referencia.png",
+    "aviso": "El tablero de referencia contiene ®, métricas e insignias de verificación inventadas: no son datos reales ni recursos.",
+    "informe_correcciones": "marca/kit/INFORME-CORRECCIONES-v1.2.json",
+    "sustituye": "1.1",
+    "png_tipografia": "Plus Jakarta Sans (exportados el 2026-11-16, AV-007)"
+  },
+  "pendiente": [
+    "azul de la barra",
+    "firma sonora",
+    "maestro vectorial",
+    "pesos e interletraje de Plus Jakarta Sans"
+  ]
 }

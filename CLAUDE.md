@@ -20,7 +20,7 @@ En Windows, si `python` no responde, usa `py -3`.
 | Dirección de montaje: texto, música, color y movimiento | [guias/EDICION.md](guias/EDICION.md) |
 | Perfil técnico, ingesta, edición, exportación y QC | [guias/TECNICA.md](guias/TECNICA.md) |
 | Set de grabación (luz, cámara, micro) | [guias/SET.md](guias/SET.md) |
-| Identidad, alias y cuentas | [marca/IDENTIDAD.md](marca/IDENTIDAD.md), `marca/CUENTAS.csv` |
+| Identidad, kit de logos, alias y cuentas | [marca/IDENTIDAD.md](marca/IDENTIDAD.md), `marca/kit/`, `marca/CUENTAS.csv` |
 | Proyectos que aparecen en los vídeos | `proyectos/<id>/PROYECTO.md` |
 | Ideas, decisiones y métricas | `registro/IDEAS.csv`, [registro/DECISIONES.md](registro/DECISIONES.md), `registro/METRICAS.csv` |
 | Lote semanal | `semanas/AAAA-WNN/SEMANA.md` |
@@ -43,7 +43,7 @@ Después de cambiar documentos, ejecuta `python scripts/marco.py validar`.
 - **Publicar**, retirar o editar publicaciones en redes. Tú preparas el copy y el plan; Ale publica y te da la URL.
 - **Gastar dinero**, instalar programas o activar pruebas de pago (CapCut Pro incluido).
 - **Abrir material personal** (grabaciones, fotos, cuentas) que Ale no haya indicado expresamente.
-- **Identidad pública**: alias, paleta, tipografías, logo o firma sonora definitivos. Mientras tanto se usa el perfil TEMP.
+- **Identidad pública**: alias, paleta, tipografías, logo o firma sonora definitivos. La identidad v2 está aprobada «por ahora» (AV-006); quedan pendientes la firma sonora y el maestro vectorial.
 - **Borrar medios** u originales.
 
 Si una tarea necesita algo de esta lista, prepara todo lo demás y pide exactamente lo que falta.
@@ -56,6 +56,7 @@ Si una tarea necesita algo de esta lista, prepara todo lo demás y pide exactame
 - Con cada guion, entrega la dirección de montaje por escena (texto exacto en pantalla, corte, sonido, toma), siguiendo [GUIONES](guias/GUIONES.md) y [EDICION](guias/EDICION.md).
 - Si cambias un guion ya aprobado, sube `Version` (v02…) y avisa a Ale de que el OK-2 tiene que renovarse.
 - Los tiempos son estimaciones hasta que Ale lea el guion en voz alta o haya material.
+- **Español latinoamericano** en voz, guiones y textos en pantalla (CONTENIDO-LATAM-001): «celular», «link», «computadora», pretérito simple («abandonaste», no «has abandonado»). Nada de expresiones de España. La identidad visual v2 (AV-006) está aprobada: el kit está en `marca/kit/` y no se cambia sin una decisión registrada.
 
 ## Reglas técnicas
 

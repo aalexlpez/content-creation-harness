@@ -25,7 +25,7 @@ Guion y dirección de montaje. Cómo rellenarlo: [GUIONES](../../guias/GUIONES.m
 - Musica: PENDIENTE
 - Texto_en_pantalla: PENDIENTE
 - Color: PENDIENTE
-- Perfil_visual: TEMP
+- Perfil_visual: v2
 
 ## Ganchos
 

@@ -1,0 +1,42 @@
+CEROBYTES — KIT VECTORIAL v1.2 CORREGIDO
+======================================
+
+Sustituye v1.1. Incluye sus recursos originales más cuatro aclaraciones/correcciones.
+
+MG-02 — RÓTULO VERTICAL
+- Antes: caja y=1595..1765, cubierta por controles de TikTok/Reels/Shorts.
+- Ahora: caja y=1130..1300 en lienzo 1080×1920.
+- Distancia hasta y=1420: 120 píxeles.
+- El rótulo sigue siendo PNG transparente y SVG vectorial.
+- Esta franja es una aproximación de seguridad: comprueba en cada plataforma,
+  dispositivo, tamaño de fuente, pie de vídeo y configuración de interfaz.
+
+CONTRASTE — LOGO SOBRE FONDO OSCURO
+- logo-oscuro.svg: icono blanco roto #F5F6F8 y letras blanco roto #F5F6F8.
+- PNG correspondientes regenerados.
+- El azul #003571 queda SOLO en archivos explícitos *-azul-referencia,
+  NO recomendados en negro por contraste insuficiente.
+
+TIPOGRAFÍA
+- Antes: declaraciones font-family=Arial; las plantillas parecían Arial.
+- Ahora: SVG font-family='Satoshi, Inter, Arial, sans-serif'.
+- Satoshi NO se distribuye con el paquete; la licencia oficial debe consultarse.
+- Descarga e instala Satoshi por tu cuenta desde https://www.fontshare.com/fonts/satoshi
+- Abre los SVG en un editor que tenga instalada Satoshi y exporta tus PNG finales.
+- Los PNG incluidos en este ZIP se han regenerado con Inter como alternativa local,
+  por lo que NO son una prueba de aplicación exacta de Satoshi.
+- Los diseños que son contornos de logotipo no dependen de que Satoshi esté instalada.
+
+WORDMARK — PROCEDENCIA
+- El logotipo principal es una RECONSTRUCCIÓN vectorial a partir del tablero
+  generado mediante IA; NO se recuperó un archivo maestro original.
+- Las curvas son editables pero no son texto vivo editable.
+- Para aprobarlo como maestro definitivo hace falta revisar curvas, espacio
+  entre letras, tamaños pequeños y criterios ópticos; la tipografía Satoshi del
+  tablero era una indicación creativa, no prueba de la fuente real de sus letras.
+
+ORIGINALES Y CONTROL
+- Versiones antiguas v1.0/v1.1 se conservan fuera de esta carpeta.
+- No usar el símbolo de registro ® sin base jurídica.
+- No se incluyen archivos de fuentes ni fotografías incrustadas.
+- Ver INFORME-CORRECCIONES-v1.2.json y VISTA-PREVIAS-v1.2.png.

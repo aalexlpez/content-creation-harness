@@ -47,7 +47,7 @@ HyperFrames es el motor de animación principal (AV-001). Si falla en una prueba
 - Entrega **MP4 por escena** (1080×1920, 30 fps, H.264), con nombres estables (`S02_v01.mp4`), más voz o audio en WAV y SRT en UTF-8 si aplica. Sin subtítulos incrustados si se van a corregir en el editor.
 - Capas con transparencia (ProRes 4444 o PNG) solo si se ha probado que el editor instalado las importa.
 - Prueba el **seek** en inicio, mitad y final de cada escena: debe verse el estado esperado en cada punto.
-- Sin `frame.md` de marca definitiva hasta que exista una identidad aprobada. Mientras tanto, perfil TEMP.
+- Marca: perfil v2 (AV-006). Los tokens salen de `marca/identidad.json` y los logos de `marca/kit/`; la tipografía (Plus Jakarta Sans, OFL) está en `marca/fuentes/plus-jakarta-sans/`.
 - Documentación: [HyperFrames en GitHub](https://github.com/heygen-com/hyperframes).
 
 **Estado:** probado en el PC de Ale el 2026-11-13 con la CLI 0.9.42 por `npx` (Windows, Node 26, Chrome del sistema), con la telemetría desactivada. Un render de prueba de 2 s a 1080×1920 y 30 fps tardó 28 s, de los que 22 s son arranque. Falta probarlo con metraje de cámara.
