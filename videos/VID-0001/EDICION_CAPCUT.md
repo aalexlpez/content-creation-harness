@@ -38,7 +38,7 @@ En el resto del vídeo no hay corrección, o solo un ajuste suave igual en todas
 ## 4. Recursos que se hacen en CapCut
 
 - **R2 · hoja de calendario (S01–S02):** va arriba a la izquierda, sin tapar la cabeza. Muestra «ENERO», pasa a «FEBRERO» al decir «febrero» y vuelve a «ENERO» al decir «todavía no». Puede ser un texto sobre una forma, con un keyframe o un cambio de texto.
-- **R1 · maqueta (S04–S07):** un móvil sobre fondo `#0B1020` con cuatro pantallas. Para cada una puedes hacer una captura o imagen, o montarla con texto en CapCut. Pon el rótulo pequeño «Maqueta de ensayo» arriba a la izquierda, fijo de S04 a S07.
+- **R1 · maqueta (S04–S07):** un móvil sobre fondo `#0D213F` con cuatro pantallas. Para cada una puedes hacer una captura o imagen, o montarla con texto en CapCut. Pon el rótulo pequeño «Maqueta de ensayo» arriba a la izquierda, fijo de S04 a S07.
   1. **S04:** «¿Qué quieres lograr este año?» y debajo «Hacer ejercicio 3 veces por semana», escrito letra a letra (animación de máquina de escribir).
   2. **S05:** en «futuro» la pantalla se apaga (saturación baja y más oscura). Aparecen escalonadas las seis tarjetas de motivo y hay un toque en «No tuve tiempo» al decir «qué pasó».
   3. **S06:** se rellena la frase «Si llego a casa después de las 20:00, entonces hago 5 minutos de estiramientos antes de sentarme en el sofá». El color vuelve poco a poco. Etiqueta «L–V · 20:00».
@@ -53,11 +53,11 @@ Los textos de la app salen de la definición de producto. No los cambies.
 | S03 | «Plan B · para tu propósito» y debajo, más pequeño, «Miniapp n.º 1» | Entra en «plan B» y dura unos 2,4 s |
 | S04–S07 | «Maqueta de ensayo» | Arriba a la izquierda, fijo |
 | S08 | «Compruébalo tú» | En el tercio superior al decir «pruébalo en modo avión», unos 1,9 s |
-| S09 | «Este febrero, *no*.» («no» en cursiva o manuscrita) | En el tercio superior, unos 2,4 s, separado de la cara y del subtítulo |
+| S09 | «Este febrero, *no*.» («no.» en ExtraBold dentro de una caja blanco roto `#F5F6F8` con texto `#0B0B0D`) | En el tercio superior, unos 2,4 s, separado de la cara y del subtítulo |
 
-- **Subtítulos:** todo el vídeo, en grupos de 2 a 4 palabras. Inter o similar en negrita, sobre placa oscura.
+- **Subtítulos:** todo el vídeo, en grupos de 2 a 4 palabras. Plus Jakarta Sans Bold en mayúsculas, sobre placa azul marino `#0D213F`. Si te da tiempo, la palabra que suena va invertida (caja `#F5F6F8` con texto `#0B0B0D`).
 - **Zona segura:** los subtítulos y los rótulos van por encima de la franja inferior, donde las redes ponen sus botones y el texto del post. Deja libre aproximadamente el 20 % inferior y la columna derecha.
-- **Tipografías:** Inter, Crimson Text y Mr Dafoe son provisionales (perfil TEMP). Si CapCut no las tiene, usa equivalentes y apúntalo.
+- **Tipografías:** Plus Jakarta Sans (AV-007, licencia OFL). Instálala en el sistema desde `marca/fuentes/plus-jakarta-sans/` (bastan Bold y ExtraBold) antes de abrir CapCut. Si CapCut no la reconoce, usa Inter Bold y apúntalo.
 
 ## 6. Sonido
 
