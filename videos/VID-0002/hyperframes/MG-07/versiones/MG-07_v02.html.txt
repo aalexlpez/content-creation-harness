@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>MG-07 v02 · Resultado de Plan B</title>
+<!--
+  MG-07 v02 · VID-0002 · Resultado: sello, calendario y fondo de pantalla. PANTALLA COMPLETA.
+  Continúa a MG-06 v02 sin corte: arranca en el paso 3 ya completo (el último estado de MG-06)
+  y empuja hacia el resultado. Misma interfaz a pantalla completa, misma cámara.
+
+  Técnica: render(t) en cada fotograma (patrón de cursor-zoom-follow, HyperFrames).
+    - Sello con impacto: cae de 1,4 a 1 en 300 ms a −6° (ficha v06) y la cámara acusa el golpe
+      con un empuje de 4 % que se asienta (receta impact-feedback de video-shotcraft).
+    - Calendario: la tarjeta sube, la cámara la acompaña y se marcan las 20 citas (40 ms).
+    - Fondo de pantalla como elemento compartido: la MISMA frase viaja de la pantalla de
+      resultado a la pantalla de bloqueo mientras el fondo pasa a oscuro (técnica Flip).
+  Fuente de verdad: ficha v06 (soycerobytes/miminiapp): sello «Este febrero, no.» sin tapar el
+    texto; resultado con frase grande y propósito pequeño; «Recuérdamelo» con «De lunes a viernes
+    a las 20:00, durante 4 semanas»; bloqueo con «Mi plan B» y la frase entre el 32 % y el 72 % de
+    la altura, márgenes del 10 %, sin logotipo ni dirección, tema oscuro.
+  Prohibido: degradados, resplandores, brillos, partículas, glitch, datos personales.
+-->
+<style>
+  @font-face { font-family: "Space Grotesk"; font-weight: 300 700; src: url("./fonts/SpaceGrotesk.woff2") format("woff2"); }
+  @font-face { font-family: "DM Sans"; font-weight: 100 1000; src: url("./fonts/DMSans.woff2") format("woff2"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 500; src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype"); }
+  :root {
+    --canvas: #F7F5F0; --surface: #FFFFFF; --panel: #FBFAF8; --ink: #242136; --muted: #605B70; --brand: #7950F2;
+    --tint: #EDE6FE; --tint-ink: #653ACB; --border: #CEC6D8; --control-border: #8B829B; --lime: #B9F65A;
+    --d-canvas: #171421; --d-ink: #F7F3FF; --d-muted: #C0B7D0;
+  }
+  html, body { margin: 0; padding: 0; }
+  #root { position: relative; width: 1080px; height: 1920px; background: #0D213F; overflow: hidden; }
+  #bgbar { position: absolute; right: -60px; top: 520px; width: 700px; height: 860px; opacity: 0.06; }
+  #clip { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; background: var(--canvas); transform-origin: 50% 50%; }
+  #cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+  #ui { position: absolute; left: 0; top: 0; width: 415px; height: 738px; transform: scale(2.6024); transform-origin: 0 0;
+    background: var(--canvas); color: var(--ink); font-family: "DM Sans", sans-serif; overflow: hidden; }
+
+  #lockbg { position: absolute; inset: 0; background: var(--d-canvas); opacity: 0; }
+  .status { position: absolute; left: 26px; right: 26px; top: 14px; height: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 600; z-index: 4; }
+  .status .icons { display: flex; gap: 6px; align-items: center; }
+  .bars { display: flex; gap: 2px; align-items: flex-end; height: 11px; }
+  .bars i { width: 3px; background: currentColor; border-radius: 1px; }
+  .batt { width: 24px; height: 11px; border: 1.5px solid currentColor; border-radius: 3px; box-sizing: border-box; padding: 1px; }
+  .batt i { display: block; width: 70%; height: 100%; background: currentColor; border-radius: 1px; }
+  .appbar { position: absolute; left: 20px; top: 66px; height: 24px; display: flex; align-items: center; gap: 8px; }
+  .appbar svg { width: 22px; height: 23px; }
+  .appbar b { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 18px; }
+
+  .step { position: absolute; left: 0; top: 20px; width: 415px; height: 738px; }
+  .nav { position: absolute; left: 20px; right: 20px; top: 120px; display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  h2 { position: absolute; left: 20px; right: 20px; margin: 0; font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -0.015em; }
+  .field { position: absolute; left: 20px; right: 20px; box-sizing: border-box; background: var(--surface); border: 2px solid var(--control-border);
+    border-radius: 12px; padding: 12px 14px; font-size: 17px; line-height: 1.35; color: var(--ink); }
+  .tag { position: absolute; left: 20px; font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 18px; color: var(--brand); }
+  .row { position: absolute; left: 20px; right: 20px; top: 420px; display: flex; gap: 8px; align-items: center; }
+  .hour { width: 88px; height: 42px; box-sizing: border-box; border: 2px solid var(--control-border); border-radius: 12px; background: var(--surface);
+    display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 600; }
+  .day { flex: 1; height: 42px; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); box-sizing: border-box;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .day.on { background: var(--tint); border-color: var(--brand); color: var(--tint-ink); }
+  .btn { position: absolute; left: 20px; right: 20px; height: 50px; border-radius: 12px; background: var(--brand); color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 600; }
+
+  .small { position: absolute; left: 20px; right: 20px; font-size: 14px; color: var(--muted); }
+  #seal { position: absolute; right: 44px; top: 136px; padding: 7px 12px; border-radius: 12px; box-sizing: border-box;
+    background: var(--lime); border: 3px solid var(--ink); color: var(--ink);
+    font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 19px; white-space: nowrap; opacity: 0; z-index: 3; }
+  /* La frase vive fuera de las pantallas para poder viajar del resultado al bloqueo */
+  #phrase { position: absolute; left: 0; top: 0; width: 333px; margin: 0; font-family: "Space Grotesk", sans-serif; font-weight: 700;
+    font-size: 26px; line-height: 1.22; letter-spacing: -0.01em; color: var(--ink); z-index: 3; }
+  #cal { position: absolute; left: 16px; right: 16px; top: 426px; height: 266px; box-sizing: border-box; padding: 14px 16px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 20px; }
+  #cal h3 { margin: 0 0 6px; font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 18px; }
+  #cal .ev { font-size: 13.5px; line-height: 1.3; color: var(--ink); font-weight: 600; }
+  #cal .sum { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
+  .wk { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 10px; }
+  .wk span { font-size: 11px; color: var(--muted); text-align: center; }
+  .cells { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 4px; }
+  .cell { height: 15px; border-radius: 5px; background: var(--surface); border: 1px solid var(--border); box-sizing: border-box; position: relative; overflow: hidden; }
+  .cell i { position: absolute; inset: 0; background: var(--lime); opacity: 0; }
+  #calBtn { margin-top: 12px; height: 40px; border-radius: 12px; background: var(--brand); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; }
+
+  #clock { position: absolute; left: 0; right: 0; top: 128px; text-align: center; font-weight: 500; font-size: 76px; letter-spacing: -0.02em; color: var(--d-ink); opacity: 0; }
+  #lockLabel { position: absolute; left: 41.5px; top: 268px; font-size: 14px; color: var(--d-muted); letter-spacing: 0.04em; opacity: 0; }
+
+  #mockLabel { position: absolute; right: 20px; top: 98px; height: 17px; padding: 0 7px; border-radius: 9px; background: #0D213F; box-sizing: border-box;
+    border: 0.5px solid rgba(245, 246, 248, 0.35); display: flex; align-items: center; gap: 4.5px; font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 500; font-size: 7.7px; letter-spacing: 0.16em; color: #F5F6F8; z-index: 5; }
+  #mockLabel svg { width: 4.2px; height: 5.4px; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="5.8">
+  <svg id="bgbar" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>
+  <div id="clip">
+    <div id="cam">
+      <div id="ui">
+        <div id="lockbg"></div>
+        <div class="status" id="status"><span>19:58</span><span class="icons"><span class="bars"><i style="height:4px"></i><i style="height:6px"></i><i style="height:8px"></i><i style="height:11px"></i></span><span class="batt"><i></i></span></span></div>
+        <div class="appbar" id="appbar">
+          <svg viewBox="-5 20 86 90"><g fill="#7950F2"><rect x="0" y="30" width="13" height="70" rx="1.4"/><path d="M13 30 38 61V82L13 51Z"/><path d="M63 30 38 61V82L63 51Z"/><rect x="63" y="30" width="13" height="70" rx="1.4"/></g></svg>
+          <b>Plan B</b>
+        </div>
+
+        <!-- Paso 3 completo: el último estado de MG-06 -->
+        <div class="step" id="s3">
+          <div class="nav"><span>← Atrás</span><span>Paso 3 de 3</span></div>
+          <h2 style="top:146px; font-size:31px; line-height:1.12;">Tu plan para ese día</h2>
+          <div class="tag" style="top:192px;">Si</div>
+          <div class="field" style="top:216px; height:74px;">llego a casa después de las 20:00</div>
+          <div class="tag" style="top:300px;">entonces</div>
+          <div class="field" style="top:324px; height:84px;">hago 5 minutos de estiramientos antes de sentarme en el sofá</div>
+          <div class="row">
+            <span class="hour">20:00</span>
+            <span class="day on">lu</span><span class="day on">ma</span><span class="day on">mi</span><span class="day on">ju</span><span class="day on">vi</span><span class="day">sá</span><span class="day">do</span>
+          </div>
+          <div class="btn" style="top:476px;">Ver mi plan</div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="step" id="s4">
+          <div class="nav"><span>← Atrás</span><span></span></div>
+          <div class="small" style="top:156px; font-weight:600;">Tu plan</div>
+          <div class="small" style="top:362px;">Tu propósito: Hacer ejercicio 3 veces por semana</div>
+          <div id="cal">
+            <h3>Recuérdamelo</h3>
+            <div class="ev">Plan B: hago 5 minutos de estiramientos antes de sentarme en el sofá</div>
+            <div class="sum">De lunes a viernes a las 20:00, durante 4 semanas</div>
+            <div class="wk"><span>lu</span><span>ma</span><span>mi</span><span>ju</span><span>vi</span><span>sá</span><span>do</span></div>
+            <div class="cells" id="cells"></div>
+            <div id="calBtn">Añadir a mi calendario</div>
+          </div>
+          <div id="seal">Este febrero, no.</div>
+        </div>
+
+        <!-- Bloqueo -->
+        <div id="clock">19:58</div>
+        <div id="lockLabel">Mi plan B</div>
+        <p id="phrase">Si llego a casa después de las 20:00, entonces hago 5 minutos de estiramientos antes de sentarme en el sofá.</p>
+        <div id="mockLabel"><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>MAQUETA DE ENSAYO</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./lib/gsap.min.js"></script>
+<script>
+(function () {
+  // ── Anclas (s). Estimadas con el SRT de YouTube (toma de 7:05–7:17 del bruto: "Con esto te
+  //    llevas…" empieza ≈0,6 s después del inicio). Se recalculan con la toma elegida.
+  const A = { PUSH: 0.0, SEAL: 0.42, CAL: 2.5, FONDO: 3.9, OUT: 5.4 };
+  const D = 5.8, W = 1080, H = 1920;
+
+  const clamp01 = (x) => Math.max(0, Math.min(1, x));
+  const mix = (a, b, p) => a + (b - a) * p;
+  const prog = (t, a, d) => clamp01((t - a) / d);
+  const easeIO = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+  const easeIn = (p) => p * p * p;
+  const $ = (id) => document.getElementById(id);
+  const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const mixColor = (a, b, p) => { const A_ = hex(a), B_ = hex(b); return `rgb(${A_.map((v, i) => Math.round(mix(v, B_[i], p))).join(",")})`; };
+
+  // 4 semanas × 7 días; de lunes a viernes = 20 apariciones
+  const marks = [];
+  for (let w = 0; w < 4; w++) for (let d = 0; d < 7; d++) {
+    const c = document.createElement("div"); c.className = "cell"; const i = document.createElement("i"); c.appendChild(i); $("cells").appendChild(c);
+    if (d < 5) marks.push(i);
+  }
+
+  // La frase: posición en el resultado y en el bloqueo (unidades de la app).
+  // Bloqueo: márgenes del 10 % (41,5) y dentro de la franja del 32–72 % de la altura (236–531).
+  const P_RES = { x: 20, y: 194 }, P_LOCK = { x: 41.5, y: 296 };
+
+  // Cámara: poses {z, x, y} en px; entre poses, easeInOut
+  const C0 = { z: 1, x: W / 2, y: H / 2 };
+  const CAM = [
+    [0.9, 0.6, { z: 1.06, x: 540, y: 800 }],    // se acerca a la frase mientras lo dices
+    [A.CAL - 0.1, 0.5, { z: 1.08, x: 540, y: 1420 }], // baja con el calendario
+    [A.FONDO - 0.05, 0.5, C0],                  // vuelve al cuadro completo para el bloqueo
+  ];
+  function camAt(t) {
+    let from = C0;
+    for (const [at, d, to] of CAM) {
+      if (t < at) return from;
+      if (t < at + d) { const p = easeIO((t - at) / d); return { z: mix(from.z, to.z, p), x: mix(from.x, to.x, p), y: mix(from.y, to.y, p) }; }
+      from = to;
+    }
+    return from;
+  }
+
+  function render(t) {
+    // Salida: la app vuelve a ser tarjeta y baja (espejo de la entrada de MG-06)
+    const o = easeIn(prog(t, A.OUT, 0.4));
+    $("clip").style.transform = `translateY(${(260 * o).toFixed(2)}px) scale(${mix(1, 0.82, o).toFixed(4)})`;
+    $("clip").style.borderRadius = `${mix(0, 72, Math.min(1, o * 3)).toFixed(1)}px`;
+    $("clip").style.opacity = (1 - prog(t, A.OUT + 0.22, 0.18)).toFixed(3);
+
+    // Cámara con golpe del sello: +4 % al caer y se asienta en 0,35 s
+    const c = camAt(t);
+    const hit = t >= A.SEAL + 0.3 ? Math.exp(-9 * (t - A.SEAL - 0.3)) * Math.cos(18 * (t - A.SEAL - 0.3)) : 0;
+    const z = c.z * (1 + 0.04 * Math.max(0, hit));
+    const hw = W / (2 * z), hh = H / (2 * z);
+    const cx = Math.max(hw, Math.min(W - hw, c.x)), cy = Math.max(hh, Math.min(H - hh, c.y));
+    $("cam").style.transform = `translate(${(W / 2 - cx * z).toFixed(2)}px, ${(H / 2 - cy * z).toFixed(2)}px) scale(${z.toFixed(4)})`;
+
+    // Empuje del paso 3 al resultado (como en MG-06)
+    const p = easeIO(prog(t, A.PUSH, 0.42));
+    $("s3").style.transform = `translateX(${(-0.3 * 415 * p).toFixed(2)}px)`;
+    $("s3").style.opacity = (1 - p).toFixed(3);
+    const lock = easeIO(prog(t, A.FONDO, 0.55));
+    $("s4").style.transform = `translateX(${(415 * (1 - p)).toFixed(2)}px)`;
+    $("s4").style.opacity = (p * (1 - easeOut(prog(t, A.FONDO, 0.3)))).toFixed(3);
+
+    // Sello: cae de 1,4 a 1 en 300 ms a −6°
+    const sp = prog(t, A.SEAL, 0.3);
+    $("seal").style.opacity = t >= A.SEAL ? Math.min(1, sp * 6).toFixed(3) : 0;
+    $("seal").style.transform = `rotate(-6deg) scale(${mix(1.4, 1, easeIn(sp)).toFixed(4)})`;
+
+    // Calendario: la tarjeta sube y se marcan las 20 citas (40 ms entre celdas)
+    const cp = easeOut(prog(t, A.CAL, 0.45));
+    $("cal").style.transform = `translateY(${(90 * (1 - cp)).toFixed(2)}px)`;
+    $("cal").style.opacity = cp.toFixed(3);
+    marks.forEach((m, i) => { m.style.opacity = prog(t, A.CAL + 0.3 + 0.04 * i, 0.08).toFixed(3); });
+
+    // Fondo de pantalla: el fondo pasa a oscuro y la MISMA frase viaja a su sitio en el bloqueo
+    $("lockbg").style.opacity = lock.toFixed(3);
+    const fp = easeIO(prog(t, A.FONDO + 0.05, 0.6));
+    const ph = $("phrase");
+    ph.style.opacity = p.toFixed(3);
+    ph.style.transform = `translate(${mix(P_RES.x + 415 * (1 - p), P_LOCK.x, fp).toFixed(2)}px, ${mix(P_RES.y + 20, P_LOCK.y, fp).toFixed(2)}px)`;
+    ph.style.color = mixColor("#242136", "#F7F3FF", fp);
+    $("clock").style.opacity = easeOut(prog(t, A.FONDO + 0.3, 0.35)).toFixed(3);
+    $("clock").style.transform = `translateY(${(-10 * (1 - easeOut(prog(t, A.FONDO + 0.3, 0.35)))).toFixed(2)}px)`;
+    $("lockLabel").style.opacity = easeOut(prog(t, A.FONDO + 0.45, 0.3)).toFixed(3);
+    $("status").style.color = mixColor("#242136", "#F7F3FF", lock);
+    $("appbar").style.opacity = (1 - lock).toFixed(3);
+  }
+
+  const clock = { t: 0 };
+  const tl = gsap.timeline({ paused: true });
+  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(clock.t) }, 0);
+  render(0);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+})();
+</script>
+</body>
+</html>

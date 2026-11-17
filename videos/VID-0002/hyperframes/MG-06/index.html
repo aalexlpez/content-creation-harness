@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>MG-06 v02 · Demo de Plan B</title>
+<title>MG-06 v03 · Demo de Plan B</title>
 <!--
   MG-06 v02 · VID-0002 · Maqueta de Plan B, pasos 1 a 3. PANTALLA COMPLETA (sin alfa).
 
@@ -104,7 +104,7 @@
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="15.4">
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="14.42">
   <svg id="bgbar" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>
   <div id="clip">
     <div id="cam">
@@ -169,7 +169,12 @@
   // ── Anclas (s desde el inicio de la pieza). Estimadas con el SRT de YouTube (toma de
   //    6:43–7:00 del bruto). Se recalculan con la toma elegida; todo lo demás deriva de aquí.
   const A = { TYPE: 0.9, NEXT1: 2.3, FEB: 3.4, WHY: 4.0, TAP: 6.5, SI: 10.3, ACC: 12.5, VER: 14.8 };
-  const D = 15.4, W = 1080, H = 1920, U = 1080 / 415;
+  const D = 14.42, D_V02 = 15.4, W = 1080, H = 1920, U = 1080 / 415;
+
+  // v03 · re-anclada al corte de ensayo_2 (2026-11-17): T4 del corte: «eliges» 23,80 · «febrero» 26,12 · «eliges» 26,87 · «no tuve tiempo» 29,60 · «armas» 31,50 · «Si llego» 33,60 · «hago» 35,68; termina en 37,12, donde entra MG-07.
+  // WARP: (tiempo nuevo, tiempo interno de la v02); entre pares, lineal.
+  const WARP = [[0, 0], [1.1, 0.9], [3.42, 3.4], [4.17, 4.0], [6.9, 6.5], [8.8, 7.0], [10.9, 10.3], [12.98, 12.5], [14.2, 14.8], [14.42, 15.4]];
+  const warp = (t) => { for (let i = 1; i < WARP.length; i++) { const [a0, b0] = WARP[i - 1], [a1, b1] = WARP[i]; if (t <= a1) return b0 + (b1 - b0) * Math.max(0, (t - a0) / (a1 - a0)); } return WARP[WARP.length - 1][1]; };
 
   // ── utilidades de tiempo
   const clamp01 = (x) => Math.max(0, Math.min(1, x));
@@ -334,8 +339,8 @@
 
   const clock = { t: 0 };
   const tl = gsap.timeline({ paused: true });
-  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(clock.t) }, 0);
-  render(0);
+  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(warp(clock.t)) }, 0);
+  render(warp(0));
   window.__timelines = window.__timelines || {};
   window.__timelines["root"] = tl;
 })();

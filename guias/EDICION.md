@@ -88,7 +88,33 @@ Propuesta AV-009, probada en el ensayo de edición del 2026-11-17 (`videos/VID-0
 | Tramos a cámara | Se usan para respirar y para lo que no conviene ilustrar (por ejemplo, un castigo que la ficha del producto evita). Pueden llevar elementos ligeros junto a la cara |
 | Sistema pequeño | Marca v2 sin color de acento, iconos lineales en blanco roto, la barra como conector, notas pequeñas en mayúsculas con tracking para la fuente de un dato |
 
-**Orden de trabajo:** primero el corte, después la capa. Los tiempos por palabra de la versión cortada son la base; con el bruto solo se puede planificar. Pasos: (1) transcripción con tiempos (`hyperframes transcribe`, ver [TECNICA](TECNICA.md)); (2) lista de eventos por frase, que Ale revisa; (3) composición sobre el corte; (4) revisión con capturas y `hyperframes check`; (5) sonidos reales en una segunda pasada.
+**Estándar:** cada evento de la capa sigue [MOTION](MOTION.md) (tamaños, curvas, transiciones, sonido, recetas de video-shotcraft y del catálogo de HyperFrames, y la revisión).
+
+**Orden de trabajo:** primero el corte, después la capa. Los tiempos por palabra de la versión cortada son la base; con el bruto solo se puede planificar. Es el flujo que salió bien en VID-0002 el 2026-11-17 («ha quedado muchísimo mejor»). El ejemplo completo está en `videos/VID-0002/hyperframes/edicion/` (`PLAN.md`, `index.html`, `mezcla.py`).
+
+| paso | quién | qué | sale |
+|---|---|---|---|
+| 1 | Ale | Corta y limpia el bruto en CapCut: toma por frase y silencios fuera. Exporta solo **Video**, sin marcar la casilla Audio (que crea un `.aac` aparte), en 1080P, H.264, mp4 y 30 fps, sin música ni subtítulos | `media/originales/<nombre>.mp4` |
+| 2 | Claude | Ingesta: `inspeccionar --perfil ingesta`, `medios`, revisar marca de agua y subtítulos en tres fotogramas. Copia de trabajo H.264 con un fotograma clave por segundo y audio a WAV 48 kHz | `hyperframes/<pieza>/assets/corte.mp4`, `media/trabajo/corte.wav` |
+| 3 | Claude | Tiempos por palabra con Parakeet **frase a frase**, cortando en las pausas, y texto corregido a mano ([TECNICA](TECNICA.md#cómo-se-trabaja-aprendido-el-2026-11-17)) | `media/trabajo/corte_palabras.json` |
+| 4 | Claude | Si lo dicho no coincide con el guion: voz literal y claims nuevos en el GUION y subida de `Version` (el OK-2 se pide sobre lo grabado) | `GUION.md` vN |
+| 5 | Claude → Ale | **Lista de eventos**: tiempo, palabra, modo (C, E o P), evento, receta de [MOTION §8](MOTION.md#8-mapa-de-recetas-para-la-serie-de-miniapps) y sonido del banco. Ale la aprueba antes de animar | `PLAN.md` §3 |
+| 6 | Claude | Composición: un solo `index.html` con `render(t)`. Las maquetas ya hechas se re-anclan con un mapa de tiempos (`WARP`) y entran como video a pantalla completa | `index.html` |
+| 7 | Claude | `check`, capturas en ~30 instantes y revisión P0/P1 ([MOTION §7](MOTION.md#7-proceso-de-una-capa-de-motion)); se corrige y se vuelve a capturar | `media/trabajo/capturas*/` |
+| 8 | Claude | Render sin sonido añadido | `media/trabajo/edicion_vNN_sin_sfx.mp4` |
+| 9 | Claude | Mezcla con `mezcla.py`: tabla de efectos (evento, archivo, recorte, pico objetivo, nota), pico 1 fotograma después del evento, música en todo el vídeo 18 dB bajo la voz, −14 LUFS | `media/trabajo/edicion_vNN.mp4` + `_mezcla.json` |
+| 10 | Ale | Lo ve y lo escucha entero en el celular; una ronda de correcciones | PRODUCCION → Correcciones |
+
+**Lo que funcionó en VID-0002 (2026-11-17):**
+- **Modos:** tres (cámara, escenario y pantalla completa), con la maqueta a pantalla completa para que se lea.
+- **Subtítulos:**
+  - un solo bloque que se desliza entre y 862 (escenario) e y 1190 (cámara), en vez de dos bloques que parpadean al cambiar de modo;
+  - sobre interfaz clara, cada palabra va en caja marina.
+- **Ritmo:**
+  - un evento por idea con peso (unos 45 en 63 s);
+  - tres golpes fuertes por vídeo, como máximo;
+  - pops, clics y lápiz alternados y con volumen en escalera.
+- **Banco de sonidos:** el que armó Ale en Pixabay (AV-011), con cada efecto recortado a su tramo audible.
 
 ## Portada
 

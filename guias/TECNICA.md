@@ -62,6 +62,14 @@ HyperFrames es el motor de animación principal (AV-001). Si falla en una prueba
 - **Transparencia:** `--format mov` da ProRes 4444 con alfa (`yuva444p12le`) y `--format webm` VP9 con alfa; ambos verificados con ffprobe. Falta comprobar que CapCut los importa.
 - **Video de cámara dentro de la composición:** `<video>` con `data-start`, `data-duration` y `data-has-audio="true"`. Convierte antes el material HEVC a una copia H.264 en `assets/` (fuera de Git por `.gitignore`).
 - **Tiempos por palabra:** `npx hyperframes@0.9.42 transcribe audio.wav --engine parakeet --language es --json`. Whisper exige compilar con CMake y Visual Studio Build Tools, así que se usa **Parakeet** (`hyperframes models install parakeet`, instalado el 2026-11-17 con permiso de Ale). Sus tiempos sirven; su texto no (traduce partes al inglés): el texto se corrige con el guion.
+- **Parakeet frase a frase:** con el audio entero traduce tramos al inglés. Cortando el WAV en sus pausas (`silencedetect=n=-38dB:d=0.12`) y transcribiendo cada frase (3–5 s) sale en español. Su JSON sale por **stderr**: redirige con `> salida.txt 2>&1`. Si el texto corregido tiene otro número de palabras que el de Parakeet, el tiempo de la frase se reparte por letras y se ajusta al componer.
+- **Video que se usa en la composición:** CapCut y los renders de HyperFrames dejan fotogramas clave cada 5–8 s y el seek se congela. Se recodifica con `-g 30 -keyint_min 30` (`libx264 -crf 14–16`).
+- **Re-anclar una pieza ya hecha a otra voz:** sin tocar su `render(t)`, se añade un mapa `WARP = [[t_nuevo, t_interno], …]` lineal por tramos, se llama `render(warp(t))` y se cambia la duración. Así se hicieron MG-06 y MG-07 v03; la versión anterior se guarda en `versiones/`.
+- **Contenedores con `overflow: hidden`:** dales ancho explícito. Un rótulo cuyo contenedor solo tenía hijos absolutos medía 0 px y no se veía.
+- **Avisos que se quedan a propósito:**
+  - `content_overlap` en el giro 3D de la hoja (las dos caras se cruzan);
+  - `line_unread` en la última frase cuando la voz acaba con el vídeo;
+  - `composition_file_too_large`, porque un solo `index.html` con `render(t)` es más fácil de sincronizar.
 - **Catálogo:** `npx hyperframes@0.9.42 catalog --json` lista 448 bloques y componentes con video de muestra. Antes de instalar uno (`hyperframes add`), Ale lo aprueba.
 
 ## Montaje (CapCut Desktop gratis o Shotcut)

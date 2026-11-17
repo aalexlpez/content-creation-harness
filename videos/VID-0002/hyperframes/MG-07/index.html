@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>MG-07 v02 · Resultado de Plan B</title>
+<title>MG-07 v03 · Resultado de Plan B</title>
 <!--
   MG-07 v02 · VID-0002 · Resultado: sello, calendario y fondo de pantalla. PANTALLA COMPLETA.
   Continúa a MG-06 v02 sin corte: arranca en el paso 3 ya completo (el último estado de MG-06)
@@ -92,7 +92,7 @@
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="5.8">
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="5.18">
   <svg id="bgbar" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>
   <div id="clip">
     <div id="cam">
@@ -151,7 +151,12 @@
   // ── Anclas (s). Estimadas con el SRT de YouTube (toma de 7:05–7:17 del bruto: "Con esto te
   //    llevas…" empieza ≈0,6 s después del inicio). Se recalculan con la toma elegida.
   const A = { PUSH: 0.0, SEAL: 0.42, CAL: 2.5, FONDO: 3.9, OUT: 5.4 };
-  const D = 5.8, W = 1080, H = 1920;
+  const D = 5.18, D_V02 = 5.8, W = 1080, H = 1920;
+
+  // v03 · re-anclada al corte de ensayo_2 (2026-11-17): T5 del corte: sello en «Con esto» 37,54 · «calendario» 39,54 · «fondo» 41,06; sale en 41,97.
+  // WARP: (tiempo nuevo, tiempo interno de la v02); entre pares, lineal.
+  const WARP = [[0, 0], [0.42, 0.42], [2.42, 2.5], [3.94, 3.9], [4.85, 5.4], [5.18, 5.8]];
+  const warp = (t) => { for (let i = 1; i < WARP.length; i++) { const [a0, b0] = WARP[i - 1], [a1, b1] = WARP[i]; if (t <= a1) return b0 + (b1 - b0) * Math.max(0, (t - a0) / (a1 - a0)); } return WARP[WARP.length - 1][1]; };
 
   const clamp01 = (x) => Math.max(0, Math.min(1, x));
   const mix = (a, b, p) => a + (b - a) * p;
@@ -241,8 +246,8 @@
 
   const clock = { t: 0 };
   const tl = gsap.timeline({ paused: true });
-  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(clock.t) }, 0);
-  render(0);
+  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(warp(clock.t)) }, 0);
+  render(warp(0));
   window.__timelines = window.__timelines || {};
   window.__timelines["root"] = tl;
 })();

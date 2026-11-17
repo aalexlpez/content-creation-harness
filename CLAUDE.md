@@ -18,6 +18,7 @@ En Windows, si `python` no responde, usa `py -3`.
 | Promesa, audiencias, pilares, selección de ideas y métricas | [guias/EDITORIAL.md](guias/EDITORIAL.md) |
 | Cómo escribir guion, ganchos, escenas y claims | [guias/GUIONES.md](guias/GUIONES.md) |
 | Dirección de montaje: texto, música, color y movimiento | [guias/EDICION.md](guias/EDICION.md) |
+| Estándar de motion graphics (reglas, recetas y revisión) | [guias/MOTION.md](guias/MOTION.md) |
 | Perfil técnico, ingesta, edición, exportación y QC | [guias/TECNICA.md](guias/TECNICA.md) |
 | Set de grabación (luz, cámara, micro) | [guias/SET.md](guias/SET.md) |
 | Identidad, kit de logos, alias y cuentas | [marca/IDENTIDAD.md](marca/IDENTIDAD.md), `marca/kit/`, `marca/CUENTAS.csv` |

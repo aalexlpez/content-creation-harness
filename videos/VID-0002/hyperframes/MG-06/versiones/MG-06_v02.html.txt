@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>MG-06 v02 · Demo de Plan B</title>
+<!--
+  MG-06 v02 · VID-0002 · Maqueta de Plan B, pasos 1 a 3. PANTALLA COMPLETA (sin alfa).
+
+  Qué cambia frente a la v01 (dirección AV-002: interfaz cinematográfica por capas):
+    - La interfaz llena el cuadro a escala legible (×2,6: texto de 17 → 44 px) en vez de un
+      celular pequeño en el centro. Entra como tarjeta que se expande a pantalla completa.
+    - Cámara que sigue cada interacción (técnica de cursor-zoom-follow, HyperFrames, Apache-2.0):
+      se acerca al campo que se escribe, al mes y al obstáculo, y vuelve.
+    - Teclado del sistema que sube al escribir, con la tecla de cada letra marcada y cursor
+      que sigue la última letra (técnica de notes-reveal, HyperFrames, Apache-2.0).
+    - Paso 2 con "blackout": al elegir "No tuve tiempo", los otros cinco se apagan
+      (receta chip-grid-single-select-blackout de video-shotcraft, Apache-2.0).
+    - Todo es función del tiempo: render(t) se recalcula en cada fotograma, así el seek es exacto.
+
+  Fuente de verdad: ficha v06 de Plan B (soycerobytes/miminiapp, docs/product-specs/plan-b.md):
+    textos de §6 tal cual (decisión del 2026-11-16), datos del ejemplo, paso 2 a gris en 600 ms,
+    paso 3 con gris 100/50/0 %. Marca del producto dentro de la app (tokens de global.css,
+    Space Grotesk y DM Sans, radios 12/20/28, isotipo M sin redibujar).
+  Marca del video fuera de la app: fondo #0D213F, barra "/" y rótulo "MAQUETA DE ENSAYO".
+  Prohibido: degradados, resplandores, partículas, glitch, sacudidas, marcas de celulares reales.
+-->
+<style>
+  @font-face { font-family: "Space Grotesk"; font-weight: 300 700; src: url("./fonts/SpaceGrotesk.woff2") format("woff2"); }
+  @font-face { font-family: "DM Sans"; font-weight: 100 1000; src: url("./fonts/DMSans.woff2") format("woff2"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 500; src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype"); }
+  :root {
+    --canvas: #F7F5F0; --surface: #FFFFFF; --ink: #242136; --muted: #605B70; --brand: #7950F2;
+    --tint: #EDE6FE; --tint-ink: #653ACB; --border: #CEC6D8; --control-border: #8B829B;
+  }
+  html, body { margin: 0; padding: 0; }
+  #root { position: relative; width: 1080px; height: 1920px; background: #0D213F; overflow: hidden; }
+  #bgbar { position: absolute; right: -60px; top: 520px; width: 700px; height: 860px; opacity: 0.06; }
+
+  /* Tarjeta que se expande a pantalla completa; dentro, la cámara */
+  #clip { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; background: var(--canvas); transform-origin: 50% 50%; }
+  #cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+  /* La app se dibuja a 415 × 738 unidades (un celular real) y se escala ×2,6024 */
+  #ui {
+    --g: 0; position: absolute; left: 0; top: 0; width: 415px; height: 738px; transform: scale(2.6024); transform-origin: 0 0;
+    background: var(--canvas); color: var(--ink); font-family: "DM Sans", sans-serif; overflow: hidden;
+    filter: grayscale(var(--g)) brightness(calc(1 - var(--g) * 0.05));
+  }
+  .status { position: absolute; left: 26px; right: 26px; top: 14px; height: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 600; }
+  .status .icons { display: flex; gap: 6px; align-items: center; }
+  .bars { display: flex; gap: 2px; align-items: flex-end; height: 11px; }
+  .bars i { width: 3px; background: var(--ink); border-radius: 1px; }
+  .batt { width: 24px; height: 11px; border: 1.5px solid var(--ink); border-radius: 3px; box-sizing: border-box; padding: 1px; }
+  .batt i { display: block; width: 70%; height: 100%; background: var(--ink); border-radius: 1px; }
+  .appbar { position: absolute; left: 20px; top: 66px; height: 24px; display: flex; align-items: center; gap: 8px; }
+  .appbar svg { width: 22px; height: 23px; }
+  .appbar b { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 18px; }
+
+  .step { position: absolute; left: 0; top: 20px; width: 415px; height: 738px; }
+  .nav { position: absolute; left: 20px; right: 20px; top: 120px; display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  h2 { position: absolute; left: 20px; right: 20px; margin: 0; font-family: "Space Grotesk", sans-serif; font-weight: 700; color: var(--ink); letter-spacing: -0.015em; }
+  .lbl { position: absolute; left: 20px; font-size: 14px; font-weight: 500; color: var(--muted); }
+  .field { position: absolute; left: 20px; right: 20px; box-sizing: border-box; background: var(--surface); border: 2px solid var(--control-border);
+    border-radius: 12px; padding: 12px 14px; font-size: 17px; line-height: 1.35; color: var(--ink); }
+  .field .txt { position: relative; white-space: pre-wrap; }
+  .field .c { visibility: hidden; }
+  /* Cursor dentro del flujo del texto: va justo después de la última letra visible, sin medir nada */
+  .caret { display: inline-block; width: 2px; height: 20px; margin: 0 -1px; vertical-align: -3px; background: var(--brand); border-radius: 1px; opacity: 0; }
+  .chips { position: absolute; left: 20px; right: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { background: var(--tint); color: var(--tint-ink); border-radius: 999px; padding: 7px 13px; font-size: 14px; font-weight: 500; }
+  .btn { position: absolute; left: 20px; right: 20px; height: 50px; border-radius: 12px; background: var(--brand); color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 600; }
+  .month { position: absolute; left: 20px; top: 148px; height: 32px; padding: 0 13px; border-radius: 999px; background: var(--tint); color: var(--tint-ink);
+    display: flex; align-items: stretch; gap: 6px; font-size: 15px; font-weight: 600; transform-origin: 0 50%; }
+  .month > b { font-weight: 600; line-height: 32px; }
+  .month .m { position: relative; display: inline-block; width: 66px; height: 32px; overflow: hidden; }
+  .month .m span { position: absolute; left: 0; top: 0; line-height: 32px; }
+  .grid { position: absolute; left: 20px; right: 20px; top: 324px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ob { height: 50px; box-sizing: border-box; border: 2px solid var(--border); background: var(--surface); border-radius: 12px;
+    display: flex; align-items: center; padding: 0 14px; font-size: 16px; font-weight: 500; color: var(--ink); }
+  .tag { position: absolute; left: 20px; font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 18px; color: var(--brand); }
+  .row { position: absolute; left: 20px; right: 20px; top: 420px; display: flex; gap: 8px; align-items: center; }
+  .hour { width: 88px; height: 42px; box-sizing: border-box; border: 2px solid var(--control-border); border-radius: 12px; background: var(--surface);
+    display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 600; }
+  .day { flex: 1; height: 42px; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); box-sizing: border-box;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .day.on { background: var(--tint); border-color: var(--brand); color: var(--tint-ink); }
+
+  /* Teclado del sistema (genérico, gris neutro) */
+  #kb { position: absolute; left: 0; top: 448px; width: 415px; height: 290px; background: #D2D4DA; }
+  .kr { position: absolute; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; }
+  .k { width: 34px; height: 42px; border-radius: 6px; background: #FFFFFF; display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: #1B1B1F; }
+  .k.f { background: #ADB1BB; font-size: 14px; }
+  .k.on { background: #ADB1BB; }
+
+  .tapdot { position: absolute; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: rgba(36, 33, 54, 0.20); opacity: 0; }
+  .tapring { position: absolute; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; border: 2.5px solid rgba(36, 33, 54, 0.35); box-sizing: border-box; opacity: 0; }
+
+  /* Rótulo de la marca del video, en su propia fila de la app (y ≈ 255 px): se mueve con la cámara y nunca pisa el contenido */
+  #mockLabel { position: absolute; right: 20px; top: 98px; height: 17px; padding: 0 7px; border-radius: 9px; background: #0D213F;
+    display: flex; align-items: center; gap: 4.5px; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 500; font-size: 7.7px;
+    letter-spacing: 0.16em; color: #F5F6F8; z-index: 5; }
+  #mockLabel svg { width: 4.2px; height: 5.4px; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="15.4">
+  <svg id="bgbar" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>
+  <div id="clip">
+    <div id="cam">
+      <div id="ui">
+        <div class="status"><span>19:58</span><span class="icons"><span class="bars"><i style="height:4px"></i><i style="height:6px"></i><i style="height:8px"></i><i style="height:11px"></i></span><span class="batt"><i></i></span></span></div>
+        <div class="appbar">
+          <svg viewBox="-5 20 86 90"><g fill="#7950F2"><rect x="0" y="30" width="13" height="70" rx="1.4"/><path d="M13 30 38 61V82L13 51Z"/><path d="M63 30 38 61V82L63 51Z"/><rect x="63" y="30" width="13" height="70" rx="1.4"/></g></svg>
+          <b>Plan B</b>
+        </div>
+
+        <div class="step" id="s1">
+          <div class="nav"><span>← Atrás</span><span>Paso 1 de 3</span></div>
+          <h2 style="top:148px; font-size:31px; line-height:1.12;">¿Qué quieres lograr este año?</h2>
+          <div class="lbl" style="top:236px;">Tu propósito</div>
+          <div class="field" id="f1" style="top:258px; height:54px; padding-top:14px;"><span class="txt" id="t1">Hacer ejercicio 3 veces por semana</span><i class="caret" id="k1" hidden></i></div>
+          <div class="chips" style="top:330px;">
+            <span class="chip">Hacer ejercicio</span><span class="chip">Leer más</span><span class="chip">Ahorrar</span>
+            <span class="chip">Aprender un idioma</span><span class="chip">Dormir mejor</span><span class="chip">Usar menos el móvil</span>
+          </div>
+          <div class="btn" id="b1" style="top:444px;">Siguiente</div>
+        </div>
+
+        <div class="step" id="s2">
+          <div class="nav"><span>← Atrás</span><span>Paso 2 de 3</span></div>
+          <div class="month" id="month"><b>Mes:</b><span class="m"><span id="mEne">enero</span><span id="mFeb">febrero</span></span></div>
+          <h2 style="top:198px; font-size:24px; line-height:1.2;">Imagina que es 1 de febrero y lo has dejado. ¿Qué ha pasado?</h2>
+          <div class="lbl" style="top:294px; font-size:13px;">Al elegir un obstáculo, pasarás al siguiente paso.</div>
+          <div class="grid">
+            <div class="ob">No tuve tiempo</div><div class="ob">Perdí las ganas</div>
+            <div class="ob">Algo se cruzó</div><div class="ob">Era demasiado</div>
+            <div class="ob">Se me olvidó</div><div class="ob">Otra cosa</div>
+          </div>
+        </div>
+
+        <div class="step" id="s3">
+          <div class="nav"><span>← Atrás</span><span>Paso 3 de 3</span></div>
+          <h2 style="top:146px; font-size:31px; line-height:1.12;">Tu plan para ese día</h2>
+          <div class="tag" style="top:192px;">Si</div>
+          <div class="field" id="f2" style="top:216px; height:74px;"><span class="txt" id="t2">llego a casa después de las 20:00</span><i class="caret" id="k2" hidden></i></div>
+          <div class="tag" style="top:300px;">entonces</div>
+          <div class="field" id="f3" style="top:324px; height:84px;"><span class="txt" id="t3">hago 5 minutos de estiramientos antes de sentarme en el sofá</span><i class="caret" id="k3" hidden></i></div>
+          <div class="row">
+            <span class="hour">20:00</span>
+            <span class="day on">lu</span><span class="day on">ma</span><span class="day on">mi</span><span class="day on">ju</span><span class="day on">vi</span><span class="day">sá</span><span class="day">do</span>
+          </div>
+          <div class="btn" id="b3" style="top:476px;">Ver mi plan</div>
+        </div>
+
+        <div id="kb">
+          <div class="kr" style="top:10px;"></div><div class="kr" style="top:62px;"></div><div class="kr" style="top:114px;"></div><div class="kr" style="top:166px;"></div>
+        </div>
+        <div class="tapdot" id="td"></div><div class="tapring" id="tr"></div>
+        <div id="mockLabel"><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>MAQUETA DE ENSAYO</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./lib/gsap.min.js"></script>
+<script>
+(function () {
+  // ── Anclas (s desde el inicio de la pieza). Estimadas con el SRT de YouTube (toma de
+  //    6:43–7:00 del bruto). Se recalculan con la toma elegida; todo lo demás deriva de aquí.
+  const A = { TYPE: 0.9, NEXT1: 2.3, FEB: 3.4, WHY: 4.0, TAP: 6.5, SI: 10.3, ACC: 12.5, VER: 14.8 };
+  const D = 15.4, W = 1080, H = 1920, U = 1080 / 415;
+
+  // ── utilidades de tiempo
+  const clamp01 = (x) => Math.max(0, Math.min(1, x));
+  const mix = (a, b, p) => a + (b - a) * p;
+  const prog = (t, a, d) => clamp01((t - a) / d);
+  const easeIO = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+  const expoOut = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+  const backOut = (p) => { const c1 = 1.7, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const $ = (id) => document.getElementById(id);
+
+  // ── teclado español
+  const ROWS = ["qwertyuiop", "asdfghjklñ", "⇧zxcvbnm⌫", ["123", "espacio", "↵"]];
+  const keys = {};
+  document.querySelectorAll(".kr").forEach((row, ri) => {
+    const r = ROWS[ri];
+    (Array.isArray(r) ? r : [...r]).forEach((ch) => {
+      const k = document.createElement("span");
+      k.className = "k" + ("⇧⌫123↵".includes(ch) && ch.length <= 3 && ch !== "espacio" ? " f" : "");
+      if (ch === "espacio") { k.style.width = "196px"; k.style.fontSize = "15px"; }
+      if (ch === "123" || ch === "↵") k.style.width = "70px";
+      if (ch === "⇧" || ch === "⌫") k.style.width = "44px";
+      k.textContent = ch; row.appendChild(k); keys[ch === "espacio" ? " " : ch] = k;
+    });
+  });
+  const keyFor = (ch) => keys[ch.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "") === "n" && ch.toLowerCase() === "ñ" ? "ñ" : ch.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")];
+
+  // ── campos que se escriben: letras como spans (visibilidad por tiempo) y cursor medido
+  const FIELDS = [
+    { txt: "t1", caret: "k1", field: "f1", t0: A.TYPE, dur: 1.1, active: [0.75, 2.3] },
+    { txt: "t2", caret: "k2", field: "f2", t0: A.SI, dur: 1.4, active: [10.0, 12.25] },
+    { txt: "t3", caret: "k3", field: "f3", t0: A.ACC, dur: 2.0, active: [12.25, 14.55] },
+  ];
+  FIELDS.forEach((F) => {
+    const el = $(F.txt), s = el.textContent; el.textContent = "";
+    F.spans = [...s].map((ch) => { const c = document.createElement("span"); c.className = "c"; c.textContent = ch; el.appendChild(c); return c; });
+    F.caretEl = $(F.caret); F.caretEl.hidden = false; el.insertBefore(F.caretEl, el.firstChild);
+  });
+  // ── cámara: poses {t, z, x, y} en px del cuadro; entre poses, easeInOut; fuera, se mantiene
+  const C0 = { z: 1, x: W / 2, y: H / 2 };
+  const CAM = [
+    // Acercamientos moderados: los campos ocupan casi todo el ancho y no deben recortarse.
+    [0.70, 0.50, { z: 1.08, x: 540, y: 800 }],   // al campo del propósito
+    [2.05, 0.35, C0],                            // vuelve para el toque en Siguiente
+    [3.28, 0.26, { z: 1.06, x: 540, y: 820 }],   // leve acercamiento; el mes se destaca solo
+    [3.95, 0.45, C0],
+    [6.10, 0.40, { z: 1.08, x: 540, y: 1040 }],  // se acerca a los obstáculos
+    [7.05, 0.35, C0],
+    [9.95, 0.40, { z: 1.08, x: 540, y: 760 }],   // al campo "Si"
+    [12.15, 0.40, { z: 1.08, x: 540, y: 1000 }], // baja al campo "entonces"
+    [14.45, 0.40, C0],
+  ];
+  function camAt(t) {
+    let from = C0;
+    for (const [at, d, to] of CAM) {
+      if (t < at) return from;
+      if (t < at + d) { const p = easeIO((t - at) / d); return { z: mix(from.z, to.z, p), x: mix(from.x, to.x, p), y: mix(from.y, to.y, p) }; }
+      from = to;
+    }
+    return from;
+  }
+
+  // ── toques: posición en unidades de la app
+  const TAPS = [
+    { t: A.NEXT1, x: 207, y: 489, el: "b1" },
+    { t: A.TAP, x: 113, y: 369, el: null },
+    { t: A.VER, x: 207, y: 521, el: "b3" },
+  ];
+  const obs = [...document.querySelectorAll(".ob")];
+
+  function render(t) {
+    // Entrada: la app llega como tarjeta y se expande a pantalla completa (0,6 s)
+    const e = expoOut(prog(t, 0, 0.6));
+    $("clip").style.transform = `scale(${mix(0.8, 1, e).toFixed(4)})`;
+    $("clip").style.borderRadius = `${mix(72, 0, e).toFixed(1)}px`;
+    $("clip").style.opacity = mix(0, 1, prog(t, 0, 0.15)).toFixed(3);
+
+    // Cámara (sin dejar ver el borde del cuadro)
+    const c = camAt(t);
+    const hw = W / (2 * c.z), hh = H / (2 * c.z);
+    const cx = Math.max(hw, Math.min(W - hw, c.x)), cy = Math.max(hh, Math.min(H - hh, c.y));
+    $("cam").style.transform = `translate(${(W / 2 - cx * c.z).toFixed(2)}px, ${(H / 2 - cy * c.z).toFixed(2)}px) scale(${c.z.toFixed(4)})`;
+
+    // Pasos: empuje horizontal (el que sale se desplaza un 30 %, el que entra llega desde la derecha)
+    const p12 = easeIO(prog(t, A.NEXT1 + 0.25, 0.42)), p23 = easeIO(prog(t, 7.0, 0.42));
+    $("s1").style.transform = `translateX(${(-0.3 * 415 * p12).toFixed(2)}px)`;
+    $("s1").style.opacity = (1 - p12).toFixed(3);
+    $("s2").style.transform = `translateX(${(415 * (1 - p12) - 0.3 * 415 * p23).toFixed(2)}px)`;
+    $("s2").style.opacity = (p12 * (1 - p23)).toFixed(3);
+    $("s3").style.transform = `translateX(${(415 * (1 - p23)).toFixed(2)}px)`;
+    $("s3").style.opacity = p23.toFixed(3);
+
+    // Gris: 0 → 1 en "febrero" (600 ms); 50 % al completar la situación; 0 al completar la acción
+    let g = easeIO(prog(t, A.FEB, 0.6));
+    g = mix(g, 0.5, easeIO(prog(t, A.SI + 1.4, 0.4)));
+    g = mix(g, 0, easeIO(prog(t, A.ACC + 2.0, 0.4)));
+    $("ui").style.setProperty("--g", g.toFixed(3));
+
+    // Mes: "enero" sube y entra "febrero"
+    const pm = easeIO(prog(t, A.FEB, 0.32));
+    $("mEne").style.transform = `translateY(${(-32 * pm).toFixed(2)}px)`;
+    $("mFeb").style.transform = `translateY(${(32 * (1 - pm)).toFixed(2)}px)`;
+    // el chip del mes se destaca: crece 1,18× y vuelve (sin recortar el resto de la pantalla)
+    const pop = Math.sin(Math.PI * prog(t, A.FEB - 0.05, 0.7));
+    $("month").style.transform = `scale(${(1 + 0.18 * easeOut(pop)).toFixed(4)})`;
+
+    // Obstáculos: entran escalonados (120 ms) con resorte; al elegir, los demás se apagan
+    const sel = t >= A.TAP + 0.04, dim = easeOut(prog(t, A.TAP + 0.04, 0.25));
+    obs.forEach((o, i) => {
+      const p = clamp01(backOut(prog(t, A.WHY + 0.12 * i, 0.42)));
+      const appear = prog(t, A.WHY + 0.12 * i, 0.2);
+      let s = mix(0.86, 1, p), op = appear;
+      if (i === 0) {
+        s *= 1 + 0.05 * easeOut(prog(t, A.TAP + 0.04, 0.25)) - 0.04 * pressAt(t - A.TAP);
+        o.style.background = sel ? "var(--brand)" : "var(--surface)";
+        o.style.borderColor = sel ? "var(--brand)" : "var(--border)";
+        o.style.color = sel ? "#FFFFFF" : "var(--ink)";
+      } else op *= 1 - 0.72 * dim;
+      o.style.transform = `scale(${s.toFixed(4)})`;
+      o.style.opacity = op.toFixed(3);
+    });
+
+    // Escritura, cursor y teclas
+    let lastKey = null;
+    FIELDS.forEach((F) => {
+      const n = F.spans.length, k = Math.min(n, Math.floor(prog(t, F.t0, F.dur) * n + 1e-6) + (t >= F.t0 ? 1 : 0));
+      const shown = t < F.t0 ? 0 : Math.min(n, k);
+      F.spans.forEach((c, i) => { c.style.visibility = i < shown ? "visible" : "hidden"; });
+      const on = t >= F.active[0] && t < F.active[1];
+      $(F.field).style.borderColor = on ? "var(--brand)" : "var(--control-border)";
+      const typing = t >= F.t0 && t < F.t0 + F.dur;
+      const blink = typing || Math.floor((t - F.active[0]) * 2) % 2 === 0;
+      const ca = F.caretEl, el = $(F.txt), next = F.spans[shown] || null;
+      if (ca.nextSibling !== next || (next === null && el.lastChild !== ca)) el.insertBefore(ca, next);
+      ca.style.opacity = on && blink ? 1 : 0;
+      if (typing && shown > 0) {
+        const tTyped = F.t0 + ((shown - 1) / n) * F.dur;
+        if (t - tTyped < 0.11) lastKey = keyFor(F.spans[shown - 1].textContent);
+      }
+    });
+    Object.values(keys).forEach((k) => k.classList.toggle("on", k === lastKey));
+
+    // Teclado: sube al empezar a escribir y baja al terminar
+    const kbUp = Math.max(easeIO(prog(t, 0.72, 0.28)) * (1 - easeIO(prog(t, 2.05, 0.28))),
+                          easeIO(prog(t, 10.0, 0.28)) * (1 - easeIO(prog(t, 14.5, 0.28))));
+    $("kb").style.transform = `translateY(${(290 * (1 - kbUp)).toFixed(2)}px)`;
+
+    // Toques: punto que presiona y anillo que se abre
+    let tap = null;
+    for (const T of TAPS) if (t >= T.t - 0.12 && t < T.t + 0.45) tap = T;
+    const td = $("td"), tr = $("tr");
+    if (tap) {
+      const dIn = prog(t, tap.t - 0.12, 0.12), dOut = prog(t, tap.t + 0.1, 0.2), r = prog(t, tap.t + 0.03, 0.35);
+      td.style.left = tr.style.left = tap.x + "px"; td.style.top = tr.style.top = tap.y + "px";
+      td.style.opacity = (dIn * (1 - dOut)).toFixed(3); td.style.transform = `scale(${mix(0.6, 1, dIn).toFixed(3)})`;
+      tr.style.opacity = (t >= tap.t ? 1 - r : 0).toFixed(3); tr.style.transform = `scale(${mix(1, 1.9, easeOut(r)).toFixed(3)})`;
+    } else { td.style.opacity = 0; tr.style.opacity = 0; }
+    TAPS.forEach((T) => { if (T.el) $(T.el).style.transform = `scale(${(1 - 0.04 * pressAt(t - T.t)).toFixed(4)})`; });
+  }
+  // Presión de botón: baja en 80 ms y vuelve en 200 ms
+  function pressAt(since) { if (since < 0 || since >= 0.28) return 0; return since < 0.08 ? since / 0.08 : 1 - easeOut((since - 0.08) / 0.2); }
+
+  const clock = { t: 0 };
+  const tl = gsap.timeline({ paused: true });
+  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(clock.t) }, 0);
+  render(0);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+})();
+</script>
+</body>
+</html>

@@ -6,7 +6,7 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 - Estado: BORRADOR
 - Bloqueo: NINGUNO
-- Siguiente_paso: Ale: leer en voz alta y aprobar OK-2
+- Siguiente_paso: Ale: revisar la lista de eventos (hyperframes/edicion/PLAN.md §3) y decidir C1; Claude: componer la edición continua
 - Perfil_visual: v2
 - Perfil_tecnico: 1080x1920 · 30 fps · H.264 · SDR BT.709 · AAC 48 kHz
 - Editor: PENDIENTE
@@ -15,6 +15,12 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 | toma | escena | qué grabar | cámara o pantalla | hecha |
 |---|---|---|---|---|
+| T1-B1 | S01 | Beat 1 · Gancho, seco a cámara, 2–3 tomas | Cámara A (S24+ trasera 1×), plano medio corto | no |
+| T1-B2 | S02 | Beat 2 · Problema, más bajo, pausa tras «Calma», 2–3 tomas | Cámara A | no |
+| T1-B3 | S03 | Beat 3 · Solución, algo más de energía, 2–3 tomas | Cámara A | no |
+| T1-B4 | S04–S05 | Beat 4 · Demo y resultado, una frase por paso (va sobre la maqueta: basta la voz), 2–3 tomas | Cámara A | no |
+| T1-B5 | S06 | Beat 5 · Prueba, tono de reto y sonrisa en «compruébalo», 2–3 tomas | Cámara A | no |
+| T1-B6 | S07 | Beat 6 · CTA, mismo encuadre que S01, más lento, 2–3 tomas | Cámara A | no |
 
 - Fecha:
 - Set (luz, posición, reflector):
@@ -26,6 +32,7 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 | archivo | escena | resolución · fps · color | audio | notas |
 |---|---|---|---|---|
+| originales/ensayo_2.mp4 | S01–S07 | 1080×1920 · 30 fps CFR (1897 cuadros) · H.264 BT.709 progresivo | AAC 44,1 kHz estéreo · −17,3 LUFS, pico −2,6 dBFS | Corte limpio de Ale en CapCut gratis, 63,25 s, sin marca de agua ni subtítulos (revisado en 0,5, 31 y 62,8 s). El audio pasa a WAV 48 kHz en trabajo/. El .AAC suelto, en descartado/ |
 
 Originales intactos en `media/originales/`. Comprobación: `python scripts/marco.py inspeccionar <archivo> --perfil ingesta`.
 
@@ -38,12 +45,12 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 
 ## Montaje
 
-- Proyecto_editor:
-- Corte_actual:
-- Cambios frente al guion:
-- Color aplicado:
-- Mezcla (voz, música, efectos):
-- Subtítulos:
+- Proyecto_editor: HyperFrames `hyperframes/edicion/` (edición continua, AV-009); plan y pasos en `hyperframes/edicion/PLAN.md`. Carpetas `media/originales`, `trabajo`, `entregas` y `descartado` creadas el 2026-11-17. Los renders MG-0N de MEDIOS.csv no están en este equipo: se rehacen desde sus fuentes
+- Corte_actual: `media/trabajo/edicion_v01.mp4` (2026-11-17, 63,25 s, 1080×1920, 30 fps, H.264, AAC 48 kHz; inspector OK). Sin sonido añadido: `edicion_v01_sin_sfx.mp4`. Composición `hyperframes/edicion/index.html` sobre `assets/corte.mp4`, con MG-06 y MG-07 v03 (re-ancladas con mapa de tiempos) a pantalla completa
+- Cambios frente al guion: el corte (63,25 s) cambia la voz literal; GUION sube a v02 el 2026-11-17 (C1 pasa a X, nuevos C9 y C10). Decisiones de Ale ese día: demo a pantalla completa, música lofi de Pixabay en todo el vídeo, edición en BORRADOR
+- Color aplicado: Toma tal cual de CapCut. Firma del gancho: desaturado y frío en «abandonaste» (1,28 s, 8 fotogramas) y vuelta en «todavía» (3,82 s)
+- Mezcla (voz, música, efectos): `hyperframes/edicion/mezcla.py`: voz con compresión suave (-17.4 LUFS de origen), 63 efectos del banco de Pixabay recortados a su tramo audible con el pico 1 fotograma después del evento (detalle en `media/trabajo/edicion_v01_mezcla.json`), música lofi en todo el vídeo 18 dB bajo la voz; total -14.2 LUFS, pico -1.1 dBFS. Medido, no escuchado por Claude
+- Subtítulos: Propios, quemados en la composición: Plus Jakarta Sans ExtraBold 58 px, 2–4 palabras, palabra activa invertida; y 862 en el escenario y 1190 a cámara; sobre la maqueta, en cajas marinas
 
 ## Correcciones
 
