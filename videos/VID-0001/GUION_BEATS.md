@@ -219,7 +219,7 @@ Los hace Claude con SUB-01 (sección 4.4). Resumen para revisarlos: una línea, 
 
 - **Efectos:** solo cuatro tipos, ligados a una acción: whoosh (entra pantalla completa), toque o clic (interacción), golpe (sello o gancho) y ding (confirmación). Van entre 8 y 16 dB por debajo del pico de tu voz.
 - **Música:** cama instrumental suave, sin letra, 12 a 15 LU por debajo de tu voz. Que Claude la **mida** (no a ojo). Entra con la demo y se funde antes de tu última frase.
-- **Derechos:** que una pista esté en el catálogo de CapCut o TikTok no significa que sirva en YouTube o Instagram. Anota cada pista y efecto en `CIERRE.md → Derechos`. Claude puede generar efectos y música propios (sintetizados, sin derechos de terceros); suenan sencillos, pero no dan problemas.
+- **Derechos:** que una pista esté en el catálogo de CapCut o TikTok no significa que sirva en YouTube o Instagram. Anota cada pista y efecto en `CIERRE.md → Derechos`. No se usan efectos sintetizados por código (AV-008, 2026-11-17): solo sonidos reales, grabados por Ale o de bibliotecas CC0 como Freesound, escuchados antes de usarlos.
 - **Mezcla final:** −14 LUFS, con pico bajo −1 dBTP.
 
 ### 3.6 Revisión en el celular (tu lista)
@@ -655,7 +655,7 @@ ACEPTACIÓN: fotogramas con las piezas separadas, a mitad de camino y ensamblada
 1. **El reto:** cuánto prometer («cada semana, mientras pueda» frente a «un año») y si el chip de MG-02 lleva «CADA SEMANA».
 2. ~~Textos de la app en español latinoamericano~~ **Resuelto (2026-11-16):** se quedan como están. La maqueta usa los de la ficha v06.
 3. ~~Dos fichas de Plan B~~ **Resuelto (2026-11-16, PROD-17):** la fuente de verdad es la más reciente, `docs/product-specs/plan-b.md` en `soycerobytes/miminiapp`. Este documento ya la sigue.
-4. **Firma sonora:** no existe y no hace falta para empezar. El logo ya existe en el kit v1.1 (`marca/kit/`), pero es una reconstrucción, no el maestro. Los efectos y la música que genera Claude son provisionales.
+4. **Firma sonora:** no existe y no hace falta para empezar. El logo ya existe en el kit v1.1 (`marca/kit/`), pero es una reconstrucción, no el maestro. Los efectos son sonidos reales (AV-008); la música, con licencia clara.
 5. **Proceso:** si te sirve este formato, se formaliza en el marco (plantilla del guion con beats, ficha de montaje por video generada del transcript, ajustes al validador y a las pruebas). Hoy esto es un documento aparte que no toca `GUION.md`.
 6. **Antes del video real:** app publicada, grabación real de la demo y modo avión, y prueba del `.ics` en Android y iPhone.
 7. **Rehacer el corto del ensayo con la identidad v2.** El v3 usa la paleta anterior (cian y violeta) y no debe publicarse.

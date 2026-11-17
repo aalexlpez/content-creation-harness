@@ -35,6 +35,7 @@ La identidad v2 no tiene color de acento: el énfasis se logra por inversión de
 
 - Por defecto, **cama instrumental discreta o voz sola**, según la pieza. Indica cuándo entra, dónde baja bajo la voz y cuándo se funde.
 - **Efectos sonoros** solo en acciones concretas: tocar, aparecer o confirmar un resultado, o cambiar de sección. Nunca de relleno.
+- **Sonidos reales, nunca sintetizados por código** (AV-008): grabados por Ale con el DJI (papel, toque, golpe seco) o de bibliotecas con licencia CC0 (por ejemplo, Freesound), siempre escuchados antes de usarlos y con su fila en Derechos. Las animaciones se entregan sin audio y el sonido va en su propia pista.
 - Silencio intencional es una opción válida.
 - **Derechos por destino:** que una pista esté en el catálogo de CapCut o TikTok no significa que se pueda usar en YouTube o Instagram. Registra cada pista y efecto en CIERRE → Derechos con su licencia y las redes que cubre.
 
@@ -65,8 +66,28 @@ Patrones de referencia:
 | T-01 | Frase clave animada y sincronizada con una palabra de la voz |
 | C-01 | Terminal real con zoom y resaltado. Nunca código falso |
 | Q-01 | Pregunta concreta, tres opciones visuales como máximo y CTA claro |
+| E-01 | Edición continua: el video alterna «a cámara» y «escenario» (gráfico arriba, cámara abajo) y la capa gráfica cambia con cada frase. Ver [Edición continua](#edición-continua) |
 
 Técnicas que se pueden pedir por escena: tipografía cinética sincronizada, transformación de un mismo elemento (*shared element*), aparición escalonada de campos, cámara virtual o parallax, microinteracción de toque, máscara para revelar el resultado, sonido ligado al evento, corte J/L con la voz y transiciones con sentido. Cada una debe poder comprobarse en tres fotogramas: antes, durante y después.
+
+## Edición continua
+
+Propuesta AV-009, probada en el ensayo de edición del 2026-11-17 (`videos/VID-0001/hyperframes/ensayo-edicion/`). Nace de estudiar la técnica del creador Erik Taveras ([referencias/MOTION.md](../referencias/MOTION.md)); se copia el método, no su estilo.
+
+**El error que corrige:** planificar unas pocas piezas sueltas (una hoja, un rótulo, una maqueta) alrededor de la cara. Se ven pequeñas, compiten con el encuadre y dejan largos tramos sin nada. El nivel profesional sale de una **capa gráfica continua**, sencilla pero constante, ligada a lo que se dice.
+
+| Regla | Cómo se aplica |
+|---|---|
+| Dos modos | **A cámara** (la toma tal cual) y **escenario**: panel `#0D213F` en la mitad de arriba (y 0–1000) con el gráfico, y la toma desplazada 700 px hacia abajo para que la cara quede en la mitad inferior. Se pasa de uno a otro en 0,5 s |
+| Un evento por frase | Cada sustantivo o idea con peso dispara algo: un icono, un nodo, un tachado, un interruptor. Un cambio cada 0,5–1,5 s en el escenario. Se saca de los tiempos por palabra del corte |
+| Ilustrar la idea, no la interfaz | Diagramas que crecen frase a frase (propósito → febrero → obstáculo → plan). La interfaz real, solo como prueba breve |
+| Composición fija | Cabecera a la izquierda (título del tramo) y «/ PLAN B · MINIAPP 01» a la derecha, a y ≈ 272 px. Orienta y hace serie |
+| Subtítulos propios en el escenario | Plus Jakarta Sans ExtraBold en mayúsculas, a y ≈ 868 px, la palabra que suena invertida. Ningún grupo de subtítulo menos de 0,4 s en pantalla |
+| Cambio de tramo | El escenario no sube y baja entre tramos seguidos: la barra «/» cruza en diagonal y el contenido cambia detrás de ella, como una cortina |
+| Tramos a cámara | Se usan para respirar y para lo que no conviene ilustrar (por ejemplo, un castigo que la ficha del producto evita). Pueden llevar elementos ligeros junto a la cara |
+| Sistema pequeño | Marca v2 sin color de acento, iconos lineales en blanco roto, la barra como conector, notas pequeñas en mayúsculas con tracking para la fuente de un dato |
+
+**Orden de trabajo:** primero el corte, después la capa. Los tiempos por palabra de la versión cortada son la base; con el bruto solo se puede planificar. Pasos: (1) transcripción con tiempos (`hyperframes transcribe`, ver [TECNICA](TECNICA.md)); (2) lista de eventos por frase, que Ale revisa; (3) composición sobre el corte; (4) revisión con capturas y `hyperframes check`; (5) sonidos reales en una segunda pasada.
 
 ## Portada
 

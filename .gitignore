@@ -16,6 +16,8 @@ videos/*/media/
 node_modules/
 videos/*/hyperframes/**/renders/
 videos/*/hyperframes/**/output/
+videos/*/hyperframes/**/.hyperframes/
+videos/*/hyperframes/**/assets/*.mp4
 
 # Python
 __pycache__/

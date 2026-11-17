@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>MG-01 v02 · Hoja de calendario</title>
+<!--
+  MG-01 v02 · VID-0002 · Hoja de calendario (capa transparente, zona Z-ESQ)
+  Base: prompt MG-01 de GUION_BEATS §4.4 y marca v2 (AV-006, AV-007).
+  Técnica tomada de la receta split-flap de video-shotcraft (Apache-2.0):
+  giro 3D sobre la bisagra con perspectiva, caída con aceleración (ease-in
+  cuadrática), la hoja se oscurece al girar y "clic" de asentado
+  (0 → 6 px → −1,5 px → 0). Mantener 1 s la información clave.
+  Prohibido (marca v2): degradados, resplandores, sombras difusas, partículas,
+  sacudidas de cámara, glitch, colores fuera de la paleta.
+-->
+<style>
+  @font-face {
+    font-family: "Plus Jakarta Sans";
+    font-weight: 800;
+    src: url("./fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype");
+  }
+  html, body { margin: 0; padding: 0; background: transparent; }
+  #root { position: relative; width: 1080px; height: 1920px; background: transparent; overflow: hidden; }
+
+  /* Hoja de 228x176 en x 72, y 250: 46 px de encuadernación + 130 px de hoja */
+  #sheet { position: absolute; left: 72px; top: 250px; width: 228px; height: 176px; opacity: 0; }
+
+  #binding {
+    position: absolute; left: 0; top: 0; width: 228px; height: 46px; box-sizing: border-box;
+    background: #0D213F; border-radius: 18px 18px 0 0; z-index: 1;
+  }
+  .ring {
+    position: absolute; top: -12px; width: 12px; height: 30px; box-sizing: border-box;
+    border-radius: 6px; background: #F5F6F8; border: 2px solid #0D213F;
+  }
+  .ring.l { left: 58px; } .ring.r { right: 58px; }
+
+  #stack {
+    position: absolute; left: 0; top: 46px; width: 228px; height: 130px;
+    perspective: 520px; perspective-origin: 50% 0%; z-index: 2;
+  }
+  #rings { position: absolute; left: 0; top: 0; width: 228px; height: 46px; z-index: 3;
+  }
+  .page {
+    position: absolute; inset: 0; transform-origin: 50% 0%; transform-style: preserve-3d;
+  }
+  .face {
+    position: absolute; inset: 0; box-sizing: border-box; overflow: hidden;
+    background: #F5F6F8; border: 2px solid rgba(11, 11, 13, 0.15); border-top: 0;
+    border-radius: 0 0 18px 18px; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  }
+  .face.back { transform: rotateX(180deg); border-radius: 18px 18px 0 0; border-top: 2px solid rgba(11, 11, 13, 0.15); border-bottom: 0; }
+  .mes {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 42px;
+    line-height: 1; color: #0B0B0D; letter-spacing: 0;
+  }
+  /* Oscurecimiento plano con el marino de la marca (no es sombra ni degradado) */
+  .tint { position: absolute; inset: 0; background: #0D213F; opacity: 0; }
+  .face.back .tint { opacity: 0.10; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="6.4">
+  <div id="sheet">
+    <div id="stack">
+      <div class="page" id="pFeb">
+        <div class="face"><div class="mes">FEBRERO</div><div class="tint" id="tFeb"></div></div>
+      </div>
+      <div class="page" id="pEne">
+        <div class="face front fEne"><div class="mes" id="mEne">ENERO</div><div class="tint" id="tEne"></div></div>
+        <div class="face back fEne"><div class="tint"></div></div>
+      </div>
+    </div>
+    <div id="binding"></div>
+    <div id="rings"><span class="ring l"></span><span class="ring r"></span></div>
+  </div>
+</div>
+
+<script src="./lib/gsap.min.js"></script>
+<script>
+  // Marcas (s). Se ajustan a la voz cuando estén elegidas las tomas:
+  //   T_FEB = empieza el giro a FEBRERO (inicio de la palabra "febrero")
+  //   T_ENE = empieza la vuelta a ENERO (inicio de "todavía no")
+  const T_IN = 0.0, T_FEB = 0.9, T_ENE = 4.4, T_OUT = 6.0;
+  const FLIP = 0.55;   // ida: la hoja pasa por encima de la encuadernación y cae por detrás
+  const BACK = 0.50;   // vuelta: el mismo recorrido rebobinado
+
+  // Instante en que la hoja queda de canto (90°) en cada recorrido:
+  //   ida   power1.in    -> 360·t² = 90          -> t = 0,5
+  //   vuelta power1.inOut -> 360·(1-p) = 90, p=0,75 -> t ≈ 0,646
+  const EDGE_FWD = FLIP * 0.5, EDGE_BACK = BACK * 0.646;
+
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#sheet", { transformOrigin: "50% 0%", rotation: -20, y: -230, opacity: 0 });
+  gsap.set("#pEne", { rotationX: 0, zIndex: 2 });
+  gsap.set("#pFeb", { zIndex: 1 });
+  gsap.set("#stack", { zIndex: 2 });
+  gsap.set("#mEne", { scale: 1.2, opacity: 0 });
+  gsap.set("#tFeb", { opacity: 0.22 });
+
+  // 1 · Entrada con resorte desde arriba (−20° → −6°) y el mes "se imprime"
+  tl.to("#sheet", { y: 0, rotation: -6, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, T_IN);
+  tl.to("#mEne", { scale: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, T_IN + 0.22);
+
+  // 2 · ENERO -> FEBRERO: la hoja gira sobre la bisagra, pasa por encima y cae por detrás
+  tl.to("#pEne", { rotationX: 360, duration: FLIP, ease: "power1.in" }, T_FEB);
+  tl.to("#tEne", { opacity: 0.45, duration: EDGE_FWD, ease: "power2.in" }, T_FEB);
+  tl.to("#tFeb", { opacity: 0, duration: FLIP, ease: "power1.out" }, T_FEB);
+  // de canto: la hoja pasa detrás de FEBRERO y de la encuadernación
+  tl.set("#pEne", { zIndex: 0 }, T_FEB + EDGE_FWD);
+  tl.set("#stack", { zIndex: 0 }, T_FEB + EDGE_FWD);
+  tl.set(".fEne", { opacity: 0 }, T_FEB + FLIP);
+  // tirón de la hoja al soltarse: −6° → −7,5° → −5,6° → −6°
+  tl.to("#sheet", { rotation: -7.5, duration: 0.08, ease: "power1.out" }, T_FEB + EDGE_FWD)
+    .to("#sheet", { rotation: -5.6, duration: 0.08, ease: "power1.inOut" })
+    .to("#sheet", { rotation: -6, duration: 0.1, ease: "power1.out" });
+
+  // 3 · FEBRERO -> ENERO ("todavía no"): rebobinado, la hoja vuelve por encima y cae delante
+  tl.set(".fEne", { opacity: 1 }, T_ENE);
+  tl.set("#tEne", { opacity: 0.45 }, T_ENE);
+  tl.to("#pEne", { rotationX: 0, duration: BACK, ease: "power1.inOut" }, T_ENE);
+  tl.set("#pEne", { zIndex: 2 }, T_ENE + EDGE_BACK);
+  tl.set("#stack", { zIndex: 2 }, T_ENE + EDGE_BACK);
+  tl.to("#tEne", { opacity: 0, duration: BACK - EDGE_BACK, ease: "power1.in" }, T_ENE + EDGE_BACK);
+  tl.to("#tFeb", { opacity: 0.22, duration: BACK - EDGE_BACK, ease: "none" }, T_ENE + EDGE_BACK);
+  // clic de asentado: 0 → 6 px → −1,5 px → 0
+  tl.to("#sheet", { y: 6, duration: 0.07, ease: "power2.out" }, T_ENE + BACK)
+    .to("#sheet", { y: -1.5, duration: 0.07, ease: "power2.inOut" })
+    .to("#sheet", { y: 0, duration: 0.09, ease: "power2.out" });
+
+  // 4 · Salida: fundido de 0,3 s tras sostener ENERO 1 s
+  tl.to("#sheet", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, T_OUT);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+</script>
+</body>
+</html>

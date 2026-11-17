@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ensayo de edición continua · VID-0001</title>
+<!--
+  ENSAYO DE EDICIÓN CONTINUA sobre el corte de TikTok del primer ensayo (VID-0001, 39,4 s).
+  No se publica. Prueba el método aprendido del reel de Erik Taveras (solo técnica):
+    - una capa gráfica continua que cambia con cada frase, no piezas sueltas;
+    - dos modos: A CÁMARA (el video tal cual, con sus subtítulos quemados) y ESCENARIO
+      (panel marino arriba con el gráfico, el video desplazado abajo y nuestros subtítulos);
+    - cabecera fija (tramo a la izquierda, "/ PLAN B · MINIAPP 01" a la derecha);
+    - los gráficos ilustran la idea (diagrama que se construye frase a frase), no la interfaz;
+    - cambio de tramo con un barrido de la barra "/" de la marca.
+  Marca cerobytes v2 (AV-006/007): #0B0B0D, #1E2937, #0D213F, #F5F6F8, secundario #B7C0CC,
+  Plus Jakarta Sans, sin color de acento (énfasis por inversión de contraste), sin degradados,
+  resplandores ni sombras difusas.
+  Tiempos: palabras medidas con Parakeet (HyperFrames transcribe) y corregidas con el guion v02.
+  El tramo de la "penitencia" (19–23,6 s) va solo a cámara: la ficha de Plan B evita castigos.
+-->
+<style>
+  @font-face { font-family: "PJS"; font-weight: 500; src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 700; src: url("./fonts/PlusJakartaSans-Bold.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 800; src: url("./fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype"); }
+  :root { --navy: #0D213F; --ink: #0B0B0D; --char: #1E2937; --off: #F5F6F8; --sec: #B7C0CC; --line: rgba(245,246,248,0.22); }
+  html, body { margin: 0; padding: 0; background: #000; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); font-family: "PJS", sans-serif; color: var(--off); }
+
+  #vwrap { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #v { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+  /* ── ESCENARIO */
+  #stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1000px; background: var(--navy); overflow: hidden; }
+  #stage .edge { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--line); }
+  #bgbar { position: absolute; right: -80px; top: 260px; width: 560px; height: 690px; opacity: 0.05; }
+  .hdr { position: absolute; top: 272px; font-weight: 700; font-size: 30px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+  #hdrL { left: 70px; }
+  #hdrR { right: 70px; font-weight: 500; font-size: 22px; letter-spacing: 0.16em; color: var(--sec); top: 278px; }
+  #hdrR svg { width: 12px; height: 15px; margin-right: 10px; vertical-align: -1px; }
+  .scene { position: absolute; left: 0; top: 0; width: 1080px; height: 1000px; opacity: 0; }
+  #sweep { position: absolute; top: -60px; width: 220px; height: 1120px; background: var(--off); transform-origin: 50% 50%; opacity: 0; }
+
+  /* Subtítulos del escenario: una línea, palabra activa invertida */
+  #cap { position: absolute; left: 60px; right: 60px; top: 868px; height: 76px; display: flex; justify-content: center; align-items: center; gap: 14px; }
+  #cap span { font-weight: 800; font-size: 50px; text-transform: uppercase; letter-spacing: -0.005em; padding: 2px 12px; border-radius: 10px; color: var(--off); }
+  #cap span.on { background: var(--off); color: var(--ink); }
+  #cap span.off { opacity: 0.55; }
+
+  /* Escena A: enero que se abandona */
+  .cal { position: absolute; left: 174px; top: 352px; width: 732px; }
+  .dow { display: grid; grid-template-columns: repeat(7, 96px); gap: 10px; margin-bottom: 10px; }
+  .dow span { text-align: center; font-weight: 500; font-size: 20px; letter-spacing: 0.12em; color: var(--sec); }
+  .days { display: grid; grid-template-columns: repeat(7, 96px); gap: 10px; }
+  .d { height: 66px; border-radius: 12px; border: 2px solid var(--line); box-sizing: border-box; position: relative; display: flex; align-items: flex-start; justify-content: flex-start; padding: 6px 9px; font-weight: 500; font-size: 18px; color: var(--sec); }
+  .d.blank { border-color: transparent; }
+  .d i { position: absolute; inset: -2px; border-radius: 12px; background: var(--off); opacity: 0; }
+  .d i svg { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+  #mark { position: absolute; font-weight: 700; font-size: 24px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; opacity: 0; }
+  .note { position: absolute; left: 70px; font-weight: 500; font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sec); }
+
+  /* Escena B: cerobytes → Plan B */
+  #logo { position: absolute; left: 50%; top: 520px; width: 620px; transform-origin: 50% 50%; }
+  #pb { position: absolute; left: 0; right: 0; top: 400px; text-align: center; font-weight: 800; font-size: 190px; letter-spacing: -0.03em; line-height: 1; overflow: hidden; height: 210px; }
+  #pb span { display: inline-block; }
+  #pbsub { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font-weight: 500; font-size: 34px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sec); }
+  #pbsub svg { width: 16px; height: 20px; margin-right: 14px; vertical-align: -1px; }
+  #pbtag { position: absolute; left: 50%; top: 720px; padding: 10px 22px; border-radius: 999px; border: 2px solid var(--line); font-weight: 700; font-size: 26px; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+
+  /* Escena C: diagrama que se construye */
+  .node { position: absolute; left: 150px; width: 780px; height: 116px; box-sizing: border-box; border-radius: 18px; border: 2px solid var(--line);
+    background: rgba(245,246,248,0.04); padding: 16px 28px; }
+  .node .lb { font-weight: 500; font-size: 21px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sec); }
+  .node .vl { margin-top: 6px; font-weight: 700; font-size: 40px; white-space: nowrap; }
+  .node.inv { background: var(--off); border-color: var(--off); }
+  .node.inv .lb { color: #4A5568; }
+  .node.inv .vl { color: var(--ink); }
+  .link { position: absolute; left: 524px; width: 32px; height: 36px; }
+  .vl .c { opacity: 0; }
+
+  /* Escena D: lo que te llevas */
+  #seal { position: absolute; left: 50%; top: 352px; white-space: nowrap; font-weight: 700; font-size: 54px; transform-origin: 50% 50%; }
+  #seal b { font-weight: 800; background: var(--off); color: var(--ink); border-radius: 12px; padding: 0 14px; margin-left: 10px; }
+  .card { position: absolute; box-sizing: border-box; border: 2px solid var(--line); border-radius: 22px; background: rgba(245,246,248,0.04); }
+  #calCard { left: 110px; top: 500px; width: 450px; height: 340px; padding: 22px 26px; }
+  .clb { font-weight: 500; font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sec); }
+  .cvl { font-weight: 700; font-size: 30px; margin-top: 4px; }
+  .mini { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; margin-top: 20px; }
+  .mini .m { height: 28px; border-radius: 7px; border: 2px solid var(--line); box-sizing: border-box; position: relative; overflow: hidden; }
+  .mini .m i { position: absolute; inset: 0; background: var(--off); opacity: 0; }
+  #phone { left: 640px; top: 540px; width: 330px; height: 300px; border-radius: 44px; overflow: hidden; }
+  #phone .scr { position: absolute; left: 14px; right: 14px; top: 14px; bottom: -40px; border-radius: 32px; background: var(--ink); border: 2px solid var(--line); }
+  #phone .clk { position: absolute; left: 0; right: 0; top: 40px; text-align: center; font-weight: 700; font-size: 62px; letter-spacing: -0.02em; }
+  #phone .pl { position: absolute; left: 34px; top: 150px; font-weight: 500; font-size: 15px; letter-spacing: 0.12em; color: var(--sec); }
+  #phone .ph { position: absolute; left: 34px; right: 30px; top: 176px; font-weight: 700; font-size: 21px; line-height: 1.25; }
+  #phoneLb { position: absolute; }
+
+  /* Escena E: lo que no te pide */
+  .chip { position: absolute; top: 380px; height: 96px; padding: 0 40px; border-radius: 999px; border: 3px solid var(--off); box-sizing: border-box;
+    display: flex; align-items: center; font-weight: 800; font-size: 46px; letter-spacing: 0.06em; }
+  .chip .st { position: absolute; left: 18px; right: 18px; top: 50%; height: 6px; margin-top: -3px; background: var(--off); transform-origin: 0 50%; border-radius: 3px; }
+  #rowCel { position: absolute; left: 150px; top: 540px; display: flex; align-items: center; gap: 22px; font-weight: 700; font-size: 38px; }
+  #rowAir { position: absolute; left: 150px; top: 660px; width: 780px; height: 116px; box-sizing: border-box; border-radius: 18px; border: 2px solid var(--line);
+    background: rgba(245,246,248,0.04); display: flex; align-items: center; padding: 0 28px; gap: 22px; font-weight: 800; font-size: 40px; letter-spacing: 0.06em; }
+  #tog { margin-left: auto; width: 120px; height: 64px; border-radius: 32px; border: 3px solid var(--off); box-sizing: border-box; position: relative; }
+  #knob { position: absolute; left: 6px; top: 6px; width: 46px; height: 46px; border-radius: 50%; background: var(--off); }
+  #airNote { position: absolute; left: 150px; top: 790px; }
+
+  /* ── MODO A CÁMARA: hoja de calendario (MG-01) y acento final (MG-05) */
+  #sheet { position: absolute; left: 72px; top: 262px; width: 228px; height: 176px; opacity: 0; }
+  #sheet .bind { position: absolute; left: 0; top: 0; width: 228px; height: 46px; background: var(--navy); border-radius: 18px 18px 0 0; z-index: 2; }
+  #sheet .rg { position: absolute; top: -12px; width: 12px; height: 30px; box-sizing: border-box; border-radius: 6px; background: var(--off); border: 2px solid var(--navy); z-index: 3; }
+  #sheet .stk { position: absolute; left: 0; top: 46px; width: 228px; height: 130px; perspective: 520px; perspective-origin: 50% 0%; }
+  #sheet .pg { position: absolute; inset: 0; transform-origin: 50% 0%; transform-style: preserve-3d; }
+  #sheet .fc { position: absolute; inset: 0; box-sizing: border-box; background: var(--off); border: 2px solid rgba(11,11,13,0.15); border-top: 0; border-radius: 0 0 18px 18px;
+    backface-visibility: hidden; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 42px; color: var(--ink); overflow: hidden; }
+  #sheet .fc.bk { transform: rotateX(180deg); border-radius: 18px 18px 0 0; }
+  #sheet .tn { position: absolute; inset: 0; background: var(--navy); opacity: 0; }
+  #accent { position: absolute; left: 70px; right: 70px; top: 262px; text-align: center; white-space: nowrap; opacity: 0; }
+  #accent .a1 { display: inline-block; font-weight: 700; font-size: 72px; color: var(--off); -webkit-text-stroke: 3px rgba(11,11,13,0.7); paint-order: stroke fill; vertical-align: middle; }
+  #accent .a2 { display: inline-block; font-weight: 800; font-size: 108px; line-height: 1; color: var(--ink); background: var(--off); border-radius: 14px; padding: 4px 18px; margin-left: 14px; vertical-align: middle; transform-origin: 50% 50%; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="39.4">
+  <div id="vwrap"><video id="v" class="clip" src="assets/ensayo.mp4" data-start="0" data-duration="39.4" data-track-index="0" data-has-audio="true" playsinline></video></div>
+
+  <div id="stage">
+    <svg id="bgbar" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>
+    <div class="hdr" id="hdrL"></div>
+    <div class="hdr" id="hdrR"><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#B7C0CC"/></svg>PLAN B · MINIAPP 01</div>
+
+    <!-- A · mediados de enero -->
+    <div class="scene" id="scA">
+      <div class="cal"><div class="dow"><span>LU</span><span>MA</span><span>MI</span><span>JU</span><span>VI</span><span>SÁ</span><span>DO</span></div><div class="days" id="days"></div></div>
+      <div id="mark">/ mediados de enero</div>
+      <div class="note" style="top:818px; font-size:18px;">Fuente: actividad en Strava · el día cambia cada año</div>
+    </div>
+
+    <!-- B · cerobytes y Plan B -->
+    <div class="scene" id="scB">
+      <img id="logo" src="assets/logo-navy.svg" alt="">
+      <div id="pb"><span id="pbt">Plan B</span></div>
+      <div id="pbsub"><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#B7C0CC"/></svg>para tu propósito</div>
+      <div id="pbtag">Para los días sin ganas</div>
+    </div>
+
+    <!-- C · cómo funciona -->
+    <div class="scene" id="scC"></div>
+
+    <!-- D · lo que te llevas -->
+    <div class="scene" id="scD">
+      <div id="seal">Este febrero, <b>no.</b></div>
+      <div class="card" id="calCard"><div class="clb">Recordatorio</div><div class="cvl">L–V · 20:00 · 4 semanas</div><div class="mini" id="mini"></div></div>
+      <div class="card" id="phone"><div class="scr"><div class="clk">19:58</div><div class="pl">MI PLAN B</div><div class="ph">Si llego tarde, entonces hago 5 minutos de estiramiento.</div></div></div>
+      <div class="note" id="phoneLb" style="left:640px; top:500px;">Fondo de pantalla</div>
+    </div>
+
+    <!-- E · lo que no te pide -->
+    <div class="scene" id="scE">
+      <div class="chip" id="chPago" style="left:190px;">PAGO<i class="st"></i></div>
+      <div class="chip" id="chCta" style="left:540px;">CUENTA<i class="st"></i></div>
+      <div id="rowCel"><svg width="40" height="64" viewBox="0 0 40 64"><rect x="2" y="2" width="36" height="60" rx="8" fill="none" stroke="#F5F6F8" stroke-width="4"/><rect x="14" y="52" width="12" height="4" rx="2" fill="#F5F6F8"/></svg>Se queda en tu celular</div>
+      <div id="rowAir">
+        <svg width="48" height="48" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="#F5F6F8"/></svg>
+        MODO AVIÓN<div id="tog"><div id="knob"></div></div>
+      </div>
+      <div class="note" id="airNote">Con la página ya cargada</div>
+    </div>
+
+    <div id="cap"></div>
+    <div class="edge"></div>
+    <div id="sweep"></div>
+  </div>
+
+  <div id="sheet">
+    <div class="bind"></div><span class="rg" style="left:58px"></span><span class="rg" style="right:58px"></span>
+    <div class="stk">
+      <div class="pg" id="pFeb"><div class="fc">FEBRERO<div class="tn" id="tFeb"></div></div></div>
+      <div class="pg" id="pEne"><div class="fc">ENERO<div class="tn" id="tEne"></div></div><div class="fc bk"><div class="tn" style="opacity:.1"></div></div></div>
+    </div>
+  </div>
+  <div id="accent"><span class="a1">Este febrero,</span><span class="a2" id="a2">no.</span></div>
+</div>
+
+<script src="./lib/gsap.min.js"></script>
+<script>
+(function () {
+  const D = 39.4;
+  const clamp01 = (x) => Math.max(0, Math.min(1, x));
+  const mix = (a, b, p) => a + (b - a) * p;
+  const prog = (t, a, d) => clamp01((t - a) / d);
+  const easeIO = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+  const easeIn = (p) => p * p;
+  const expoOut = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+  const backOut = (p) => { const c1 = 1.6, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const $ = (id) => document.getElementById(id);
+  const SLASH = '<svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#B7C0CC"/></svg>';
+
+  // ── Modos: intervalos en ESCENARIO; fuera de ellos, A CÁMARA
+  // Un solo intervalo continuo de 4,2 a 19,0 s: dentro, los tramos cambian con el barrido (sin subir y bajar el escenario)
+  const STAGES = [[4.2, 19.0], [23.6, 36.0]];
+  // ── Tramos del escenario (cambian con barrido de la barra)
+  const SCENES = [
+    { id: "scA", from: 4.2,   title: "Mediados de enero" },
+    { id: "scB", from: 7.15,  title: "La miniapp" },
+    { id: "scC", from: 10.85, title: "Cómo funciona" },
+    { id: "scD", from: 23.6,  title: "Lo que te llevas" },
+    { id: "scE", from: 28.3,  title: "Lo que no te pide" },
+  ];
+
+  // ── Palabras (inicio en s) y grupos de subtítulo del escenario
+  const CAP = [
+    [["pero",4.22],["para",4.40],["mediados",4.62]], [["de",4.95],["enero",5.15]], [["mucha",5.55],["gente",5.85]], [["ya",6.1],["tiró",6.3],["la",6.55],["toalla",6.7]],
+    [["soy",7.2],["cerobytes",7.36]], [["y",8.0],["creé",8.12],["un",8.3],["plan",8.48],["B",8.72]], [["para",8.96],["los",9.12],["días",9.28]], [["que",9.52],["no",9.68],["tienes",9.85],["ganas",10.1]],
+    [["escribes",10.9],["tu",11.36],["propósito",11.52]], [["te",11.96],["lleva",12.12],["un",12.44],["mes",12.52],["al",12.68],["futuro",12.76]], [["al",13.0],["día",13.08],["que",13.2],["te",13.28],["rendiste",13.6]],
+    [["y",14.16],["te",14.3],["pregunta",14.4],["qué",14.88],["pasó",15.0]], [["eliges",15.28],["lo",15.72],["que",15.8],["hizo",15.96]], [["rendirte",16.36]],
+    [["y",16.84],["escribes",17.0]], [["qué",17.4],["vas",17.55],["a",17.65],["hacer",17.75]], [["ese",18.0],["día",18.3]],
+    [["al",23.68],["final",23.8],["te",24.0],["llevas",24.2]], [["un",24.5],["recordatorio",24.8]], [["en",25.44],["tu",25.52],["calendario",25.68]], [["y",26.4],["tu",26.56],["plan",26.72]], [["como",27.04],["fondo",27.24]], [["de",27.72],["pantalla",27.8]],
+    [["lo",28.4],["mejor",28.64]], [["es",29.04],["gratis",29.36]], [["no",29.92],["necesitas",30.08]], [["crearte",30.56],["cuenta",31.0]], [["todo",31.5],["se",31.75],["queda",31.9]], [["en",32.24],["tu",32.32],["celular",32.44]],
+    [["es",32.92],["más",33.08]], [["pruébalo",33.48]], [["en",34.04],["modo",34.12],["avión",34.44]], [["y",35.12],["me",35.32],["dices",35.48]],
+  ];
+  const GROUP_END = (gi) => (gi + 1 < CAP.length ? Math.min(CAP[gi + 1][0][1], CAP[gi][CAP[gi].length - 1][1] + 0.9) : 35.96);
+
+  // ── Construcción del DOM de las escenas
+  // A: enero de 2027 empieza en viernes
+  const days = $("days"), dayCells = [];
+  for (let i = 0; i < 4; i++) { const b = document.createElement("div"); b.className = "d blank"; days.appendChild(b); }
+  for (let d = 1; d <= 31; d++) {
+    const c = document.createElement("div"); c.className = "d"; c.textContent = d;
+    const i = document.createElement("i"); i.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#0B0B0D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    c.appendChild(i); days.appendChild(c); dayCells.push(c);
+  }
+  // C: nodos del diagrama
+  const NODES = [
+    { t: 11.36, lb: "Tu propósito", vl: "Hacer ejercicio 3 veces por semana", type: 0.9 },
+    { t: 12.76, lb: "Un mes después", vl: "1 de febrero" },
+    { t: 14.4,  lb: "La pregunta", vl: "¿Qué pasó?" },
+    { t: 15.28, lb: "Tu obstáculo", vl: "No tuve tiempo", inv: true },
+    { t: 17.0,  lb: "Tu plan", vl: "Si pasa esto, entonces hago esto" },
+  ];
+  const scC = $("scC");
+  NODES.forEach((n, i) => {
+    const el = document.createElement("div"); el.className = "node" + (n.inv ? " inv" : "");
+    el.innerHTML = `<div class="lb">${n.lb}</div><div class="vl">${n.type ? [...n.vl].map((c) => `<span class="c">${c}</span>`).join("") : n.vl}</div>`;
+    scC.appendChild(el); n.el = el; n.chars = el.querySelectorAll(".c");
+    if (i > 0) { const l = document.createElement("div"); l.className = "link"; l.innerHTML = '<svg viewBox="0 0 109 134" width="32" height="36"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#B7C0CC"/></svg>'; scC.appendChild(l); n.link = l; }
+  });
+  // D: mini calendario 4 × 7 (20 citas de lunes a viernes)
+  const mini = $("mini"), miniMarks = [];
+  for (let w = 0; w < 4; w++) for (let d = 0; d < 7; d++) { const c = document.createElement("div"); c.className = "m"; const i = document.createElement("i"); c.appendChild(i); mini.appendChild(c); if (d < 5) miniMarks.push(i); }
+
+  const capEl = $("cap");
+  let capShown = -1;
+
+  function stageAmount(t) {
+    let a = 0;
+    for (const [s, e] of STAGES) {
+      const pin = easeIO(prog(t, s - 0.1, 0.55)), pout = easeIO(prog(t, e - 0.1, 0.5));
+      a = Math.max(a, Math.min(pin, 1 - pout));
+    }
+    return a;
+  }
+
+  function render(t) {
+    // ── Modo: el escenario baja y el video se desplaza 700 px
+    const s = stageAmount(t);
+    $("stage").style.transform = `translateY(${(-1000 * (1 - s)).toFixed(2)}px)`;
+    $("vwrap").style.transform = `translateY(${(700 * s).toFixed(2)}px)`;
+
+    // Firma de color del gancho: desatura y enfría en "abandonas" (8 fotogramas), vuelve de golpe en "todavía no"
+    const g = prog(t, 1.58, 0.27) * (t < 3.42 ? 1 : 0);
+    $("v").style.filter = g > 0 ? `saturate(${mix(1, 0.4, g).toFixed(3)}) brightness(${mix(1, 0.92, g).toFixed(3)}) hue-rotate(${(-8 * g).toFixed(1)}deg)` : "none";
+
+    // ── Cabecera y tramo activo
+    let cur = -1; SCENES.forEach((sc, i) => { if (t >= sc.from) cur = i; });
+    // barrido de la barra en cada cambio de tramo dentro del escenario: el tramo nuevo aparece
+    // a la izquierda de la barra y el anterior sigue a su derecha (cortina diagonal a 29°)
+    let swi = -1; SCENES.forEach((sc, i) => { if (i > 0 && t >= sc.from - 0.25 && t < sc.from + 0.25 && s > 0.99) swi = i; });
+    SCENES.forEach((sc, i) => { const el = $(sc.id); el.style.clipPath = "none"; el.style.opacity = i === cur ? 1 : 0; });
+    if (swi > 0) {
+      const p = easeIO(prog(t, SCENES[swi].from - 0.25, 0.5)), tx = mix(-320, 1180, p), c = tx + 110, k = 0.554;
+      $("sweep").style.opacity = 1; $("sweep").style.transform = `translateX(${tx.toFixed(1)}px) skewX(-29deg)`;
+      const top = c + k * 560, bot = c - k * 560;   // línea central de la barra en y = −60 y y = 1060
+      const nw = $(SCENES[swi].id), od = $(SCENES[swi - 1].id);
+      nw.style.opacity = 1; od.style.opacity = 1;
+      nw.style.clipPath = `polygon(-2000px -60px, ${top.toFixed(1)}px -60px, ${bot.toFixed(1)}px 1060px, -2000px 1060px)`;
+      od.style.clipPath = `polygon(${top.toFixed(1)}px -60px, 4000px -60px, 4000px 1060px, ${bot.toFixed(1)}px 1060px)`;
+      $("hdrL").textContent = SCENES[p < 0.35 ? swi - 1 : swi].title;
+    } else { $("sweep").style.opacity = 0; if (cur >= 0) $("hdrL").textContent = SCENES[cur].title; }
+    const hdrIn = expoOut(prog(t, SCENES[Math.max(cur, 0)].from, 0.45));
+    $("hdrL").style.transform = `translateX(${(-30 * (1 - hdrIn)).toFixed(1)}px)`; $("hdrL").style.opacity = hdrIn.toFixed(3);
+
+    // ── Subtítulos del escenario
+    let gi = -1; CAP.forEach((grp, i) => { if (t >= grp[0][1] - 0.05 && t < GROUP_END(i)) gi = i; });
+    if (gi !== capShown) { capEl.innerHTML = gi < 0 ? "" : CAP[gi].map(([w]) => `<span>${w}</span>`).join(""); capShown = gi; }
+    if (gi >= 0) {
+      const spans = capEl.children; let act = 0;
+      CAP[gi].forEach(([, ws], i) => { if (t >= ws - 0.03) act = i; });
+      [...spans].forEach((sp, i) => { sp.className = i === act ? "on" : i > act ? "off" : ""; });
+      const ci = expoOut(prog(t, CAP[gi][0][1] - 0.05, 0.18));
+      capEl.style.opacity = ci.toFixed(3); capEl.style.transform = `translateY(${(14 * (1 - ci)).toFixed(1)}px)`;
+    } else capEl.style.opacity = 0;
+
+    // ── A: los días de enero se marcan… y a mediados se dejan
+    dayCells.forEach((c, i) => {
+      const day = i + 1, on = prog(t, 4.45 + 0.07 * i, 0.08);
+      const marked = day <= 16;
+      c.querySelector("i").style.opacity = marked ? on.toFixed(3) : 0;
+      const quit = easeOut(prog(t, 6.55, 0.35));
+      c.style.opacity = day > 16 ? mix(1, 0.28, quit).toFixed(3) : 1;
+      c.style.transform = marked ? `scale(${mix(0.85, 1, backOut(on)).toFixed(3)})` : "";
+    });
+    const mk = expoOut(prog(t, 5.6, 0.45));
+    $("mark").style.left = "174px"; $("mark").style.top = "772px";
+    $("mark").style.opacity = mk.toFixed(3); $("mark").style.transform = `translateX(${(-24 * (1 - mk)).toFixed(1)}px)`;
+
+    // ── B: cerobytes → Plan B
+    const lgIn = expoOut(prog(t, 7.3, 0.5)), lgUp = easeIO(prog(t, 8.4, 0.45));
+    $("logo").style.opacity = (lgIn * (1 - lgUp)).toFixed(3);
+    $("logo").style.transform = `translate(-50%, ${(-60 * lgUp + 20 * (1 - lgIn)).toFixed(1)}px) scale(${mix(1, 0.7, lgUp).toFixed(3)})`;
+    const pbIn = expoOut(prog(t, 8.48, 0.55));
+    $("pbt").style.transform = `translateY(${(105 * (1 - pbIn)).toFixed(1)}%)`;
+    const subIn = expoOut(prog(t, 8.75, 0.45));
+    $("pbsub").style.opacity = subIn.toFixed(3); $("pbsub").style.transform = `translateY(${(20 * (1 - subIn)).toFixed(1)}px)`;
+    const tagIn = clamp01(backOut(prog(t, 9.28, 0.4)));
+    $("pbtag").style.opacity = prog(t, 9.28, 0.12).toFixed(3); $("pbtag").style.transform = `translateX(-50%) scale(${mix(0.8, 1, tagIn).toFixed(3)})`;
+
+    // ── C: diagrama; la pila sube para dejar siempre a la vista los 3 últimos nodos
+    let k = 0; NODES.forEach((n, i) => { if (i >= 3) k = Math.max(k, (i - 2) * easeIO(prog(t, n.t - 0.15, 0.5))); });
+    const dim = easeIO(prog(t, 12.76, 0.6)) * (1 - easeIO(prog(t, 17.0, 0.6)));
+    NODES.forEach((n, i) => {
+      const y = 352 + (i - k) * 168;
+      const a = expoOut(prog(t, n.t - 0.05, 0.45));
+      const out = clamp01((352 - y) / 120);
+      n.el.style.top = y.toFixed(1) + "px";
+      n.el.style.opacity = (a * (1 - out) * (i < 4 ? 1 - 0.55 * dim : 1)).toFixed(3);
+      n.el.style.transform = `translateY(${(36 * (1 - a)).toFixed(1)}px)`;
+      if (n.link) { n.link.style.top = (y - 52).toFixed(1) + "px"; n.link.style.opacity = (a * (1 - clamp01((352 - (y - 52)) / 80))).toFixed(3); }
+      if (n.type) { const sh = Math.floor(prog(t, n.t + 0.1, n.type) * n.chars.length + 1e-6); n.chars.forEach((c, j) => { c.style.opacity = j < sh ? 1 : 0; }); }
+    });
+
+    // ── D: sello, calendario y fondo de pantalla
+    const sp = prog(t, 23.8, 0.3);
+    $("seal").style.opacity = t >= 23.8 ? Math.min(1, sp * 5).toFixed(3) : 0;
+    const hit = t >= 24.1 ? Math.exp(-10 * (t - 24.1)) * Math.cos(20 * (t - 24.1)) : 0;
+    $("seal").style.transform = `translateX(-50%) rotate(-6deg) scale(${(mix(1.4, 1, easeIn(sp)) * (1 + 0.03 * Math.max(0, hit))).toFixed(4)})`;
+    const cc = expoOut(prog(t, 25.6, 0.5));
+    $("calCard").style.opacity = cc.toFixed(3); $("calCard").style.transform = `translateY(${(50 * (1 - cc)).toFixed(1)}px)`;
+    miniMarks.forEach((m, i) => { m.style.opacity = prog(t, 25.85 + 0.04 * i, 0.08).toFixed(3); });
+    const ph = expoOut(prog(t, 27.2, 0.55));
+    $("phone").style.opacity = ph.toFixed(3); $("phone").style.transform = `translateY(${(60 * (1 - ph)).toFixed(1)}px)`;
+    $("phoneLb").style.opacity = expoOut(prog(t, 27.5, 0.4)).toFixed(3);
+
+    // ── E: lo que no te pide
+    [["chPago", 29.36], ["chCta", 30.56]].forEach(([id, t0]) => {
+      const a = clamp01(backOut(prog(t, t0 - 0.1, 0.4)));
+      $(id).style.opacity = prog(t, t0 - 0.1, 0.12).toFixed(3); $(id).style.transform = `scale(${mix(0.7, 1, a).toFixed(3)})`;
+      $(id).querySelector(".st").style.transform = `scaleX(${easeOut(prog(t, t0 + 0.3, 0.3)).toFixed(3)})`;
+    });
+    const cel = expoOut(prog(t, 31.5, 0.45));
+    $("rowCel").style.opacity = cel.toFixed(3); $("rowCel").style.transform = `translateX(${(-30 * (1 - cel)).toFixed(1)}px)`;
+    const air = expoOut(prog(t, 33.48, 0.45));
+    $("rowAir").style.opacity = air.toFixed(3); $("rowAir").style.transform = `translateY(${(40 * (1 - air)).toFixed(1)}px)`;
+    const on = clamp01(backOut(prog(t, 34.44, 0.35)));
+    $("knob").style.transform = `translateX(${(56 * on).toFixed(1)}px)`;
+    $("knob").style.background = t >= 34.55 ? "#0D213F" : "#F5F6F8";
+    $("tog").style.background = t >= 34.55 ? "#F5F6F8" : "transparent";
+    $("airNote").style.opacity = expoOut(prog(t, 34.7, 0.4)).toFixed(3);
+
+    // ── Hoja de calendario del gancho (MG-01 v02, versión compacta)
+    const sIn = clamp01(backOut(prog(t, 0.15, 0.5))), sOut = easeIn(prog(t, 3.9, 0.3));
+    $("sheet").style.opacity = (prog(t, 0.15, 0.12) * (1 - sOut)).toFixed(3);
+    $("sheet").style.transform = `translateY(${(-230 * (1 - sIn) - 30 * sOut).toFixed(1)}px) rotate(${mix(-20, -6, sIn).toFixed(2)}deg)`;
+    $("sheet").style.transformOrigin = "50% 0%";
+    let ang = 0, front = true;
+    if (t >= 0.86 && t < 3.42) { const p = prog(t, 0.86, 0.55); ang = 360 * p * p; front = p * p < 0.25; }
+    else if (t >= 3.42) { const p = prog(t, 3.42, 0.5); const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; ang = 360 * (1 - e); front = (1 - e) < 0.25; }
+    $("pEne").style.transform = `rotateX(${ang.toFixed(2)}deg)`;
+    $("pEne").style.zIndex = front ? 2 : 0; document.querySelector("#sheet .stk").style.zIndex = front ? 1 : 0;
+    $("tEne").style.opacity = (0.45 * clamp01(Math.sin(Math.PI * ang / 360) * 1.2)).toFixed(3);
+
+    // ── Acento final (MG-05): "Este febrero," y cae "no."
+    const a1 = expoOut(prog(t, 37.44, 0.55)), a2 = clamp01(backOut(prog(t, 38.24, 0.4)));
+    $("accent").style.opacity = a1.toFixed(3);
+    $("accent").style.clipPath = `inset(0 ${(100 * (1 - a1)).toFixed(1)}% 0 0)`;
+    $("a2").style.transform = `scale(${t >= 38.24 ? mix(0.3, 1, a2).toFixed(3) : 0})`;
+  }
+
+  const clock = { t: 0 };
+  const tl = gsap.timeline({ paused: true });
+  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(clock.t) }, 0);
+  render(0);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+})();
+</script>
+</body>
+</html>

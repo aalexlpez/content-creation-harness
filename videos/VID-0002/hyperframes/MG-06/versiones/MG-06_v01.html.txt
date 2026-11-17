@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>MG-06 v01 · Demo de Plan B</title>
+<!--
+  MG-06 v01 · VID-0002 · Maqueta de Plan B, pasos 1 a 3. PANTALLA COMPLETA (sin alfa).
+  Fuente de verdad: soycerobytes/miminiapp, docs/product-specs/plan-b.md (ficha v06):
+    textos de §6 tal cual (decisión del 2026-11-16), datos del ejemplo, paso 2 a gris
+    en 600 ms, paso 3 con gris 100/50/0 % según campos completos.
+  Marca del producto (solo dentro del celular): tokens de src/styles/global.css,
+    Space Grotesk (títulos) y DM Sans (cuerpo), radios 12/20/28, isotipo M sin redibujar.
+  Marca del video (fuera del celular): fondo #0D213F plano, barra "/" al 6 %,
+    rótulo "MAQUETA DE ENSAYO" en Plus Jakarta Sans.
+  Prompt: GUION_BEATS §4.4 MG-06. Prohibido: degradados, resplandores, sombras difusas,
+    partículas, glitch, sacudidas, datos personales, marcas de celulares reales.
+-->
+<style>
+  @font-face { font-family: "Space Grotesk"; font-weight: 300 700; src: url("./fonts/SpaceGrotesk.woff2") format("woff2"); }
+  @font-face { font-family: "DM Sans"; font-weight: 100 1000; src: url("./fonts/DMSans.woff2") format("woff2"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 500; src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype"); }
+  :root {
+    --canvas: #F7F5F0; --surface: #FFFFFF; --ink: #242136; --muted: #605B70; --brand: #7950F2;
+    --tint: #EDE6FE; --tint-ink: #653ACB; --border: #CEC6D8; --lime: #B9F65A; --control-border: #8B829B;
+  }
+  html, body { margin: 0; padding: 0; }
+  #root { position: relative; width: 1080px; height: 1920px; background: #0D213F; overflow: hidden; }
+
+  #bgbar { position: absolute; right: -120px; top: 380px; width: 640px; height: 787px; opacity: 0.06; }
+  #mockLabel {
+    position: absolute; left: 0; right: 0; top: 268px; text-align: center;
+    font-family: "Plus Jakarta Sans", sans-serif; font-weight: 500; font-size: 26px; letter-spacing: 0.2em; color: #B7C0CC;
+  }
+  #mockLabel svg { width: 14px; height: 18px; margin-right: 14px; vertical-align: -1px; }
+
+  /* Celular genérico 550×950, centrado, por encima de los subtítulos (y≈1345) */
+  #phone { position: absolute; left: 265px; top: 330px; width: 550px; height: 950px; }
+  #frame {
+    position: absolute; inset: 0; box-sizing: border-box; border-radius: 64px;
+    background: #1E2937; border: 2px solid rgba(245, 246, 248, 0.20);
+  }
+  #screen { position: absolute; left: 14px; top: 14px; width: 522px; height: 922px; border-radius: 52px; overflow: hidden; background: var(--canvas); }
+  /* La app se dibuja a 390×689 (un celular real) y se escala ×1,3385 */
+  #app {
+    --g: 0; position: absolute; left: 0; top: 0; width: 390px; height: 689px; transform: scale(1.3385); transform-origin: 0 0;
+    background: var(--canvas); color: var(--ink); font-family: "DM Sans", sans-serif;
+    filter: grayscale(var(--g)) brightness(calc(1 - var(--g) * 0.06));
+  }
+  .appbar { position: absolute; left: 20px; right: 20px; top: 34px; height: 24px; display: flex; align-items: center; gap: 8px; }
+  .appbar svg { width: 22px; height: 23px; }
+  .appbar b { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 17px; }
+  .step { position: absolute; left: 0; top: 0; width: 390px; height: 689px; opacity: 0; }
+  .nav { position: absolute; left: 20px; right: 20px; top: 72px; display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  h2 { position: absolute; left: 20px; right: 20px; margin: 0; font-family: "Space Grotesk", sans-serif; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+  .lbl { position: absolute; left: 20px; font-size: 14px; font-weight: 500; color: var(--muted); }
+  .field {
+    position: absolute; left: 20px; right: 20px; box-sizing: border-box; background: var(--surface);
+    border: 2px solid var(--control-border); border-radius: 12px; padding: 12px 14px; font-size: 17px; line-height: 1.35; color: var(--ink);
+  }
+  .field.active { border-color: var(--brand); }
+  .chips { position: absolute; left: 20px; right: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { background: var(--tint); color: var(--tint-ink); border-radius: 999px; padding: 7px 13px; font-size: 14px; font-weight: 500; }
+  .btn {
+    position: absolute; left: 20px; right: 20px; height: 50px; border-radius: 12px; background: var(--brand); color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 600;
+  }
+  .month { position: absolute; left: 20px; top: 104px; height: 30px; padding: 0 12px; border-radius: 999px; background: var(--tint); color: var(--tint-ink);
+    display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; overflow: hidden; }
+  .month .m { position: relative; display: inline-block; width: 62px; height: 30px; }
+  .month .m span { position: absolute; left: 0; top: 0; line-height: 30px; }
+  .grid { position: absolute; left: 20px; right: 20px; top: 286px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ob { height: 64px; box-sizing: border-box; border: 2px solid var(--border); background: var(--surface); border-radius: 12px;
+    display: flex; align-items: center; padding: 0 14px; font-size: 16px; font-weight: 500; color: var(--ink); }
+  .ob.sel { background: var(--brand); border-color: var(--brand); color: #FFFFFF; }
+  .tag { position: absolute; left: 20px; font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 18px; color: var(--brand); }
+  .days { position: absolute; left: 20px; right: 20px; top: 540px; display: flex; gap: 6px; }
+  .day { flex: 1; height: 38px; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--muted); }
+  .day.on { background: var(--tint); border-color: var(--brand); color: var(--tint-ink); }
+  .c { opacity: 0; }
+  #tap { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: rgba(36, 33, 54, 0.22); opacity: 0; }
+  #ring { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; border: 3px solid rgba(36, 33, 54, 0.35); box-sizing: border-box; opacity: 0; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="15.4">
+  <svg id="bgbar" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>
+  <div id="mockLabel"><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#B7C0CC"/></svg>MAQUETA DE ENSAYO</div>
+
+  <div id="phone">
+    <div id="frame"></div>
+    <div id="screen">
+      <div id="app">
+        <div class="appbar">
+          <svg viewBox="-5 20 86 90"><g fill="#7950F2"><rect x="0" y="30" width="13" height="70" rx="1.4"/><path d="M13 30 38 61V82L13 51Z"/><path d="M63 30 38 61V82L63 51Z"/><rect x="63" y="30" width="13" height="70" rx="1.4"/></g></svg>
+          <b>Plan B</b>
+        </div>
+
+        <!-- PASO 1 -->
+        <div class="step" id="s1">
+          <div class="nav"><span>← Atrás</span><span>Paso 1 de 3</span></div>
+          <h2 style="top:104px; font-size:27px; line-height:1.15;">¿Qué quieres lograr este año?</h2>
+          <div class="lbl" style="top:182px;">Tu propósito</div>
+          <div class="field active" style="top:206px; height:52px; padding-top:13px;"><span id="t1">Hacer ejercicio 3 veces por semana</span></div>
+          <div class="chips" style="top:276px;">
+            <span class="chip">Hacer ejercicio</span><span class="chip">Leer más</span><span class="chip">Ahorrar</span>
+            <span class="chip">Aprender un idioma</span><span class="chip">Dormir mejor</span><span class="chip">Usar menos el móvil</span>
+          </div>
+          <div class="btn" id="b1" style="top:612px;">Siguiente</div>
+        </div>
+
+        <!-- PASO 2 -->
+        <div class="step" id="s2">
+          <div class="nav"><span>← Atrás</span><span>Paso 2 de 3</span></div>
+          <div class="month">Mes: <span class="m"><span id="mEne">enero</span><span id="mFeb">febrero</span></span></div>
+          <h2 style="top:148px; font-size:22px; line-height:1.22;">Imagina que es 1 de febrero y lo has dejado. ¿Qué ha pasado?</h2>
+          <div class="lbl" style="top:252px; font-size:13px;">Al elegir un obstáculo, pasarás al siguiente paso.</div>
+          <div class="grid">
+            <div class="ob" id="ob0">No tuve tiempo</div><div class="ob">Perdí las ganas</div>
+            <div class="ob">Algo se cruzó</div><div class="ob">Era demasiado</div>
+            <div class="ob">Se me olvidó</div><div class="ob">Otra cosa</div>
+          </div>
+        </div>
+
+        <!-- PASO 3 -->
+        <div class="step" id="s3">
+          <div class="nav"><span>← Atrás</span><span>Paso 3 de 3</span></div>
+          <h2 style="top:104px; font-size:27px; line-height:1.15;">Tu plan para ese día</h2>
+          <div class="tag" style="top:156px;">Si</div>
+          <div class="field" id="f2" style="top:184px; height:84px;"><span id="t2">llego a casa después de las 20:00</span></div>
+          <div class="tag" style="top:286px;">entonces</div>
+          <div class="field" id="f3" style="top:314px; height:112px;"><span id="t3">hago 5 minutos de estiramientos antes de sentarme en el sofá</span></div>
+          <div class="lbl" style="top:446px;">Hora</div>
+          <div class="field" style="top:470px; left:20px; right:auto; width:120px; height:50px; padding-top:12px; font-weight:600;">20:00</div>
+          <div class="days">
+            <span class="day on">lu</span><span class="day on">ma</span><span class="day on">mi</span><span class="day on">ju</span><span class="day on">vi</span><span class="day">sá</span><span class="day">do</span>
+          </div>
+          <div class="btn" id="b3" style="top:612px;">Ver mi plan</div>
+        </div>
+
+        <div id="tap"></div><div id="ring"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./lib/gsap.min.js"></script>
+<script>
+  // ── Anclas (s desde el inicio de la pieza). Estimadas con el SRT de YouTube, toma de
+  //    6:43–7:00; se recalculan con la toma elegida. La pieza entra 0,3 s antes de "Aquí".
+  const A = {
+    IN: 0.0,        // entrada deslizante de 0,3 s (whoosh)
+    TYPE: 0.9,      // "eliges un propósito"
+    NEXT1: 2.3,     // toque en Siguiente
+    S2: 2.7,        // entra el paso 2 con el mes en "enero"
+    FEB: 3.4,       // "febrero": cambia el mes y la pantalla pasa a gris (600 ms)
+    WHY: 4.0,       // "eliges por qué": entran los seis obstáculos
+    TAP: 6.5,       // "no tuve tiempo": toque y avance automático
+    S3: 7.1,        // entra el paso 3
+    SI: 10.3,       // "si llego a casa…": se escribe la situación (gris → 50 %)
+    ACC: 12.5,      // "hago 5 minutos…": se escribe la acción (gris → 0 %)
+    VER: 14.8,      // toque en "Ver mi plan" (continúa MG-07)
+  };
+  const SCALE = 1.3385;
+
+  // Divide un texto en letras para "escribirlo" con opacidad escalonada
+  function split(id) {
+    const el = document.getElementById(id), t = el.textContent; el.textContent = "";
+    for (const ch of t) { const s = document.createElement("span"); s.className = "c"; s.textContent = ch; el.appendChild(s); }
+    return el.querySelectorAll(".c");
+  }
+  const c1 = split("t1"), c2 = split("t2"), c3 = split("t3");
+  const type = (chars, t0, dur) => tl.to(chars, { opacity: 1, duration: 0.001, stagger: dur / chars.length, ease: "none" }, t0);
+
+  // Centro de un elemento de la app, en coordenadas de la app (390×689)
+  function center(el) {
+    const a = document.getElementById("app").getBoundingClientRect(), r = el.getBoundingClientRect();
+    return { x: (r.left - a.left + r.width / 2) / SCALE, y: (r.top - a.top + r.height / 2) / SCALE };
+  }
+  function tapAt(el, t) {
+    const p = center(el);
+    tl.set(["#tap", "#ring"], { left: p.x, top: p.y, scale: 0.6, opacity: 0 }, t - 0.12);
+    tl.to("#tap", { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, t - 0.12);
+    tl.to("#ring", { opacity: 1, duration: 0.05 }, t);
+    tl.to("#ring", { scale: 1.8, opacity: 0, duration: 0.35, ease: "power2.out" }, t + 0.05);
+    tl.to("#tap", { opacity: 0, duration: 0.2, ease: "power1.in" }, t + 0.12);
+    tl.to(el, { scale: 0.97, duration: 0.08, ease: "power2.out", yoyo: true, repeat: 1 }, t - 0.02);
+  }
+  const stepIn = (id, t) => { tl.fromTo(id, { x: 28, opacity: 0 }, { x: 0, opacity: 1, duration: 0.32, ease: "expo.out" }, t); };
+  const stepOut = (id, t) => { tl.to(id, { x: -28, opacity: 0, duration: 0.22, ease: "power2.in" }, t); };
+
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#mFeb", { yPercent: 100, opacity: 0 });
+  gsap.set(".ob", { scale: 0.86, opacity: 0 });
+  gsap.set("#phone", { transformOrigin: "50% 50%" });
+
+  // Entrada deslizante del celular (0,3 s) y paso 1 visible
+  tl.fromTo("#phone", { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "expo.out" }, A.IN);
+  tl.fromTo("#mockLabel", { opacity: 0 }, { opacity: 1, duration: 0.3 }, A.IN + 0.1);
+  tl.set("#s1", { opacity: 1 }, A.IN);
+
+  // Paso 1: se escribe el propósito
+  type(c1, A.TYPE, 1.1);
+  tapAt(document.getElementById("b1"), A.NEXT1);
+  stepOut("#s1", A.NEXT1 + 0.15);
+
+  // Paso 2: entra con "enero"; en "febrero" cambia el mes, zoom al mes y gris en 600 ms
+  stepIn("#s2", A.S2);
+  tl.to("#mEne", { yPercent: -100, opacity: 0, duration: 0.3, ease: "power2.inOut" }, A.FEB);
+  tl.to("#mFeb", { yPercent: 0, opacity: 1, duration: 0.3, ease: "power2.inOut" }, A.FEB);
+  tl.to("#app", { "--g": 1, duration: 0.6, ease: "power1.inOut" }, A.FEB);
+  // cámara virtual: 1,10× hacia la etiqueta de mes y regreso (0,6 s)
+  tl.set("#phone", { transformOrigin: "30% 18%" }, A.FEB - 0.01);
+  tl.to("#phone", { scale: 1.10, duration: 0.3, ease: "power2.out" }, A.FEB - 0.05)
+    .to("#phone", { scale: 1, duration: 0.45, ease: "power2.inOut" }, A.FEB + 0.55);
+  // seis obstáculos escalonados (120 ms), con resorte
+  tl.to(".ob", { scale: 1, opacity: 1, duration: 0.42, ease: "back.out(1.7)", stagger: 0.12 }, A.WHY);
+  // toque en "No tuve tiempo": se marca y avanza solo
+  tapAt(document.getElementById("ob0"), A.TAP);
+  tl.set("#ob0", { className: "ob sel" }, A.TAP + 0.05);
+  stepOut("#s2", A.S3 - 0.2);
+
+  // Paso 3: gris al 100 %; la situación lo baja al 50 % y la acción al 0 %
+  stepIn("#s3", A.S3);
+  tl.set("#f2", { className: "field active" }, A.SI - 0.1);
+  type(c2, A.SI, 1.4);
+  tl.to("#app", { "--g": 0.5, duration: 0.4, ease: "power1.inOut" }, A.SI + 1.4);
+  tl.set("#f2", { className: "field" }, A.ACC - 0.1);
+  tl.set("#f3", { className: "field active" }, A.ACC - 0.1);
+  type(c3, A.ACC, 2.0);
+  tl.to("#app", { "--g": 0, duration: 0.4, ease: "power1.inOut" }, A.ACC + 2.0);
+  tl.set("#f3", { className: "field" }, A.VER - 0.2);
+  // zoom suave 1,06× sobre el campo activo
+  tl.set("#phone", { transformOrigin: "50% 40%" }, A.SI - 0.3);
+  tl.to("#phone", { scale: 1.06, duration: 0.6, ease: "power1.inOut" }, A.SI - 0.3)
+    .to("#phone", { scale: 1, duration: 0.6, ease: "power1.inOut" }, A.VER - 0.7);
+  tapAt(document.getElementById("b3"), A.VER);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+</script>
+</body>
+</html>

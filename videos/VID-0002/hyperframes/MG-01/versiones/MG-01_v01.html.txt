@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>MG-01 · Hoja de calendario</title>
+<style>
+  @font-face {
+    font-family: "Plus Jakarta Sans";
+    font-weight: 800;
+    src: url("./fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype");
+  }
+  html, body { margin: 0; padding: 0; background: transparent; }
+  #root { position: relative; width: 1080px; height: 1920px; background: transparent; overflow: hidden; }
+
+  /* Zona Z-ESQ: hoja de 228x176 en x 72, y 250 (MG-01 de GUION_BEATS §4.4) */
+  #sheet { position: absolute; left: 72px; top: 250px; width: 228px; height: 176px; opacity: 0; }
+  .page {
+    position: absolute; inset: 0; box-sizing: border-box;
+    background: #F5F6F8; border-radius: 18px;
+    border: 2px solid rgba(11, 11, 13, 0.15);
+    overflow: hidden; transform-origin: 50% 0%;
+  }
+  .page .head { position: absolute; left: 0; top: 0; width: 100%; height: 46px; background: #0D213F; }
+  .page .ring { position: absolute; top: 17px; width: 12px; height: 12px; border-radius: 50%; background: #F5F6F8; }
+  .page .ring.l { left: 62px; }
+  .page .ring.r { right: 62px; }
+  .page .mes {
+    position: absolute; left: 0; right: 0; top: 46px; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800;
+    font-size: 42px; line-height: 1; color: #0B0B0D; letter-spacing: 0;
+  }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="5.6">
+  <div id="sheet">
+    <div class="page" id="pEnero"><div class="head"><span class="ring l"></span><span class="ring r"></span></div><div class="mes">ENERO</div></div>
+    <div class="page" id="pFebrero"><div class="head"><span class="ring l"></span><span class="ring r"></span></div><div class="mes">FEBRERO</div></div>
+  </div>
+</div>
+
+<script src="./lib/gsap.min.js"></script>
+<script>
+  // Marcas de tiempo (s). Cambian al ajustar a la voz real:
+  //   T_FEB  = instante en que la hoja pasa a FEBRERO (la palabra "febrero")
+  //   T_ENE  = instante en que vuelve a ENERO ("todavía no")
+  const T_IN = 0.0, T_FEB = 0.9, T_ENE = 4.4, T_OUT = 5.2, FLIP = 0.17;
+
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#pFebrero", { scaleY: 0 });
+  gsap.set("#sheet", { transformOrigin: "50% 0%", rotation: -20, y: -230, opacity: 0 });
+
+  // Entrada con resorte desde arriba: -20° -> -6°
+  tl.to("#sheet", { y: 0, rotation: -6, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, T_IN);
+
+  // ENERO -> FEBRERO: la hoja gira sobre su borde superior
+  tl.to("#pEnero",   { scaleY: 0, duration: FLIP, ease: "power2.in"  }, T_FEB);
+  tl.to("#pFebrero", { scaleY: 1, duration: FLIP, ease: "power2.out" }, T_FEB + FLIP);
+
+  // FEBRERO -> ENERO
+  tl.to("#pFebrero", { scaleY: 0, duration: FLIP, ease: "power2.in"  }, T_ENE);
+  tl.to("#pEnero",   { scaleY: 1, duration: FLIP, ease: "power2.out" }, T_ENE + FLIP);
+
+  // Salida: fundido de 0,3 s
+  tl.to("#sheet", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, T_OUT);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+</script>
+</body>
+</html>

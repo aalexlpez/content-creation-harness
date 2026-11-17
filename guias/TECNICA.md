@@ -50,7 +50,19 @@ HyperFrames es el motor de animación principal (AV-001). Si falla en una prueba
 - Marca: perfil v2 (AV-006). Los tokens salen de `marca/identidad.json` y los logos de `marca/kit/`; la tipografía (Plus Jakarta Sans, OFL) está en `marca/fuentes/plus-jakarta-sans/`.
 - Documentación: [HyperFrames en GitHub](https://github.com/heygen-com/hyperframes).
 
-**Estado:** probado en el PC de Ale el 2026-11-13 con la CLI 0.9.42 por `npx` (Windows, Node 26, Chrome del sistema), con la telemetría desactivada. Un render de prueba de 2 s a 1080×1920 y 30 fps tardó 28 s, de los que 22 s son arranque. Falta probarlo con metraje de cámara.
+**Estado:** probado en el PC de Ale el 2026-11-13 con la CLI 0.9.42 por `npx` (Windows, Node 26, Chrome del sistema), con la telemetría desactivada. Un render de prueba de 2 s a 1080×1920 y 30 fps tardó 28 s, de los que 22 s son arranque. **2026-11-17:** probado con metraje de cámara (39,4 s sobre un corte de TikTok, render de 52 s) y con piezas sueltas de VID-0002.
+
+### Cómo se trabaja (aprendido el 2026-11-17)
+
+- **Una carpeta por composición:** `videos/VID-NNNN/hyperframes/<pieza>/index.html`, con sus fuentes en `fonts/` y GSAP en `lib/` (todo local, sin CDN). HyperFrames no admite dos `index.html` raíz en la misma carpeta: las versiones anteriores se guardan en `versiones/` con extensión `.txt`.
+- **Todo es función del tiempo:** un único tween de GSAP actúa de reloj y llama a `render(t)`, que calcula cada estilo para ese instante (técnica de los bloques `notes-reveal` y `cursor-zoom-follow` del catálogo de HyperFrames). Así el render en paralelo y el seek son exactos.
+- **No medir el DOM** (`getBoundingClientRect`, `offset*`) para posicionar en el render: las capturas salían bien y el MP4 no. Lo que dependa del texto va dentro del flujo del propio texto (por ejemplo, el cursor como `span` insertado tras la última letra visible).
+- **3D con CSS:** una opacidad en un elemento con `preserve-3d` aplana el 3D; se desvanecen sus caras, no el contenedor.
+- **Comandos:** `npx hyperframes@0.9.42 lint .` y `check .` (errores, textos que no se leen a tiempo, contraste) · `snapshot . --at 1.0,2.5 --no-end -o <carpeta>` (capturas por instante) · `render . --format mp4|mov|webm --fps 30 --resolution portrait -o <archivo>`.
+- **Transparencia:** `--format mov` da ProRes 4444 con alfa (`yuva444p12le`) y `--format webm` VP9 con alfa; ambos verificados con ffprobe. Falta comprobar que CapCut los importa.
+- **Video de cámara dentro de la composición:** `<video>` con `data-start`, `data-duration` y `data-has-audio="true"`. Convierte antes el material HEVC a una copia H.264 en `assets/` (fuera de Git por `.gitignore`).
+- **Tiempos por palabra:** `npx hyperframes@0.9.42 transcribe audio.wav --engine parakeet --language es --json`. Whisper exige compilar con CMake y Visual Studio Build Tools, así que se usa **Parakeet** (`hyperframes models install parakeet`, instalado el 2026-11-17 con permiso de Ale). Sus tiempos sirven; su texto no (traduce partes al inglés): el texto se corrige con el guion.
+- **Catálogo:** `npx hyperframes@0.9.42 catalog --json` lista 448 bloques y componentes con video de muestra. Antes de instalar uno (`hyperframes add`), Ale lo aprueba.
 
 ## Montaje (CapCut Desktop gratis o Shotcut)
 

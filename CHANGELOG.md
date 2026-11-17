@@ -2,6 +2,11 @@
 
 ## Sin publicar
 
+- **Edición continua** (AV-009, propuesta): método nuevo en [EDICION](guias/EDICION.md#edición-continua), patrón E-01. Probado en un ensayo de edición sobre el corte de TikTok de VID-0001 (`videos/VID-0001/hyperframes/ensayo-edicion/`).
+- **Sonidos reales** (AV-008): fuera los efectos sintetizados por código; grabados por Ale o CC0 con licencia registrada.
+- **Motion graphics de VID-0002** en HyperFrames: MG-01 v02 (hoja de calendario con giro 3D), MG-02 (rótulo de presentación), ambos con alfa (ProRes 4444 y WebM), y MG-06/MG-07 v02 (maqueta de Plan B a pantalla completa con cámara, teclado y frase que viaja al fondo de bloqueo). Un proyecto por pieza en `videos/VID-0002/hyperframes/`.
+- [TECNICA](guias/TECNICA.md): cómo se trabaja con HyperFrames (render por tiempo, no medir el DOM, 3D, transparencia, video de cámara, tiempos por palabra con Parakeet, catálogo).
+- [referencias/MOTION.md](referencias/MOTION.md): repositorios, herramientas y el reel de referencia estudiados, con su veredicto.
 - **Identidad visual v2** (AV-006): cerobytes «creative tech» (wordmark en minúsculas con barra diagonal, paleta de cuatro colores y Plus Jakarta Sans, AV-007). Sustituye al perfil TEMP y a la v1 (PR-002). El **kit vectorial v1.2** vive en `marca/kit/` (37 SVG y 53 PNG, reconstrucción no maestra: el wordmark es vectorial pero no es el diseño maestro original) y se documenta en `marca/IDENTIDAD.md`.
 - **Tipografía** Plus Jakarta Sans (Google Fonts, OFL) en `marca/fuentes/plus-jakarta-sans/`, en lugar de Satoshi (AV-007). Se exportaron de nuevo los 15 PNG con texto del kit.
 - Rótulo inferior 9:16 **ajustado** (`marca/kit/*/rotulo-inferior-video-9x16-ajustado.*`): desplazado 100 px sobre el kit v1.2 para no pisar la banda de subtítulos.

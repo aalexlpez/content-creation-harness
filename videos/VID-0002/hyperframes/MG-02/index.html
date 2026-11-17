@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>MG-02 v01 · Rótulo de presentación</title>
+<!--
+  MG-02 v01 · VID-0002 · Rótulo «Plan B · para tu propósito» (capa transparente)
+  Referencias del repositorio:
+    - marca/kit/svg/rotulo-inferior-video-9x16-ajustado.svg: caja #0D213F al 95 %,
+      x 69, y 1230–1400 (alto 170, radio 18; aquí 700 de ancho, ajustado al texto), barra "/" a la izquierda, título
+      Bold y línea secundaria en mayúsculas con tracking (aquí 30 px en vez de 26
+      para que se lea en el celular). No pisa los subtítulos
+      (y 1060–1180) ni la zona de la red (y > 1420).
+    - GUION_BEATS §4.4 MG-02: barrido diagonal (≈29° de la vertical) de izquierda a
+      derecha en 0,4 s, la barra entra primero (0,2 s), sale con el barrido inverso
+      en 0,3 s. Texto según VID-0002/GUION.md S03.
+    - referencias/tecnologia/: rótulo lateral con jerarquía título / línea
+      secundaria que entran escalonados (solo técnica; ni paleta ni estilo).
+  Prohibido (marca v2): degradados, resplandores, sombras difusas, partículas,
+  glitch, colores o fuentes fuera de la paleta.
+-->
+<style>
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 700; src: url("./fonts/PlusJakartaSans-Bold.ttf") format("truetype"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 500; src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype"); }
+  html, body { margin: 0; padding: 0; background: transparent; }
+  #root { position: relative; width: 1080px; height: 1920px; background: transparent; overflow: hidden; }
+
+  /* --r: borde derecho del barrido; --l: borde izquierdo (salida). Inclinación: 94 px en 170 px de alto (≈29°) */
+  #block {
+    --r: 0px; --l: 0px;
+    position: absolute; left: 69px; top: 1230px; width: 700px; height: 170px; box-sizing: border-box;
+    background: rgba(13, 33, 63, 0.95); border: 2px solid rgba(245, 246, 248, 0.20); border-radius: 18px;
+    clip-path: polygon(var(--l) 0px, var(--r) 0px, calc(var(--r) - 94px) 170px, calc(var(--l) - 94px) 170px);
+  }
+  .line { position: absolute; overflow: hidden; white-space: nowrap; font-family: "Plus Jakarta Sans", sans-serif; }
+  .line > span { display: inline-block; }
+  #title { left: 158px; top: 30px; height: 70px; line-height: 70px; }
+  #title .main { font-weight: 700; font-size: 58px; color: #F5F6F8; letter-spacing: -1px; }
+  #title .sub  { font-weight: 500; font-size: 32px; color: #B7C0CC; margin-left: 14px; }
+  #second { left: 161px; top: 108px; height: 36px; line-height: 36px; font-weight: 500; font-size: 30px; color: #B7C0CC; letter-spacing: 0.12em; }
+
+  /* Barra "/" del kit: 36×130 en unidades de la marca, aquí a escala 0,70 en x 102, y 1267 */
+  #bar { position: absolute; left: 102px; top: 1267px; width: 76px; height: 94px; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="2.9">
+  <div id="block">
+    <div class="line" id="title"><span class="main" id="tMain">Plan B</span><span class="sub" id="tSub">· para tu propósito</span></div>
+    <div class="line" id="second"><span id="sText">HERRAMIENTA N.º 1</span></div>
+  </div>
+  <svg id="bar" viewBox="0 0 109 134" xmlns="http://www.w3.org/2000/svg"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>
+</div>
+
+<script src="./lib/gsap.min.js"></script>
+<script>
+  // T_IN: instante en que digo "Plan B" (el rótulo ya se lee completo a T_IN + 0,6 s).
+  // HOLD: el guion pide ~2,5 s en pantalla.
+  const T_IN = 0.0, HOLD = 2.5, T_OUT = T_IN + 0.1 + HOLD - 0.3;
+  const W = 700 + 94 + 4;              // ancho del barrido completo, con la inclinación
+  const EASE_IN = "expo.out";          // aproxima cubic-bezier(0.22, 1, 0.36, 1)
+
+  const tl = gsap.timeline({ paused: true });
+  // la barra entra a lo largo de su propia diagonal (≈29° de la vertical)
+  gsap.set("#bar", { x: -24, y: 44, opacity: 0 });
+  gsap.set("#tMain, #tSub", { yPercent: 105 });
+  gsap.set("#sText", { x: -34, opacity: 0 });
+
+  // 1 · La barra primero (0,2 s)
+  tl.to("#bar", { x: 0, y: 0, opacity: 1, duration: 0.22, ease: "power3.out" }, T_IN);
+  // 2 · Barrido diagonal de la caja, de izquierda a derecha (0,4 s)
+  tl.to("#block", { "--r": W + "px", duration: 0.42, ease: EASE_IN }, T_IN + 0.1);
+  // 3 · Título por máscara, escalonado (Plan B, luego · para tu propósito)
+  tl.to("#tMain", { yPercent: 0, duration: 0.4, ease: EASE_IN }, T_IN + 0.24);
+  tl.to("#tSub",  { yPercent: 0, duration: 0.4, ease: EASE_IN }, T_IN + 0.34);
+  // 4 · Línea secundaria, 120 ms después
+  tl.to("#sText", { x: 0, opacity: 1, duration: 0.36, ease: EASE_IN }, T_IN + 0.46);
+
+  // 5 · Salida: barrido inverso de la caja (0,3 s) y la barra al final
+  tl.to("#block", { "--l": W + "px", duration: 0.3, ease: "power2.in" }, T_OUT);
+  tl.to("#bar", { x: 24, y: -44, opacity: 0, duration: 0.2, ease: "power2.in" }, T_OUT + 0.12);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+</script>
+</body>
+</html>

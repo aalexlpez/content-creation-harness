@@ -37,9 +37,9 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 
 ## Animación
 
-- Herramienta y versión: PENDIENTE: los recursos R1 y R2 se harán en CapCut
-- Escenas animadas y entrega (MP4 por escena, WAV, SRT):
-- Prueba de seek (inicio, medio, final):
+- Herramienta y versión: HyperFrames 0.9.42 por `npx` (ensayo de edición continua del 2026-11-17, después de cancelar el vídeo). Proyecto en `hyperframes/ensayo-edicion/`
+- Escenas animadas y entrega (MP4 por escena, WAV, SRT): composición completa sobre el corte de TikTok de Ale (`media/trabajo/tiktok_ensayo.mp4`, 42,1 s con subtítulos quemados), recortada a 39,4 s. Alterna «a cámara» y «escenario» con cinco tramos (mediados de enero, la miniapp, cómo funciona, lo que te llevas, lo que no te pide), subtítulos propios en el escenario, hoja de calendario en el gancho y acento final. Sin efectos de sonido. Tiempos por palabra con Parakeet, texto corregido con el guion. Entregas: `media/trabajo/ensayo_edicion_v01.mp4` y `ensayo_edicion_v02.mp4` (v02: el escenario no sube y baja entre tramos seguidos y el cambio de tramo sigue a la barra), más vistas previas
+- Prueba de seek (inicio, medio, final): `hyperframes check` sin errores (4 subtítulos demasiado breves se unieron) y capturas en 15 instantes; fotogramas del MP4 final revisados
 
 ## Montaje
 
@@ -67,3 +67,4 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 - 2026-11-13 · Ingesta, corte de cámara y montaje v01 (guion v02)
 - 2026-11-15 · Se descarta el montaje v01 (ffmpeg + HyperFrames); Ale monta en CapCut con el guion v02
 - 2026-11-16 · Estado → CANCELADO
+- 2026-11-17 · Ensayo de edición continua sobre el corte de TikTok (no se publica; método AV-009)
