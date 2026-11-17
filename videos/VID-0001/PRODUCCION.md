@@ -47,7 +47,7 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 - Corte_actual:
 - Cambios frente al guion:
 - Color aplicado:
-- Mezcla (voz, música, efectos):
+- Mezcla (voz, música, efectos): ensayo de edición v03 (2026-11-17): voz original comprimida suave + 7 efectos reales CC0 de Freesound en 41 momentos (whoosh, hoja, clic, tecleo, sello, interruptor, golpe), sin música; −14,0 LUFS, pico −4,2 dBFS. Lista y licencias en `hyperframes/ensayo-edicion/SONIDOS.md`; mezcla con `sonido.py`. Entrega `media/trabajo/ensayo_edicion_v03.mp4`. **Rechazada por Ale el 2026-11-17** («son efectos de sonido horribles»); sonido aparcado, siguiente intento con Mixkit (ver SONIDOS.md)
 - Subtítulos:
 
 ## Correcciones
@@ -68,3 +68,4 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 - 2026-11-15 · Se descarta el montaje v01 (ffmpeg + HyperFrames); Ale monta en CapCut con el guion v02
 - 2026-11-16 · Estado → CANCELADO
 - 2026-11-17 · Ensayo de edición continua sobre el corte de TikTok (no se publica; método AV-009)
+- 2026-11-17 · Mezcla con efectos de Freesound (v03) rechazada; sonido aparcado

@@ -36,6 +36,7 @@ La identidad v2 no tiene color de acento: el énfasis se logra por inversión de
 - Por defecto, **cama instrumental discreta o voz sola**, según la pieza. Indica cuándo entra, dónde baja bajo la voz y cuándo se funde.
 - **Efectos sonoros** solo en acciones concretas: tocar, aparecer o confirmar un resultado, o cambiar de sección. Nunca de relleno.
 - **Sonidos reales, nunca sintetizados por código** (AV-008): grabados por Ale con el DJI (papel, toque, golpe seco) o de bibliotecas con licencia CC0 (por ejemplo, Freesound), siempre escuchados antes de usarlos y con su fila en Derechos. Las animaciones se entregan sin audio y el sonido va en su propia pista.
+- **Bibliotecas:** primero las profesionales gratuitas con licencia comercial sin atribución (Mixkit, Pixabay Sound Effects; la licencia se comprueba en la página al descargar). Freesound solo para algo concreto y escuchado entero: los micro-sonidos de interfaz sueltos sonaron «horribles» en el ensayo del 2026-11-17. Un mismo «pop» para todo lo que aparece da coherencia; no todo evento necesita sonido.
 - Silencio intencional es una opción válida.
 - **Derechos por destino:** que una pista esté en el catálogo de CapCut o TikTok no significa que se pueda usar en YouTube o Instagram. Registra cada pista y efecto en CIERRE → Derechos con su licencia y las redes que cubre.
 

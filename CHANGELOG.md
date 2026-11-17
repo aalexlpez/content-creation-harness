@@ -3,7 +3,7 @@
 ## Sin publicar
 
 - **Edición continua** (AV-009, propuesta): método nuevo en [EDICION](guias/EDICION.md#edición-continua), patrón E-01. Probado en un ensayo de edición sobre el corte de TikTok de VID-0001 (`videos/VID-0001/hyperframes/ensayo-edicion/`).
-- **Sonidos reales** (AV-008): fuera los efectos sintetizados por código; grabados por Ale o CC0 con licencia registrada.
+- **Sonidos reales** (AV-008): fuera los efectos sintetizados por código; grabados por Ale o de bibliotecas con licencia registrada. Primer intento con Freesound rechazado; siguiente, Mixkit (`videos/VID-0001/hyperframes/ensayo-edicion/SONIDOS.md`, mezcla con `sonido.py`).
 - **Motion graphics de VID-0002** en HyperFrames: MG-01 v02 (hoja de calendario con giro 3D), MG-02 (rótulo de presentación), ambos con alfa (ProRes 4444 y WebM), y MG-06/MG-07 v02 (maqueta de Plan B a pantalla completa con cámara, teclado y frase que viaja al fondo de bloqueo). Un proyecto por pieza en `videos/VID-0002/hyperframes/`.
 - [TECNICA](guias/TECNICA.md): cómo se trabaja con HyperFrames (render por tiempo, no medir el DOM, 3D, transparencia, video de cámara, tiempos por palabra con Parakeet, catálogo).
 - [referencias/MOTION.md](referencias/MOTION.md): repositorios, herramientas y el reel de referencia estudiados, con su veredicto.
