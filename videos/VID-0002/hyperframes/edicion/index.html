@@ -2,37 +2,27 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Edición continua v03 · VID-0002 (ensayo 2)</title>
+<title>Edición continua v05 · VID-0002 (ensayo 2)</title>
 <!--
-  EDICIÓN CONTINUA de VID-0002 sobre el corte de Ale en CapCut (ensayo_2.mp4, 63,25 s). No se publica.
-  Método E-01 (AV-009) + estándar de motion graphics (guias/MOTION.md, AV-010). Lista de eventos: PLAN.md §3.
-  Modos: C = a cámara · E = escenario (panel #0D213F arriba, toma bajada 700 px) · P = pantalla completa
-  (maqueta MG-06 v03 y MG-07 v03, re-ancladas al corte y renderizadas en assets/).
-  Marca v2 (AV-006/007): #0B0B0D, #1E2937, #0D213F, #F5F6F8, secundario #B7C0CC, Plus Jakarta Sans, sin acento,
+  EDICIÓN CONTINUA v05 de VID-0002 sobre el corte de Ale en CapCut (ensayo_2.mp4) con su voz mejorada. No se publica.
+  Plan: PLAN_v05.md. Método E-01 (AV-009) + estándar de motion graphics (guias/MOTION.md, AV-010).
+  Marca v2 (AV-006/007): #0B0B0D, #1E2937, #0D213F, #F5F6F8, secundario #B7C0CC, solo Plus Jakarta Sans, sin acento,
   énfasis por inversión, sin degradados, resplandores ni sombras difusas.
-  Tiempos: media/trabajo/corte_palabras.json (Parakeet frase a frase, texto corregido con el guion v02).
-  Todo es función del tiempo: render(t), sin medir el DOM.
+  Tiempos: media/trabajo/corte_palabras.json. La composición está escrita en tiempos del corte v01 («viejos») y
+  render() traduce el tiempo del corte v05 con KEEP (= cortes.py = mezcla_v05.py).
 
-  v02 (2026-11-18) · arreglos de REVIEW.md:
-    - la demo ya no va a pantalla completa: se ve en una ventana del escenario, casi a tamaño real,
-      que sigue el paso activo, y la cara queda siempre abajo (P0 1–2);
-    - subtítulos siempre en su banda (y ≈ 862 en el escenario), fuera de la interfaz (P0 3);
-    - sin anillo ni punto de toque en la maqueta (MG-06 v04) (P0 4);
-    - «La solución» con un evento por frase: precio tachado, GRATIS, PARA ESE DÍA, 01 (P1 5);
-    - recortes de voz: «Aquí simplemente», «¿Como cuál?», la mayor parte de «La serie» y «Y me dices
-      qué tal»: 63,25 → 49,66 s (P1 6–7). El corte ya viene hecho en assets/corte_v02.mp4 (voz mejorada
-      de Ale) y en assets/demo_v02.mp4; la composición sigue escrita en tiempos del corte v01 y
-      render() trabaja en tiempo viejo (KEEP);
-    - subtítulos de 66 px, cabecera derecha de 32 px, días del calendario sin número, sin el rótulo
-      «Plan B» duplicado ni la etiqueta del link (P1 8–11, P2 11).
-
-  v03 (2026-11-18) · correcciones de Ale sobre la v02:
-    - los cortes caen en silencios reales y en finales de frase (cortes.py, KEEP medido sobre la voz);
-      «La serie» vuelve hasta «…cualquier ámbito.» (solo se quita el «eh»), «Aquí simplemente» se
-      queda: 55,48 s;
-    - la demo se encuadra por grupos de interfaz (FRAMES: centro y zoom por momento), con acercamientos
-      y alejamientos de 0,55 s; ningún plano corta un campo o un botón;
-    - los subtítulos se encogen si no caben en el ancho (estimación por caracteres, sin medir el DOM).
+  Qué trae la v05 frente a la v04 (versiones/edicion_v04.html.txt):
+    - Textos en tres niveles: subtítulo base, 6 palabras protagonistas (ABANDONASTE y CALMA detrás de la persona con
+      el recorte de HyperFrames, «Plan B» que llena el cuadro, SIN GANAS, GRATIS, «Este febrero, no.») y cabecera «n / 5».
+    - Cortes: encuadre que alterna 100 % / 110 % en cada empalme de KEEP y por frase, con oscurecido de 3 fotogramas
+      antes de cada empalme.
+    - Transiciones con causa: la hoja de calendario se atraviesa hasta el escenario (zoom a través), la tarjeta Plan B se
+      ensancha hasta ser la ventana de la demo, la pantalla de bloqueo se encoge hasta la tarjeta 01 (llevar al otro
+      lado) y el escenario entra con desenfoque.
+    - Demo con dos insertos a pantalla completa de ≤ 1,3 s (el toque en «No tuve tiempo» y el sello).
+    - «La serie»: una tarjeta protagonista de 260 px por categoría en vez de una fila de iconos pequeños.
+    - El calendario dice «MEDIADOS DE ENERO»: «la mitad» es el claim C1 (X) y no se refuerza en pantalla.
+    - Cola de 0,8 s con el último fotograma. La voz ya no viaja en el vídeo: va en voz_v05.wav y se mezcla aparte.
 -->
 <style>
   @font-face { font-family: "PJS"; font-weight: 500; src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype"); }
@@ -43,7 +33,10 @@
   #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); font-family: "PJS", sans-serif; color: var(--off); }
 
   #vwrap { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 50% 32%; }
-  #v { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+  #v, #mt { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+  #mt { opacity: 0; }
+  #hb { position: absolute; left: 0; right: 0; top: 0; height: 1920px; opacity: 0; }
+  #hb .w { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; letter-spacing: -0.02em; line-height: 1; white-space: nowrap; color: var(--off); text-transform: uppercase; opacity: 0; }
 
   /* ── ESCENARIO */
   #stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1000px; background: var(--navy); overflow: hidden; }
@@ -51,6 +44,7 @@
   #bgbar { position: absolute; right: -80px; top: 260px; width: 560px; height: 690px; opacity: 0.05; }
   .hdr { position: absolute; top: 272px; font-weight: 700; font-size: 34px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
   #hdrL { left: 70px; }
+  #hdrL b { font-weight: 500; color: var(--sec); margin-right: 14px; letter-spacing: 0.1em; }
   #hdrR { right: 70px; font-weight: 500; font-size: 32px; letter-spacing: 0.12em; color: var(--sec); top: 274px; }
   #hdrR svg { width: 16px; height: 20px; margin-right: 10px; vertical-align: -1px; }
   .scene { position: absolute; left: 0; top: 0; width: 1080px; height: 1000px; opacity: 0; }
@@ -62,7 +56,7 @@
   .dow { display: grid; grid-template-columns: repeat(7, 96px); gap: 10px; margin-bottom: 10px; }
   .dow span { text-align: center; font-weight: 500; font-size: 28px; letter-spacing: 0.12em; color: var(--sec); }
   .days { display: grid; grid-template-columns: repeat(7, 96px); gap: 10px; }
-  .d { height: 64px; border-radius: 12px; border: 2px solid var(--line); box-sizing: border-box; position: relative; padding: 4px 9px; font-weight: 500; font-size: 22px; color: var(--sec); opacity: 1; }
+  .d { height: 64px; border-radius: 12px; border: 2px solid var(--line); box-sizing: border-box; position: relative; opacity: 1; }
   .d.blank { border-color: transparent; }
   .d i { position: absolute; inset: -2px; border-radius: 12px; background: var(--off); opacity: 0; }
   .d i svg { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; }
@@ -74,31 +68,34 @@
   .wd .n { position: absolute; left: 0; right: 0; top: 18px; text-align: center; font-weight: 500; font-size: 30px; letter-spacing: 0.12em; color: var(--sec); }
   .wd i { position: absolute; inset: -2px; border-radius: 20px; background: rgba(245,246,248,0.12); opacity: 0; }
   .wd i svg { position: absolute; left: 50%; top: 104px; width: 48px; height: 48px; margin-left: -24px; }
-  #bigday { position: absolute; left: 340px; top: 360px; width: 400px; height: 420px; border-radius: 34px; box-sizing: border-box; border: 3px solid var(--off); opacity: 0; transform-origin: 50% 50%; }
+  #bigday { position: absolute; left: 340px; top: 360px; width: 400px; height: 440px; border-radius: 34px; box-sizing: border-box; border: 3px solid var(--off); opacity: 0; transform-origin: 50% 50%; background: var(--navy); }
   #bigday .n { position: absolute; left: 0; right: 0; top: 40px; text-align: center; font-weight: 700; font-size: 40px; letter-spacing: 0.14em; }
-  #bigday .q { position: absolute; left: 0; right: 0; top: 130px; text-align: center; font-weight: 800; font-size: 150px; line-height: 1; }
-  #singanas { position: absolute; left: 50%; top: 680px; padding: 14px 30px; border-radius: 999px; background: var(--off); color: var(--ink); font-weight: 800; font-size: 44px; letter-spacing: 0.08em; white-space: nowrap; opacity: 0; }
+  #bigday .q, #bigday .q2 { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; line-height: 1; white-space: nowrap; }
+  #bigday .q { top: 150px; font-size: 170px; }
+  #bigday .q2 { top: 200px; font-size: 118px; opacity: 0; background: var(--off); color: var(--ink); width: 760px; left: 50%; right: auto; margin-left: -380px; border-radius: 18px; padding: 16px 0; }
 
   /* C · Plan B */
-  #pbcard { position: absolute; left: 140px; top: 360px; width: 800px; height: 300px; border-radius: 34px; border: 2px solid var(--line); background: rgba(245,246,248,0.05); box-sizing: border-box; transform-origin: 50% 50%; }
+  #pbcard { position: absolute; left: 70px; top: 360px; width: 640px; height: 300px; border-radius: 34px; border: 2px solid var(--line); background: rgba(245,246,248,0.05); box-sizing: border-box; transform-origin: 50% 50%; }
   #pbcard .t { position: absolute; left: 0; right: 0; top: 46px; text-align: center; font-weight: 800; font-size: 150px; letter-spacing: -0.03em; line-height: 1; }
-  #pbcard .s { position: absolute; left: 0; right: 0; top: 214px; text-align: center; font-weight: 500; font-size: 34px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sec); }
+  #pbcard .s { position: absolute; left: 0; right: 0; top: 214px; text-align: center; font-weight: 500; font-size: 30px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sec); }
   #pbcard .s svg { width: 16px; height: 20px; margin-right: 12px; vertical-align: -1px; }
-  .pill { position: absolute; top: 700px; height: 84px; padding: 0 34px; border-radius: 999px; border: 3px solid var(--off); box-sizing: border-box; display: flex; align-items: center; font-weight: 800; font-size: 40px; letter-spacing: 0.06em; white-space: nowrap; opacity: 0; }
+  .pill { position: absolute; top: 700px; height: 108px; padding: 0 36px; border-radius: 999px; border: 3px solid var(--off); box-sizing: border-box; display: flex; align-items: center; font-weight: 800; font-size: 56px; letter-spacing: 0.04em; white-space: nowrap; opacity: 0; }
   .pill.inv { background: var(--off); color: var(--ink); }
-  #pStrike { position: absolute; left: 12px; right: 12px; top: 50%; height: 6px; margin-top: -3px; background: var(--off); border-radius: 3px; transform-origin: 0 50%; transform: rotate(-28deg) scaleX(0); }
-  #num { position: absolute; left: 850px; top: 693px; font-weight: 800; font-size: 96px; line-height: 1; opacity: 0; white-space: nowrap; }
-  #num svg { width: 46px; height: 58px; margin-left: 8px; }
+  #pStrike { position: absolute; left: 12px; right: 12px; top: 50%; height: 7px; margin-top: -3px; background: var(--off); border-radius: 3px; transform-origin: 0 50%; transform: rotate(-24deg) scaleX(0); }
+  #num { position: absolute; left: 752px; top: 400px; font-weight: 800; font-size: 150px; line-height: 1; opacity: 0; white-space: nowrap; display: flex; align-items: center; }
+  #num .dg { display: block; height: 150px; overflow: hidden; width: 90px; }
+  #num .dg div { height: 150px; text-align: center; }
+  #num svg { width: 46px; height: 58px; margin-left: 10px; }
 
-  /* D · la serie */
-  .sc { position: absolute; top: 400px; width: 220px; height: 270px; border-radius: 26px; border: 2px solid var(--line); background: rgba(245,246,248,0.05); box-sizing: border-box; opacity: 0; }
-  .sc .k { position: absolute; left: 22px; top: 18px; font-weight: 800; font-size: 40px; }
-  .sc .ic { position: absolute; left: 50%; top: 96px; width: 112px; height: 112px; margin-left: -56px; opacity: 0; }
-  .sc .lb { position: absolute; left: 0; right: 0; top: 206px; text-align: center; font-weight: 800; font-size: 32px; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0; }
-  .sc.inv { background: var(--off); border-color: var(--off); color: var(--ink); }
-  #week1 { position: absolute; left: 50px; top: 334px; padding: 8px 20px; border-radius: 999px; background: var(--off); color: var(--ink); font-weight: 800; font-size: 32px; letter-spacing: 0.08em; opacity: 0; white-space: nowrap; }
-  #people { position: absolute; left: 700px; top: 700px; display: flex; gap: 14px; }
-  #people svg { width: 64px; height: 84px; opacity: 0; }
+  /* D · la serie: una tarjeta protagonista */
+  #hc { position: absolute; left: 300px; top: 400px; width: 480px; height: 440px; border-radius: 34px; border: 2px solid var(--line); background: rgba(245,246,248,0.05); box-sizing: border-box; opacity: 0; transform-origin: 50% 50%; }
+  #hc.inv { background: var(--off); border-color: var(--off); }
+  #hc .k { position: absolute; left: 26px; top: 20px; font-weight: 800; font-size: 40px; }
+  #hc .ic { position: absolute; left: 110px; top: 70px; width: 260px; height: 260px; opacity: 0; }
+  #hc .lb { position: absolute; left: 0; right: 0; top: 350px; text-align: center; font-weight: 800; font-size: 40px; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0; }
+  #week1 { position: absolute; left: 70px; top: 330px; padding: 8px 22px; border-radius: 999px; background: var(--off); color: var(--ink); font-weight: 800; font-size: 34px; letter-spacing: 0.06em; opacity: 0; white-space: nowrap; }
+  #dots { position: absolute; left: 600px; top: 346px; display: flex; gap: 12px; transform-origin: 0 0; }
+  #dots i { display: block; width: 30px; height: 30px; border-radius: 8px; border: 2px solid var(--line); box-sizing: border-box; }
 
   /* Subtítulos: una línea, palabra activa invertida */
   .capbox { position: absolute; left: 40px; right: 40px; height: 90px; display: flex; justify-content: center; align-items: center; gap: 14px; }
@@ -114,16 +111,13 @@
   #capB.boxed span.off { opacity: 1; color: var(--sec); }
   #capB.boxed { gap: 6px; }
 
-  /* Demo dentro del escenario: ventana de 960×520 que sigue el paso activo (escala 0,889) */
-  #appwin { position: absolute; left: 60px; top: 330px; width: 960px; height: 520px; border-radius: 28px; overflow: hidden; border: 2px solid var(--line); box-sizing: border-box; background: #F7F5F0; }
+  /* Ventana de la demo: vive en la raíz para poder ensancharse hasta la pantalla completa (inserto) */
+  #appwin { position: absolute; left: 60px; top: 330px; width: 960px; height: 520px; border-radius: 28px; overflow: hidden; border: 2px solid var(--line); box-sizing: border-box; background: #F7F5F0; opacity: 0; }
   #appin { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
   #appin video { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
-  /* Pantalla completa (maqueta) */
-  .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 50% 50%; }
-  .full video { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
 
-  /* ── A CÁMARA: hoja (MG-01), rótulos (MG-02) y acento final */
-  #sheet { position: absolute; left: 72px; top: 262px; width: 228px; height: 176px; transform-origin: 50% 0%; }
+  /* ── A CÁMARA: hoja (MG-01), «Plan B» protagonista y acento final */
+  #sheet { position: absolute; left: 72px; top: 262px; width: 228px; height: 176px; transform-origin: 50% 50%; }
   #sheet .bind { position: absolute; left: 0; top: 0; width: 228px; height: 46px; background: var(--navy); border-radius: 18px 18px 0 0; z-index: 2; }
   #sheet .rg { position: absolute; top: -12px; width: 12px; height: 30px; box-sizing: border-box; border-radius: 6px; background: var(--off); border: 2px solid var(--navy); z-index: 3; }
   #sheet .stk { position: absolute; left: 0; top: 46px; width: 228px; height: 130px; perspective: 520px; perspective-origin: 50% 0%; }
@@ -132,22 +126,22 @@
     backface-visibility: hidden; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 42px; color: var(--ink); overflow: hidden; }
   #sheet .fc.bk { transform: rotateX(180deg); border-radius: 18px 18px 0 0; }
   #sheet .tn { position: absolute; inset: 0; background: var(--navy); opacity: 0; }
-  .lt { position: absolute; left: 70px; top: 230px; width: 940px; height: 150px; overflow: hidden; }
-  .lt .bar { position: absolute; left: 0; top: 0; width: 18px; height: 150px; background: var(--off); }
-  .lt .box { position: absolute; left: 30px; top: 0; height: 150px; background: var(--navy); border-radius: 0 18px 18px 0; padding: 0 40px 0 34px; box-sizing: border-box; white-space: nowrap; }
-  .lt .ti { font-weight: 700; font-size: 58px; line-height: 1; margin-top: 26px; }
-  .lt .su { font-weight: 500; font-size: 28px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sec); margin-top: 16px; }
+  #heroPB { position: absolute; left: 0; right: 0; top: 830px; text-align: center; font-weight: 800; font-size: 250px; letter-spacing: -0.035em; line-height: 1; white-space: nowrap; opacity: 0; }
+  #heroPB span { display: inline-block; }
+  #heroPB .sp { width: 0.22em; }
   #accent { position: absolute; left: 60px; right: 60px; top: 230px; text-align: center; white-space: nowrap; opacity: 0; }
   #accent .a1 { display: inline-block; font-weight: 700; font-size: 74px; color: var(--off); -webkit-text-stroke: 3px rgba(11,11,13,0.7); paint-order: stroke fill; vertical-align: middle; }
   #accent .a2 { display: inline-block; font-weight: 800; font-size: 112px; line-height: 1; color: var(--ink); background: var(--off); border-radius: 14px; padding: 4px 18px; margin-left: 14px; vertical-align: middle; transform-origin: 50% 50%; }
-  #link { position: absolute; left: 50%; top: 384px; height: 88px; padding: 0 30px 0 34px; border-radius: 999px; background: var(--navy); border: 2px solid var(--line); box-sizing: border-box; display: flex; align-items: center; gap: 18px; font-weight: 800; font-size: 38px; letter-spacing: 0.06em; white-space: nowrap; opacity: 0; }
-  #link svg { width: 40px; height: 40px; }
-  #link .ar { stroke-dasharray: 60; }
+  #dip { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; background: #000; opacity: 0; pointer-events: none; }
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="55.48">
-  <div id="vwrap"><video id="v" class="clip" src="assets/corte_v03.mp4" data-start="0" data-duration="55.48" data-track-index="0" data-has-audio="true" playsinline></video></div>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="56.43">
+  <div id="vwrap">
+    <video id="v" class="clip" src="assets/corte_v05.mp4" data-start="0" data-duration="56.43" data-track-index="0" muted playsinline></video>
+    <div id="hb"><div class="w" id="hbA">ABANDONASTE</div><div class="w" id="hbC">CALMA</div></div>
+    <video id="mt" class="clip" src="assets/matte_gancho.webm" data-start="0.8" data-duration="3.8" data-track-index="3" muted playsinline data-layout-allow-occlusion></video>
+  </div>
 
   <div id="stage">
     <svg id="bgbar" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>
@@ -156,68 +150,64 @@
 
     <div class="scene" id="scA">
       <div class="cal"><div class="dow"><span>LU</span><span>MA</span><span>MI</span><span>JU</span><span>VI</span><span>SÁ</span><span>DO</span></div><div class="days" id="days"></div></div>
-      <div class="note" id="half">/ Mitad de enero</div>
+      <div class="note" id="half">/ Mediados de enero</div>
     </div>
 
     <div class="scene" id="scB">
       <div id="week"></div>
-      <div id="bigday"><div class="n">JUEVES</div><div class="q">?</div></div>
-      <div id="singanas">SIN GANAS</div>
+      <div id="bigday"><div class="n">JUEVES</div><div class="q" id="bdq">?</div><div class="q2" id="bdq2">SIN GANAS</div></div>
     </div>
 
     <div class="scene" id="scC">
-      <div id="num">01<svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg></div>
+      <div id="num"><span class="dg"><div>0</div></span><span class="dg" id="dg2"><div id="dg2in"><div>0</div><div>1</div></div></span><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg></div>
       <div id="pbcard"><div class="t">Plan B</div><div class="s"><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#B7C0CC"/></svg>para tu propósito</div></div>
-      <div class="pill" id="pPrecio" style="left:140px; padding:0 26px;">$<i id="pStrike"></i></div>
-      <div class="pill inv" id="pGratis" style="left:262px;">GRATIS</div>
-      <div class="pill" id="pDia" style="left:500px;">PARA ESE DÍA</div>
+      <div class="pill" id="pPrecio" data-hold style="left:70px; padding:0 34px;">$<i id="pStrike"></i></div>
+      <div class="pill inv" id="pGratis" style="left:70px;">GRATIS</div>
+      <div class="pill" id="pDia" style="left:420px;">PARA ESE DÍA</div>
     </div>
+
+    <div class="scene" id="scDemo"></div>
 
     <div class="scene" id="scD">
       <div id="week1">1 POR SEMANA</div>
-      <div class="sc inv" id="c1" style="left:50px;"><div class="k">01</div><div class="lb" style="opacity:1">PLAN B</div>
-        <svg class="ic" style="opacity:1" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#0B0B0D"/></svg></div>
-      <div class="sc" id="c2" style="left:290px;"><div class="k">02</div>
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#F5F6F8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="32" height="36" rx="5"/><path d="M15 18l4 4 8-8M15 31h18"/></svg></div>
-      <div class="sc" id="c3" style="left:530px;"><div class="k">03</div>
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#F5F6F8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6h10M21 6v12L9 39a3 3 0 0 0 3 4h24a3 3 0 0 0 3-4L27 18V6M14 30h20"/></svg></div>
-      <div class="sc" id="c4" style="left:770px;"><div class="k">04</div>
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#F5F6F8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="14" width="38" height="22" rx="11"/><path d="M15 21v8M11 25h8"/><circle cx="31" cy="23" r="1.6" fill="#F5F6F8"/><circle cx="35" cy="27" r="1.6" fill="#F5F6F8"/></svg></div>
-      <div class="sc" id="c5" style="left:1010px;"><div class="k">…</div></div>
-      <div class="pill inv" id="pLibres" style="left:70px; top:720px;">LIBRES</div>
-      <div class="pill" id="pGratis2" style="left:330px; top:720px;">GRATIS</div>
-      <div id="people"></div>
-    </div>
-
-    <div class="scene" id="scDemo">
-      <div id="appwin"><div id="appin"><video id="dm" class="clip" src="assets/demo_v03.mp4" data-start="22.70" data-duration="18.6" data-track-index="1" muted playsinline></video></div></div>
+      <div id="dots"><i></i><i></i><i></i><i></i><i></i></div>
+      <div id="hc" class="inv"><div class="k" id="hck" data-layout-ignore>01</div>
+        <svg class="ic" id="ic1" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#0B0B0D"/></svg>
+        <svg class="ic" id="ic2" viewBox="0 0 48 48" fill="none" stroke="#F5F6F8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="32" height="36" rx="5"/><path d="M15 18l4 4 8-8M15 31h18"/></svg>
+        <svg class="ic" id="ic3" viewBox="0 0 48 48" fill="none" stroke="#F5F6F8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6h10M21 6v12L9 39a3 3 0 0 0 3 4h24a3 3 0 0 0 3-4L27 18V6M14 30h20"/></svg>
+        <svg class="ic" id="ic4" viewBox="0 0 48 48" fill="none" stroke="#F5F6F8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="14" width="38" height="22" rx="11"/><path d="M15 21v8M11 25h8"/><circle cx="31" cy="23" r="1.4" fill="#F5F6F8"/><circle cx="35" cy="27" r="1.4" fill="#F5F6F8"/></svg>
+        <div class="lb" id="hcl" data-layout-ignore>PLAN B</div></div>
     </div>
 
     <div class="edge"></div>
     <div id="sweep"></div>
   </div>
 
+  <div id="appwin"><div id="appin"><video id="dm" class="clip" src="assets/demo_v05.mp4" data-start="22.70" data-duration="18.6" data-track-index="1" muted playsinline></video></div></div>
 
-  <div id="sheet">
+  <div id="sheet" data-layout-allow-overlap>
     <div class="bind"></div><span class="rg" style="left:58px"></span><span class="rg" style="right:58px"></span>
     <div class="stk">
       <div class="pg" id="pFeb"><div class="fc">FEBRERO<div class="tn" id="tFeb"></div></div></div>
       <div class="pg" id="pEne"><div class="fc">ENERO<div class="tn" id="tEne"></div></div><div class="fc bk"><div class="tn" style="opacity:.1"></div></div></div>
     </div>
   </div>
+  <div id="heroPB"><span id="hpA">Plan</span><span class="sp"></span><span id="hpB">B</span></div>
   <div id="accent"><span class="a1">Este febrero,</span><span class="a2" id="a2">no.</span></div>
 
   <div class="capbox" id="capB"></div>
+  <div id="dip"></div>
 </div>
 
 <script src="./lib/gsap.min.js"></script>
 <script>
 (function () {
-  const D = 55.48;
-  // Tramos del corte v01 que se conservan (en tiempo viejo), medidos en silencios de la voz. Los mismos de cortes.py y mezcla.py.
+  const D = 56.43;
+  // Tramos del corte v01 que se conservan (tiempo viejo), medidos en silencios de la voz. = cortes.py = mezcla_v05.py
   const KEEP = [[0, 32.60], [33.60, 49.00], [49.86, 52.20], [56.64, 60.15], [61.62, 63.25]];
   const oldT = (tn) => { let acc = 0; for (const [a, b] of KEEP) { if (tn <= acc + (b - a)) return a + (tn - acc); acc += b - a; } return KEEP[KEEP.length - 1][1]; };
   const kept = (to) => KEEP.some(([a, b]) => to >= a && to < b);
+  const JOINTS = (() => { let acc = 0; const j = []; KEEP.forEach(([a, b], i) => { acc += b - a; if (i < KEEP.length - 1) j.push(acc); }); return j; })();   // empalmes en tiempo nuevo
   const clamp01 = (x) => Math.max(0, Math.min(1, x));
   const mix = (a, b, p) => a + (b - a) * p;
   const prog = (t, a, d) => clamp01((t - a) / d);
@@ -226,47 +216,44 @@
   const easeIn = (p) => p * p * p;
   const expoOut = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
   const backOut = (p) => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const backOut2 = (p) => { const c1 = 2.2, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
   const $ = (id) => document.getElementById(id);
   const CHECK = (c) => `<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  // aparición con resorte (posición/escala) y opacidad sin rebote
+  // aparición con resorte (escala) y opacidad sin rebote
   const popIn = (el, t, t0, from = 0.7, base = "") => {
     const a = clamp01(backOut(prog(t, t0 - 0.06, 0.42)));
     el.style.opacity = prog(t, t0 - 0.06, 0.12).toFixed(3);
     el.style.transform = `${base} scale(${(t >= t0 - 0.06 ? mix(from, 1, a) : from).toFixed(4)})`;
   };
+  // cambio de estado de texto/icono: el que sale se desenfoca y baja; el que entra sube y se enfoca (text-state-swap, icon-swap)
+  const swapOut = (el, t, t0, d = 0.2) => { const p = easeIn(prog(t, t0, d)); el.style.opacity = (1 - p).toFixed(3); el.style.filter = `blur(${(7 * p).toFixed(1)}px)`; el.style.transform = `scale(${mix(1, 0.86, p).toFixed(3)})`; };
+  const swapIn = (el, t, t0, d = 0.3) => { const p = expoOut(prog(t, t0, d)); el.style.opacity = prog(t, t0, 0.1).toFixed(3); el.style.filter = `blur(${(7 * (1 - p)).toFixed(1)}px)`; el.style.transform = `scale(${mix(1.14, 1, p).toFixed(3)})`; };
 
   // ── Palabras del corte [texto, inicio, fin] (corte_palabras.json)
   const W = [["Es", 0.16, 0.32], ["febrero", 0.32, 0.8], ["y", 0.88, 1.04], ["ya", 1.04, 1.28], ["abandonaste", 1.28, 1.84], ["tu", 1.84, 2.0], ["propósito", 2.0, 2.4], ["de", 2.4, 2.56], ["año", 2.56, 2.8], ["nuevo.", 2.8, 3.12], ["Calma.", 3.26, 3.74], ["Todavía", 3.82, 4.3], ["no.", 4.3, 4.62], ["Pero", 4.66, 4.92], ["para", 4.92, 5.18], ["mediados", 5.18, 5.69], ["de", 5.69, 5.82], ["enero", 5.82, 6.15], ["ya", 6.15, 6.28], ["la", 6.28, 6.41], ["mitad", 6.41, 6.73], ["hemos", 6.73, 7.05], ["tirado", 7.05, 7.44], ["la", 7.44, 7.57], ["toalla.", 7.57, 8.02], ["Y", 8.23, 8.47], ["la", 8.63, 8.79], ["mayoría", 8.79, 9.27], ["no", 9.27, 9.43], ["piensa", 9.43, 9.75], ["en", 9.83, 9.99], ["qué", 9.99, 10.15], ["va", 10.23, 10.31], ["a", 10.31, 10.39], ["hacer", 10.47, 10.63], ["ese", 11.06, 11.29], ["día", 11.29, 11.53], ["que", 11.53, 11.77], ["no", 11.77, 11.92], ["tiene", 11.92, 12.31], ["ganas.", 12.31, 12.79], ["Soy", 12.79, 13.02], ["cerobytes", 13.02, 13.73], ["y", 13.73, 13.8], ["por", 13.8, 14.04], ["eso", 14.04, 14.28], ["hice", 14.28, 14.59], ["Plan", 14.59, 14.9], ["B.", 14.9, 15.06], ["Esta", 15.23, 15.39], ["es", 15.47, 15.63], ["una", 15.63, 15.79], ["nueva", 15.79, 16.11], ["aplicación", 16.11, 16.83], ["gratis", 17.24, 17.88], ["para", 18.04, 18.28], ["justamente", 18.28, 18.84], ["planear", 18.84, 19.32], ["ese", 19.32, 19.56], ["día", 19.64, 19.8], ["en", 19.8, 19.96], ["el", 19.96, 20.04], ["que", 20.04, 20.2], ["no", 20.2, 20.36], ["tenemos", 20.36, 20.76], ["ganas.", 20.76, 21.08], ["Es", 21.32, 21.48], ["la", 21.48, 21.64], ["primera", 21.64, 22.04], ["de", 22.04, 22.28], ["esta", 22.28, 22.52], ["serie.", 22.52, 22.92], ["Aquí", 23.0, 23.4], ["simplemente", 23.4, 23.8], ["eliges", 23.8, 24.28], ["un", 24.36, 24.52], ["propósito,", 24.52, 24.92], ["la", 24.92, 25.08], ["app", 25.08, 25.24], ["te", 25.4, 25.56], ["lleva", 25.56, 25.88], ["hasta", 25.88, 26.12], ["febrero", 26.12, 26.76], ["y", 26.8, 26.87], ["eliges", 26.87, 27.3], ["por", 27.3, 27.51], ["qué", 27.51, 27.72], ["lo", 27.72, 27.87], ["abandonaste.", 27.87, 28.72], ["Por", 28.96, 29.12], ["ejemplo:", 29.12, 29.6], ["no", 29.6, 29.76], ["tuve", 29.76, 30.16], ["tiempo.", 30.16, 30.64], ["Y", 30.7, 30.78], ["con", 31.02, 31.26], ["esto", 31.26, 31.42], ["armas", 31.5, 31.98], ["un", 31.98, 32.14], ["plan.", 32.14, 32.54], ["¿Como", 32.76, 32.92], ["cuál?", 33.08, 33.56], ["Si", 33.6, 33.92], ["llego", 33.92, 34.32], ["a", 34.32, 34.4], ["casa", 34.4, 34.72], ["después", 34.72, 34.96], ["de", 34.96, 35.04], ["las", 35.04, 35.2], ["8,", 35.2, 35.68], ["hago", 35.68, 36.0], ["cinco", 36.0, 36.32], ["minutos", 36.32, 36.56], ["de", 36.56, 36.64], ["estiramiento.", 36.64, 37.52], ["Con", 37.54, 37.78], ["esto", 37.78, 38.02], ["te", 38.02, 38.18], ["llevas", 38.18, 38.58], ["un", 38.58, 38.66], ["recordatorio", 38.66, 39.3], ["en", 39.3, 39.38], ["tu", 39.38, 39.54], ["calendario", 39.54, 40.18], ["y", 40.18, 40.34], ["tu", 40.34, 40.5], ["plan", 40.5, 40.66], ["como", 40.82, 41.06], ["fondo", 41.06, 41.38], ["de", 41.38, 41.46], ["pantalla.", 41.46, 41.94], ["En", 41.97, 42.09], ["esta", 42.09, 42.34], ["nueva", 42.34, 42.64], ["serie", 42.64, 42.94], ["de", 42.94, 43.06], ["videos", 43.06, 43.43], ["voy", 43.43, 43.61], ["a", 43.61, 43.67], ["intentar", 43.67, 44.16], ["crear", 44.16, 44.47], ["una", 44.47, 44.65], ["miniaplicación", 44.65, 45.5], ["a", 45.5, 45.56], ["la", 45.56, 45.68], ["semana", 45.68, 46.05], ["para", 46.05, 46.29], ["productividad,", 46.66, 47.86], ["ciencia,", 47.86, 48.5], ["eh,", 49.22, 49.80], ["minijuegos,", 49.90, 50.73], ["cualquier", 51.06, 51.54], ["ámbito.", 51.62, 52.1], ["Y", 52.44, 52.76], ["que", 52.92, 53.24], ["pues", 53.24, 53.48], ["sean", 53.64, 54.04], ["libres", 54.04, 54.52], ["y", 54.52, 54.6], ["gratis", 54.6, 55.08], ["para", 55.08, 55.24], ["cualquier", 55.24, 55.56], ["persona", 55.56, 55.8], ["que", 55.8, 55.96], ["las", 55.96, 56.12], ["necesite.", 56.12, 56.52], ["Así", 56.6, 56.84], ["que", 56.84, 57.0], ["no", 57.0, 57.16], ["esperes", 57.16, 57.64], ["más,", 57.64, 57.88], ["arma", 57.88, 58.28], ["tu", 58.28, 58.36], ["plan", 58.36, 58.44], ["B", 58.6, 58.76], ["antes", 58.84, 59.0], ["de", 59.0, 59.08], ["que", 59.08, 59.16], ["llegue", 59.16, 59.4], ["febrero.", 59.56, 60.12], ["Y", 60.2, 60.52], ["me", 60.52, 60.68], ["dices", 60.68, 61.08], ["qué", 61.16, 61.24], ["tal.", 61.32, 61.48], ["El", 61.64, 61.8], ["link", 61.8, 62.12], ["está", 62.12, 62.28], ["en", 62.28, 62.36], ["mi", 62.36, 62.52], ["perfil.", 62.52, 63.16]];
 
   // ── Modos (en tiempo viejo)
-  const STAGES = [[4.66, 12.79], [16.90, 56.70]];   // ESCENARIO: el segundo tramo es continuo (solución, demo y serie)
+  const STAGES = [[4.50, 12.79], [16.90, 56.70]];   // ESCENARIO: el segundo tramo es continuo (solución, demo y serie)
   const SCENES = [
     { id: "scA", from: 4.66,  title: "El problema" },
     { id: "scB", from: 8.23,  title: "¿Y ese día?" },
     { id: "scC", from: 16.90, title: "La solución" },
     { id: "scDemo", from: 22.70, title: "Cómo funciona" },
-    { id: "scD", from: 42.10, title: "La serie" },
+    { id: "scD", from: 41.20, title: "La serie" },
   ];
   // Demo en la ventana: planos por grupo de interfaz (tiempo viejo en que empieza el movimiento, centro vertical
-  // en px de la maqueta 1080×1920, zoom). Medidos sobre MG-06/MG-07 v04. Zoom ≤ 0,9 para no cortar los campos.
+  // en px de la maqueta 1080×1920, zoom). Zoom ≤ 0,9 para no cortar los campos; el «detalle» lo hacen los insertos.
   const FRAMES = [
-    [22.70, 800, 0.74],   // paso 1: pregunta, campo y sugerencias
-    [23.55, 725, 0.90],   // se acerca al campo mientras escribes
-    [24.65, 1060, 0.82],  // campo, sugerencias y «Siguiente»
-    [25.35, 640, 0.90],   // paso 2: mes y pregunta («febrero»)
-    [26.75, 940, 0.72],   // pregunta y las seis tarjetas
-    [29.20, 1010, 0.90],  // se acerca a la selección («no tuve tiempo»)
-    [31.70, 745, 0.78],   // paso 3: título y los dos campos
-    [33.70, 690, 0.90],   // «Si…» mientras se escribe
-    [35.55, 810, 0.90],   // «entonces…» mientras se escribe
-    [37.10, 660, 0.87],   // resultado: sello y frase
-    [39.45, 1430, 0.74],  // «Recuérdamelo» completo
-    [40.95, 770, 0.60],   // pantalla de bloqueo completa
+    [22.70, 800, 0.74], [23.55, 725, 0.90], [24.65, 1060, 0.82], [25.35, 640, 0.90], [26.75, 940, 0.72], [29.20, 1010, 0.90],
+    [31.70, 745, 0.78], [33.70, 690, 0.90], [35.55, 810, 0.90], [37.10, 660, 0.87], [39.45, 1430, 0.74], [40.95, 770, 0.60],
   ];
   const MOVE = 0.55;
+  // Encuadre a cámara: alterna 100 % / 110 % por frase y en cada empalme de KEEP (el salto parece intencional)
+  const ZP = [[0, 1.0, 0.01], [3.20, 1.10, 0.35], [3.82, 1.0, 0.25], [12.79, 1.08, 0.30], [15.23, 1.0, 0.30], [33.60, 1.10, 0.001], [49.86, 1.0, 0.001], [56.64, 1.10, 0.001], [59.56, 1.0, 0.2], [61.62, 1.10, 0.001]];
+  const zAt = (t) => { let z = 1, i = 0; for (; i < ZP.length && t >= ZP[i][0]; i++); if (i === 0) return 1; const [t0, z1, d] = ZP[i - 1], z0 = i > 1 ? ZP[i - 2][1] : 1; return mix(z0, z1, easeIO(prog(t, t0, d))); };
 
-  // ── Subtítulos: grupos de 2–3 palabras; corte en puntuación o pausa ≥ 0,15 s; ninguno < 0,4 s
-  const GR = [];   // grupos de 2–4 palabras, ≥ 0,45 s cuando se puede
+  // ── Subtítulos: grupos de 2–4 palabras; corte en puntuación o pausa ≥ 0,25 s; nada en pantalla < 0,4 s
+  const GR = [];
   const W2 = W.filter((w) => kept(w[1]));
   { let g = [];
     W2.forEach((w, i) => {
@@ -275,9 +262,14 @@
       const dur = w[2] - g[0][1];
       if (!nx || (punct && dur >= 0.45) || g.length >= 4 || (nx[1] - w[2] >= 0.25 && dur >= 0.3) || (g.length >= 3 && dur >= 0.7)) { GR.push(g); g = []; }
     });
-    // una palabra suelta que dura poco se une al grupo anterior (nada en pantalla < 0,4 s)
     for (let i = GR.length - 1; i > 0; i--) { const g = GR[i], p = GR[i - 1]; if (g.length === 1 && g[0][2] - g[0][1] < 0.5 && p.length < 4) { p.push(...g); GR.splice(i, 1); } }
-    GR.forEach((g, i) => { const nx = GR[i + 1]; g.end = nx ? Math.min(nx[0][1], g[g.length - 1][2] + 0.6) : D - 0.05; if (g.end - g[0][1] < 0.4 && nx) g.end = Math.min(nx[0][1], g[0][1] + 0.4); });
+    { const last = GR.flat().slice(-5);   // la última frase («link está en mi perfil») es un solo grupo y dura ≥ 2 s
+      while (GR.length && GR[GR.length - 1][0][1] >= last[0][1]) GR.pop();
+      if (GR.length) { const g = GR[GR.length - 1]; while (g.length && g[g.length - 1][1] >= last[0][1]) g.pop(); if (!g.length) GR.pop(); }
+      // lo que quede suelto («El») se une al grupo anterior para no dejar una palabra < 0,4 s en pantalla
+      if (GR.length > 1 && GR[GR.length - 1].length === 1 && GR[GR.length - 2].length < 4) { const x = GR.pop(); GR[GR.length - 1].push(...x); }
+      GR.push(last); }
+    GR.forEach((g, i) => { const nx = GR[i + 1]; g.end = nx ? Math.min(nx[0][1], g[g.length - 1][2] + 0.6) : 63.25 + 0.7; if (g.end - g[0][1] < 0.4 && nx) g.end = Math.min(nx[0][1], g[0][1] + 0.4); });
   }
   const clean = (s) => s.replace(/[.,:;!?¿¡]/g, "");
 
@@ -286,20 +278,16 @@
   for (let i = 0; i < 4; i++) { const b = document.createElement("div"); b.className = "d blank"; days.appendChild(b); }   // enero de 2027 empieza en viernes
   for (let d = 1; d <= 31; d++) { const c = document.createElement("div"); c.className = "d"; const i = document.createElement("i"); i.innerHTML = CHECK("#0B0B0D"); c.appendChild(i); days.appendChild(c); dayCells.push(c); }
   const week = $("week"), wcells = [];
-  ["LU", "MA", "MI", "JU", "VI", "SÁ", "DO"].forEach((n, k) => { const c = document.createElement("div"); c.className = "wd"; c.innerHTML = `<div class="n">${n}</div><i>${CHECK("#F5F6F8")}</i>`; week.appendChild(c); wcells.push(c); });
-  const PERSON = '<svg viewBox="0 0 32 42" fill="none" stroke="#F5F6F8" stroke-width="3" stroke-linecap="round"><circle cx="16" cy="10" r="7"/><path d="M3 40c0-8 6-14 13-14s13 6 13 14"/></svg>';
-  $("people").innerHTML = PERSON + PERSON + PERSON;
-  const people = [...$("people").children];
-  const capB = $("capB");
+  ["LU", "MA", "MI", "JU", "VI", "SÁ", "DO"].forEach((n) => { const c = document.createElement("div"); c.className = "wd"; c.innerHTML = `<div class="n">${n}</div><i>${CHECK("#F5F6F8")}</i>`; week.appendChild(c); wcells.push(c); });
+  const capB = $("capB"), dots = [...$("dots").children];
   let shownB = -2;
 
   const amount = (t, list, inD = 0.55, outD = 0.5) => { let a = 0; for (const [s, e] of list) a = Math.max(a, Math.min(easeIO(prog(t, s - 0.1, inD)), 1 - easeIO(prog(t, e - 0.1, outD)))); return a; };
 
   function captions(t, el, y) {
     let gi = -1; GR.forEach((g, i) => { if (t >= g[0][1] - 0.05 && t < g.end) gi = i; });
-    const key = gi;
-    if (key !== shownB) { el.innerHTML = gi < 0 ? "" : GR[gi].map((w) => `<span>${clean(w[0])}</span>`).join(""); shownB = key; }
-    // ancho estimado (mayúsculas ExtraBold ≈ 0,72 em por letra + relleno de cada palabra + separaciones): si no cabe en 980 px, se encoge
+    if (gi !== shownB) { el.innerHTML = gi < 0 ? "" : GR[gi].map((w) => `<span>${clean(w[0])}</span>`).join(""); shownB = gi; }
+    // ancho estimado (mayúsculas ExtraBold ≈ 0,72 em por letra + relleno + separaciones): si no cabe en 980 px, se encoge
     const est = gi < 0 ? 0 : GR[gi].reduce((a, w) => a + clean(w[0]).length * 0.72 * 66 + 24, 0) + 14 * (GR[gi].length - 1);
     const fit = est > 980 ? 980 / est : 1;
     if (gi < 0) { el.style.opacity = 0; return; }
@@ -310,23 +298,44 @@
     el.style.transform = `translateY(${(y + 12 * (1 - ci)).toFixed(1)}px) scale(${fit.toFixed(4)})`;
   }
 
+  // ── Ventana de la demo: rectángulos [left, top, ancho, alto, radio]
+  const R_PB = [70, 360, 640, 300, 34], R_FULL = [0, 0, 1080, 1920, 0], R_HC = [300, 400, 480, 440, 34];
+  const lerpR = (a, b, p) => a.map((v, i) => mix(v, b[i], p));
+
   function render(tn) {
     const t = oldT(tn);
-    // ── Modo escenario: el panel baja y la toma se desplaza 700 px
+    // ── Modo escenario: el panel baja y la toma se desplaza 700 px; al entrar y salir, desenfoque (cambio de fondo)
     const s = amount(t, STAGES);
+    const stageMove = Math.sin(Math.PI * s);
     $("stage").style.transform = `translateY(${(-1000 * (1 - s)).toFixed(2)}px)`;
-    // punch-in de «Calma» (3,26) que se suelta al entrar el escenario
-    const z = 1 + 0.1 * easeIO(prog(t, 3.2, 0.35)) * (1 - easeIO(prog(t, 4.56, 0.5)));
-    $("vwrap").style.transform = `translateY(${(700 * s).toFixed(2)}px) scale(${z.toFixed(4)})`;
+    const z = zAt(t);
+    let shake = 0;
+    if (t >= 59.56 && t < 60.0) shake = 10 * Math.exp(-14 * (t - 59.56)) * Math.sin(40 * (t - 59.56));   // golpe 3 de 3, en «no.»
+    $("vwrap").style.transform = `translateY(${(700 * s + shake).toFixed(2)}px) scale(${z.toFixed(4)})`;
+    $("vwrap").style.filter = stageMove > 0.02 ? `blur(${(7 * stageMove).toFixed(1)}px)` : "none";
 
     // Firma de color del gancho: desatura y enfría en «abandonaste» (8 fotogramas); vuelve de golpe en «todavía»
     const g = prog(t, 1.28, 0.27) * (t < 3.82 ? 1 : 0);
-    $("v").style.filter = g > 0 ? `saturate(${mix(1, 0.35, g).toFixed(3)}) brightness(${mix(1, 0.9, g).toFixed(3)}) hue-rotate(${(-10 * g).toFixed(1)}deg)` : "none";
+    const flt = g > 0 ? `saturate(${mix(1, 0.35, g).toFixed(3)}) brightness(${mix(1, 0.9, g).toFixed(3)}) hue-rotate(${(-10 * g).toFixed(1)}deg)` : "none";
+    $("v").style.filter = flt; $("mt").style.filter = flt;
 
-    // ── Tramos del escenario con cortina diagonal
+    // ── Palabras protagonistas detrás de la persona (ABANDONASTE y CALMA): texto entre la toma y el recorte
+    const hbA = prog(t, 1.18, 0.1) * (1 - prog(t, 2.45, 0.12)), hbC = prog(t, 3.20, 0.1) * (1 - prog(t, 3.78, 0.1));
+    const slam = (el, t0, size, y, dir) => {
+      const a = clamp01(backOut2(prog(t, t0, 0.24)));
+      el.style.fontSize = size + "px"; el.style.top = y + "px";
+      el.style.transform = `translateX(${(dir * 160 * (1 - expoOut(prog(t, t0, 0.2)))).toFixed(1)}px) scale(${mix(1.5, 1, a).toFixed(3)})`;
+    };
+    $("hbA").style.opacity = hbA.toFixed(3); slam($("hbA"), 1.20, 118, 420, 0);
+    $("hbC").style.opacity = hbC.toFixed(3); slam($("hbC"), 3.22, 250, 470, -1);
+    $("hb").style.opacity = (hbA + hbC > 0 ? 1 : 0);
+    $("mt").style.opacity = (hbA + hbC > 0 ? 1 : 0);
+
+    // ── Cabecera con contador «n / 5» y cortina diagonal entre tramos del escenario
     let cur = -1; SCENES.forEach((sc, i) => { if (t >= sc.from) cur = i; });
-    let swi = -1; SCENES.forEach((sc, i) => { if (i > 0 && t >= sc.from - 0.25 && t < sc.from + 0.25 && s > 0.99) swi = i; });
+    let swi = -1; SCENES.forEach((sc, i) => { if (i === 1 && t >= sc.from - 0.25 && t < sc.from + 0.25 && s > 0.99) swi = i; });   // solo la cortina «/» entre A y B
     SCENES.forEach((sc, i) => { const el = $(sc.id); el.style.clipPath = "none"; el.style.opacity = i === cur ? 1 : 0; });
+    const hdrTxt = (i) => `<b>${i + 1} / ${SCENES.length}</b>${SCENES[i].title}`;
     if (swi > 0) {
       const p = easeIO(prog(t, SCENES[swi].from - 0.25, 0.5)), tx = mix(-320, 1180, p), c = tx + 110, k = 0.554;
       $("sweep").style.opacity = 1; $("sweep").style.transform = `translateX(${tx.toFixed(1)}px) skewX(-29deg)`;
@@ -335,12 +344,14 @@
       nw.style.opacity = 1; od.style.opacity = 1;
       nw.style.clipPath = `polygon(-2000px -60px, ${top.toFixed(1)}px -60px, ${bot.toFixed(1)}px 1060px, -2000px 1060px)`;
       od.style.clipPath = `polygon(${top.toFixed(1)}px -60px, 4000px -60px, 4000px 1060px, ${bot.toFixed(1)}px 1060px)`;
-      $("hdrL").textContent = SCENES[p < 0.35 ? swi - 1 : swi].title;
-    } else { $("sweep").style.opacity = 0; if (cur >= 0) $("hdrL").textContent = SCENES[cur].title; }
+      $("hdrL").innerHTML = hdrTxt(p < 0.35 ? swi - 1 : swi);
+    } else { $("sweep").style.opacity = 0; if (cur >= 0) $("hdrL").innerHTML = hdrTxt(cur); }
     const hdrIn = expoOut(prog(t, SCENES[Math.max(cur, 0)].from, 0.45));
     $("hdrL").style.transform = `translateX(${(-30 * (1 - hdrIn)).toFixed(1)}px)`; $("hdrL").style.opacity = hdrIn.toFixed(3);
+    // la tarjeta Plan B no se funde con un corte: se ensancha hasta ser la ventana de la demo (card-resize) y la escena se apaga detrás
+    if (t >= 22.70) $("scC").style.opacity = (1 - prog(t, 22.70, 0.3)).toFixed(3);
 
-    // ── A · enero: días 1–14 marcados cada vez más rápido; se para a mitad; las marcas caen en «tirado la toalla»
+    // ── A · enero: días 1–14 marcados cada vez más rápido; se para a mediados; las marcas caen en «tirado la toalla»
     const markAt = (i) => 5.18 + 1.15 * (1 - Math.pow(1 - i / 14, 1.6));   // acelera (R2)
     const fall = (i) => easeIn(prog(t, 7.05 + 0.035 * (13 - i), 0.45));
     dayCells.forEach((c, i) => {
@@ -354,81 +365,94 @@
     const hf = expoOut(prog(t, 6.41, 0.45));
     $("half").style.opacity = hf.toFixed(3); $("half").style.transform = `translateX(${(-24 * (1 - hf)).toFixed(1)}px)`;
 
-    // ── B · la semana se marca… menos el jueves; el jueves crece en «día» y dice SIN GANAS
+    // ── B · la semana se marca… menos el jueves; el jueves crece en «día» y se ensancha en «ganas» (SIN GANAS)
     wcells.forEach((c, k) => {
-      const tin = 8.5 + 0.09 * k, a = expoOut(prog(t, tin, 0.4));
-      c.style.opacity = a.toFixed(3); c.style.transform = `translateY(${(30 * (1 - a)).toFixed(1)}px)`;
-      const chk = k === 3 ? 0 : prog(t, 9.3 + 0.12 * k, 0.1);
-      c.querySelector("i").style.opacity = chk.toFixed(3);
-      if (k !== 3) c.style.opacity = (a * (1 - 0.75 * easeOut(prog(t, 11.2, 0.3)))).toFixed(3);
+      const a = expoOut(prog(t, 8.5 + 0.09 * k, 0.4));
+      c.style.transform = `translateY(${(30 * (1 - a)).toFixed(1)}px)`;
+      c.querySelector("i").style.opacity = (k === 3 ? 0 : prog(t, 9.3 + 0.12 * k, 0.1)).toFixed(3);
+      c.style.opacity = (k === 3 ? (1 - prog(t, 11.24, 0.1)) * a : a * (1 - 0.75 * easeOut(prog(t, 11.2, 0.3)))).toFixed(3);
     });
-    const bd = clamp01(backOut(prog(t, 11.24, 0.45)));
+    const bd = clamp01(backOut(prog(t, 11.24, 0.45))), ex = easeIO(prog(t, 12.22, 0.45));
     $("bigday").style.opacity = prog(t, 11.24, 0.1).toFixed(3);
     $("bigday").style.transform = `scale(${(t >= 11.24 ? mix(0.5, 1, bd) : 0.5).toFixed(4)})`;
-    wcells[3].style.opacity = (1 - prog(t, 11.24, 0.1)) * expoOut(prog(t, 8.77, 0.4));
-    popIn($("singanas"), t, 12.31, 0.6, "translateX(-50%)");
+    $("bigday").style.width = mix(400, 880, ex).toFixed(1) + "px"; $("bigday").style.left = mix(340, 100, ex).toFixed(1) + "px";
+    swapOut($("bdq"), t, 12.28, 0.18); swapIn($("bdq2"), t, 12.31, 0.32);
 
-    // ── C · Plan B: tarjeta (giro), fichas y contador «01 /»
+    // ── C · «Plan B» llena el cuadro a cámara (lead-word); en el escenario: tarjeta, $ → GRATIS, PARA ESE DÍA y «01 /»
+    const hp = $("heroPB"), hpIn = expoOut(prog(t, 14.59, 0.55)), hpB = expoOut(prog(t, 14.90, 0.4));
+    hp.style.opacity = (prog(t, 14.59, 0.08) * (1 - prog(t, 16.35, 0.3))).toFixed(3);
+    $("hpA").style.transform = `scale(${mix(1.9, 1, hpIn).toFixed(3)})`;
+    $("hpB").style.opacity = prog(t, 14.90, 0.1).toFixed(3); $("hpB").style.transform = `translateX(${(120 * (1 - hpB)).toFixed(1)}px)`;
+    hp.style.filter = `blur(${(10 * prog(t, 16.35, 0.3)).toFixed(1)}px)`;
     const fl = easeOut(prog(t, 16.95, 0.6));
     $("pbcard").style.opacity = prog(t, 16.95, 0.15).toFixed(3);
     $("pbcard").style.transform = `perspective(1400px) rotateX(${mix(-75, 0, fl).toFixed(2)}deg)`;
-    popIn($("pPrecio"), t, 16.95, 0.7); $("pStrike").style.transform = `rotate(-28deg) scaleX(${easeOut(prog(t, 17.10, 0.22)).toFixed(3)})`;
-    if (t >= 17.3) $("pPrecio").style.opacity = mix(1, 0.45, easeOut(prog(t, 17.3, 0.3))).toFixed(3);
-    popIn($("pGratis"), t, 17.24); popIn($("pDia"), t, 18.84);
-    const nm = expoOut(prog(t, 21.64, 0.5));
+    popIn($("pPrecio"), t, 16.95, 0.7); $("pStrike").style.transform = `rotate(-24deg) scaleX(${easeOut(prog(t, 17.0, 0.2)).toFixed(3)})`;
+    if (t >= 17.2) { const p = easeIn(prog(t, 17.2, 0.22)); $("pPrecio").style.opacity = (1 - p).toFixed(3); $("pPrecio").style.filter = `blur(${(7 * p).toFixed(1)}px)`; }
+    if (t < 17.1) $("pGratis").style.opacity = 0; else swapIn($("pGratis"), t, 17.24, 0.3);
+    popIn($("pDia"), t, 18.84);
+    const nm = expoOut(prog(t, 21.40, 0.4)), roll = easeIO(prog(t, 21.64, 0.4));
     $("num").style.opacity = nm.toFixed(3); $("num").style.transform = `translateX(${(40 * (1 - nm)).toFixed(1)}px)`;
+    $("dg2in").style.transform = `translateY(${(-150 * roll).toFixed(1)}px)`;
 
-    // ── D · la serie (congelada en 52,20: lo posterior está recortado)
+    // ── D · la serie: una tarjeta protagonista por categoría (se congela en 52,20: lo posterior está recortado)
     { const t = Math.min(oldT(tn), 52.20);
-    const c1 = expoOut(prog(t, 42.15, 0.5));
-    $("c1").style.opacity = c1.toFixed(3); $("c1").style.transform = `scale(${mix(1.6, 1, c1).toFixed(4)}) translateY(${(-60 * (1 - c1)).toFixed(1)}px)`;
-    const away = easeIO(prog(t, 51.06, 0.7));   // «cualquier ámbito»: la fila se aleja y se ve que sigue
-    ["c2", "c3", "c4", "c5"].forEach((id, k) => {
-      const t0 = k < 3 ? 44.65 + 0.16 * k : 51.06;
-      const a = clamp01(backOut(prog(t, t0, 0.42)));
-      $(id).style.opacity = prog(t, t0, 0.12).toFixed(3);
-      $(id).style.transform = `translateY(${(40 * (1 - a)).toFixed(1)}px)`;
-    });
-    [["c2", 46.66], ["c3", 47.86], ["c4", 49.92]].forEach(([id, t0]) => {
-      const a = clamp01(backOut(prog(t, t0 - 0.05, 0.4)));
-      const ic = $(id).querySelector(".ic");
-      ic.style.opacity = prog(t, t0 - 0.05, 0.1).toFixed(3); ic.style.transform = `scale(${(t >= t0 - 0.05 ? mix(0.4, 1, a) : 0.4).toFixed(3)})`;
-      $(id).style.borderColor = t >= t0 - 0.05 ? "rgba(245,246,248,0.6)" : "";
-    });
-    const row = ["c1", "c2", "c3", "c4", "c5"];
-    row.forEach((id) => { $(id).style.marginLeft = `${(-170 * away).toFixed(1)}px`; });
-    popIn($("week1"), t, 44.65, 0.7);
-    popIn($("pLibres"), t, 54.04); popIn($("pGratis2"), t, 54.60);
-    people.forEach((p, k) => { const a = clamp01(backOut(prog(t, 55.24 + 0.14 * k, 0.4))); p.style.opacity = prog(t, 55.24 + 0.14 * k, 0.1).toFixed(3); p.style.transform = `translateY(${(30 * (1 - a)).toFixed(1)}px)`; });
+      const hcIn = t >= 41.30 ? 1 : 0;
+      const away = easeIO(prog(t, 51.06, 0.7));   // «cualquier ámbito»: la tarjeta se aleja y la fila crece
+      $("hc").style.opacity = hcIn;
+      $("hc").style.transform = `translateY(${(-70 * away).toFixed(1)}px) scale(${mix(1, 0.62, away).toFixed(3)})`;
+      const st = t < 46.66 ? 1 : t < 47.86 ? 2 : t < 49.90 ? 3 : 4;
+      const tt = [0, 41.30, 46.66, 47.86, 49.90][st];
+      const names = [null, "PLAN B", "PRODUCTIVIDAD", "CIENCIA", "MINIJUEGOS"];
+      $("hcl").textContent = names[st]; $("hck").textContent = "0" + st;
+      $("hc").className = st === 1 ? "inv" : "";
+      $("hck").style.color = st === 1 ? "#0B0B0D" : "#F5F6F8"; $("hcl").style.color = st === 1 ? "#0B0B0D" : "#F5F6F8";
+      [1, 2, 3, 4].forEach((k) => { const el = $("ic" + k); if (k === st) { if (st === 1) { el.style.opacity = 1; el.style.filter = "none"; el.style.transform = "none"; } else swapIn(el, t, tt, 0.3); } else el.style.opacity = 0; });
+      $("hcl").style.opacity = ((st === 1 ? 1 : prog(t, tt + 0.08, 0.2)) * (1 - clamp01(away * 2))).toFixed(3); $("hck").style.opacity = (1 - clamp01(away * 2)).toFixed(3);
+      popIn($("week1"), t, 44.65, 0.7);
+      dots.forEach((d, k) => { const on = k < st; d.style.background = on ? "#F5F6F8" : "transparent"; d.style.borderColor = on ? "#F5F6F8" : "rgba(245,246,248,0.22)"; });
+      $("dots").style.opacity = hcIn;
+      $("dots").style.transform = `translate(${(-298 * away).toFixed(1)}px, ${(420 * away).toFixed(1)}px) scale(${mix(1, 2.4, away).toFixed(3)})`;
     }
 
-    // ── Demo en la ventana del escenario: la cámara sigue el paso activo
-    let cy = FRAMES[0][1], zs = FRAMES[0][2];
-    for (let i = 1; i < FRAMES.length; i++) {
-      const [ta, ya, sa] = FRAMES[i - 1], [tb, yb, sb] = FRAMES[i];
-      if (t >= tb + MOVE) { cy = yb; zs = sb; continue; }
-      if (t >= tb) { const q = easeIO(prog(t, tb, MOVE)); cy = mix(ya, yb, q); zs = mix(sa, sb, q); } else { cy = ya; zs = sa; }
-      break;
-    }
-    const winH = 520 / zs;
-    const top = Math.max(0, Math.min(1920 - winH, cy - winH / 2));
-    // la ventana se ajusta al ancho de la interfaz cuando el plano se aleja (sin franjas a los lados)
-    const ww = Math.min(960, 1080 * zs);
-    $("appwin").style.width = ww.toFixed(1) + "px"; $("appwin").style.left = ((1080 - ww) / 2).toFixed(1) + "px";
-    $("appin").style.transform = `translate(${((ww - 1080 * zs) / 2).toFixed(1)}px, ${(-top * zs).toFixed(1)}px) scale(${zs.toFixed(4)})`;
-    $("appwin").style.background = t >= 41.0 ? "#171421" : "#F7F5F0";
-    // la ventana aparece cuando la maqueta ya terminó su propia entrada (tarjeta que se expande)
-    const wIn = expoOut(prog(t, 23.10, 0.45));
-    $("appwin").style.transform = `translateY(${(40 * (1 - wIn)).toFixed(1)}px)`;
-    $("appwin").style.opacity = prog(t, 23.10, 0.15).toFixed(3);
+    // ── Ventana de la demo: se ensancha desde la tarjeta Plan B, sigue el paso activo, hace dos insertos a pantalla
+    //    completa (toque en «No tuve tiempo» y sello) y se encoge hasta la tarjeta «01» de la serie (llevar al otro lado)
+    let ins = 0;
+    if (t >= 22.70 && t < 41.60) {
+      let cy = FRAMES[0][1], zs = FRAMES[0][2];
+      for (let i = 1; i < FRAMES.length; i++) {
+        const [ta, ya, sa] = FRAMES[i - 1], [tb, yb, sb] = FRAMES[i];
+        if (t >= tb + MOVE) { cy = yb; zs = sb; continue; }
+        if (t >= tb) { const q = easeIO(prog(t, tb, MOVE)); cy = mix(ya, yb, q); zs = mix(sa, sb, q); } else { cy = ya; zs = sa; }
+        break;
+      }
+      const ww0 = Math.min(960, 1080 * zs);
+      const base = [(1080 - ww0) / 2, 330, ww0, 520, 28];
+      const pA = easeIO(prog(t, 22.70, 0.55));
+      let R = lerpR(R_PB, base, pA), m = 1 - pA;
+      const i1 = easeIO(prog(t, 29.45, 0.30)) * (1 - easeIO(prog(t, 30.95, 0.35)));
+      const i2 = easeIO(prog(t, 37.40, 0.30)) * (1 - easeIO(prog(t, 38.95, 0.35)));
+      ins = Math.max(i1, i2);
+      R = lerpR(R, R_FULL, ins); m = Math.max(m, ins);
+      const q = easeIO(prog(t, 40.97, 0.43));
+      R = lerpR(R, R_HC, q); m = Math.max(m, q);
+      const zsE = mix(zs, R[2] / 1080, m), cyE = mix(cy, 960, m);
+      const winH = R[3] / zsE, top = Math.max(0, Math.min(1920 - winH, cyE - winH / 2));
+      const w = $("appwin");
+      w.style.left = R[0].toFixed(1) + "px"; w.style.top = R[1].toFixed(1) + "px"; w.style.width = R[2].toFixed(1) + "px"; w.style.height = R[3].toFixed(1) + "px"; w.style.borderRadius = R[4].toFixed(1) + "px";
+      $("appin").style.transform = `translate(${((R[2] - 1080 * zsE) / 2).toFixed(1)}px, ${(-top * zsE).toFixed(1)}px) scale(${zsE.toFixed(4)})`;
+      w.style.background = t >= 41.0 ? "#171421" : "#F7F5F0";
+      w.style.opacity = (prog(t, 22.70, 0.12) * (1 - prog(t, 41.32, 0.15))).toFixed(3);
+    } else $("appwin").style.opacity = 0;
 
-    // ── Subtítulos: en su banda del escenario (y 862) o abajo a cámara (y 1190); nunca sobre la interfaz
-    captions(t, capB, mix(1190, 862, s));
+    // ── Subtítulos: banda del escenario (y 862), a cámara (y 1190) o, en los insertos, sobre la maqueta (y 1330, cajas marinas)
+    capB.classList.toggle("boxed", ins > 0.5);
+    captions(t, capB, mix(mix(1190, 862, s), 1330, ins));
 
-    // ── Hoja de calendario del gancho (MG-01): visible ya en el fotograma 0
-    const sOut = easeIn(prog(t, 4.3, 0.3));
-    $("sheet").style.opacity = (1 - sOut).toFixed(3);
-    $("sheet").style.transform = `translateY(${(-30 * sOut).toFixed(1)}px) rotate(-6deg)`;
+    // ── Hoja de calendario del gancho (MG-01): visible ya en el fotograma 0; en 4,28 se atraviesa hasta el calendario del escenario
+    const zt = easeIn(prog(t, 4.26, 0.34)), sheetFade = 1 - prog(t, 4.52, 0.14);
+    $("sheet").style.opacity = sheetFade.toFixed(3);
+    $("sheet").style.transform = `translate(${(354 * zt).toFixed(1)}px, ${(150 * zt).toFixed(1)}px) rotate(${(-6 * (1 - zt)).toFixed(2)}deg) scale(${(1 + 4.9 * zt).toFixed(3)})`;
     let ang = 0, front = true;
     if (t >= 0.30 && t < 3.82) { const p = prog(t, 0.30, 0.55); ang = 360 * p * p; front = p * p < 0.25; }
     else if (t >= 3.82) { const p = prog(t, 3.82, 0.5); const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; ang = 360 * (1 - e); front = (1 - e) < 0.25; }
@@ -436,23 +460,15 @@
     $("pEne").style.zIndex = front ? 2 : 0;
     $("tEne").style.opacity = (0.45 * clamp01(Math.sin(Math.PI * ang / 360) * 1.2)).toFixed(3);
 
-    // ── Rótulos (MG-02): barra, caja por barrido y salida limpia
-    [].forEach(([id, t0, hold]) => {
-      const el = $(id), a = expoOut(prog(t, t0, 0.5)), b = easeIn(prog(t, t0 + hold, 0.3));
-      const vis = t >= t0 && t < t0 + hold + 0.3;
-      el.style.opacity = vis ? 1 : 0;
-      el.querySelector(".bar").style.transform = `scaleY(${a.toFixed(3)})`;
-      el.querySelector(".box").style.clipPath = `inset(0 ${(100 * (1 - expoOut(prog(t, t0 + 0.12, 0.5)))).toFixed(1)}% 0 0)`;
-      el.style.transform = `translateX(${(-80 * b).toFixed(1)}px)`; if (b > 0) el.style.opacity = (1 - b).toFixed(3);
-    });
-
-    // ── Acento final: «Este febrero,» en «antes» y cae «no.» en «febrero»
+    // ── Acento final: «Este febrero,» en «antes» y cae «no.» en «febrero» (golpe 3 de 3)
     const a1 = expoOut(prog(t, 58.84, 0.5)), a2 = clamp01(backOut(prog(t, 59.56, 0.4)));
     $("accent").style.opacity = a1.toFixed(3);
     $("accent").style.clipPath = `inset(0 ${(100 * (1 - a1)).toFixed(1)}% 0 0)`;
     $("a2").style.transform = `scale(${t >= 59.56 ? mix(0.3, 1, a2).toFixed(3) : 0})`;
-    // golpe de cámara corto en «no.» (2.º de 3 del vídeo)
-    if (t >= 59.56 && t < 60.0) { const h = Math.exp(-14 * (t - 59.56)) * Math.sin(40 * (t - 59.56)); $("vwrap").style.transform += ` translateY(${(10 * h).toFixed(2)}px)`; }
+
+    // ── Oscurecido de 3 fotogramas (≈ 40 %) antes de cada empalme de la voz: el corte se lee como intencional
+    let dip = 0; JOINTS.forEach((j) => { if (tn >= j - 0.1 && tn < j) dip = 0.4; });
+    $("dip").style.opacity = dip;
   }
 
   const clock = { t: 0 };

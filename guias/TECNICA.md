@@ -70,6 +70,16 @@ HyperFrames es el motor de animación principal (AV-001). Si falla en una prueba
   - `content_overlap` en el giro 3D de la hoja (las dos caras se cruzan);
   - `line_unread` en la última frase cuando la voz acaba con el vídeo;
   - `composition_file_too_large`, porque un solo `index.html` con `render(t)` es más fácil de sincronizar.
+### Aprendido el 2026-11-18 (edición v05 de VID-0002)
+
+- **Recortar a la persona:** `npx hyperframes@0.9.42 remove-background clip.mp4 -o assets/matte.webm --quality best`. La primera vez instala `onnxruntime-node` y baja el modelo (≈ 168 MB, con permiso de Ale). En CPU tarda ≈ 1,8 s por fotograma: recorta antes con ffmpeg solo la ventana que haga falta (114 fotogramas = 3,4 min). En la composición, un `<video>` con `data-layout-allow-occlusion` dentro del mismo contenedor que la toma, con el texto entre los dos y el **mismo filtro CSS** que la toma. Se muestra solo mientras el texto está visible (el WebM cambia un poco el color). Las capas WebM en `assets/` van fuera de Git (`.gitignore`).
+- **Piezas del catálogo (`hyperframes add`):** llegan con estilo genérico (degradados, sombras, glitch RGB) y cargan GSAP desde una CDN. Se toma su técnica (cómo se mueve) y se reescribe con la marca v2; no se montan tal cual.
+- **Ventana de la demo en la raíz** de la composición, no dentro del escenario (que recorta con `overflow: hidden`). Un rectángulo `[left, top, ancho, alto, radio]` por estado (tarjeta, ventana, pantalla completa, tarjeta de la serie) y `lerp` entre ellos; el zoom interno también se interpola para que la interfaz siga llenando el ancho.
+- **Avisos de `check` que se atienden con una marca, no con código:** `data-layout-allow-overlap` en elementos que se cruzan a propósito (las dos caras de la hoja), `data-layout-ignore` en texto que es textura y `data-hold` en una línea breve a propósito (el «$» que se tacha).
+- **Voz en WAV y composición muda:** `cortes.py` corta la voz mejorada en WAV con los mismos `KEEP` (crossfade de 12–15 ms) y `mezcla_v05.py` la mezcla aparte; el vídeo no lleva audio. La voz mejorada llega 4,4 dB más baja: se sube a −17,4 LUFS antes de mezclar porque los picos de los efectos están calibrados contra esa voz.
+- **Música que baja al hablar:** `sidechaincompress=threshold=0.05:ratio=3:attack=80:release=400` con la voz como señal de control da ≈ −4 dB. Un umbral más bajo la hunde 10 dB.
+- **Cola final:** `tpad=stop_mode=clone:stop_duration=1.0` tras el concat deja el último fotograma; la voz se alarga con `apad`.
+- **Medición:** `hyperframes/edicion/revisar.py <mp4> [<mp4 sin música>]` y `check`; el render completo (56 s, `--quality high`) tarda ≈ 4,5 min.
 - **Catálogo:** `npx hyperframes@0.9.42 catalog --json` lista 448 bloques y componentes con video de muestra. Antes de instalar uno (`hyperframes add`), Ale lo aprueba.
 
 ### Aprendido el 2026-11-18 (edición v04 de VID-0002)

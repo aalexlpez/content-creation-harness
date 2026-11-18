@@ -121,6 +121,29 @@ Propuesta AV-009, probada en el ensayo de edición del 2026-11-17 (`videos/VID-0
   - pops, clics y lápiz alternados y con volumen en escalera.
 - **Banco de sonidos:** el que armó Ale en Pixabay (AV-011), con cada efecto recortado a su tramo audible.
 
+### Textos, cortes y transiciones que subieron el nivel (v05 de VID-0002, 2026-11-18)
+
+| Qué | Regla probada |
+|---|---|
+| Tres niveles de texto | Subtítulo base (66 px), **palabra protagonista** (60–90 % del ancho, máximo 7 por vídeo, una por idea) y cabecera con contador «n / total». En VID-0002 salieron 6 |
+| Texto detrás de la persona | Solo en 1–2 palabras de ≈ 1,5 s a cámara (`remove-background`, [TECNICA](TECNICA.md)). El texto queda entre la toma y el recorte, y al menos un tercio de la palabra debe verse |
+| Empalmes de voz | Cada empalme de `KEEP` lleva un cambio de encuadre (100 % ↔ 110 %, instantáneo) y un oscurecido del 40 % durante 3 fotogramas justo antes. El salto se lee como intencional |
+| Transiciones con causa | Cinco tipos por vídeo, todos salen de algo ya en pantalla: **zoom a través** de un objeto, **cortina «/»**, **la tarjeta que se ensancha** hasta ser la ventana, **llevar al otro lado** (el elemento se encoge hasta su sitio en la escena siguiente) y **cambio de fondo con desenfoque** |
+| Demo | En una ventana del escenario con la cara abajo, más **dos insertos a pantalla completa de ≤ 2 s** (el toque y el resultado) donde la interfaz se ve a su tamaño real. Sin anillo de toque |
+| Una serie de cosas | Una tarjeta protagonista que cambia de contenido (`icon-swap`: sale con desenfoque, entra enfocándose) en vez de una fila de iconos pequeños |
+| Última línea | ≥ 2 s en pantalla: una cola de 1 s con el último fotograma (`tpad`) y las últimas palabras en un solo grupo |
+| Mezcla | Música que **baja 4 dB cuando hablas** (`sidechaincompress`) y dos másteres, con y sin música (AV-012, propuesta) |
+| Revisión | `revisar.py` mide el MP4 (loudness, cara tapada, tramos del escenario sin cambio, voz en los empalmes) y genera la hoja de 1 fotograma por segundo y la de 360 px |
+
+### Estilo flotante (ensayo 3 de VID-0002, 2026-11-18; propuesta AV-013)
+
+Alternativa a E-01 cuando la pantalla dividida no aporta: la **cara a pantalla completa** todo el vídeo y la división solo para la **demo** de la app. Los gráficos flotan sobre la cara:
+- **Nodos** (icono, tarjeta de cristal oscuro o etiqueta) en los márgenes y por encima de la cabeza, nunca sobre la cara. A cámara la cabeza ocupa de y 500 a 1040: la zona libre es y 170–480, las columnas x < 370 y x > 790, y el pecho de y 1040 a 1140.
+- **Entrada y salida desenfocadas** (14 → 0 px), **deriva leve** (±5–14 px y ±1,6°, con fase propia) y **profundidad** (los lejanos, más pequeños, tenues y con 2 px de desenfoque).
+- **Flechas** que se dibujan con un punto de luz que viaja; las que cruzan el cuadro **dan la vuelta por encima de la cabeza**, nunca por el mentón.
+- **Un hilo conductor:** un elemento que reaparece (en VID-0002, el teléfono flotante, que se ensancha hasta ser la ventana de la demo y vuelve a encogerse).
+- **Resplandor** en blanco roto: es excepción a AV-007 (sin resplandores) y solo se usa tras la decisión de Ale.
+
 ## Portada
 
 Cada vídeo lleva su propia portada: título corto, un único foco (cara **o** producto) y, si hay serie, una marca de serie. Comprueba en cada red si se puede subir una portada propia antes de prometerla en el plan.

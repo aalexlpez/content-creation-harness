@@ -4,6 +4,8 @@ Composición final del ensayo 2 con el método de [Edición continua](../../../.
 
 Estándar: [guias/MOTION.md](../../../../guias/MOTION.md). Cada evento de la sección 3 lleva su receta (carta de video-shotcraft o pieza del catálogo) antes de animarse.
 
+Plan de la edición más profesional (v05): [PLAN_v05.md](PLAN_v05.md).
+
 Estado: **v01 entregada el 2026-11-17** (`media/trabajo/edicion_v01.mp4`; Ale: «ha quedado muchísimo mejor»). Antes: (`media/originales/ensayo_2.mp4`, 63,25 s, limpio en CapCut por Ale). Fuentes, GSAP y logo ya están en `fonts/`, `lib/` y `assets/`. El `index.html` se escribe después del corte, con los tiempos por palabra reales.
 
 ## 1. Qué tiene que traer Ale

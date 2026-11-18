@@ -101,3 +101,26 @@ Ale, sobre la v03: el corte tras «semana» era brusco («te pasaste de recorte�
 | Subtítulo que se salía del ancho | Con 66 px, «MINIAPLICACIÓN A LA SEMANA» no cabía | Cada grupo se encoge si su ancho estimado pasa de 980 px |
 
 **Regla nueva para el proceso:** un corte de voz solo se acepta si cae en un silencio medido y no parte una frase que sigue. Se comprueba con la medida, no con los tiempos de la transcripción.
+
+## 8. Revisión de la v05 (composición v05, 2026-11-18)
+
+Entrega: `media/trabajo/edicion_v05.mp4` (con música) y `edicion_v05_sin_musica.mp4`, 56,43 s. Plan: [PLAN_v05.md](PLAN_v05.md). Revisada con 31 capturas en los instantes clave, 7 más en las transiciones, la hoja de 1 fotograma por segundo del render final, `hyperframes check` y `revisar.py`. **El sonido está medido, no escuchado.**
+
+**Medido:** -14.3 LUFS, pico real -1.3 dBFS (límite −1 dBTP) en los dos másteres · LRA 3.5 LU · escenario 67.6 % · cara tapada 5.7 % · 45 efectos del banco de Pixabay · ningún tramo del escenario sin cambio de más de 3 s.
+
+**Hallazgos y arreglos durante la revisión**
+
+| # | Hallazgo | Arreglo |
+|---|---|---|
+| 1 | «CALMA» detrás de la persona chocaba con la hoja de calendario | CALMA baja a y 470 |
+| 2 | Zoom a través de 0,42 s, lento: la hoja se apagaba a mitad de camino | 0,34 s y se apaga en 4,52–4,66 s |
+| 3 | `check` marcaba como error las dos caras de la hoja que se cruzan | Intencional: `data-layout-allow-overlap` |
+| 4 | Las etiquetas de la tarjeta de la serie caían a 25 px al encogerse | Se funden antes de empequeñecer |
+| 5 | La última frase («el link») duraba < 2 s | Cola de 1,0 s y último grupo «link está en mi perfil» de 2,4 s |
+| 6 | La fila de puntos de «La serie» acababa descentrada | Centrada bajo la tarjeta |
+
+**Pendiente (P2), para la regrabación**
+1. **Empalmes:** la voz mejorada tiene silencio digital, y el nivel en los empalmes es 32.6 s → -57.2 dBFS, 48.0 s → -48.2 dBFS, 50.34 s → -63.1 dBFS, 53.85 s → -64.7 dBFS; los de −57 y −48 dBFS no cumplen el criterio estricto de < −60, aunque son inaudibles bajo la música. Si suena seco, probar 40 ms de aire tomado de otra pausa.
+2. **Color:** la cara sigue sin tratamiento (`media-treatment`). Probar un grado suave.
+3. **Anticipación:** que todos los gráficos entren 0,15 s antes de su palabra.
+4. **Palabras protagonistas:** subir de 6 a 7 (decidir si NO TUVE TIEMPO merece palabra propia).

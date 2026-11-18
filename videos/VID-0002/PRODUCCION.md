@@ -6,7 +6,7 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 - Estado: BORRADOR
 - Bloqueo: NINGUNO
-- Siguiente_paso: Ensayo cerrado con la edición v01 (2026-11-17). Ale regrabará el vídeo final en otro expediente, con los cambios de C1 y C10 del GUION
+- Siguiente_paso: Ale ve la v05 en el celular y decide si hay una ronda de correcciones; después, grabar el vídeo final en otro expediente con los cambios de C1 y C10 del GUION
 - Perfil_visual: v2
 - Perfil_tecnico: 1080x1920 · 30 fps · H.264 · SDR BT.709 · AAC 48 kHz
 - Editor: PENDIENTE
@@ -33,6 +33,7 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 | archivo | escena | resolución · fps · color | audio | notas |
 |---|---|---|---|---|
 | originales/ensayo_2.mp4 | S01–S07 | 1080×1920 · 30 fps CFR (1897 cuadros) · H.264 BT.709 progresivo | AAC 44,1 kHz estéreo · −17,3 LUFS, pico −2,6 dBFS | Corte limpio de Ale en CapCut gratis, 63,25 s, sin marca de agua ni subtítulos (revisado en 0,5, 31 y 62,8 s). El audio pasa a WAV 48 kHz en trabajo/. El .AAC suelto, en descartado/ |
+| trabajo/audio_mejora/ensayo_2_voz_original-mejorada-v2.wav | S01–S07 | WAV 16 bits · 48 kHz · estéreo · 63,2509 s | Voz mejorada por Ale fuera del repo: −21,7 LUFS, pico −5,6 dBFS, sin ruido en las pausas, desfase 0 ms frente a la original | Decisión de Ale el 2026-11-18: se mantiene. Original sin tocar en `ensayo_2_voz_original.wav` (24 bits, −17,3 LUFS). La mezcla la sube a −14 LUFS |
 
 Originales intactos en `media/originales/`. Comprobación: `python scripts/marco.py inspeccionar <archivo> --perfil ingesta`.
 
@@ -46,11 +47,11 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 ## Montaje
 
 - Proyecto_editor: HyperFrames `hyperframes/edicion/` (edición continua, AV-009); plan y pasos en `hyperframes/edicion/PLAN.md`. Carpetas `media/originales`, `trabajo`, `entregas` y `descartado` creadas el 2026-11-17. Los renders MG-0N de MEDIOS.csv no están en este equipo: se rehacen desde sus fuentes
-- Corte_actual: `media/trabajo/edicion_v01.mp4` (2026-11-17, 63,25 s, 1080×1920, 30 fps, H.264, AAC 48 kHz; inspector OK). Sin sonido añadido: `edicion_v01_sin_sfx.mp4`. Composición `hyperframes/edicion/index.html` sobre `assets/corte.mp4`, con MG-06 y MG-07 v03 (re-ancladas con mapa de tiempos) a pantalla completa
+- Corte_actual: `media/trabajo/edicion_v05.mp4` (con música) y `edicion_v05_sin_musica.mp4` (2026-11-18, 56,43 s, 1080×1920, 30 fps, H.264, AAC 48 kHz; inspector OK). Imagen sin sonido: `edicion_v05_sin_sfx.mp4`. Composición `hyperframes/edicion/index.html` (v05) sobre `assets/corte_v05.mp4`, `demo_v05.mp4` y `matte_gancho.webm`; plan en `PLAN_v05.md`, revisión en `REVIEW.md` §8
 - Cambios frente al guion: el corte (63,25 s) cambia la voz literal; GUION sube a v02 el 2026-11-17 (C1 pasa a X, nuevos C9 y C10). Decisiones de Ale ese día: demo a pantalla completa, música lofi de Pixabay en todo el vídeo, edición en BORRADOR
-- Color aplicado: Toma tal cual de CapCut. Firma del gancho: desaturado y frío en «abandonaste» (1,28 s, 8 fotogramas) y vuelta en «todavía» (3,82 s)
-- Mezcla (voz, música, efectos): `hyperframes/edicion/mezcla.py`: voz con compresión suave (-17.4 LUFS de origen), 63 efectos del banco de Pixabay recortados a su tramo audible con el pico 1 fotograma después del evento (detalle en `media/trabajo/edicion_v01_mezcla.json`), música lofi en todo el vídeo 18 dB bajo la voz; total -14.2 LUFS, pico -1.1 dBFS. Medido, no escuchado por Claude
-- Subtítulos: Propios, quemados en la composición: Plus Jakarta Sans ExtraBold 58 px, 2–4 palabras, palabra activa invertida; y 862 en el escenario y 1190 a cámara; sobre la maqueta, en cajas marinas
+- Color aplicado: Toma tal cual de CapCut. Firma del gancho: desaturado y frío en «abandonaste» (1,28 s, 8 fotogramas) y vuelta en «todavía» (3,82 s). Sin `media-treatment`
+- Mezcla (voz, música, efectos): `hyperframes/edicion/mezcla_v05.py`: voz mejorada de Ale en WAV (`voz_v05.wav`, cortada con KEEP y subida de -21.5 a -17.4 LUFS antes de mezclar), 45 efectos del banco de Pixabay con el pico un fotograma después del evento y música lofi 18 dB bajo la voz que baja 4 dB al hablar (más 3 dB en la demo); dos másteres a -14.3 LUFS, pico -1.3 dBFS. Medido, no escuchado por Claude
+- Subtítulos: Propios, quemados en la composición: Plus Jakarta Sans ExtraBold 66 px, 2–4 palabras, palabra activa invertida, en una banda fija (y 862 en el escenario, y 1190 a cámara, y 1330 sobre la maqueta a pantalla completa, con cajas marinas). Seis palabras protagonistas a tamaño grande
 
 - Edición v03 (2026-11-18): arreglos de `hyperframes/edicion/REVIEW.md` (demo en ventana del escenario con la cara siempre visible, subtítulos en banda fija, sin anillo de toque, recortes de voz a 49,66 s, textos más grandes, 39 efectos) con la voz mejorada de Ale (`media/trabajo/voz_mejorada_v2.mp3`). Entrega `media/trabajo/edicion_v03.mp4`, −14,4 LUFS, pico −3,7 dBFS
 - Edición v04 (2026-11-18): correcciones de Ale sobre la v03 (cortes en silencios medidos y finales de frase con `cortes.py`, «La serie» hasta «cualquier ámbito», demo encuadrada por grupos de interfaz con zoom, subtítulos que caben en el ancho). Entrega `media/trabajo/edicion_v04.mp4`, 55,48 s, −14,4 LUFS, pico −4,3 dBFS
@@ -68,3 +69,6 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 ## Historial
 
 - 2026-11-16 · Estado → BORRADOR
+- 2026-11-18 · Edición v05 (plan aprobado por Ale): textos en tres niveles, cortes con encuadres alternos, cinco transiciones con causa, insertos en la demo, música que baja al hablar y dos másteres
+- 2026-11-18 · Ensayo 3 «flotante»: `media/trabajo/flotante_v01.mp4` y `flotante_v01_sin_musica.mp4` (composición en `hyperframes/flotante/`, plan en `PLAN_flotante.md`). Misma voz y mismo corte que la v05; la pantalla dividida solo en la demo. Estilo luminoso pendiente de decisión (AV-013)
+

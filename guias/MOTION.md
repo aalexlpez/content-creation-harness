@@ -173,6 +173,10 @@ Puntos de partida. La carta o la pieza se lee antes de usarla y se viste con la 
 
 **Por probar:** la exportación de shotcraft a borradores de Jianying (`jianying-export/windows_draft.py`, sin verificar en Windows) podría abrir el resultado en CapCut con subtítulos y audio editables. No se prueba sin que Ale lo pida.
 
+## 8 bis. Probado en VID-0002 v05 (2026-11-18)
+
+Piezas y recetas que ya salieron en un render real, con la marca v2: `text-state-swap` y `icon-swap` (el que sale se desenfoca y baja; el que entra sube y se enfoca), `card-resize` (la tarjeta se ensancha hasta ser la ventana), zoom a través de un objeto, `number-wheel` (el dígito rueda) y texto detrás de la persona. Los detalles y las desviaciones del plan están en `videos/VID-0002/hyperframes/edicion/PLAN_v05.md` §14.
+
 ## 9. Lista de comprobación antes de enseñar un corte
 
 - [ ] El fotograma 0 tiene cara o frase; nada se lee fuera de y 168–1330.

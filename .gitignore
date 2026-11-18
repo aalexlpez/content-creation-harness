@@ -37,3 +37,6 @@ desktop.ini
 .tmp-*
 .vscode/
 .idea/
+
+# HyperFrames: capas con transparencia de trabajo (fuera de Git)
+videos/*/hyperframes/**/assets/*.webm
