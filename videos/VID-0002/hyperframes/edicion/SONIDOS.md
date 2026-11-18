@@ -1,6 +1,6 @@
 # VID-0002 · Sonidos
 
-> **Banco definitivo (2026-11-17): el de Pixabay que armó Ale** en `Documents/proyectos/referencias/banco_audios` (30 archivos). Los efectos, la música y sus momentos están en `mezcla.py` y en `media/trabajo/edicion_v01_mezcla.json`. Sonniss queda como reserva: Ale no eligió ninguno de sus candidatos.
+> **Banco definitivo (2026-11-17): el de Pixabay que armó Ale** en `Documents/proyectos/referencias/banco_audios` (30 archivos). Los efectos, la música y sus momentos están en `mezcla.py` y en `media/trabajo/edicion_v01_mezcla.json`. Sonniss queda como reserva: Ale no eligió ninguno de sus candidatos y borró la copia local el 2026-11-18. Para volver a usarlo, se descarga de [gdc.sonniss.com](https://gdc.sonniss.com/).
 
 Mixkit y Freesound quedan descartados: Ale los escuchó y los rechazó el 2026-11-17. El banco nuevo es el **Sonniss #GameAudioGDC 2026**: 347 WAV (7,47 GB) de estudios profesionales (Cinematic Sound Design, Epic Stock Media, 344 Audio, etc.). Ale lo descargó el 2026-11-17 y está fuera del repo, en `C:\Users\aalex\Documents\proyectos\referencias\sonniss-gdc-2026\`.
 

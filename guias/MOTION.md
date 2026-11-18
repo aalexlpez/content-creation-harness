@@ -113,7 +113,7 @@ Encima de AV-008 (solo sonidos reales):
    Se mide con `hyperframes audio` sobre el render. Se dice siempre que se midió, no que se escuchó.
 7. **Prueba en contexto:** un sonido se juzga ya montado en el vídeo, nunca suelto (S1).
 
-**Bibliotecas:** el **banco de Pixabay de Ale** (AV-011) en `Documents/proyectos/referencias/banco_audios`, con nombres descriptivos. Reserva: **Sonniss #GameAudioGDC** (profesional, uso comercial sin atribución; clon local en `Documents/proyectos/referencias/sonniss-gdc-2026`, ver `videos/VID-0002/hyperframes/edicion/SONIDOS.md`). Mixkit y Freesound, rechazados por Ale al oído el 2026-11-17; ZapSplat, alternativa con crédito en la descripción. Shotcraft usa por defecto Freesound y BGM *tech-house*: aquí no se adopta (AV-008 y el rechazo del 2026-11-17).
+**Bibliotecas:** el **banco de Pixabay de Ale** (AV-011) en `Documents/proyectos/referencias/banco_audios`, con nombres descriptivos. Reserva: **Sonniss #GameAudioGDC** (profesional, uso comercial sin atribución; se descarga de nuevo desde gdc.sonniss.com, la copia local se borró el 2026-11-18). Mixkit y Freesound, rechazados por Ale al oído el 2026-11-17; ZapSplat, alternativa con crédito en la descripción. Shotcraft usa por defecto Freesound y BGM *tech-house*: aquí no se adopta (AV-008 y el rechazo del 2026-11-17).
 
 ## 7. Proceso de una capa de motion
 
