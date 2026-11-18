@@ -6,7 +6,7 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 - Estado: BORRADOR
 - Bloqueo: NINGUNO
-- Siguiente_paso: Ale: revisar la lista de eventos (hyperframes/edicion/PLAN.md §3) y decidir C1; Claude: componer la edición continua
+- Siguiente_paso: Ensayo cerrado con la edición v01 (2026-11-17). Ale regrabará el vídeo final en otro expediente, con los cambios de C1 y C10 del GUION
 - Perfil_visual: v2
 - Perfil_tecnico: 1080x1920 · 30 fps · H.264 · SDR BT.709 · AAC 48 kHz
 - Editor: PENDIENTE

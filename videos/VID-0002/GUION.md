@@ -52,7 +52,7 @@ Voz literal transcrita del corte (v02, 2026-11-17). La dirección de montaje com
 
 | claim_id | tipo | afirmación | prueba y límites |
 |---|---|---|---|
-| C1 | X | Para mediados de enero «ya la mitad» abandonó su propósito | La fuente (Strava, «Quitter's Day», vía [BikeRadar](https://www.bikeradar.com/news/today-is-the-day-we-lose-motivation-strava-says)) habla de usuarios de una app deportiva y no da «la mitad». En v01 se decía «mucha gente». Para el vídeo real: fuente que diga la mitad, o regrabar con «mucha gente» |
+| C1 | X | Para mediados de enero «ya la mitad» abandonó su propósito (0:06,15–0:06,73 del corte) | La fuente (Strava, «Quitter's Day», vía [BikeRadar](https://www.bikeradar.com/news/today-is-the-day-we-lose-motivation-strava-says)) habla de usuarios de una app deportiva y no da «la mitad». **Decisión de Ale (2026-11-18):** «la mitad» fue una referencia inventada; en la regrabación dirá «la mayoría». Aviso de Claude: «la mayoría» también es una cifra (más de la mitad) que la fuente no da; sin otra fuente, la forma que se sostiene es «mucha gente» (como en v01) |
 | C2 | O | La mayoría no piensa qué hará el día que no tenga ganas | Opinión de Ale; se dice como tal |
 | C3 | H | El recorrido: propósito, salto a febrero, obstáculo y plan «si… entonces» | Ficha de Plan B (PROD-17, v06 de `soycerobytes/miminiapp`). En el ensayo es una maqueta declarada en pantalla. Pasa a P cuando la miniapp publicada haga exactamente esto |
 | C4 | H | Te llevas un recordatorio en tu calendario y tu plan como fondo de pantalla | Ficha §4 y §8. Pasa a P tras probarlo en un iPhone y un Android. No se promete la hora del aviso |
@@ -60,7 +60,7 @@ Voz literal transcrita del corte (v02, 2026-11-17). La dirección de montaje com
 | C7 | O | Es la primera de una serie | Compromiso de Ale (PROD-15) |
 | C8 | H | El link está en mi perfil | Solo es cierto cuando la dirección definitiva esté publicada en la bio de cada red. En el ensayo es una frase de prueba |
 | C9 | O | «Voy a intentar crear una miniaplicación a la semana» | Compromiso de Ale dicho como intento. Fija una frecuencia que v01 evitaba (decisión de Ale en la grabación) |
-| C10 | H | Las miniapps serán «libres y gratis para cualquier persona» | «Libres» puede entenderse como código abierto o licencia libre. Hay que definir qué significa antes del vídeo real; si no, decir solo «gratis» |
+| C10 | H | Las miniapps serán «libres y gratis para cualquier persona» (0:54,04–0:54,52 del corte) | **Ale (2026-11-18):** «libres» significa código abierto (open source). Pasa a P cuando el código de cada miniapp esté publicado con una licencia abierta. En la regrabación conviene decirlo claro («de código abierto») para que no se entienda solo como «gratis» |
 
 ## Notas de revisión
 
@@ -69,7 +69,8 @@ Voz literal transcrita del corte (v02, 2026-11-17). La dirección de montaje com
   - S06 pasa de «prueba / modo avión» a «la serie»;
   - salen C6 (modo avión, celular) y «sin cuenta».
 
-  **El OK-2 se pide sobre esta versión. Un claim X lo bloquea**: Ale decide sobre C1. Dudas de transcripción para Ale: «abandonaste» (Parakeet oyó «abandonas») y «hemos tirado la toalla».
+  **El OK-2 se pide sobre esta versión. Un claim X lo bloquea**: Ale decide sobre C1.
+- **2026-11-18 · VID-0002 es un ensayo y se vuelve a grabar.** El vídeo final será otro expediente. Para la regrabación: C1 con «la mayoría» según Ale («mucha gente» si no aparece una fuente que lo sostenga) y C10 dicho como «de código abierto». Dudas de transcripción para Ale: «abandonaste» (Parakeet oyó «abandonas») y «hemos tirado la toalla».
 - **Qué ensaya VID-0002 (2026-11-16):** el método de `videos/VID-0001/GUION_BEATS.md`. Ale graba por beats con sus palabras (la voz literal es una guía, no un texto para memorizar), 2–3 tomas por beat y un segundo quieto antes y después de cada frase. Claude transcribe, corta y propone el montaje. El OK-2 se calcula sobre este GUION: si al grabar cambian las frases, se actualiza la voz literal y sube la Version.
 - **Cambios frente a VID-0001:** gancho en pretérito («abandonaste»), una frase más de problema (C2, opinión), la serie presentada sin prometer frecuencia (C7), la demo en dos escenas (pasos y resultado) y vuelve «El link está en mi perfil». Sin plano de modo avión en el ensayo.
 - **Textos de la app:** la maqueta muestra los textos de la ficha tal cual, aunque suenen a España (decisión del 2026-11-16 en GUION_BEATS §1). Voz y subtítulos, en español latinoamericano.

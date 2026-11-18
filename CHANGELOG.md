@@ -2,6 +2,7 @@
 
 ## Sin publicar
 
+- VID-0002: decisiones de Ale para regrabar el vídeo final. C1 pasará de «la mitad» a «la mayoría», con el aviso de que sin fuente se sostiene «mucha gente». C10: «libres» significa código abierto.
 - **Edición continua de VID-0002 v01** (2026-11-17): sobre el corte de Ale en CapCut (63,25 s). Composición `videos/VID-0002/hyperframes/edicion/` con tres modos (cámara, escenario y maqueta a pantalla completa), unos 45 eventos ligados a la voz, subtítulos propios y mezcla con `mezcla.py`: 63 efectos y música del banco de Pixabay de Ale, a −14 LUFS. Ale: «ha quedado muchísimo mejor».
 - El flujo completo, de diez pasos y probado, está en [EDICION → Edición continua](guias/EDICION.md#edición-continua). Los trucos técnicos (Parakeet frase a frase, fotogramas clave, re-anclar con `WARP`) están en [TECNICA](guias/TECNICA.md).
 - **AV-011:** banco de sonidos propio en Pixabay.
