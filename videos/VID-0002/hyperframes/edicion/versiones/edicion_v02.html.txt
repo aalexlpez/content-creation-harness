@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Edición continua v02 · VID-0002 (ensayo 2)</title>
+<!--
+  EDICIÓN CONTINUA de VID-0002 sobre el corte de Ale en CapCut (ensayo_2.mp4, 63,25 s). No se publica.
+  Método E-01 (AV-009) + estándar de motion graphics (guias/MOTION.md, AV-010). Lista de eventos: PLAN.md §3.
+  Modos: C = a cámara · E = escenario (panel #0D213F arriba, toma bajada 700 px) · P = pantalla completa
+  (maqueta MG-06 v03 y MG-07 v03, re-ancladas al corte y renderizadas en assets/).
+  Marca v2 (AV-006/007): #0B0B0D, #1E2937, #0D213F, #F5F6F8, secundario #B7C0CC, Plus Jakarta Sans, sin acento,
+  énfasis por inversión, sin degradados, resplandores ni sombras difusas.
+  Tiempos: media/trabajo/corte_palabras.json (Parakeet frase a frase, texto corregido con el guion v02).
+  Todo es función del tiempo: render(t), sin medir el DOM.
+
+  v02 (2026-11-18) · arreglos de REVIEW.md:
+    - la demo ya no va a pantalla completa: se ve en una ventana del escenario, casi a tamaño real,
+      que sigue el paso activo, y la cara queda siempre abajo (P0 1–2);
+    - subtítulos siempre en su banda (y ≈ 862 en el escenario), fuera de la interfaz (P0 3);
+    - sin anillo ni punto de toque en la maqueta (MG-06 v04) (P0 4);
+    - «La solución» con un evento por frase: precio tachado, GRATIS, PARA ESE DÍA, 01 (P1 5);
+    - recortes de voz: «Aquí simplemente», «¿Como cuál?», la mayor parte de «La serie» y «Y me dices
+      qué tal»: 63,25 → 49,66 s (P1 6–7). El corte ya viene hecho en assets/corte_v02.mp4 (voz mejorada
+      de Ale) y en assets/demo_v02.mp4; la composición sigue escrita en tiempos del corte v01 y
+      render() trabaja en tiempo viejo (KEEP);
+    - subtítulos de 66 px, cabecera derecha de 32 px, días del calendario sin número, sin el rótulo
+      «Plan B» duplicado ni la etiqueta del link (P1 8–11, P2 11).
+-->
+<style>
+  @font-face { font-family: "PJS"; font-weight: 500; src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 700; src: url("./fonts/PlusJakartaSans-Bold.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 800; src: url("./fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype"); }
+  :root { --navy: #0D213F; --ink: #0B0B0D; --char: #1E2937; --off: #F5F6F8; --sec: #B7C0CC; --line: rgba(245,246,248,0.22); }
+  html, body { margin: 0; padding: 0; background: #000; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); font-family: "PJS", sans-serif; color: var(--off); }
+
+  #vwrap { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 50% 32%; }
+  #v { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+  /* ── ESCENARIO */
+  #stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1000px; background: var(--navy); overflow: hidden; }
+  #stage .edge { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--line); }
+  #bgbar { position: absolute; right: -80px; top: 260px; width: 560px; height: 690px; opacity: 0.05; }
+  .hdr { position: absolute; top: 272px; font-weight: 700; font-size: 34px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+  #hdrL { left: 70px; }
+  #hdrR { right: 70px; font-weight: 500; font-size: 32px; letter-spacing: 0.12em; color: var(--sec); top: 274px; }
+  #hdrR svg { width: 16px; height: 20px; margin-right: 10px; vertical-align: -1px; }
+  .scene { position: absolute; left: 0; top: 0; width: 1080px; height: 1000px; opacity: 0; }
+  #sweep { position: absolute; top: -60px; width: 220px; height: 1120px; background: var(--off); opacity: 0; }
+  .note { position: absolute; font-weight: 500; font-size: 32px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sec); white-space: nowrap; }
+
+  /* A · enero */
+  .cal { position: absolute; left: 174px; top: 352px; width: 732px; }
+  .dow { display: grid; grid-template-columns: repeat(7, 96px); gap: 10px; margin-bottom: 10px; }
+  .dow span { text-align: center; font-weight: 500; font-size: 28px; letter-spacing: 0.12em; color: var(--sec); }
+  .days { display: grid; grid-template-columns: repeat(7, 96px); gap: 10px; }
+  .d { height: 64px; border-radius: 12px; border: 2px solid var(--line); box-sizing: border-box; position: relative; padding: 4px 9px; font-weight: 500; font-size: 22px; color: var(--sec); opacity: 1; }
+  .d.blank { border-color: transparent; }
+  .d i { position: absolute; inset: -2px; border-radius: 12px; background: var(--off); opacity: 0; }
+  .d i svg { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+  #half { position: absolute; left: 174px; top: 800px; }
+
+  /* B · ese día */
+  #week { position: absolute; left: 110px; top: 420px; width: 860px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; }
+  .wd { height: 210px; border-radius: 20px; border: 2px solid var(--line); box-sizing: border-box; position: relative; }
+  .wd .n { position: absolute; left: 0; right: 0; top: 18px; text-align: center; font-weight: 500; font-size: 30px; letter-spacing: 0.12em; color: var(--sec); }
+  .wd i { position: absolute; inset: -2px; border-radius: 20px; background: rgba(245,246,248,0.12); opacity: 0; }
+  .wd i svg { position: absolute; left: 50%; top: 104px; width: 48px; height: 48px; margin-left: -24px; }
+  #bigday { position: absolute; left: 340px; top: 360px; width: 400px; height: 420px; border-radius: 34px; box-sizing: border-box; border: 3px solid var(--off); opacity: 0; transform-origin: 50% 50%; }
+  #bigday .n { position: absolute; left: 0; right: 0; top: 40px; text-align: center; font-weight: 700; font-size: 40px; letter-spacing: 0.14em; }
+  #bigday .q { position: absolute; left: 0; right: 0; top: 130px; text-align: center; font-weight: 800; font-size: 150px; line-height: 1; }
+  #singanas { position: absolute; left: 50%; top: 680px; padding: 14px 30px; border-radius: 999px; background: var(--off); color: var(--ink); font-weight: 800; font-size: 44px; letter-spacing: 0.08em; white-space: nowrap; opacity: 0; }
+
+  /* C · Plan B */
+  #pbcard { position: absolute; left: 140px; top: 360px; width: 800px; height: 300px; border-radius: 34px; border: 2px solid var(--line); background: rgba(245,246,248,0.05); box-sizing: border-box; transform-origin: 50% 50%; }
+  #pbcard .t { position: absolute; left: 0; right: 0; top: 46px; text-align: center; font-weight: 800; font-size: 150px; letter-spacing: -0.03em; line-height: 1; }
+  #pbcard .s { position: absolute; left: 0; right: 0; top: 214px; text-align: center; font-weight: 500; font-size: 34px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sec); }
+  #pbcard .s svg { width: 16px; height: 20px; margin-right: 12px; vertical-align: -1px; }
+  .pill { position: absolute; top: 700px; height: 84px; padding: 0 34px; border-radius: 999px; border: 3px solid var(--off); box-sizing: border-box; display: flex; align-items: center; font-weight: 800; font-size: 40px; letter-spacing: 0.06em; white-space: nowrap; opacity: 0; }
+  .pill.inv { background: var(--off); color: var(--ink); }
+  #pStrike { position: absolute; left: 12px; right: 12px; top: 50%; height: 6px; margin-top: -3px; background: var(--off); border-radius: 3px; transform-origin: 0 50%; transform: rotate(-28deg) scaleX(0); }
+  #num { position: absolute; left: 850px; top: 693px; font-weight: 800; font-size: 96px; line-height: 1; opacity: 0; white-space: nowrap; }
+  #num svg { width: 46px; height: 58px; margin-left: 8px; }
+
+  /* D · la serie */
+  .sc { position: absolute; top: 400px; width: 220px; height: 270px; border-radius: 26px; border: 2px solid var(--line); background: rgba(245,246,248,0.05); box-sizing: border-box; opacity: 0; }
+  .sc .k { position: absolute; left: 22px; top: 18px; font-weight: 800; font-size: 40px; }
+  .sc .ic { position: absolute; left: 50%; top: 96px; width: 112px; height: 112px; margin-left: -56px; opacity: 0; }
+  .sc .lb { position: absolute; left: 0; right: 0; top: 206px; text-align: center; font-weight: 800; font-size: 32px; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0; }
+  .sc.inv { background: var(--off); border-color: var(--off); color: var(--ink); }
+  #week1 { position: absolute; left: 50px; top: 334px; padding: 8px 20px; border-radius: 999px; background: var(--off); color: var(--ink); font-weight: 800; font-size: 32px; letter-spacing: 0.08em; opacity: 0; white-space: nowrap; }
+  #people { position: absolute; left: 700px; top: 700px; display: flex; gap: 14px; }
+  #people svg { width: 64px; height: 84px; opacity: 0; }
+
+  /* Subtítulos: una línea, palabra activa invertida */
+  .capbox { position: absolute; left: 40px; right: 40px; height: 90px; display: flex; justify-content: center; align-items: center; gap: 14px; }
+  .capbox span { font-weight: 800; font-size: 66px; text-transform: uppercase; letter-spacing: -0.005em; padding: 2px 12px; border-radius: 10px; color: var(--off); white-space: nowrap; }
+  .capbox span.on { background: var(--off); color: var(--ink); }
+  .capbox span.off { opacity: 0.6; }
+  #capB { top: 0; }
+  #capB span { -webkit-text-stroke: 8px rgba(11,11,13,0.55); paint-order: stroke fill; }
+  #capB span.on { -webkit-text-stroke: 0; }
+  /* sobre la maqueta (fondo claro): cada palabra en caja marina */
+  #capB.boxed span { -webkit-text-stroke: 0; background: var(--navy); }
+  #capB.boxed span.on { background: var(--off); color: var(--ink); box-shadow: inset 0 0 0 3px var(--navy); }
+  #capB.boxed span.off { opacity: 1; color: var(--sec); }
+  #capB.boxed { gap: 6px; }
+
+  /* Demo dentro del escenario: ventana de 960×520 que sigue el paso activo (escala 0,889) */
+  #appwin { position: absolute; left: 60px; top: 330px; width: 960px; height: 520px; border-radius: 28px; overflow: hidden; border: 2px solid var(--line); box-sizing: border-box; background: #F7F5F0; }
+  #appin { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+  #appin video { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  /* Pantalla completa (maqueta) */
+  .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 50% 50%; }
+  .full video { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+  /* ── A CÁMARA: hoja (MG-01), rótulos (MG-02) y acento final */
+  #sheet { position: absolute; left: 72px; top: 262px; width: 228px; height: 176px; transform-origin: 50% 0%; }
+  #sheet .bind { position: absolute; left: 0; top: 0; width: 228px; height: 46px; background: var(--navy); border-radius: 18px 18px 0 0; z-index: 2; }
+  #sheet .rg { position: absolute; top: -12px; width: 12px; height: 30px; box-sizing: border-box; border-radius: 6px; background: var(--off); border: 2px solid var(--navy); z-index: 3; }
+  #sheet .stk { position: absolute; left: 0; top: 46px; width: 228px; height: 130px; perspective: 520px; perspective-origin: 50% 0%; }
+  #sheet .pg { position: absolute; inset: 0; transform-origin: 50% 0%; transform-style: preserve-3d; }
+  #sheet .fc { position: absolute; inset: 0; box-sizing: border-box; background: var(--off); border: 2px solid rgba(11,11,13,0.15); border-top: 0; border-radius: 0 0 18px 18px;
+    backface-visibility: hidden; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 42px; color: var(--ink); overflow: hidden; }
+  #sheet .fc.bk { transform: rotateX(180deg); border-radius: 18px 18px 0 0; }
+  #sheet .tn { position: absolute; inset: 0; background: var(--navy); opacity: 0; }
+  .lt { position: absolute; left: 70px; top: 230px; width: 940px; height: 150px; overflow: hidden; }
+  .lt .bar { position: absolute; left: 0; top: 0; width: 18px; height: 150px; background: var(--off); }
+  .lt .box { position: absolute; left: 30px; top: 0; height: 150px; background: var(--navy); border-radius: 0 18px 18px 0; padding: 0 40px 0 34px; box-sizing: border-box; white-space: nowrap; }
+  .lt .ti { font-weight: 700; font-size: 58px; line-height: 1; margin-top: 26px; }
+  .lt .su { font-weight: 500; font-size: 28px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sec); margin-top: 16px; }
+  #accent { position: absolute; left: 60px; right: 60px; top: 230px; text-align: center; white-space: nowrap; opacity: 0; }
+  #accent .a1 { display: inline-block; font-weight: 700; font-size: 74px; color: var(--off); -webkit-text-stroke: 3px rgba(11,11,13,0.7); paint-order: stroke fill; vertical-align: middle; }
+  #accent .a2 { display: inline-block; font-weight: 800; font-size: 112px; line-height: 1; color: var(--ink); background: var(--off); border-radius: 14px; padding: 4px 18px; margin-left: 14px; vertical-align: middle; transform-origin: 50% 50%; }
+  #link { position: absolute; left: 50%; top: 384px; height: 88px; padding: 0 30px 0 34px; border-radius: 999px; background: var(--navy); border: 2px solid var(--line); box-sizing: border-box; display: flex; align-items: center; gap: 18px; font-weight: 800; font-size: 38px; letter-spacing: 0.06em; white-space: nowrap; opacity: 0; }
+  #link svg { width: 40px; height: 40px; }
+  #link .ar { stroke-dasharray: 60; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="49.66">
+  <div id="vwrap"><video id="v" class="clip" src="assets/corte_v02.mp4" data-start="0" data-duration="49.66" data-track-index="0" data-has-audio="true" playsinline></video></div>
+
+  <div id="stage">
+    <svg id="bgbar" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>
+    <div class="hdr" id="hdrL"></div>
+    <div class="hdr" id="hdrR"><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#B7C0CC"/></svg>PLAN B · MINIAPP 01</div>
+
+    <div class="scene" id="scA">
+      <div class="cal"><div class="dow"><span>LU</span><span>MA</span><span>MI</span><span>JU</span><span>VI</span><span>SÁ</span><span>DO</span></div><div class="days" id="days"></div></div>
+      <div class="note" id="half">/ Mitad de enero</div>
+    </div>
+
+    <div class="scene" id="scB">
+      <div id="week"></div>
+      <div id="bigday"><div class="n">JUEVES</div><div class="q">?</div></div>
+      <div id="singanas">SIN GANAS</div>
+    </div>
+
+    <div class="scene" id="scC">
+      <div id="num">01<svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg></div>
+      <div id="pbcard"><div class="t">Plan B</div><div class="s"><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#B7C0CC"/></svg>para tu propósito</div></div>
+      <div class="pill" id="pPrecio" style="left:140px; padding:0 26px;">$<i id="pStrike"></i></div>
+      <div class="pill inv" id="pGratis" style="left:262px;">GRATIS</div>
+      <div class="pill" id="pDia" style="left:500px;">PARA ESE DÍA</div>
+    </div>
+
+    <div class="scene" id="scD">
+      <div id="week1">1 POR SEMANA</div>
+      <div class="sc inv" id="c1" style="left:50px;"><div class="k">01</div><div class="lb" style="opacity:1">PLAN B</div>
+        <svg class="ic" style="opacity:1" viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#0B0B0D"/></svg></div>
+      <div class="sc" id="c2" style="left:290px;"><div class="k">02</div>
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#F5F6F8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="32" height="36" rx="5"/><path d="M15 18l4 4 8-8M15 31h18"/></svg></div>
+      <div class="sc" id="c3" style="left:530px;"><div class="k">03</div>
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#F5F6F8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6h10M21 6v12L9 39a3 3 0 0 0 3 4h24a3 3 0 0 0 3-4L27 18V6M14 30h20"/></svg></div>
+      <div class="sc" id="c4" style="left:770px;"><div class="k">04</div>
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#F5F6F8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="14" width="38" height="22" rx="11"/><path d="M15 21v8M11 25h8"/><circle cx="31" cy="23" r="1.6" fill="#F5F6F8"/><circle cx="35" cy="27" r="1.6" fill="#F5F6F8"/></svg></div>
+      <div class="sc" id="c5" style="left:1010px;"><div class="k">…</div></div>
+      <div class="pill inv" id="pLibres" style="left:70px; top:720px;">LIBRES</div>
+      <div class="pill" id="pGratis2" style="left:330px; top:720px;">GRATIS</div>
+      <div id="people"></div>
+    </div>
+
+    <div class="scene" id="scDemo">
+      <div id="appwin"><div id="appin"><video id="dm" class="clip" src="assets/demo_v02.mp4" data-start="22.70" data-duration="18.0" data-track-index="1" muted playsinline></video></div></div>
+    </div>
+
+    <div class="edge"></div>
+    <div id="sweep"></div>
+  </div>
+
+
+  <div id="sheet">
+    <div class="bind"></div><span class="rg" style="left:58px"></span><span class="rg" style="right:58px"></span>
+    <div class="stk">
+      <div class="pg" id="pFeb"><div class="fc">FEBRERO<div class="tn" id="tFeb"></div></div></div>
+      <div class="pg" id="pEne"><div class="fc">ENERO<div class="tn" id="tEne"></div></div><div class="fc bk"><div class="tn" style="opacity:.1"></div></div></div>
+    </div>
+  </div>
+  <div id="accent"><span class="a1">Este febrero,</span><span class="a2" id="a2">no.</span></div>
+
+  <div class="capbox" id="capB"></div>
+</div>
+
+<script src="./lib/gsap.min.js"></script>
+<script>
+(function () {
+  const D = 49.66;
+  // Tramos del corte v01 que se conservan (en tiempo viejo). El vídeo y la demo ya vienen cortados así.
+  const KEEP = [[0, 23.0], [23.8, 32.76], [33.56, 46.05], [56.60, 60.20], [61.64, 63.25]];
+  const oldT = (tn) => { let acc = 0; for (const [a, b] of KEEP) { if (tn <= acc + (b - a)) return a + (tn - acc); acc += b - a; } return KEEP[KEEP.length - 1][1]; };
+  const kept = (to) => KEEP.some(([a, b]) => to >= a && to < b);
+  const clamp01 = (x) => Math.max(0, Math.min(1, x));
+  const mix = (a, b, p) => a + (b - a) * p;
+  const prog = (t, a, d) => clamp01((t - a) / d);
+  const easeIO = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+  const easeIn = (p) => p * p * p;
+  const expoOut = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+  const backOut = (p) => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const $ = (id) => document.getElementById(id);
+  const CHECK = (c) => `<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  // aparición con resorte (posición/escala) y opacidad sin rebote
+  const popIn = (el, t, t0, from = 0.7, base = "") => {
+    const a = clamp01(backOut(prog(t, t0 - 0.06, 0.42)));
+    el.style.opacity = prog(t, t0 - 0.06, 0.12).toFixed(3);
+    el.style.transform = `${base} scale(${(t >= t0 - 0.06 ? mix(from, 1, a) : from).toFixed(4)})`;
+  };
+
+  // ── Palabras del corte [texto, inicio, fin] (corte_palabras.json)
+  const W = [["Es", 0.16, 0.32], ["febrero", 0.32, 0.8], ["y", 0.88, 1.04], ["ya", 1.04, 1.28], ["abandonaste", 1.28, 1.84], ["tu", 1.84, 2.0], ["propósito", 2.0, 2.4], ["de", 2.4, 2.56], ["año", 2.56, 2.8], ["nuevo.", 2.8, 3.12], ["Calma.", 3.26, 3.74], ["Todavía", 3.82, 4.3], ["no.", 4.3, 4.62], ["Pero", 4.66, 4.92], ["para", 4.92, 5.18], ["mediados", 5.18, 5.69], ["de", 5.69, 5.82], ["enero", 5.82, 6.15], ["ya", 6.15, 6.28], ["la", 6.28, 6.41], ["mitad", 6.41, 6.73], ["hemos", 6.73, 7.05], ["tirado", 7.05, 7.44], ["la", 7.44, 7.57], ["toalla.", 7.57, 8.02], ["Y", 8.23, 8.47], ["la", 8.63, 8.79], ["mayoría", 8.79, 9.27], ["no", 9.27, 9.43], ["piensa", 9.43, 9.75], ["en", 9.83, 9.99], ["qué", 9.99, 10.15], ["va", 10.23, 10.31], ["a", 10.31, 10.39], ["hacer", 10.47, 10.63], ["ese", 11.06, 11.29], ["día", 11.29, 11.53], ["que", 11.53, 11.77], ["no", 11.77, 11.92], ["tiene", 11.92, 12.31], ["ganas.", 12.31, 12.79], ["Soy", 12.79, 13.02], ["cerobytes", 13.02, 13.73], ["y", 13.73, 13.8], ["por", 13.8, 14.04], ["eso", 14.04, 14.28], ["hice", 14.28, 14.59], ["Plan", 14.59, 14.9], ["B.", 14.9, 15.06], ["Esta", 15.23, 15.39], ["es", 15.47, 15.63], ["una", 15.63, 15.79], ["nueva", 15.79, 16.11], ["aplicación", 16.11, 16.83], ["gratis", 17.24, 17.88], ["para", 18.04, 18.28], ["justamente", 18.28, 18.84], ["planear", 18.84, 19.32], ["ese", 19.32, 19.56], ["día", 19.64, 19.8], ["en", 19.8, 19.96], ["el", 19.96, 20.04], ["que", 20.04, 20.2], ["no", 20.2, 20.36], ["tenemos", 20.36, 20.76], ["ganas.", 20.76, 21.08], ["Es", 21.32, 21.48], ["la", 21.48, 21.64], ["primera", 21.64, 22.04], ["de", 22.04, 22.28], ["esta", 22.28, 22.52], ["serie.", 22.52, 22.92], ["Aquí", 23.0, 23.4], ["simplemente", 23.4, 23.8], ["eliges", 23.8, 24.28], ["un", 24.36, 24.52], ["propósito,", 24.52, 24.92], ["la", 24.92, 25.08], ["app", 25.08, 25.24], ["te", 25.4, 25.56], ["lleva", 25.56, 25.88], ["hasta", 25.88, 26.12], ["febrero", 26.12, 26.76], ["y", 26.8, 26.87], ["eliges", 26.87, 27.3], ["por", 27.3, 27.51], ["qué", 27.51, 27.72], ["lo", 27.72, 27.87], ["abandonaste.", 27.87, 28.72], ["Por", 28.96, 29.12], ["ejemplo:", 29.12, 29.6], ["no", 29.6, 29.76], ["tuve", 29.76, 30.16], ["tiempo.", 30.16, 30.64], ["Y", 30.7, 30.78], ["con", 31.02, 31.26], ["esto", 31.26, 31.42], ["armas", 31.5, 31.98], ["un", 31.98, 32.14], ["plan.", 32.14, 32.54], ["¿Como", 32.76, 32.92], ["cuál?", 33.08, 33.56], ["Si", 33.6, 33.92], ["llego", 33.92, 34.32], ["a", 34.32, 34.4], ["casa", 34.4, 34.72], ["después", 34.72, 34.96], ["de", 34.96, 35.04], ["las", 35.04, 35.2], ["8,", 35.2, 35.68], ["hago", 35.68, 36.0], ["cinco", 36.0, 36.32], ["minutos", 36.32, 36.56], ["de", 36.56, 36.64], ["estiramiento.", 36.64, 37.52], ["Con", 37.54, 37.78], ["esto", 37.78, 38.02], ["te", 38.02, 38.18], ["llevas", 38.18, 38.58], ["un", 38.58, 38.66], ["recordatorio", 38.66, 39.3], ["en", 39.3, 39.38], ["tu", 39.38, 39.54], ["calendario", 39.54, 40.18], ["y", 40.18, 40.34], ["tu", 40.34, 40.5], ["plan", 40.5, 40.66], ["como", 40.82, 41.06], ["fondo", 41.06, 41.38], ["de", 41.38, 41.46], ["pantalla.", 41.46, 41.94], ["En", 41.97, 42.09], ["esta", 42.09, 42.34], ["nueva", 42.34, 42.64], ["serie", 42.64, 42.94], ["de", 42.94, 43.06], ["videos", 43.06, 43.43], ["voy", 43.43, 43.61], ["a", 43.61, 43.67], ["intentar", 43.67, 44.16], ["crear", 44.16, 44.47], ["una", 44.47, 44.65], ["miniaplicación", 44.65, 45.5], ["a", 45.5, 45.56], ["la", 45.56, 45.68], ["semana", 45.68, 46.05], ["para", 46.05, 46.29], ["productividad,", 46.66, 47.86], ["ciencia,", 47.86, 48.5], ["eh,", 49.21, 49.53], ["minijuegos,", 49.53, 50.73], ["cualquier", 51.06, 51.54], ["ámbito.", 51.62, 52.1], ["Y", 52.44, 52.76], ["que", 52.92, 53.24], ["pues", 53.24, 53.48], ["sean", 53.64, 54.04], ["libres", 54.04, 54.52], ["y", 54.52, 54.6], ["gratis", 54.6, 55.08], ["para", 55.08, 55.24], ["cualquier", 55.24, 55.56], ["persona", 55.56, 55.8], ["que", 55.8, 55.96], ["las", 55.96, 56.12], ["necesite.", 56.12, 56.52], ["Así", 56.6, 56.84], ["que", 56.84, 57.0], ["no", 57.0, 57.16], ["esperes", 57.16, 57.64], ["más,", 57.64, 57.88], ["arma", 57.88, 58.28], ["tu", 58.28, 58.36], ["plan", 58.36, 58.44], ["B", 58.6, 58.76], ["antes", 58.84, 59.0], ["de", 59.0, 59.08], ["que", 59.08, 59.16], ["llegue", 59.16, 59.4], ["febrero.", 59.56, 60.12], ["Y", 60.2, 60.52], ["me", 60.52, 60.68], ["dices", 60.68, 61.08], ["qué", 61.16, 61.24], ["tal.", 61.32, 61.48], ["El", 61.64, 61.8], ["link", 61.8, 62.12], ["está", 62.12, 62.28], ["en", 62.28, 62.36], ["mi", 62.36, 62.52], ["perfil.", 62.52, 63.16]];
+
+  // ── Modos (en tiempo viejo)
+  const STAGES = [[4.66, 12.79], [16.90, 56.70]];   // ESCENARIO: el segundo tramo es continuo (solución, demo y serie)
+  const SCENES = [
+    { id: "scA", from: 4.66,  title: "El problema" },
+    { id: "scB", from: 8.23,  title: "¿Y ese día?" },
+    { id: "scC", from: 16.90, title: "La solución" },
+    { id: "scDemo", from: 22.70, title: "Cómo funciona" },
+    { id: "scD", from: 41.80, title: "La serie" },
+  ];
+  // Demo en la ventana: (tiempo viejo, centro vertical en px de la maqueta 1080×1920). Entre pares, easeInOut 0,5 s.
+  const PAN = [[22.70, 700], [26.05, 610], [26.80, 1080], [31.45, 720], [35.60, 930], [37.10, 650], [39.45, 1420], [40.95, 700]];
+
+  // ── Subtítulos: grupos de 2–3 palabras; corte en puntuación o pausa ≥ 0,15 s; ninguno < 0,4 s
+  const GR = [];   // grupos de 2–4 palabras, ≥ 0,45 s cuando se puede
+  const W2 = W.filter((w) => kept(w[1]));
+  { let g = [];
+    W2.forEach((w, i) => {
+      g.push(w);
+      const nx = W2[i + 1], punct = /[.,:;?!]$/.test(w[0]);
+      const dur = w[2] - g[0][1];
+      if (!nx || (punct && dur >= 0.45) || g.length >= 4 || (nx[1] - w[2] >= 0.25 && dur >= 0.3) || (g.length >= 3 && dur >= 0.7)) { GR.push(g); g = []; }
+    });
+    // una palabra suelta que dura poco se une al grupo anterior (nada en pantalla < 0,4 s)
+    for (let i = GR.length - 1; i > 0; i--) { const g = GR[i], p = GR[i - 1]; if (g.length === 1 && g[0][2] - g[0][1] < 0.5 && p.length < 4) { p.push(...g); GR.splice(i, 1); } }
+    GR.forEach((g, i) => { const nx = GR[i + 1]; g.end = nx ? Math.min(nx[0][1], g[g.length - 1][2] + 0.6) : D - 0.05; if (g.end - g[0][1] < 0.4 && nx) g.end = Math.min(nx[0][1], g[0][1] + 0.4); });
+  }
+  const clean = (s) => s.replace(/[.,:;!?¿¡]/g, "");
+
+  // ── DOM de las escenas
+  const days = $("days"), dayCells = [];
+  for (let i = 0; i < 4; i++) { const b = document.createElement("div"); b.className = "d blank"; days.appendChild(b); }   // enero de 2027 empieza en viernes
+  for (let d = 1; d <= 31; d++) { const c = document.createElement("div"); c.className = "d"; const i = document.createElement("i"); i.innerHTML = CHECK("#0B0B0D"); c.appendChild(i); days.appendChild(c); dayCells.push(c); }
+  const week = $("week"), wcells = [];
+  ["LU", "MA", "MI", "JU", "VI", "SÁ", "DO"].forEach((n, k) => { const c = document.createElement("div"); c.className = "wd"; c.innerHTML = `<div class="n">${n}</div><i>${CHECK("#F5F6F8")}</i>`; week.appendChild(c); wcells.push(c); });
+  const PERSON = '<svg viewBox="0 0 32 42" fill="none" stroke="#F5F6F8" stroke-width="3" stroke-linecap="round"><circle cx="16" cy="10" r="7"/><path d="M3 40c0-8 6-14 13-14s13 6 13 14"/></svg>';
+  $("people").innerHTML = PERSON + PERSON + PERSON;
+  const people = [...$("people").children];
+  const capB = $("capB");
+  let shownB = -2;
+
+  const amount = (t, list, inD = 0.55, outD = 0.5) => { let a = 0; for (const [s, e] of list) a = Math.max(a, Math.min(easeIO(prog(t, s - 0.1, inD)), 1 - easeIO(prog(t, e - 0.1, outD)))); return a; };
+
+  function captions(t, el, y) {
+    let gi = -1; GR.forEach((g, i) => { if (t >= g[0][1] - 0.05 && t < g.end) gi = i; });
+    const key = gi;
+    if (key !== shownB) { el.innerHTML = gi < 0 ? "" : GR[gi].map((w) => `<span>${clean(w[0])}</span>`).join(""); shownB = key; }
+    if (gi < 0) { el.style.opacity = 0; return; }
+    let act = 0; GR[gi].forEach((w, i) => { if (t >= w[1] - 0.03) act = i; });
+    [...el.children].forEach((sp, i) => { sp.className = i === act ? "on" : i > act ? "off" : ""; });
+    const ci = expoOut(prog(t, GR[gi][0][1] - 0.05, 0.16)), co = prog(t, GR[gi].end - 0.12, 0.12);
+    el.style.opacity = (ci * (1 - co)).toFixed(3);
+    el.style.transform = `translateY(${(y + 12 * (1 - ci)).toFixed(1)}px)`;
+  }
+
+  function render(tn) {
+    const t = oldT(tn);
+    // ── Modo escenario: el panel baja y la toma se desplaza 700 px
+    const s = amount(t, STAGES);
+    $("stage").style.transform = `translateY(${(-1000 * (1 - s)).toFixed(2)}px)`;
+    // punch-in de «Calma» (3,26) que se suelta al entrar el escenario
+    const z = 1 + 0.1 * easeIO(prog(t, 3.2, 0.35)) * (1 - easeIO(prog(t, 4.56, 0.5)));
+    $("vwrap").style.transform = `translateY(${(700 * s).toFixed(2)}px) scale(${z.toFixed(4)})`;
+
+    // Firma de color del gancho: desatura y enfría en «abandonaste» (8 fotogramas); vuelve de golpe en «todavía»
+    const g = prog(t, 1.28, 0.27) * (t < 3.82 ? 1 : 0);
+    $("v").style.filter = g > 0 ? `saturate(${mix(1, 0.35, g).toFixed(3)}) brightness(${mix(1, 0.9, g).toFixed(3)}) hue-rotate(${(-10 * g).toFixed(1)}deg)` : "none";
+
+    // ── Tramos del escenario con cortina diagonal
+    let cur = -1; SCENES.forEach((sc, i) => { if (t >= sc.from) cur = i; });
+    let swi = -1; SCENES.forEach((sc, i) => { if (i > 0 && t >= sc.from - 0.25 && t < sc.from + 0.25 && s > 0.99) swi = i; });
+    SCENES.forEach((sc, i) => { const el = $(sc.id); el.style.clipPath = "none"; el.style.opacity = i === cur ? 1 : 0; });
+    if (swi > 0) {
+      const p = easeIO(prog(t, SCENES[swi].from - 0.25, 0.5)), tx = mix(-320, 1180, p), c = tx + 110, k = 0.554;
+      $("sweep").style.opacity = 1; $("sweep").style.transform = `translateX(${tx.toFixed(1)}px) skewX(-29deg)`;
+      const top = c + k * 560, bot = c - k * 560;
+      const nw = $(SCENES[swi].id), od = $(SCENES[swi - 1].id);
+      nw.style.opacity = 1; od.style.opacity = 1;
+      nw.style.clipPath = `polygon(-2000px -60px, ${top.toFixed(1)}px -60px, ${bot.toFixed(1)}px 1060px, -2000px 1060px)`;
+      od.style.clipPath = `polygon(${top.toFixed(1)}px -60px, 4000px -60px, 4000px 1060px, ${bot.toFixed(1)}px 1060px)`;
+      $("hdrL").textContent = SCENES[p < 0.35 ? swi - 1 : swi].title;
+    } else { $("sweep").style.opacity = 0; if (cur >= 0) $("hdrL").textContent = SCENES[cur].title; }
+    const hdrIn = expoOut(prog(t, SCENES[Math.max(cur, 0)].from, 0.45));
+    $("hdrL").style.transform = `translateX(${(-30 * (1 - hdrIn)).toFixed(1)}px)`; $("hdrL").style.opacity = hdrIn.toFixed(3);
+
+    // ── A · enero: días 1–14 marcados cada vez más rápido; se para a mitad; las marcas caen en «tirado la toalla»
+    const markAt = (i) => 5.18 + 1.15 * (1 - Math.pow(1 - i / 14, 1.6));   // acelera (R2)
+    const fall = (i) => easeIn(prog(t, 7.05 + 0.035 * (13 - i), 0.45));
+    dayCells.forEach((c, i) => {
+      const day = i + 1, marked = day <= 14;
+      const on = marked ? prog(t, markAt(i), 0.08) : 0, f = marked ? fall(i) : 0;
+      c.querySelector("i").style.opacity = (on * (1 - f)).toFixed(3);
+      const rest = easeOut(prog(t, 6.41, 0.35));
+      c.style.opacity = day > 14 ? mix(1, 0.25, rest).toFixed(3) : 1;
+      c.style.transform = marked ? `translateY(${(90 * f).toFixed(1)}px) scale(${mix(0.85, 1, clamp01(backOut(on))).toFixed(3)})` : "";
+    });
+    const hf = expoOut(prog(t, 6.41, 0.45));
+    $("half").style.opacity = hf.toFixed(3); $("half").style.transform = `translateX(${(-24 * (1 - hf)).toFixed(1)}px)`;
+
+    // ── B · la semana se marca… menos el jueves; el jueves crece en «día» y dice SIN GANAS
+    wcells.forEach((c, k) => {
+      const tin = 8.5 + 0.09 * k, a = expoOut(prog(t, tin, 0.4));
+      c.style.opacity = a.toFixed(3); c.style.transform = `translateY(${(30 * (1 - a)).toFixed(1)}px)`;
+      const chk = k === 3 ? 0 : prog(t, 9.3 + 0.12 * k, 0.1);
+      c.querySelector("i").style.opacity = chk.toFixed(3);
+      if (k !== 3) c.style.opacity = (a * (1 - 0.75 * easeOut(prog(t, 11.2, 0.3)))).toFixed(3);
+    });
+    const bd = clamp01(backOut(prog(t, 11.24, 0.45)));
+    $("bigday").style.opacity = prog(t, 11.24, 0.1).toFixed(3);
+    $("bigday").style.transform = `scale(${(t >= 11.24 ? mix(0.5, 1, bd) : 0.5).toFixed(4)})`;
+    wcells[3].style.opacity = (1 - prog(t, 11.24, 0.1)) * expoOut(prog(t, 8.77, 0.4));
+    popIn($("singanas"), t, 12.31, 0.6, "translateX(-50%)");
+
+    // ── C · Plan B: tarjeta (giro), fichas y contador «01 /»
+    const fl = easeOut(prog(t, 16.95, 0.6));
+    $("pbcard").style.opacity = prog(t, 16.95, 0.15).toFixed(3);
+    $("pbcard").style.transform = `perspective(1400px) rotateX(${mix(-75, 0, fl).toFixed(2)}deg)`;
+    popIn($("pPrecio"), t, 16.95, 0.7); $("pStrike").style.transform = `rotate(-28deg) scaleX(${easeOut(prog(t, 17.10, 0.22)).toFixed(3)})`;
+    if (t >= 17.3) $("pPrecio").style.opacity = mix(1, 0.45, easeOut(prog(t, 17.3, 0.3))).toFixed(3);
+    popIn($("pGratis"), t, 17.24); popIn($("pDia"), t, 18.84);
+    const nm = expoOut(prog(t, 21.64, 0.5));
+    $("num").style.opacity = nm.toFixed(3); $("num").style.transform = `translateX(${(40 * (1 - nm)).toFixed(1)}px)`;
+
+    // ── D · la serie (congelada en 46,05: lo posterior está recortado)
+    { const t = Math.min(oldT(tn), 46.05);
+    const c1 = expoOut(prog(t, 42.15, 0.5));
+    $("c1").style.opacity = c1.toFixed(3); $("c1").style.transform = `scale(${mix(1.6, 1, c1).toFixed(4)}) translateY(${(-60 * (1 - c1)).toFixed(1)}px)`;
+    const away = easeIO(prog(t, 51.06, 0.7));   // «cualquier ámbito»: la fila se aleja y se ve que sigue
+    ["c2", "c3", "c4", "c5"].forEach((id, k) => {
+      const t0 = k < 3 ? 44.65 + 0.16 * k : 45.68;
+      const a = clamp01(backOut(prog(t, t0, 0.42)));
+      $(id).style.opacity = prog(t, t0, 0.12).toFixed(3);
+      $(id).style.transform = `translateY(${(40 * (1 - a)).toFixed(1)}px)`;
+    });
+    [["c2", 46.66], ["c3", 47.86], ["c4", 49.53]].forEach(([id, t0]) => {
+      const a = clamp01(backOut(prog(t, t0 - 0.05, 0.4)));
+      const ic = $(id).querySelector(".ic");
+      ic.style.opacity = prog(t, t0 - 0.05, 0.1).toFixed(3); ic.style.transform = `scale(${(t >= t0 - 0.05 ? mix(0.4, 1, a) : 0.4).toFixed(3)})`;
+      $(id).style.borderColor = t >= t0 - 0.05 ? "rgba(245,246,248,0.6)" : "";
+    });
+    const row = ["c1", "c2", "c3", "c4", "c5"];
+    row.forEach((id) => { $(id).style.marginLeft = `${(-170 * away).toFixed(1)}px`; });
+    popIn($("week1"), t, 44.65, 0.7);
+    popIn($("pLibres"), t, 54.04); popIn($("pGratis2"), t, 54.60);
+    people.forEach((p, k) => { const a = clamp01(backOut(prog(t, 55.24 + 0.14 * k, 0.4))); p.style.opacity = prog(t, 55.24 + 0.14 * k, 0.1).toFixed(3); p.style.transform = `translateY(${(30 * (1 - a)).toFixed(1)}px)`; });
+    }
+
+    // ── Demo en la ventana del escenario: la cámara sigue el paso activo
+    let cy = PAN[0][1];
+    for (let i = 1; i < PAN.length; i++) { const [ta, ya] = PAN[i - 1], [tb, yb] = PAN[i]; if (t >= tb) { cy = yb; continue; } cy = mix(ya, yb, easeIO(prog(t, tb - 0.5, 0.5))); break; }
+    const SC = 960 / 1080, winH = 520 / SC;
+    const top = Math.max(0, Math.min(1920 - winH, cy - winH / 2));
+    $("appin").style.transform = `scale(${SC}) translateY(${(-top).toFixed(1)}px)`;
+    const wIn = expoOut(prog(t, 22.75, 0.5));
+    $("appwin").style.transform = `translateY(${(40 * (1 - wIn)).toFixed(1)}px)`;
+
+    // ── Subtítulos: en su banda del escenario (y 862) o abajo a cámara (y 1190); nunca sobre la interfaz
+    captions(t, capB, mix(1190, 862, s));
+
+    // ── Hoja de calendario del gancho (MG-01): visible ya en el fotograma 0
+    const sOut = easeIn(prog(t, 4.3, 0.3));
+    $("sheet").style.opacity = (1 - sOut).toFixed(3);
+    $("sheet").style.transform = `translateY(${(-30 * sOut).toFixed(1)}px) rotate(-6deg)`;
+    let ang = 0, front = true;
+    if (t >= 0.30 && t < 3.82) { const p = prog(t, 0.30, 0.55); ang = 360 * p * p; front = p * p < 0.25; }
+    else if (t >= 3.82) { const p = prog(t, 3.82, 0.5); const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; ang = 360 * (1 - e); front = (1 - e) < 0.25; }
+    $("pEne").style.transform = `rotateX(${ang.toFixed(2)}deg)`;
+    $("pEne").style.zIndex = front ? 2 : 0;
+    $("tEne").style.opacity = (0.45 * clamp01(Math.sin(Math.PI * ang / 360) * 1.2)).toFixed(3);
+
+    // ── Rótulos (MG-02): barra, caja por barrido y salida limpia
+    [].forEach(([id, t0, hold]) => {
+      const el = $(id), a = expoOut(prog(t, t0, 0.5)), b = easeIn(prog(t, t0 + hold, 0.3));
+      const vis = t >= t0 && t < t0 + hold + 0.3;
+      el.style.opacity = vis ? 1 : 0;
+      el.querySelector(".bar").style.transform = `scaleY(${a.toFixed(3)})`;
+      el.querySelector(".box").style.clipPath = `inset(0 ${(100 * (1 - expoOut(prog(t, t0 + 0.12, 0.5)))).toFixed(1)}% 0 0)`;
+      el.style.transform = `translateX(${(-80 * b).toFixed(1)}px)`; if (b > 0) el.style.opacity = (1 - b).toFixed(3);
+    });
+
+    // ── Acento final: «Este febrero,» en «antes» y cae «no.» en «febrero»
+    const a1 = expoOut(prog(t, 58.84, 0.5)), a2 = clamp01(backOut(prog(t, 59.56, 0.4)));
+    $("accent").style.opacity = a1.toFixed(3);
+    $("accent").style.clipPath = `inset(0 ${(100 * (1 - a1)).toFixed(1)}% 0 0)`;
+    $("a2").style.transform = `scale(${t >= 59.56 ? mix(0.3, 1, a2).toFixed(3) : 0})`;
+    // golpe de cámara corto en «no.» (2.º de 3 del vídeo)
+    if (t >= 59.56 && t < 60.0) { const h = Math.exp(-14 * (t - 59.56)) * Math.sin(40 * (t - 59.56)); $("vwrap").style.transform += ` translateY(${(10 * h).toFixed(2)}px)`; }
+  }
+
+  const clock = { t: 0 };
+  const tl = gsap.timeline({ paused: true });
+  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(clock.t) }, 0);
+  render(0);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+})();
+</script>
+</body>
+</html>

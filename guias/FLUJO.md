@@ -112,6 +112,8 @@ videos/VID-0001/
 3. Antes de borrar nada del equipo, confirma que la copia está íntegra. Borrar es decisión de Ale.
 4. Para restaurar, copia de vuelta a `media/` y ejecuta `marco.py medios VID-0001 --comprobar`.
 
+**Trabajar en varios equipos:** `git pull` trae los documentos y `MEDIOS.csv`, no los medios. Copia `media/` del otro equipo (disco o nube) y comprueba con `marco.py medios VID-NNNN --comprobar`; si un archivo llegó con otro nombre pero su SHA-256 coincide, se renombra al del inventario. **No ejecutes `marco.py medios VID-NNNN` sin `--comprobar` en un equipo al que le faltan medios:** reescribe el inventario con lo que hay en disco y borra las filas de lo que no está. En ese caso, añade solo las filas nuevas.
+
 El máster aprobado se identifica por su SHA-256 en `CIERRE.md`. En otro equipo sin los medios, el validador avisa pero no falla. Si el archivo está y no coincide, falla.
 
 ## Retomar el trabajo en otra sesión o herramienta

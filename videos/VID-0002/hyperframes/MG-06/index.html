@@ -329,8 +329,8 @@
     if (tap) {
       const dIn = prog(t, tap.t - 0.12, 0.12), dOut = prog(t, tap.t + 0.1, 0.2), r = prog(t, tap.t + 0.03, 0.35);
       td.style.left = tr.style.left = tap.x + "px"; td.style.top = tr.style.top = tap.y + "px";
-      td.style.opacity = (dIn * (1 - dOut)).toFixed(3); td.style.transform = `scale(${mix(0.6, 1, dIn).toFixed(3)})`;
-      tr.style.opacity = (t >= tap.t ? 1 - r : 0).toFixed(3); tr.style.transform = `scale(${mix(1, 1.9, easeOut(r)).toFixed(3)})`;
+      // v04 (2026-11-18): sin punto ni anillo de toque (MOTION §4); el toque se nota por la presión del botón y el cambio de estado
+      td.style.opacity = 0; tr.style.opacity = 0;
     } else { td.style.opacity = 0; tr.style.opacity = 0; }
     TAPS.forEach((T) => { if (T.el) $(T.el).style.transform = `scale(${(1 - 0.04 * pressAt(t - T.t)).toFixed(4)})`; });
   }

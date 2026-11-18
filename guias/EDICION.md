@@ -87,10 +87,15 @@ Propuesta AV-009, probada en el ensayo de edición del 2026-11-17 (`videos/VID-0
 | Cambio de tramo | El escenario no sube y baja entre tramos seguidos: la barra «/» cruza en diagonal y el contenido cambia detrás de ella, como una cortina |
 | Tramos a cámara | Se usan para respirar y para lo que no conviene ilustrar (por ejemplo, un castigo que la ficha del producto evita). Pueden llevar elementos ligeros junto a la cara |
 | Sistema pequeño | Marca v2 sin color de acento, iconos lineales en blanco roto, la barra como conector, notas pequeñas en mayúsculas con tracking para la fuente de un dato |
+| Cara siempre | La cara se ve en todo el vídeo (≥ 60 % del tiempo a pantalla, entera o abajo en el escenario). La pantalla completa sin cara es una excepción de ≤ 4 s. Presupuesto por tramo en el `PLAN.md` antes de animar: escenario ≤ 6 s seguidos con el mismo gráfico quieto |
+| La demo, en una ventana | La interfaz va en una ventana del escenario (y 330–850) con la cara abajo. La cámara trabaja por **planos de grupo de interfaz** (pregunta y campo, tarjetas, campos del plan, resultado…), medidos sobre la maqueta, con acercamientos y alejamientos de 0,5–0,6 s y zoom ≤ 0,9. Ningún plano parte un campo o un botón. La ventana cambia de ancho con el zoom para que no queden franjas |
+| Banda de subtítulos | Fija en cada modo (y ≈ 862 en el escenario, y ≈ 1190 a cámara) y nunca ocupada por gráficos ni interfaz. Si un grupo no cabe en 980 px, se encoge (estimación por caracteres, sin medir el DOM) |
+| Cortes de voz | Solo en un **silencio medido** (< −60 dB en ventanas de 10 ms) y en final de frase. Nunca a mitad de una frase que sigue, aunque la transcripción diga que ahí acaba una palabra: sus tiempos fallan. Script de referencia: `videos/VID-0002/hyperframes/edicion/cortes.py` |
+| Una idea, 40–55 s | La duración se decide en el guion. Las digresiones se quedan en una frase con un gráfico o van a otro vídeo |
 
 **Estándar:** cada evento de la capa sigue [MOTION](MOTION.md) (tamaños, curvas, transiciones, sonido, recetas de video-shotcraft y del catálogo de HyperFrames, y la revisión).
 
-**Orden de trabajo:** primero el corte, después la capa. Los tiempos por palabra de la versión cortada son la base; con el bruto solo se puede planificar. Es el flujo que salió bien en VID-0002 el 2026-11-17 («ha quedado muchísimo mejor»). El ejemplo completo está en `videos/VID-0002/hyperframes/edicion/` (`PLAN.md`, `index.html`, `mezcla.py`).
+**Orden de trabajo:** primero el corte (en silencios medidos), después la capa. Antes de enseñar el corte, una revisión con la hoja de 1 fotograma por segundo y el formato de `REVIEW.md` (no después de entregar). Los tiempos por palabra de la versión cortada son la base; con el bruto solo se puede planificar. Es el flujo que salió bien en VID-0002 el 2026-11-17 («ha quedado muchísimo mejor»). El ejemplo completo está en `videos/VID-0002/hyperframes/edicion/` (`PLAN.md`, `index.html`, `mezcla.py`).
 
 | paso | quién | qué | sale |
 |---|---|---|---|

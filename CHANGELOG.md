@@ -2,6 +2,10 @@
 
 ## Sin publicar
 
+- **Edición de VID-0002 v04** (2026-11-18): revisión completa de la v01 (`videos/VID-0002/hyperframes/edicion/REVIEW.md`) y arreglos: la demo en una ventana del escenario con la cara siempre visible y planos por grupo de interfaz con zoom; subtítulos en banda fija que caben en el ancho; sin anillo de toque; cortes de voz en silencios medidos (`cortes.py`); voz mejorada de Ale; 43 efectos.
+- [EDICION](guias/EDICION.md) y [MOTION](guias/MOTION.md): reglas nuevas de la edición continua (cara siempre, demo en ventana, banda de subtítulos, cortes en silencio, una idea en 40–55 s) y lista de comprobación ampliada.
+- [TECNICA](guias/TECNICA.md): cortes y mezcla compartiendo `KEEP`, voz mejorada aparte, recompresiones, banco de sonidos en otro equipo, etiqueta de IA, música de tendencia y Buffer. Propuesta **AV-012**: dos másteres por vídeo.
+- [FLUJO](guias/FLUJO.md): cómo trabajar con los medios en varios equipos sin romper `MEDIOS.csv`.
 - VID-0002: decisiones de Ale para regrabar el vídeo final. C1 pasará de «la mitad» a «la mayoría», con el aviso de que sin fuente se sostiene «mucha gente». C10: «libres» significa código abierto.
 - **Edición continua de VID-0002 v01** (2026-11-17): sobre el corte de Ale en CapCut (63,25 s). Composición `videos/VID-0002/hyperframes/edicion/` con tres modos (cámara, escenario y maqueta a pantalla completa), unos 45 eventos ligados a la voz, subtítulos propios y mezcla con `mezcla.py`: 63 efectos y música del banco de Pixabay de Ale, a −14 LUFS. Ale: «ha quedado muchísimo mejor».
 - El flujo completo, de diez pasos y probado, está en [EDICION → Edición continua](guias/EDICION.md#edición-continua). Los trucos técnicos (Parakeet frase a frase, fotogramas clave, re-anclar con `WARP`) están en [TECNICA](guias/TECNICA.md).

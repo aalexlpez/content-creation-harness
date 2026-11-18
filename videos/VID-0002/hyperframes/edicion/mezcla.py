@@ -10,13 +10,39 @@ Estándar: guias/MOTION.md §6.
   - Música lofi en todo el vídeo, unos 16–18 dB bajo la voz, fundido de 0,2 s al final.
   - Voz con compresión suave; total a −14 LUFS y pico ≤ −1,5 dBFS (dos pasadas: mide y corrige).
 Solo biblioteca estándar + ffmpeg.
+
+v02 (2026-11-18, arreglos de REVIEW.md):
+  - Los tiempos de CUES siguen en el corte v01 (63,25 s). KEEP dice qué tramos se conservan en el
+    corte v02 (49,66 s): cada efecto se traslada a su tiempo nuevo y los que caen en un tramo
+    quitado se descartan. Sin KEEP (KEEP = None) la mezcla funciona como en la v01.
+  - Menos efectos (de 63 a ~35): fuera los clics de la semana, la mitad de las marcas de enero,
+    la mitad de los pops de obstáculos y los de los rótulos y el link quitados.
+  - Música 3 dB más baja durante la demo (DEMO) y fundido al final del vídeo real.
+  - Voz mejorada por Ale: compresión más suave (2:1 desde −18 dB) para no comprimir dos veces.
 """
 import array, json, os, re, subprocess, sys
 
-BANCO = r"C:/Users/aalex/Documents/proyectos/referencias/banco_audios/"
+# En otro equipo, la ruta se cambia con la variable de entorno BANCO_AUDIOS.
+BANCO = os.environ.get("BANCO_AUDIOS", r"C:/Users/aalex/Documents/proyectos/referencias/banco_audios/").rstrip("/\\") + "/"
 FPS = 30.0
 SR = 48000
-FIN = 63.25
+FIN = 63.25   # se recalcula con la duración real del vídeo de entrada
+
+# Tramos del corte v01 que se conservan en el corte v02 (tiempo viejo). None = sin recortes.
+KEEP = [(0.0, 32.60), (33.60, 49.00), (49.86, 52.20), (56.64, 60.15), (61.62, 63.25)]   # = cortes.py
+DEMO = (22.70, 41.97)   # tramo de la demo (tiempo viejo): música −3 dB
+
+
+def nuevo(t):
+    """Tiempo del corte v02 para un tiempo del v01; None si cae en un tramo quitado."""
+    if KEEP is None:
+        return t
+    acc = 0.0
+    for a, b in KEEP:
+        if a <= t < b:
+            return acc + (t - a)
+        acc += b - a
+    return None
 
 # (evento s, archivo, recorte inicio, recorte fin, pico objetivo dBFS, nota)
 # recorte: números en s; "pk-0.05" = desde 50 ms antes del pico del archivo; None = hasta el final del tramo audible
@@ -28,26 +54,25 @@ CUES = [
     # T2 · el problema
     (4.56, "whoosh_basico.mp3", 0.0, 0.58, -14, "baja el escenario"),
     *[(5.18 + 1.15 * (1 - (1 - i / 14) ** 1.6), "pencil_scribble_short.mp3" if k % 2 == 0 else "scribble-pencil.mp3",
-       0.0, 0.29 if k % 2 == 0 else 0.3, -15 - 1.2 * k, "marca de enero (acelera, volumen en escalera)") for k, i in enumerate(range(0, 14, 2))],
+       0.0, 0.29 if k % 2 == 0 else 0.3, -15 - 1.5 * k, "marca de enero (acelera, volumen en escalera)") for k, i in enumerate(range(0, 14, 4))],
     (6.41, "scribble-pencil.mp3", 0.3, 1.0, -16, "se para a mitad de mes"),
     (7.05, "whoosh_fast-simple-chop.mp3", 0.0, 0.55, -16, "las marcas caen"),
     (8.23, "whoosh_esquiva.mp3", 0.0, 0.53, -14, "cortina «/» a ¿Y ESE DÍA?"),
-    *[(9.3 + 0.12 * k, "mouse-click-sfx.mp3", 0.0, 0.15, -24 - 0.6 * n, "check de la semana") for n, k in enumerate([0, 1, 2, 4, 5, 6])],
     (11.24, "pop.mp3", 0.19, 0.31, -13, "el jueves crece"),
     (12.31, "pop-universfield-bubble.mp3", 0.0, 0.18, -14, "SIN GANAS"),
     # T3 · la solución
     (12.69, "whoosh_basico.mp3", 0.0, 0.58, -16, "sube el escenario"),
-    (14.55, "click-photos.mp3", 0.0, 0.84, -15, "rótulo Plan B"),
     (16.80, "whoosh_esquiva.mp3", 0.0, 0.53, -15, "baja el escenario"),
+    (17.10, "scribble-pencil.mp3", 0.3, 0.75, -18, "precio tachado"),
     (17.24, "pop.mp3", 0.19, 0.31, -13, "GRATIS"),
     (18.84, "pop-universfield-bubble.mp3", 0.0, 0.18, -14, "PARA ESE DÍA"),
     (21.64, "light-switch.mp3", 0.0, 0.25, -16, "01 /"),
     # T4 · la demo (maqueta)
-    (22.75, "whoosh_largo_misterioso.mp3", 0.47, 1.71, -14, "la tarjeta se vuelve la maqueta"),
+    (22.75, "whoosh_largo_misterioso.mp3", 0.47, 1.71, -15, "entra la ventana de la demo"),
     (23.80, "iphone_typing.mp3", 0.28, 1.48, -21, "tecleo del propósito"),
     (26.12, "page-turn.mp3", 0.0, 0.55, -15, "salto a febrero"),
     *[(26.87 + 0.13 * i, "pop.mp3" if i % 2 == 0 else "pop-universfield-bubble.mp3", 0.19 if i % 2 == 0 else 0.0,
-       0.31 if i % 2 == 0 else 0.18, -14 - 1.6 * i, "tarjeta de obstáculo") for i in range(6)],
+       0.31 if i % 2 == 0 else 0.18, -14 - 1.6 * i, "tarjeta de obstáculo") for i in range(0, 6, 2)],
     (29.60, "screen-tap.mp3", 0.40, 0.70, -11, "toque en «No tuve tiempo»"),
     (31.50, "whoosh_fast-simple-chop.mp3", 0.0, 0.55, -16, "paso 3"),
     (33.62, "iphone_typing.mp3", 2.58, 3.78, -21, "tecleo «Si…»"),
@@ -63,16 +88,14 @@ CUES = [
     (45.68, "click-photos.mp3", 0.0, 0.84, -16, "1 POR SEMANA"),
     (46.61, "pop-universfield-bubble.mp3", 0.0, 0.18, -14, "icono productividad"),
     (47.81, "pop.mp3", 0.19, 0.31, -14, "icono ciencia"),
-    (49.48, "pop-universfield-bubble.mp3", 0.0, 0.18, -14, "icono minijuegos"),
+    (49.92, "pop-universfield-bubble.mp3", 0.0, 0.18, -14, "icono minijuegos"),
     (51.06, "whoosh_fast-simple-chop.mp3", 0.0, 0.55, -16, "la fila se aleja"),
     (54.04, "switch-toggle.mp3", 0.0, 0.46, -15, "LIBRES"),
     (54.60, "light-switch.mp3", 0.0, 0.25, -15, "GRATIS"),
     *[(55.24 + 0.14 * k, "pop.mp3", 0.19, 0.31, -17 - 3 * k, "personas") for k in range(3)],
     # T7 · llamada a la acción
     (56.50, "whoosh_esquiva.mp3", 0.0, 0.53, -15, "sube el escenario"),
-    (57.85, "click-photos.mp3", 0.0, 0.84, -15, "rótulo ARMA TU PLAN B"),
     (59.56, "cinematic-riser-impact.mp3", "pk-0.05", 3.21, -9, "«no.» final (golpe 3 de 3)"),
-    (61.15, "benkirb-shine.mp3", 0.0, 1.0, -20, "link en el perfil"),
 ]
 MUSICA = ("watrfallkero-lofi-beat-chill.mp3", 18.0)   # dB bajo la voz (LUFS integrados)
 
@@ -103,13 +126,20 @@ def lufs(path_or_args):
 
 
 def main(src, out):
+    global FIN
+    FIN = float(run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", src]).stdout.strip())
     work = os.path.join(os.path.dirname(os.path.abspath(out)), "mezcla_tmp"); os.makedirs(work, exist_ok=True)
     inputs, filt, labels, log = ["-i", src], [], [], []
     # voz: compresión suave
-    filt.append("[0:a]aresample=48000,aformat=channel_layouts=mono,acompressor=threshold=-20dB:ratio=3:attack=8:release=120:makeup=1[voz]")
+    filt.append("[0:a]aresample=48000,aformat=channel_layouts=mono,acompressor=threshold=-18dB:ratio=2:attack=10:release=150:makeup=1[voz]")
     labels.append("[voz]")
     vI, _ = lufs(["-i", src, "-vn"])
-    for n, (t, f, a, b, pk_db, note) in enumerate(CUES):
+    usados = 0
+    for n, (t_v01, f, a, b, pk_db, note) in enumerate(CUES):
+        t = nuevo(t_v01)
+        if t is None or t > FIN - 0.2:
+            continue                                   # el evento cae en un tramo recortado
+        usados += 1
         path = BANCO + f
         if isinstance(a, str):
             x = pcm(path); i, _ = peak(x); a = max(0.0, i / SR + float(a[2:]))
@@ -125,13 +155,15 @@ def main(src, out):
         k = len(labels)
         filt.append(f"[{k}:a]aresample=48000,aformat=channel_layouts=mono,afade=t=out:st={max(0, b - a - 0.04):.3f}:d=0.04,volume={gain:.2f}dB,adelay={d}|{d}[s{k}]")
         labels.append(f"[s{k}]")
-        log.append({"t": round(t, 3), "archivo": f, "recorte": [round(a, 3), round(b, 3)], "pico_en": round(lag, 3), "entra": round(start, 3), "pico_dbfs": pk_db, "nota": note})
+        log.append({"t_v01": t_v01, "t": round(t, 3), "archivo": f, "recorte": [round(a, 3), round(b, 3)], "pico_en": round(lag, 3), "entra": round(start, 3), "pico_dbfs": pk_db, "nota": note})
     # música: nivel relativo a la voz
     mpath = BANCO + MUSICA[0]
     mI, _ = lufs(["-t", "60", "-i", mpath])
     mg = (vI - MUSICA[1]) - mI
     inputs += ["-i", mpath]; k = len(labels)
-    filt.append(f"[{k}:a]aresample=48000,aformat=channel_layouts=mono,atrim=0:{FIN},afade=t=in:st=0:d=0.3,afade=t=out:st=63.0:d=0.2,volume={mg:.2f}dB[mus]")
+    d0, d1 = (nuevo(DEMO[0]) or 0.0), (nuevo(DEMO[1] - 0.01) or 0.0)
+    filt.append(f"[{k}:a]aresample=48000,aformat=channel_layouts=mono,atrim=0:{FIN},afade=t=in:st=0:d=0.3,afade=t=out:st={FIN - 0.25:.2f}:d=0.2,"
+                f"volume={mg:.2f}dB,volume=-3dB:enable='between(t,{d0:.2f},{d1:.2f})'[mus]")
     labels.append("[mus]")
     filt.append(f"{''.join(labels)}amix=inputs={len(labels)}:normalize=0:duration=first,atrim=0:{FIN}[mix]")
     tmp = os.path.join(work, "mezcla_cruda.wav")
@@ -149,7 +181,7 @@ def main(src, out):
     if r.returncode: print(r.stderr[-2000:]); sys.exit(1)
     json.dump({"voz_lufs": vI, "musica_ganancia_db": round(mg, 2), "final_lufs": I2, "final_pico_dbfs": P2, "efectos": log},
               open(os.path.splitext(out)[0] + "_mezcla.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    print(f"{len(CUES)} efectos + música ({mg:+.1f} dB) · voz {vI:.1f} LUFS -> final {I2:.1f} LUFS, pico {P2:.1f} dBFS -> {out}")
+    print(f"{usados} efectos + música ({mg:+.1f} dB) · voz {vI:.1f} LUFS -> final {I2:.1f} LUFS, pico {P2:.1f} dBFS -> {out}")
 
 
 if __name__ == "__main__":

@@ -72,6 +72,14 @@ HyperFrames es el motor de animación principal (AV-001). Si falla en una prueba
   - `composition_file_too_large`, porque un solo `index.html` con `render(t)` es más fácil de sincronizar.
 - **Catálogo:** `npx hyperframes@0.9.42 catalog --json` lista 448 bloques y componentes con video de muestra. Antes de instalar uno (`hyperframes add`), Ale lo aprueba.
 
+### Aprendido el 2026-11-18 (edición v04 de VID-0002)
+
+- **Cortes:** se generan con un script que corta imagen y voz a la vez en tramos `KEEP` medidos sobre la voz (`cortes.py`). La composición sigue escrita en los tiempos del corte anterior y `render()` traduce el tiempo nuevo al viejo; `mezcla.py` traslada los efectos con el mismo `KEEP` y descarta los que caen en tramos quitados. Si cambia `KEEP`, cambia en los tres.
+- **Voz mejorada aparte:** si Ale mejora el audio fuera (limpieza de ruido), su archivo sustituye a la voz del corte con la misma duración; la mezcla se rehace sin tocar la imagen. Mejor en WAV que en MP3.
+- **Recompresiones:** cada versión parte del original, no de la anterior, pero dentro de una versión hay dos compresiones de imagen (corte CRF 17 y render CRF 16) y varias de audio. Para no perder: intermedio sin pérdida (H.264 `-crf 0` o ProRes) y render final con `--quality delivery`; audio en WAV hasta la mezcla. Las vistas previas a media resolución son solo para mirar.
+- **Banco de sonidos en otro equipo:** `mezcla.py` lee la ruta del banco de la variable `BANCO_AUDIOS` (por defecto, la del primer equipo).
+- **`hyperframes check`** avisa de subtítulos que no dan tiempo a leer (`line_unread`); se corrige uniendo palabras sueltas al grupo anterior.
+
 ## Montaje (CapCut Desktop gratis o Shotcut)
 
 Decisión vigente (D-EDIT): CapCut Desktop **gratis** como editor final y Shotcut como alternativa libre. Sin funciones de pago ni pruebas Pro.
@@ -117,3 +125,6 @@ Compara el mismo fotograma del original y del exportado en el mismo reproductor.
 - Al publicar, Ale da la URL real y Claude la añade en CIERRE → Publicaciones con la fecha. Si una red falla, anota la causa en `notas` y sigue con las demás.
 - Una cuenta solo puede usarse si está `VERIFICADA` en `marca/CUENTAS.csv`.
 - Divulgación: si el vídeo promociona un producto propio, revisa las normas de contenido de marca de cada red.
+- **Etiqueta de IA:** las redes piden marcar el contenido **realista** creado o alterado con IA (voz clonada, cara o escenas generadas). No hace falta por subtítulos, gráficos, guion con ayuda de IA, efectos de biblioteca ni por limpiar la propia voz. Se decide en cada publicación y se anota en CIERRE; las normas cambian, así que se revisan en cada red.
+- **Música de tendencia:** solo se usa **dentro de la app** de cada red (TikTok, Instagram, Shorts), con su licencia. Nunca se mezcla en el archivo una canción comercial: provoca reclamaciones, silencio o bloqueo. Por eso cada vídeo tiene dos másteres (propuesta AV-012): **sin música** (voz y efectos) para añadir el sonido de tendencia en la app, y **con música libre** (banco de Pixabay) para publicación directa. Las cuentas de empresa solo tienen la biblioteca comercial de cada red.
+- **Buffer:** publica por la API y no permite elegir sonidos de la app. Para tendencias, usar su **publicación por notificación** (TikTok) o recordatorio (Instagram) y terminar en la app añadiendo el sonido; para YouTube y Facebook, publicación directa con el máster con música libre. Confirmar las opciones actuales de Buffer antes de planificar.

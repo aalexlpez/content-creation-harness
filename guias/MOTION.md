@@ -183,3 +183,8 @@ Puntos de partida. La carta o la pieza se lee antes de usarla y se viste con la 
 - [ ] 3–5 tipos de transición, cada uno con su causa.
 - [ ] Cada sonido tiene causa visible, pico un fotograma después de la imagen, licencia registrada; mezcla entre −16 y −14 LUFS y ≤ −1 dBTP.
 - [ ] `check` limpio, `snapshot --review` mirado (hoja de 360 px incluida), `REVIEW.md` escrito y revisión independiente hecha.
+- [ ] La cara se ve ≥ 60 % del vídeo; ningún tramo a pantalla completa sin cara de más de 4 s.
+- [ ] Cada corte de voz cae en un silencio medido y en final de frase.
+- [ ] Ningún subtítulo se sale del ancho ni pisa la interfaz; la banda de subtítulos está libre en todos los modos.
+- [ ] En la demo, ningún plano parte un campo o un botón y nada se lee por debajo de 28 px en el render.
+- [ ] Hay dos másteres: sin música (para sonidos de tendencia en la app) y con música libre.

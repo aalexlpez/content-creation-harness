@@ -52,6 +52,9 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 - Mezcla (voz, música, efectos): `hyperframes/edicion/mezcla.py`: voz con compresión suave (-17.4 LUFS de origen), 63 efectos del banco de Pixabay recortados a su tramo audible con el pico 1 fotograma después del evento (detalle en `media/trabajo/edicion_v01_mezcla.json`), música lofi en todo el vídeo 18 dB bajo la voz; total -14.2 LUFS, pico -1.1 dBFS. Medido, no escuchado por Claude
 - Subtítulos: Propios, quemados en la composición: Plus Jakarta Sans ExtraBold 58 px, 2–4 palabras, palabra activa invertida; y 862 en el escenario y 1190 a cámara; sobre la maqueta, en cajas marinas
 
+- Edición v03 (2026-11-18): arreglos de `hyperframes/edicion/REVIEW.md` (demo en ventana del escenario con la cara siempre visible, subtítulos en banda fija, sin anillo de toque, recortes de voz a 49,66 s, textos más grandes, 39 efectos) con la voz mejorada de Ale (`media/trabajo/voz_mejorada_v2.mp3`). Entrega `media/trabajo/edicion_v03.mp4`, −14,4 LUFS, pico −3,7 dBFS
+- Edición v04 (2026-11-18): correcciones de Ale sobre la v03 (cortes en silencios medidos y finales de frase con `cortes.py`, «La serie» hasta «cualquier ámbito», demo encuadrada por grupos de interfaz con zoom, subtítulos que caben en el ancho). Entrega `media/trabajo/edicion_v04.mp4`, 55,48 s, −14,4 LUFS, pico −4,3 dBFS
+
 ## Correcciones
 
 | ronda | tiempo | defecto | cambio | verificado |
