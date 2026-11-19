@@ -63,6 +63,21 @@ Un guion de este marco es a la vez **texto para decir** y **plan de montaje**. C
 4. Si los dos fallan, **una** reescritura. Si siguen fallando, el problema está en la idea, no en las palabras.
 5. No empieces con «Hola, soy…». Abre con acción o con el conflicto. La presentación, si hace falta, después de ganarte los primeros segundos.
 
+## 3 bis. Retención: picos y encadenado
+
+Reglas que se repiten en los vídeos cortos que retienen (sin cifras propias todavía; se medirán con METRICAS):
+
+1. **Gancho triple en 0–2 s:** voz, imagen y texto cuentan lo mismo a la vez.
+2. **Brecha de curiosidad:** el gancho abre una pregunta que solo responde el vídeo.
+3. **Concreto mejor que abstracto:** una escena («jueves, 8 de la noche») vale más que un concepto («falta de motivación»).
+4. **Segundo gancho a los 3–6 s:** una frase que sube la apuesta cuando el espectador decide si se queda.
+5. **«Pero» o «por eso», no «y entonces»:** cada frase empuja a la siguiente con un giro o una consecuencia.
+6. **El valor antes del 70 %:** el resultado aparece pronto, no al final.
+7. **Tres picos, uno por tercio** (gancho, revelación y cierre), cada uno con golpe de música, corte y palabra protagonista. Entre picos, un cambio de imagen cada 2–4 s.
+8. **Final que responde al inicio:** la última frase cierra lo que abrió la primera y el último plano encaja con el primero, para el bucle.
+
+**Tipos de gancho:** confesión (primera persona, solo si es verdad), contraste («Planeaste X. ¿Planeaste Y?»), escena concreta, contraria («no falla por A, falla por B»), advertencia y pregunta directa. Se escriben varios, se puntúan y se graban 2–3 tomas del segundo mejor como alternativa. Un gancho tiene que funcionar **el día que se publica** (VID-0003: «Es febrero…» no servía para el 1 de enero).
+
 ## 4. Voz y estilo
 
 - Primera persona, natural y concreta: «creé», «voy a probar», «todavía no funciona».

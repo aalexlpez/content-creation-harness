@@ -4,9 +4,9 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 ## Control
 
-- Estado: BORRADOR
+- Estado: GUION_APROBADO
 - Bloqueo: NINGUNO
-- Siguiente_paso: Ale decide guion (mismo de VID-0002 o nuevo de 35–40 s, ver GUION → Notas de revisión); después `/guion VID-0003` y `/rodaje VID-0003` con la configuración vigente de SET
+- Siguiente_paso: `/rodaje VID-0003` (lista de tomas y comprobaciones con la configuración vigente de SET) y grabar; la interpretación de cada frase está en GUION_BEATS.md
 - Perfil_visual: v2
 - Perfil_tecnico: 1080x1920 · 30 fps · H.264 · SDR BT.709 · AAC 48 kHz
 - Editor: PENDIENTE
@@ -56,3 +56,4 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 
 ## Historial
 
+- 2026-11-19 · OK-2 · v01 · 1a610d493b2d · Ale en chat, 2026-11-19: «OK-2 para VID-0003»
