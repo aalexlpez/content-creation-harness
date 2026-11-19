@@ -11,6 +11,53 @@
 
 ---
 
+## Configuración vigente (2026-11-19)
+
+> **Lee esto primero.** Resume lo probado con Ale el 2026-11-19 tras VID-0002 v06 y manda sobre las secciones de abajo donde no coincidan. **Ahora solo hay un celular: el POCO F5** (el Galaxy S24+ ya no está disponible; las menciones a dos cámaras quedan como referencia).
+
+**Por qué importa:** en los vídeos profesionales, la mayor parte del look sale de la luz y de la cámara; el color en edición (look B, LUT) solo pule. El POCO F5 graba en 8 bits y **no tiene LOG ni 10 bits**: lo que no se capture bien no se recupera.
+
+### Cámara: POCO F5, modo Pro de vídeo
+
+| Ajuste | Valor | Por qué |
+|---|---|---|
+| Resolución y fps | **4K a 30 fps**, lente **W (1×)** | El 4K deja margen para recortar 1,5–2× en edición (el vídeo final es 1080×1920); el UW deforma la cara |
+| Obturación | **1/50 fija** | Red de 50 Hz en España: sin parpadeo y movimiento natural. No se toca para exponer |
+| ISO | **El más bajo que deje la cara bien expuesta: 100–400** | ISO 400 sigue siendo aceptable; por encima de 800 la piel se ve «encerada» por la reducción de ruido |
+| Balance de blancos | **5600 K manual** en el set (softbox de 5700 K) | Fuera del set (luz de oficina, ≈ 3000–4000 K) 5600 K sale naranja: allí, automático |
+| Enfoque | **Manual** sobre los ojos, con **pico de enfoque** | El automático va y viene con las manos. Si no hay quien ayude, automático (la prueba del 2026-11-19 se hizo así) |
+| EV | 0 | — |
+| Herramientas | **Histograma** y **Verificar exposición** activados | La cara, en la parte media-alta del histograma; sin rayas en frente ni nariz; la pared, más oscura que la cara |
+
+**Ajustes de la app de cámara (engranaje):**
+- **Tasa de fotogramas automática: desactivada.** Con poca luz bajaría los fps.
+- **Estabilización de imagen: desactivada** en trípode.
+- **Anti bandas: 50 Hz.**
+- **Conservar los ajustes: activado** para el modo Pro (todas las sesiones igual).
+- **Codificador:** H.264 por defecto; H.265 da algo más de calidad solo si CapCut lo abre en el PC (probar 5 s antes).
+- **Guardar información de ubicación: desactivada** (los originales llevarían las coordenadas de casa).
+
+**Exposición, en este orden:** (1) acercar el softbox a la cara; (2) reflector plateado al otro lado; (3) subir el ISO hasta 400; (4) la obturación no se toca. **No grabar oscuro para aclarar después:** en 8 bits salen ruido, escalones en la pared y piel sin detalle. Si con ISO 400 y el softbox a 60 cm sigue oscuro, el límite es la potencia de la luz (bombilla más potente o segunda luz: compra que decide Ale; comprobar antes que el portalámparas la admite).
+
+### Luz y posiciones
+
+| Elemento | Posición |
+|---|---|
+| **Cámara** | A la altura de los ojos y **recta** (inclinarla mete techo o suelo), a **1–1,2 m** de Ale |
+| **Softbox** | De lado, **45–60°** respecto a la cámara, un poco por encima de los ojos e inclinado hacia abajo, a **50–70 cm de la cara** (no de la cámara). En vertical, con el borde apuntando a la cara (*feathering*): luz más suave y menos luz en la pared |
+| **Reflector** | Lado contrario, fuera de cuadro: cara **negra** para más volumen o **blanca** para algo más suave |
+| **Luz azul o RGB** | Detrás de Ale, del lado contrario al softbox, apuntando a pelo y hombros (separa la camiseta negra y el pelo oscuro del fondo) |
+| **Fondo** | Ale a **1 m o más** de la pared; **no acercarse a la pared**. La pared, más oscura que la cara. Un punto de luz cálida o un objeto (planta, estantería) rompe la pared lisa |
+
+### Encuadre: grabar abierto y recortar en edición
+
+Se encuadra **más abierto** de lo que se quiere ver: si en los bordes de la toma 4K salen techo, suelo o el borde del softbox, Claude recorta en edición (del pecho a un poco por encima de la cabeza). Un recorte de 1,5× todavía deja margen para acercamientos en las frases clave. **Antes de cada sesión:** grabar 5 s con los ajustes y pasarlos a Claude, que dice qué recorte tendrá el vídeo y si algo cae dentro; si cae, se mueve el softbox (más de lado o más alto), no la persona.
+
+### Color en edición
+
+- Look de la serie: **look B** (EDICION → Color), aplicado con ffmpeg antes de componer.
+- En prueba: el LUT **«cine cálido» v02** para tomas Rec.709 del celular (`marca/color/`; ver su README). Probado solo en una toma de oficina subexpuesta; falta probarlo en el set. No se aplica encima del look B (se suman).
+
 ## 1. Inventario consolidado
 
 | Equipo | Modelo / dato identificado | Estado | Función principal |

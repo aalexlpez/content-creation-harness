@@ -6,7 +6,7 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 - Estado: BORRADOR
 - Bloqueo: NINGUNO
-- Siguiente_paso: Ale ve la v05 en el celular y decide si hay una ronda de correcciones; después, grabar el vídeo final en otro expediente con los cambios de C1 y C10 del GUION
+- Siguiente_paso: Cerrado como ensayo 2 con la edición v06f. El ensayo 3 sigue en VID-0003 (set nuevo, POCO F5 y edición v06 como estándar)
 - Perfil_visual: v2
 - Perfil_tecnico: 1080x1920 · 30 fps · H.264 · SDR BT.709 · AAC 48 kHz
 - Editor: PENDIENTE
@@ -70,5 +70,11 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 
 - 2026-11-16 · Estado → BORRADOR
 - 2026-11-18 · Edición v05 (plan aprobado por Ale): textos en tres niveles, cortes con encuadres alternos, cinco transiciones con causa, insertos en la demo, música que baja al hablar y dos másteres
+- 2026-11-19 · Edición v06f: `media/trabajo/edicion_v06f.mp4` y `edicion_v06f_sin_musica.mp4`. Look B de color y piel elegido por Ale, aplicado con ffmpeg en `preparar.py` (`PLAN_v06.md` §8)
+- 2026-11-19 · Edición v06e: `media/trabajo/edicion_v06e.mp4` y `edicion_v06e_sin_musica.mp4` (−14,1 LUFS, pico −1,4 dBFS). La demo es la app REAL de staging grabada con `hyperframes/v06/demo/grabar.mjs` (fecha emulada en enero de 2027), en un celular de proporción real; sin maqueta (`PLAN_v06.md` §8)
+- 2026-11-19 · Edición v06d: `media/trabajo/edicion_v06d.mp4` y `edicion_v06d_sin_musica.mp4`. Empieza con la cara de Ale y R01 como tarjeta en el pecho (`PLAN_v06.md` §8)
+- 2026-11-19 · Edición v06c: `media/trabajo/edicion_v06c.mp4` y `edicion_v06c_sin_musica.mp4`. Quita el salto entre «nuevo» y «calma» (la deriva de cámara se reiniciaba sin corte; ver `PLAN_v06.md` §8)
+- 2026-11-19 · Edición v06b (correcciones de Ale): `media/trabajo/edicion_v06b.mp4` y `edicion_v06b_sin_musica.mp4` (56,58 s, −14,1 LUFS, pico −1,4 dBFS). Sin apertura en frío (empieza con la voz y R01), R01–R04 de ≈ 1,65 s y flechas que se van con su tarjeta (`PLAN_v06.md` §8)
+- 2026-11-19 · Edición v06: `media/trabajo/edicion_v06.mp4` (con música) y `edicion_v06_sin_musica.mp4` (57,77 s, −14,1 LUFS, pico −1,3 dBFS). Composición `hyperframes/v06/` con recursos de stock R01–R04 y R07–R09, la pista `top-flow-happy-rock.mp3` montada por compases, apertura en frío y demo en un celular en perspectiva (plan en `PLAN_v06.md` §8). Mezcla medida, no escuchada por Claude. Falta el enlace de cada recurso y de la canción para Derechos
 - 2026-11-18 · Ensayo 3 «flotante»: `media/trabajo/flotante_v01.mp4` y `flotante_v01_sin_musica.mp4` (composición en `hyperframes/flotante/`, plan en `PLAN_flotante.md`). Misma voz y mismo corte que la v05; la pantalla dividida solo en la demo. Estilo luminoso pendiente de decisión (AV-013)
 

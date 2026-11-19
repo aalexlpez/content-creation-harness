@@ -12,7 +12,7 @@ Planificación del lote. Criterios de selección: [EDITORIAL](../../guias/EDITOR
 
 | idea_id | video_id | horas | motivo |
 |---|---|---|---|
-| I-0001 | VID-0001, VID-0002 |  | Añadida al crear el vídeo |
+| I-0001 | VID-0001, VID-0002, VID-0003 |  | Añadida al crear el vídeo |
 
 ## OK-1
 

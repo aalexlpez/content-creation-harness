@@ -59,6 +59,8 @@ Las carpetas `.md` de shotcraft están en chino. Se citan por el nombre de la ca
 
 **Pausas.** Lo que se quiere recordar queda quieto al menos 1 s (R1). Antes del resultado, 0,3–0,75 s de espera. Un título que ya llegó no se mueve más: el movimiento pasa al siguiente elemento.
 
+**Deriva de cámara continua.** Un empuje casi imperceptible (100 → 103 % a lo largo del plano) solo vuelve a 100 % **en un corte real** (vuelta de un recurso, paso a la demo, empalme del corte). Si se reinicia donde no hay corte, la imagen salta un 3 % y se ve como un corte mal hecho (VID-0002 v06b, «nuevo / calma»). Los acercamientos de énfasis van aparte y siempre con curva.
+
 **En la duda, más lento.** La primera versión casi siempre va rápida (R3). Una interacción simulada (escribir, tocar, elegir) va a velocidad humana: quien mira debería poder hacerla a la vez.
 
 **Una técnica, un protagonista.** Cada técnica (caer, apilar, girar, sellar) protagoniza **una sola vez** por vídeo. Lo que repite una idea ya dicha se corta (P4). Un plano, un efecto.

@@ -86,6 +86,8 @@ Una fila por escena. Cada intervención se ancla a un tiempo aproximado y a una 
 | toma o recurso | Qué hay que grabar o qué archivo se usa. Marca `POR ACREDITAR` lo que aún no tenga derechos |
 | claim | ID del claim que sostiene la escena, o «—» |
 
+**Recursos (B-roll) en la columna «toma o recurso».** Además de la toma a cámara, cada escena que lo pida lleva sus planos de recurso con código `R01`, `R02`…: qué se ve, duración (1–3 s) y origen. **Propio** si Ale lo puede grabar en la misma sesión (objetos, manos, el celular, la pantalla real de la app) y **stock** solo si no se puede grabar (un gimnasio vacío, un laboratorio). Debajo de la tabla de escenas va la lista «Recursos que grabar», para que `/rodaje` la convierta en tomas. Criterios en [EDICION → Planos de recurso](EDICION.md#planos-de-recurso-b-roll).
+
 Si una escena funciona con voz, plano fijo y subtítulos, escríbelo así. No añadas efectos por rellenar. Cómo decidir texto, música, color y movimiento: [EDICION](EDICION.md).
 
 ## 6. Claims
