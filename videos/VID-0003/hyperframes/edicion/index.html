@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Edición · VID-0003</title>
+<!--
+  EDICIÓN de VID-0003 (ensayo 3, guion v01 aprobado). Estilo de la v06f de VID-0002 (ver su index.html y PLAN_v06 §8):
+  cara a pantalla completa, recursos cortados en golpes, demo de la app REAL en un celular en perspectiva, 3 picos
+  alineados con la música, resplandor solo en los protagonistas. Sin filtro de color ni viñeta (petición de Ale, 2026-11-20).
+  Tiempos: T = tn = tiempo del corte (palabras.js, generado por preparar.py). Todo es función del tiempo: render(T).
+  Picos: (1) «hice una APP» 4,42 · (2) el plan en la app 21,37 · (3) «¿Y tú?» 26,81.
+  ⚠ El resplandor contenido es una excepción a AV-007 en prueba (AV-013, propuesta).
+-->
+<style>
+  @font-face { font-family: "PJS"; font-weight: 500; src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 700; src: url("./fonts/PlusJakartaSans-Bold.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 800; src: url("./fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype"); }
+  :root { --navy: #0D213F; --ink: #0B0B0D; --char: #1E2937; --off: #F5F6F8; --sec: #B7C0CC; --line: rgba(245,246,248,0.22); }
+  html, body { margin: 0; padding: 0; background: #000; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); font-family: "PJS", sans-serif; color: var(--off); }
+  .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #vwrap { transform-origin: 50% 30%; }
+  #v { object-fit: cover; }
+
+  /* Recursos: a pantalla completa o «sobre la cara» (tarjeta en el pecho, la cara sigue a la vista) */
+  .br { opacity: 0; overflow: hidden; }
+  .br video { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; transform-origin: 50% 50%; }
+  .br.over { overflow: visible; }
+  .br .cd { position: absolute; left: 340px; top: 1000px; width: 400px; height: 400px; border-radius: 28px; overflow: hidden; box-sizing: border-box; border: 3px solid rgba(245,246,248,0.9); transform-origin: 50% 50%; }
+  .br .cd video { width: 400px; height: 400px; }
+  /* Sin viñeta (2026-11-20, Ale pidió quitar el filtro): la imagen va con su color original */
+  #vig { display: none; pointer-events: none; }
+
+  /* Palabras protagonistas en el pecho */
+  .hw { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; letter-spacing: -0.02em; line-height: 1; white-space: nowrap; color: var(--off); text-transform: uppercase; opacity: 0;
+    -webkit-text-stroke: 10px rgba(11,11,13,0.55); paint-order: stroke fill; }
+  .hw span { display: inline-block; }
+  #hwApp { font-size: 120px; }
+
+  /* Promesa (rótulo de los primeros 3 s) */
+  #prom { position: absolute; left: 60px; right: 60px; top: 178px; text-align: center; font-weight: 800; font-size: 46px; line-height: 1.12; letter-spacing: -0.01em; color: var(--off); opacity: 0;
+    -webkit-text-stroke: 8px rgba(11,11,13,0.6); paint-order: stroke fill; }
+  #prom b { color: var(--ink); background: var(--off); -webkit-text-stroke: 0; border-radius: 10px; padding: 0 12px; }
+
+  /* Capa flotante */
+  .nd { position: absolute; left: 0; top: 0; opacity: 0; will-change: transform, filter; }
+  .gl { position: absolute; inset: 0; border: 3px solid rgba(245,246,248,0.92); background: rgba(11,18,38,0.74); backdrop-filter: blur(14px); border-radius: 30px; box-sizing: border-box; }
+  .gl.pill { border-radius: 999px; }
+  .gl.inv { background: var(--off); border-color: var(--off); }
+  .txt { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; white-space: nowrap; line-height: 1; }
+  .phone { position: absolute; inset: 0; border: 5px solid var(--off); border-radius: 38px; background: rgba(11,18,38,0.74); backdrop-filter: blur(14px); box-sizing: border-box; }
+  .phone .gl2 { position: absolute; left: 0; right: 0; top: 70px; display: flex; justify-content: center; }
+  .phone .nt { position: absolute; left: 50%; top: 14px; width: 46px; height: 8px; margin-left: -23px; border-radius: 4px; background: rgba(245,246,248,0.55); }
+  .phone .pl { position: absolute; left: 0; right: 0; bottom: 24px; text-align: center; font-weight: 800; font-size: 30px; letter-spacing: 0.05em; }
+  #ar { pointer-events: none; }
+  #ar path { fill: none; stroke: var(--off); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Celular de la demo: la app real (demo/grabar.mjs, 1080×2342) a escala K0 = 0,5 en un marco de 19,5:9 */
+  .dev { position: absolute; left: 256px; top: 280px; width: 568px; height: 1199px; border-radius: 74px; background: var(--ink); box-sizing: border-box; border: 2px solid rgba(245,246,248,0.32); opacity: 0; transform-origin: 50% 50%; }
+  .dev .scr { position: absolute; left: 14px; top: 14px; width: 540px; height: 1171px; border-radius: 60px; overflow: hidden; background: #F6F4EF; }
+  .dev .scr video { position: absolute; left: 0; top: 0; width: 1080px; height: 2342px; transform: scale(0.5); transform-origin: 0 0; }
+
+  /* Subtítulos: una línea, palabra activa invertida */
+  .capbox { position: absolute; left: 40px; right: 40px; top: 0; height: 90px; display: flex; justify-content: center; align-items: center; gap: 14px; }
+  .capbox span { font-weight: 800; font-size: 66px; text-transform: uppercase; letter-spacing: -0.005em; padding: 2px 12px; border-radius: 10px; color: var(--off); white-space: nowrap; -webkit-text-stroke: 8px rgba(11,11,13,0.55); paint-order: stroke fill; }
+  .capbox span.on { background: var(--off); color: var(--ink); -webkit-text-stroke: 0; }
+  .capbox span.off { opacity: 0.6; }
+  #capB.boxed { gap: 6px; }
+  #capB.boxed span { -webkit-text-stroke: 0; background: var(--navy); }
+  #capB.boxed span.on { background: var(--off); color: var(--ink); box-shadow: inset 0 0 0 3px var(--navy); }
+  #capB.boxed span.off { opacity: 1; color: var(--sec); }
+
+  /* Hoja de calendario del cierre, «Plan B» protagonista y acento final */
+  #sheet { position: absolute; left: 72px; top: 512px; width: 228px; height: 176px; transform-origin: 50% 50%; opacity: 0; }
+  #sheet .bind { position: absolute; left: 0; top: 0; width: 228px; height: 46px; background: var(--navy); border-radius: 18px 18px 0 0; z-index: 2; }
+  #sheet .rg { position: absolute; top: -12px; width: 12px; height: 30px; box-sizing: border-box; border-radius: 6px; background: var(--off); border: 2px solid var(--navy); z-index: 3; }
+  #sheet .stk { position: absolute; left: 0; top: 46px; width: 228px; height: 130px; perspective: 520px; perspective-origin: 50% 0%; }
+  #sheet .pg { position: absolute; inset: 0; transform-origin: 50% 0%; transform-style: preserve-3d; }
+  #sheet .fc { position: absolute; inset: 0; box-sizing: border-box; background: var(--off); border: 2px solid rgba(11,11,13,0.15); border-top: 0; border-radius: 0 0 18px 18px;
+    backface-visibility: hidden; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 42px; color: var(--ink); overflow: hidden; }
+  #sheet .fc.bk { transform: rotateX(180deg); border-radius: 18px 18px 0 0; }
+  #sheet .tn { position: absolute; inset: 0; background: var(--navy); opacity: 0; }
+  #heroPB { position: absolute; left: 0; right: 0; top: 1330px; text-align: center; font-weight: 800; font-size: 230px; letter-spacing: -0.035em; line-height: 1; white-space: nowrap; opacity: 0; transform-origin: 50% 50%; }
+  .rv { position: absolute; top: 1320px; width: 5px; height: 250px; margin-left: -2px; border-radius: 3px; background: var(--off); opacity: 0; }
+  #heroPB span { display: inline-block; }
+  #heroPB .sp { width: 0.22em; }
+  #accent { position: absolute; left: 60px; right: 60px; top: 168px; text-align: center; white-space: nowrap; opacity: 0; }
+  #accent .a1 { display: inline-block; font-weight: 700; font-size: 64px; color: var(--off); -webkit-text-stroke: 3px rgba(11,11,13,0.7); paint-order: stroke fill; vertical-align: middle; }
+  #accent .a2 { display: inline-block; font-weight: 800; font-size: 96px; line-height: 1; color: var(--ink); background: var(--off); border-radius: 14px; padding: 4px 18px; margin-left: 14px; vertical-align: middle; transform-origin: 50% 50%; }
+  #dip { background: #000; opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="29.72">
+  <div id="vwrap" class="full">
+    <video id="v" class="clip full" src="assets/corte.mp4" data-start="0" data-duration="29.72" data-track-index="0" muted playsinline></video>
+  </div>
+
+  <div id="brs" class="full">
+    <div class="br full over" id="brR01"><div class="cd"><video id="r01" class="clip fv" src="assets/R01.mp4" data-start="1.900" data-duration="1.550" data-track-index="4" muted playsinline></video></div></div>
+    <div class="br full" id="brR02"><video id="r02" class="clip fv" src="assets/R02.mp4" data-start="5.250" data-duration="1.850" data-track-index="5" muted playsinline></video></div>
+    <div class="br full over" id="brR04"><div class="cd"><video id="r04" class="clip fv" src="assets/R04.mp4" data-start="7.320" data-duration="1.900" data-track-index="6" muted playsinline></video></div></div>
+  </div>
+  <div id="vig" class="full"></div>
+
+  <div class="hw" id="hwApp"><span id="hwA">Hice</span> <span id="hwB">una</span><br><span id="hwC">app</span></div>
+  <div class="hw" id="hwTu">¿Y tú?</div>
+
+  <div id="fl" class="full"></div>
+  <svg id="ar" class="full" viewBox="0 0 1080 1920"></svg>
+
+  <div class="dev" id="dev"><div class="scr" id="dscr"><video id="dm" class="clip" src="assets/demo_real.mp4" data-start="12.400" data-duration="13.8" data-track-index="1" muted playsinline></video></div></div>
+
+  <div id="sheet" data-layout-allow-overlap>
+    <div class="bind"></div><span class="rg" style="left:58px"></span><span class="rg" style="right:58px"></span>
+    <div class="stk">
+      <div class="pg" id="pFeb"><div class="fc">FEBRERO<div class="tn"></div></div></div>
+      <div class="pg" id="pEne"><div class="fc">ENERO<div class="tn" id="tEne"></div></div><div class="fc bk"><div class="tn" style="opacity:.1"></div></div></div>
+    </div>
+  </div>
+  <div id="heroPB"><span id="hpA">Plan</span><span class="sp"></span><span id="hpB">B</span></div>
+  <div class="rv" id="rvL"></div><div class="rv" id="rvR"></div>
+  <div id="accent"><span class="a1">Este año,</span><span class="a2" id="a2">sí.</span></div>
+  <div id="prom">Una app <b>gratis</b> para el día<br>que no tengas ganas</div>
+
+  <div class="capbox" id="capB"></div>
+  <div id="dip" class="full"></div>
+</div>
+
+<script src="./palabras.js"></script>
+<script src="./lib/gsap.min.js"></script>
+<script>
+(function () {
+  const W = window.PALABRAS, C = window.CORTE, D = C.D, JOINTS = C.juntas;
+  const clamp01 = (x) => Math.max(0, Math.min(1, x));
+  const mix = (a, b, p) => a + (b - a) * p;
+  const prog = (t, a, d) => clamp01((t - a) / d);
+  const easeIO = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+  const easeIn = (p) => p * p * p;
+  const expoOut = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+  const backOut = (p) => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const backOut2 = (p) => { const c1 = 2.2, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const $ = (id) => document.getElementById(id);
+  const TAU = Math.PI * 2;
+  const GLOW = "drop-shadow(0 0 10px rgba(245,246,248,0.55)) drop-shadow(0 0 26px rgba(245,246,248,0.22))";   // solo protagonistas
+  const blurIn = (el, t, t0, d = 0.3) => { const p = expoOut(prog(t, t0, d)); return { o: prog(t, t0, 0.1), b: 8 * (1 - p), s: mix(1.12, 1, p) }; };
+  const swapOut = (el, t, t0, d = 0.2) => { const p = easeIn(prog(t, t0, d)); el.style.opacity = (1 - p).toFixed(3); el.style.filter = `blur(${(7 * p).toFixed(1)}px)`; el.style.transform = `scale(${mix(1, 0.86, p).toFixed(3)})`; };
+  const swapIn = (el, t, t0, d = 0.3) => { const p = expoOut(prog(t, t0, d)); el.style.opacity = prog(t, t0, 0.1).toFixed(3); el.style.filter = `blur(${(7 * (1 - p)).toFixed(1)}px)`; el.style.transform = `scale(${mix(1.14, 1, p).toFixed(3)})`; };
+
+  // ── Recursos (preparar.py → BROLL): cortes en golpes de la música
+  const BR = Object.entries(C.broll).map(([c, [a, b, m]]) => ({ c, a, b, m }));
+  BR.forEach((r) => { r.el = $("br" + r.c); r.v = r.el.querySelector(".fv"); r.cd = r.el.querySelector(".cd"); });
+  const brAt = (t) => BR.find((r) => t >= r.a && t < r.b);
+
+  // ── Iconos y nodos flotantes (tn)
+  const SLASH = '<svg viewBox="0 0 109 134" width="62" height="76"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#F5F6F8"/></svg>';
+  const NODES = [
+    { id: "phone", x: 885, y: 600, w: 190, h: 330, d: 1.0, show: [[4.42, 5.22], [9.02, 12.64], [25.12, 40]], move: 0, pop: 4.42,
+      html: `<div class="phone"><div class="nt"></div><div class="gl2">${SLASH}</div><div class="pl" id="phl">PLAN B</div></div>` },
+    { id: "logo", x: 215, y: 330, w: 340, h: 100, d: 0.8, show: [[9.14, 12.6]], html: `<div class="gl pill"></div><img src="assets/logo-monocromo-blanco.svg" style="position:absolute;left:44px;top:25px;width:252px;height:auto" alt="">` },
+    { id: "mini", x: 885, y: 985, w: 300, h: 70, d: 0.9, show: [[10.62, 12.6]], html: `<div class="gl pill inv"></div><div class="txt" style="top:18px;font-size:34px;color:#0B0B0D;letter-spacing:.06em">MINIAPP 01</div>` },
+    { id: "gratis", x: 885, y: 860, w: 330, h: 120, d: 0.85, show: [[11.30, 12.6]],
+      html: `<div class="gl pill"></div><div class="txt" id="gPr" style="top:30px;font-size:60px">$</div><div id="gSt" style="position:absolute;left:112px;right:112px;top:56px;height:7px;background:#F5F6F8;border-radius:3px;transform-origin:0 50%;transform:rotate(-12deg) scaleX(0)"></div><div class="txt" id="gGr" style="top:30px;font-size:56px;opacity:0">GRATIS</div>` },
+    { id: "sheet2", x: 186, y: 600, w: 228, h: 176, fixed: true },
+  ];
+  const NB = {}; NODES.forEach((n, i) => { NB[n.id] = n; n.ph = (i * 2.399) % TAU; n.px = 3.4 + (i % 4) * 0.6; n.py = 4.2 + (i % 3) * 0.7; });
+  // Flechas: 2 en todo el vídeo. Nunca sobreviven a sus tarjetas.
+  const ARROWS = [
+    { a: "logo", as: "r", b: "phone", bs: "t", apex: 200, t0: 9.55, t1: 12.6 },
+    { a: "sheet2", as: "t", b: "phone", bs: "t", apex: 395, t0: 25.55, t1: 27.30 },
+  ];
+  const showEnd = (id, t0) => { const n = NB[id]; if (!n.show) return Infinity; const iv = n.show.find(([a, b]) => t0 >= a - 0.001 && t0 < b); return iv ? iv[1] : -Infinity; };
+  ARROWS.forEach((a) => { a.t1 = Math.min(a.t1, showEnd(a.a, a.t0), showEnd(a.b, a.t0)); });
+  const fl = $("fl"), ar = $("ar");
+  NODES.forEach((n) => { if (n.fixed) return; const el = document.createElement("div"); el.className = "nd"; el.style.width = n.w + "px"; el.style.height = n.h + "px"; el.innerHTML = n.html; fl.appendChild(el); n.el = el; });
+  const SV = "http://www.w3.org/2000/svg";
+  ARROWS.forEach((a) => {
+    a.p = document.createElementNS(SV, "path"); a.p.setAttribute("pathLength", "1"); a.p.setAttribute("stroke-dasharray", "1 1"); ar.appendChild(a.p);
+    a.h = document.createElementNS(SV, "path"); ar.appendChild(a.h);
+    a.o = document.createElementNS(SV, "circle"); a.o.setAttribute("r", "6"); a.o.setAttribute("fill", "#F5F6F8"); a.o.style.stroke = "none"; ar.appendChild(a.o);
+  });
+  const pos = (n, t) => {
+    if (n.fixed) return [n.x, n.y];
+    const m = n.move === 0 ? 0 : 1, a = (5 + 9 * n.d) * m, b = (4 + 8 * n.d) * m;
+    return [n.x + a * Math.sin(TAU * t / (n.px * 2.2) + n.ph), n.y + b * Math.sin(TAU * t / (n.py * 2.2) + n.ph * 1.7)];
+  };
+  const anch = (id, side, t) => { const n = NB[id], p = pos(n, t), hw = n.w / 2 + 10, hh = n.h / 2 + 10;
+    return side === "r" ? [p[0] + hw, p[1]] : side === "l" ? [p[0] - hw, p[1]] : side === "t" ? [p[0], p[1] - hh] : [p[0], p[1] + hh]; };
+  const nodeAlpha = (n, t) => { let o = 0, inP = 0, outP = 0; for (const [a, b] of n.show) if (t >= a - 0.001 && t < b + 0.001) { inP = prog(t, a, 0.5); outP = prog(t, b - 0.3, 0.3); o = 1; } return { o, inP, outP }; };
+
+  // ── Demo: encuadres de la app real [tn, centro y en la grabación (0–2342), escala efectiva del texto (0,5 = el celular entero)]
+  const DEMO = [12.62, 25.15];
+  const FRAMES = [
+    [12.62, 1171, 0.50],    // el celular entero mientras crece
+    [13.15, 1250, 0.80],    // «Eliges tu meta»: campo e ideas
+    [14.15, 1180, 0.72],    // «qué te hizo dejarla»: «Imagina que es 1 de febrero…»
+    [14.62, 1330, 0.98],    // las razones a todo el ancho; toque en «No tuve tiempo»
+    [15.50, 1171, 0.56],    // «y escribes tu plan B»: paso 3 entero
+    [16.05, 1520, 0.80],    // «Escribir la mía»
+    [17.55, 1790, 0.92],    // tecleo de la situación
+    [19.35, 1730, 0.90],    // tecleo de la acción
+    [21.05, 930, 1.00],     // el plan a todo el ancho (pico 2)
+    [22.35, 1150, 0.62],    // «calendario»: se abre el panel
+    [22.85, 1050, 0.80],    // hora 20:00 y días
+    [23.45, 1150, 0.60],    // «fondo de pantalla»
+  ];
+  const MOVE = 0.45, K0 = 0.5, HREC = 2342, PCX = 540, PCY = 880, PW = 568;
+
+  // ── Cámara: escala base (acercamientos en los picos y para disimular los empalmes) × deriva 100 → 103 % por plano
+  const ZP = [[0, 1.0, 0.45], [4.42, 1.10, 0.001], [4.85, 1.0, 0.001], [9.02, 1.07, 0.001], [25.06, 1.03, 0.001], [26.81, 1.18, 0.001], [27.46, 1.07, 0.001]];
+  const zAt = (t) => { let i = 0; for (; i < ZP.length && t >= ZP[i][0]; i++); if (i === 0) return 1; const [t0, z1, d] = ZP[i - 1], z0 = i > 1 ? ZP[i - 2][1] : 1.12; return mix(z0, z1, easeIO(prog(t, t0, d))); };   // el primer plano arranca en 1,12
+  const SHOTS = [0, 4.42, 4.85, 6.90, 9.02, 12.62, 25.06, 26.81, 27.46, 40];   // solo cortes REALES (MOTION §4)
+  const drift = (t) => { let i = 0; while (i < SHOTS.length - 1 && t >= SHOTS[i + 1]) i++; return 1 + 0.03 * easeIO(prog(t, SHOTS[i], SHOTS[i + 1] - SHOTS[i])); };
+
+  // ── Subtítulos: grupos de 2–4 palabras que caben en una línea
+  const GR = [];
+  { let g = [];
+    W.forEach((w, i) => {
+      g.push(w);
+      const nx = W[i + 1], punct = /[.,:;?!]$/.test(w[0]);
+      const dur = w[2] - g[0][1];
+      const fin = /[.?!]$/.test(w[0]);           // nunca se juntan dos frases en una línea
+      if (!nx || fin || (punct && dur >= 0.4) || g.length >= 4 || (nx[1] - w[2] >= 0.25 && dur >= 0.3) || (g.length >= 3 && dur >= 0.7)) { GR.push(g); g = []; }
+    });
+    for (let i = GR.length - 1; i > 0; i--) { const g = GR[i], p = GR[i - 1]; if (g.length === 1 && g[0][2] - g[0][1] < 0.5 && p.length < 4 && !/[.?!]$/.test(p[p.length - 1][0])) { p.push(...g); GR.splice(i, 1); } }
+    GR.forEach((g, i) => { const nx = GR[i + 1]; g.end = nx ? Math.min(nx[0][1], g[g.length - 1][2] + 0.6) : D; if (g.end - g[0][1] < 0.4 && nx) g.end = Math.min(nx[0][1], g[0][1] + 0.4); });
+  }
+  const clean = (s) => s.replace(/[.,:;!?¿¡]/g, "");
+  const capB = $("capB"); let shownB = -2;
+  const amount = (t, list, inD = 0.55, outD = 0.5) => { let a = 0; for (const [s, e] of list) a = Math.max(a, Math.min(easeIO(prog(t, s - 0.1, inD)), 1 - easeIO(prog(t, e - 0.1, outD)))); return a; };
+  function captions(t, el, y, hide) {
+    let gi = -1; GR.forEach((g, i) => { if (t >= g[0][1] - 0.05 && t < g.end) gi = i; });
+    if (gi !== shownB) { el.innerHTML = gi < 0 ? "" : GR[gi].map((w) => `<span>${clean(w[0])}</span>`).join(""); shownB = gi; }
+    if (gi < 0 || hide >= 1) { el.style.opacity = 0; return; }
+    const est = GR[gi].reduce((a, w) => a + clean(w[0]).length * 0.72 * 66 + 24, 0) + 14 * (GR[gi].length - 1);
+    const fit = est > 980 ? 980 / est : 1;
+    let act = 0; GR[gi].forEach((w, i) => { if (t >= w[1] - 0.03) act = i; });
+    [...el.children].forEach((sp, i) => { sp.className = i === act ? "on" : i > act ? "off" : ""; });
+    const ci = expoOut(prog(t, GR[gi][0][1] - 0.05, 0.16)), co = prog(t, GR[gi].end - 0.12, 0.12);
+    el.style.opacity = (ci * (1 - co) * (1 - hide)).toFixed(3);
+    el.style.transform = `translateY(${(y + 12 * (1 - ci)).toFixed(1)}px) scale(${fit.toFixed(4)})`;
+  }
+
+  function render(t) {
+    // ── Recursos
+    const br = brAt(t);
+    BR.forEach((r) => {
+      if (r !== br) { r.el.style.opacity = 0; return; }
+      r.el.style.opacity = 1;
+      const e = expoOut(prog(t, r.a, 0.3)), push = 1 + 0.05 * prog(t, r.a, r.b - r.a);
+      if (r.m === "full") r.v.style.transform = `scale(${(mix(1.08, 1, e) * push).toFixed(4)})`;
+      else { const rot = -3 + 1.2 * prog(t, r.a, r.b - r.a);
+        r.cd.style.transform = `translateY(${(40 * (1 - e)).toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${mix(0.92, 1, e).toFixed(4)})`; r.v.style.transform = `scale(${push.toFixed(4)})`; }
+    });
+
+    // ── Cámara y demo (la cara se desenfoca y oscurece detrás del celular)
+    const s = amount(t, [[DEMO[0], DEMO[1]]]);
+    let shake = 0;
+    if (t >= 26.81 && t < 27.2) shake = 9 * Math.exp(-14 * (t - 26.81)) * Math.sin(40 * (t - 26.81));
+    const z = zAt(t) * drift(t);
+    $("vwrap").style.transform = `translateY(${shake.toFixed(2)}px) scale(${(z * mix(1, 1.08, s)).toFixed(4)})`;
+    $("v").style.filter = s > 0.01 ? `blur(${(18 * s).toFixed(1)}px) brightness(${mix(1, 0.5, s).toFixed(3)})` : "none";
+
+    // ── Promesa (0,4–3,0 s)
+    { const pi = expoOut(prog(t, 0.40, 0.35)), po = easeIn(prog(t, 2.95, 0.25));
+      const p = $("prom"); p.style.opacity = (prog(t, 0.40, 0.12) * (1 - po)).toFixed(3);
+      p.style.filter = `blur(${(8 * (1 - pi) + 8 * po).toFixed(1)}px)`; p.style.transform = `translateY(${(-18 * (1 - pi)).toFixed(1)}px) scale(${mix(1.06, 1, pi).toFixed(3)})`; }
+
+    // ── Pico 1: «HICE UNA APP» palabra a palabra, «APP» cae con el golpe
+    { const el = $("hwApp"), on = t >= 3.75 && t < 4.95;
+      el.style.opacity = on ? (1 - prog(t, 4.75, 0.12)).toFixed(3) : 0;
+      el.style.top = "1030px";
+      const word = (id, t0, size) => { const w = $(id), a = clamp01(backOut2(prog(t, t0, 0.22)));
+        w.style.fontSize = size + "px"; w.style.opacity = prog(t, t0, 0.06).toFixed(3); w.style.transform = `scale(${mix(1.5, 1, a).toFixed(3)})`; };
+      word("hwA", 3.79, 120); word("hwB", 4.10, 120); word("hwC", 4.42, 230);
+      el.style.filter = t >= 4.42 ? GLOW : "none"; }
+
+    // ── Pico 3: «¿Y TÚ?»
+    { const el = $("hwTu"), a = clamp01(backOut2(prog(t, 26.81, 0.24)));
+      el.style.top = "1060px"; el.style.fontSize = "220px";
+      el.style.opacity = (prog(t, 26.81, 0.06) * (1 - prog(t, 27.50, 0.15))).toFixed(3);
+      el.style.transform = `scale(${mix(1.5, 1, a).toFixed(3)})`; el.style.filter = t >= 26.81 ? GLOW : "none"; }
+
+    // ── Capa flotante (se apaga bajo los recursos a pantalla completa)
+    const hideFl = br && br.m === "full";
+    NODES.forEach((n) => {
+      if (n.fixed) return;
+      const { o, inP, outP } = nodeAlpha(n, t);
+      if (!o || hideFl) { n.el.style.opacity = 0; return; }
+      const p = pos(n, t), e = expoOut(inP), x = easeIn(outP);
+      const sc = mix(0.78, 1, e) * mix(1, 0.9, x) * (0.9 + 0.1 * n.d) * (n.pop && t >= n.pop && t < n.pop + 0.6 ? mix(1.25, 1, expoOut(prog(t, n.pop, 0.4))) : 1);
+      const blur = 14 * (1 - e) + 12 * x + (1 - n.d) * 2.2;
+      const rot = 1.6 * Math.sin(TAU * t / (n.px * 3) + n.ph) * (n.move === 0 ? 0 : 1);
+      n.el.style.opacity = (e * (1 - x) * (0.88 + 0.12 * n.d)).toFixed(3);
+      n.el.style.transform = `translate(${(p[0] - n.w / 2).toFixed(1)}px, ${(p[1] - n.h / 2).toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
+      n.el.style.filter = `blur(${blur.toFixed(1)}px)`;
+    });
+    $("phl").textContent = t >= 9.02 && t < 13 ? "01 /" : "PLAN B";
+    // precio tachado → GRATIS («gratis» 11,42)
+    $("gSt").style.transform = `rotate(-12deg) scaleX(${easeOut(prog(t, 11.30, 0.15)).toFixed(3)})`;
+    if (t >= 11.42) swapOut($("gPr"), t, 11.42, 0.2); else { $("gPr").style.opacity = 1; $("gPr").style.filter = "none"; $("gPr").style.transform = "none"; }
+    $("gSt").style.opacity = t >= 11.42 ? (1 - prog(t, 11.42, 0.18)).toFixed(3) : 1;
+    if (t < 11.40) $("gGr").style.opacity = 0; else swapIn($("gGr"), t, 11.45, 0.3);
+
+    // ── Flechas (sin resplandor)
+    ARROWS.forEach((a) => {
+      const p = easeOut(prog(t, a.t0, 0.55)), fade = 1 - prog(t, a.t1 - 0.25, 0.25);
+      if (t < a.t0 || t >= a.t1 || hideFl) { a.p.style.opacity = 0; a.h.style.opacity = 0; a.o.style.opacity = 0; return; }
+      const A = anch(a.a, a.as, t), B = anch(a.b, a.bs, t);
+      const cx = (A[0] + B[0]) / 2, cy = a.apex === null ? (A[1] + B[1]) / 2 : (a.apex - 0.25 * (A[1] + B[1])) / 0.5;
+      a.p.setAttribute("d", `M ${A[0].toFixed(1)} ${A[1].toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${B[0].toFixed(1)} ${B[1].toFixed(1)}`);
+      a.p.setAttribute("stroke-dashoffset", (1 - p).toFixed(3)); a.p.style.opacity = fade.toFixed(3);
+      const th = Math.atan2(B[1] - cy, B[0] - cx), L = 26;
+      a.h.setAttribute("d", `M ${(B[0] - L * Math.cos(th - 0.55)).toFixed(1)} ${(B[1] - L * Math.sin(th - 0.55)).toFixed(1)} L ${B[0].toFixed(1)} ${B[1].toFixed(1)} L ${(B[0] - L * Math.cos(th + 0.55)).toFixed(1)} ${(B[1] - L * Math.sin(th + 0.55)).toFixed(1)}`);
+      a.h.style.opacity = (prog(t, a.t0 + 0.42, 0.12) * fade).toFixed(3);
+      const u = ((t - a.t0) * 0.42) % 1, v = 1 - u;
+      a.o.setAttribute("cx", (v * v * A[0] + 2 * v * u * cx + u * u * B[0]).toFixed(1)); a.o.setAttribute("cy", (v * v * A[1] + 2 * v * u * cy + u * u * B[1]).toFixed(1));
+      a.o.style.opacity = (prog(t, a.t0 + 0.6, 0.2) * fade * 0.95).toFixed(3);
+    });
+
+    // ── «Plan B» nace del gesto de Ale: las manos juntas en el centro (9,9 s) se abren hacia los lados (10,0–10,35 s) y la
+    // palabra aparece entre ellas, a la altura de las manos. REV = media anchura visible (px) medida fotograma a fotograma.
+    const REV = [[9.92, 0], [10.00, 50], [10.10, 220], [10.20, 370], [10.30, 480], [10.38, 560]];
+    let half = 0; for (let i = 0; i < REV.length; i++) { if (t >= REV[i][0]) half = REV[i][1]; if (i > 0 && t >= REV[i - 1][0] && t < REV[i][0]) half = mix(REV[i - 1][1], REV[i][1], prog(t, REV[i - 1][0], REV[i][0] - REV[i - 1][0])); }
+    const hp = $("heroPB"), rp = clamp01(half / 420), hpO = prog(t, 11.15, 0.3), hpOn = t >= 9.92 && t < 11.5;
+    hp.style.opacity = hpOn ? (prog(t, 9.92, 0.05) * (1 - hpO)).toFixed(3) : 0;
+    hp.style.clipPath = `inset(-80px ${Math.max(0, 540 - half).toFixed(1)}px -80px ${Math.max(0, 540 - half).toFixed(1)}px)`;
+    hp.style.transform = `scaleX(${mix(0.62, 1, expoOut(rp)).toFixed(3)}) scaleY(${mix(0.9, 1, expoOut(rp)).toFixed(3)})`;
+    hp.style.filter = `blur(${(9 * (1 - rp) + 10 * hpO).toFixed(1)}px) ${GLOW}`;
+    $("hpA").style.transform = "none"; $("hpB").style.opacity = 1;
+    $("hpB").style.transform = `scale(${t >= 10.62 ? mix(1.18, 1, expoOut(prog(t, 10.62, 0.3))).toFixed(3) : 1})`;
+    ["rvL", "rvR"].forEach((id, k) => { const el = $(id), on = hpOn && t < 10.45;
+      el.style.left = (540 + (k ? 1 : -1) * half).toFixed(1) + "px";
+      el.style.opacity = on ? (prog(t, 9.92, 0.05) * (1 - prog(t, 10.25, 0.18))).toFixed(3) : 0;
+      el.style.filter = GLOW; });
+
+    // ── Celular de la demo: nace del teléfono flotante, encuadra la app y vuelve al teléfono
+    const dev = $("dev");
+    if (t >= DEMO[0] && t < DEMO[1] + 0.05) {
+      let cy = FRAMES[0][1], zs = FRAMES[0][2];
+      for (let i = 1; i < FRAMES.length; i++) {
+        const [, ya, sa] = FRAMES[i - 1], [tb, yb, sb] = FRAMES[i];
+        if (t >= tb + MOVE) { cy = yb; zs = sb; continue; }
+        if (t >= tb) { const q = easeIO(prog(t, tb, MOVE)); cy = mix(ya, yb, q); zs = mix(sa, sb, q); } else { cy = ya; zs = sa; }
+        break;
+      }
+      let S = Math.max(1, zs / K0);
+      const f = clamp01((S - 1) / 0.25);
+      let dx = 0, dy = -(cy - HREC / 2) * K0 * S * f;
+      let ry = -9 * (1 - f) + 1.2 * Math.sin(TAU * t / 7), rx = 4 * (1 - f);
+      S *= 1 + 0.035 * Math.exp(-7 * Math.max(0, t - 21.37)) * (t >= 21.37 ? 1 : 0);   // golpe del plan (pico 2)
+      const P1 = pos(NB.phone, DEMO[0]), P2 = pos(NB.phone, DEMO[1]), sN = 190 / PW;
+      const pA = easeIO(prog(t, DEMO[0], 0.5)), q = easeIO(prog(t, 24.75, 0.40));
+      dx = mix(P1[0] - PCX, dx, pA); dy = mix(P1[1] - PCY, dy, pA); S = mix(sN, S, pA); ry = mix(0, ry, pA); rx = mix(0, rx, pA);
+      dx = mix(dx, P2[0] - PCX, q); dy = mix(dy, P2[1] - PCY, q); S = mix(S, sN, q); ry = mix(ry, 0, q); rx = mix(rx, 0, q);
+      dev.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) perspective(2200px) rotateY(${ry.toFixed(2)}deg) rotateX(${rx.toFixed(2)}deg) scale(${S.toFixed(4)})`;
+      dev.style.opacity = (prog(t, DEMO[0], 0.08) * (1 - prog(t, DEMO[1] - 0.05, 0.1))).toFixed(3);
+    } else dev.style.opacity = 0;
+
+    // ── Subtítulos (siempre en caja): a cámara 1190, con tarjeta en el pecho 1420, en la demo 1440. Se apagan con los protagonistas
+    const inDemo = s > 0.5;
+    capB.classList.add("boxed");   // siempre en caja: se lee sobre el estampado de la camiseta y sobre la app
+    const hide = Math.max(t >= 3.75 && t < 4.85 ? 1 : 0, hpOn ? prog(t, 9.90, 0.06) * (1 - hpO) : 0, t >= 26.78 && t < 27.55 ? 1 : 0);
+    // zona segura: a cámara 1190 (en caja sobre la camiseta); con tarjeta en el pecho, justo debajo (1420); en la demo 1440
+    captions(t, capB, inDemo ? 1440 : br && br.m === "over" ? 1420 : 1190, hide);
+
+    // ── Hoja ENERO → FEBRERO del cierre («no las dejo en enero»)
+    const si = prog(t, 25.25, 0.4), so = 1 - prog(t, 27.15, 0.25);
+    $("sheet").style.opacity = (t >= 25.2 ? si * so : 0).toFixed(3);
+    $("sheet").style.transform = `rotate(-6deg) scale(${mix(0.85, 1, expoOut(si)).toFixed(3)})`;
+    let ang = 0, front = true;
+    if (t >= 26.30) { const p = prog(t, 26.30, 0.5); ang = Math.min(360 * p * p, 360); front = p * p < 0.25; }
+    $("pEne").style.transform = `rotateX(${ang.toFixed(2)}deg)`;
+    $("pEne").style.zIndex = front ? 2 : 0;
+    $("tEne").style.opacity = (0.45 * clamp01(Math.sin(Math.PI * ang / 360) * 1.2)).toFixed(3);
+
+    // ── Acento final «Este año, sí.» (después de «¿Y tú?»; responde a «este año no las dejo en enero»)
+    const a1 = expoOut(prog(t, 27.55, 0.45)), a2 = clamp01(backOut(prog(t, 27.85, 0.4)));
+    $("accent").style.opacity = a1.toFixed(3);
+    $("accent").style.clipPath = `inset(-40px ${(100 * (1 - a1)).toFixed(1)}% -40px 0)`;
+    $("a2").style.transform = `scale(${t >= 27.85 ? mix(0.3, 1, a2).toFixed(3) : 0})`;
+    $("a2").style.filter = t >= 27.85 ? GLOW : "none";
+
+    // ── Oscurecido de 3 fotogramas antes de cada empalme a cámara (no en recursos ni en la demo)
+    let dip = 0; JOINTS.forEach((j) => { if (t >= j - 0.1 && t < j && !brAt(j) && !brAt(j - 0.05) && s < 0.05 && !(j > 4.3 && j < 5.0) && !(j > 26.7 && j < 27.6)) dip = 0.35; });
+    $("dip").style.opacity = dip;
+  }
+
+  const clock = { t: 0 };
+  const tl = gsap.timeline({ paused: true });
+  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(clock.t) }, 0);
+  render(0);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+})();
+</script>
+</body>
+</html>

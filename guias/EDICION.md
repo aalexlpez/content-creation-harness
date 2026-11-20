@@ -93,6 +93,8 @@ Cuando la miniapp existe (aunque sea en staging), la demo se graba de la app de 
 
 ## Color
 
+> **Aviso (2026-11-20, VID-0003):** en el set con la luz nueva Ale vio el look B demasiado notorio (pared violeta, piel naranja, negros aplastados, piel suavizada). VID-0003 usa un color «natural» (`videos/VID-0003/hyperframes/edicion/preparar.py`: `LOOK` y `PIEL`): curva muy suave, piel un poco más cálida, pared menos violeta y limpieza de ruido en vez de suavizar la piel. **Regla:** el color se mide en la toma (pared, piel, negros) y se corrige hacia lo natural; el look de la serie es un punto de partida, no un filtro fijo. Después Ale pidió **quitar el filtro** del todo (v03): la versión vigente de VID-0003 va con el color de la cámara, sin corrección ni viñeta. Con la luz del set bien puesta, la toma ya no necesita look.
+>
 > **Look de la serie (2026-11-19, VID-0002 v06f):** look B «cálido cinematográfico», elegido por Ale entre tres. Receta en `videos/VID-0002/hyperframes/v06/preparar.py` (`LOOK_B` y `PIEL`): se aplica con ffmpeg al corte antes de componer (no con filtros CSS), con suavizado de piel que respeta bordes solo en la toma de cámara y la misma curva y temperatura en los recursos.
 
 El color se aplica a la **toma de cámara**. La captura de pantalla conserva su color original. Orden: exposición y balance de blancos primero, después contraste y saturación. Revisa la piel, los blancos y las luces del set comparando el mismo fotograma con el original. Si el original es HDR, primero conviértelo a SDR ([TECNICA](TECNICA.md)).
@@ -201,6 +203,8 @@ Alternativa a E-01 cuando la pantalla dividida no aporta: la **cara a pantalla c
 
 **Meta:** que un vídeo nuevo se edite con los mismos pasos, archivos y scripts, cambiando solo el contenido (palabras, eventos, recursos y música). **Se da por estable** cuando dos vídeos seguidos salen sin tocar los scripts ni las reglas.
 
+> **Estado (2026-11-20):** el proceso está escrito en la skill **`/edicion`** (`.claude/skills/edicion/`: pasos, valores de referencia, errores ya corregidos y lista de revisión) y la base canónica es `videos/VID-0003/hyperframes/edicion/` (v04, aprobada por Ale): un vídeo nuevo copia esa carpeta y cambia solo los datos. Motivo: una edición hecha en otra computadora solo con las guías salió poco pulida (transiciones, volúmenes, tarjetas, efectos), porque los valores finos vivían en el código de una sesión.
+
 | Pieza | Hoy (VID-0002) | Estable |
 |---|---|---|
 | Corte | `cortes.py` con `KEEP` medido a mano por vídeo | El mismo script; `KEEP` en un archivo de datos del vídeo y la medida de silencios automática |
@@ -211,7 +215,7 @@ Alternativa a E-01 cuando la pantalla dividida no aporta: la **cara a pantalla c
 | Recursos | No había | B-roll propio en el guion y en `/rodaje`; stock solo si falta |
 | Música | Un lofi en bucle bajo la voz | Brief de música en el guion, pista con estructura y sincronía en 3–4 puntos |
 | Revisión | `revisar.py`, capturas y revisión de Claude | Lo mismo, más la escucha de Ale en el celular como puerta antes de pulir |
-| Orden | Varios scripts y pasos manuales | **`editar.py`**: cortar → componer → render → mezcla → revisar → másteres |
+| Orden | Varios scripts y pasos manuales | **Hecho en parte:** skill `/edicion` con el orden y los valores; `preparar.py` → `render` → `mezcla.py` en VID-0003. Pendiente: `editar.py` que lo encadene |
 
 **Orden para llegar:** (1) cerrar el estilo y la música con VID-0002 v06; (2) extraer los componentes y el `eventos.csv` de la v06; (3) unificar la mezcla y crear `editar.py`; (4) editar el siguiente vídeo con el estándar y anotar lo que haya que tocar; (5) si el segundo sale sin tocar nada, se declara estable.
 

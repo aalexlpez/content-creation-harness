@@ -18,6 +18,7 @@ En Windows, si `python` no responde, usa `py -3`.
 | Promesa, audiencias, pilares, selección de ideas y métricas | [guias/EDITORIAL.md](guias/EDITORIAL.md) |
 | Cómo escribir guion, ganchos, escenas y claims | [guias/GUIONES.md](guias/GUIONES.md) |
 | Dirección de montaje: texto, música, color y movimiento | [guias/EDICION.md](guias/EDICION.md) |
+| Cómo editar un vídeo de principio a fin (estándar, valores y errores) | `.claude/skills/edicion/` (skill `/edicion`) |
 | Estándar de motion graphics (reglas, recetas y revisión) | [guias/MOTION.md](guias/MOTION.md) |
 | Perfil técnico, ingesta, edición, exportación y QC | [guias/TECNICA.md](guias/TECNICA.md) |
 | Set de grabación (luz, cámara, micro) | [guias/SET.md](guias/SET.md) |
@@ -79,5 +80,6 @@ Atajos (en Claude Code son comandos `/`; en cualquier otro sitio, Ale puede pedi
 | `/semana` | Prepara el lote de la semana con horas y una hipótesis, listo para el OK-1 |
 | `/guion <idea o VID>` | Crea el expediente si falta y redacta brief, ganchos, escenas, claims y montaje |
 | `/rodaje <VID>` | Lista de tomas, ficha del set y comprobaciones antes de grabar |
+| `/edicion <VID>` | Edita el vídeo con el estándar (corte, demo real, motion, música, mezcla y revisión). Skill en `.claude/skills/edicion/` con valores, errores ya corregidos y lista de revisión |
 | `/cierre <VID>` | QC del máster, derechos, plan de publicación y copy por red |
 | `/retro` | Métricas registradas, retrospectiva de la semana y siguiente hipótesis |
