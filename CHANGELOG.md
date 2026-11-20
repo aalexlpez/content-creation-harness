@@ -2,6 +2,7 @@
 
 ## Sin publicar
 
+- **Estándar `/edicion`, sonido** (2026-11-20): música ≈ 9 dB bajo la voz, estribillo seguido bajo la demo (sin el valle que sonaba a bajada de volumen), cada efecto con algo que se ve, tecleos por su inicio. Base `videos/VID-0003/hyperframes/edicion/` (`preparar.py`, `mezcla.py`) y `.claude/skills/edicion/` (`referencia.md`, `errores.md`) al día; VID-0003 edición v06.
 - **Skill `/edicion`** (2026-11-20, petición de Ale): `.claude/skills/edicion/` con el proceso de edición de principio a fin (`SKILL.md`), los valores exactos (`referencia.md`), todas las correcciones de Ale y los fallos técnicos con su regla (`errores.md`) y la lista de revisión y autocrítica (`revision.md`). Base canónica: `videos/VID-0003/hyperframes/edicion/`. Motivo: en otra computadora, solo con las guías, la edición salía poco pulida.
 - **VID-0003 · edición v01–v04** (2026-11-20): voz mejorada de Ale alineada (+25 ms) con el audio de la cámara en silencio, recorte 1,6× del 4K, 8 cortes en silencios medidos, R01/R02/R04 en golpes, demo de la app real al ritmo de la voz, tres picos con la música, «Plan B» que nace del gesto de las manos, sin filtro de color (Ale), subtítulos en caja dentro de la zona segura y cierre «Este año, sí.». Guion v02 con la voz grabada y OK-2 renovado. Composición en `videos/VID-0003/hyperframes/edicion/`.
 - [EDICION](guias/EDICION.md): el color se mide en cada toma y, por defecto, va sin filtro.

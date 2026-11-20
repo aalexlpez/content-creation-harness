@@ -57,28 +57,28 @@ Los números que hacen que la edición salga pulida. Están en `videos/VID-0003/
 | Qué | Valor |
 |---|---|
 | Voz | La mejorada de Ale, alineada; a −17,4 LUFS antes de mezclar; compresor suave (umbral −18 dB, ratio 2) |
-| Música | 13 dB bajo la voz (LUFS integrados); baja ≈ 5 dB al hablar (`sidechaincompress` umbral 0,04, ratio 4, ataque 60 ms, release 350 ms); −2 dB en la demo; +4 dB en los picos sin voz y en la cola |
+| Música | **6 dB bajo la voz** (LUFS integrados); baja ≈ 3 dB al hablar (`sidechaincompress` umbral 0,05, ratio 2,5, ataque 80 ms, release 400 ms): queda **≈ 9 dB bajo la voz** mientras hablas; sin bajada extra en la demo; +2 dB en los picos sin voz y en la cola. (Hasta la v05 iba 13 dB bajo la voz y −2 dB en la demo: en el celular no se oía.) |
 | Master | −14 LUFS integrados, limitador a 0,84 (pico ≤ −1,4 dBFS), AAC 256 kb/s 48 kHz; dos másteres (con y sin música) |
-| Efectos | Recortados a su tramo audible, pico 1 fotograma después del evento, fundido de salida 40 ms |
+| Efectos | Recortados a su tramo audible, pico 1 fotograma después del evento, fundido de salida 40 ms. Los **continuos** (tecleo) se colocan **por su inicio** y duran toda la acción. **Cada efecto tiene algo que se ve en ese momento** |
 
-Efectos de VID-0003 v04 (32; banco de Pixabay de Ale, carpeta `BANCO_AUDIOS`):
+Efectos de VID-0003 v06 (31; banco de Pixabay de Ale, carpeta `BANCO_AUDIOS`):
 
 | Evento | Archivo (recorte) | Pico dBFS |
 |---|---|---|
 | Tarjeta / píldora que aparece | `pop.mp3` (0,19–0,31) o `pop-universfield-bubble.mp3` (0–0,18), alternando | −14 a −19 |
 | Flecha | `pencil_scribble_short.mp3` (0–0,29) | −21 |
 | Hoja de calendario | `page-turn.mp3` (0–0,55) / `page-flip.mp3` (0,64–1,77) | −17 a −20 |
-| Pico 1 | `cinematic-impact-boom.mp3` (0–1,92) + `whoosh_fast-simple-chop.mp3` | −15 / −19 |
-| «Plan B» protagonista | `click-photos.mp3` (0–0,84) | −16 |
+| Pico 1 («APP» y el teléfono) | `pop.mp3` + `whoosh_fast-simple-chop.mp3` (sin boom de cine: «sonaba sin contexto») | −14 / −19 |
+| «Plan B» nace de las manos | `benkirb-shine.mp3` (0–1,2), al empezar a abrirse las manos (no un clic de cámara) | −20 |
 | Precio tachado | `scribble-pencil.mp3` (0,3–0,75) | −18 |
-| Teléfono → celular de la demo | `whoosh_largo_misterioso.mp3` (0,47–1,71) | −16 |
+| Teléfono → celular de la demo | `whoosh_basico.mp3` (0–0,94) mientras crece | −17 |
 | Toque en la app (solo ≈ 4) | `screen-tap.mp3` (0,40–0,70) | −11 a −14 |
-| Tecleo | `iphone_typing.mp3` (2,58–3,98 / 5,19–6,39) | −21 |
-| Pico 2 (el plan) | `tension-riser.mp3` por su final + `office-stamp-varios-veces.mp3` (0–0,66) | −19 / −10 |
+| Tecleo | `iphone_typing.mp3` desde 2,58 / 5,19 s, **por su inicio y durante todo el tecleo** | −15 |
+| Pico 2 (el plan) | `magic-spell.mp3` (0–1,6) con el estribillo 2 (sin riser ni sello: no hay sello en imagen) | −15 |
 | Recordatorio | `new-notification.mp3` (0–1,38) | −17 |
 | Desplazamiento / encogerse | `whoosh_basico.mp3` / `whoosh_fast-simple-chop.mp3` | −17 a −19 |
-| Pico 3 | `cinematic-riser-impact.mp3` desde 0,05 s antes del pico | −10 |
+| Pico 3 | `cinematic-riser-impact.mp3` desde 0,05 s antes del pico (el riser llena el silencio) | −12 |
 
 ## Música de la serie
 
-`top-flow-happy-rock.mp3` (145 BPM, golpes en `beats_top-flow-happy-rock.json`): intro 0–6,7 · batería 6,7–13,3 · estribillo 13,3–24,9 · valle 26,5–39,8 · subida 39,8–53,0 · estribillo 2 53,0–64,6 · final 76,6. Tramos de VID-0003 en `preparar.py → SEG`.
+`top-flow-happy-rock.mp3` (145 BPM, golpes en `beats_top-flow-happy-rock.json`): intro 0–6,7 · batería 6,7–13,3 · estribillo 13,3–24,9 · valle 26,5–39,8 · subida 39,8–53,0 · estribillo 2 53,0–64,6 · final 76,6. Tramos de VID-0003 en `preparar.py → SEG`. **Las partes largas sin cambio (la demo) van sobre tramos de energía pareja:** el valle (26,5–39,8, ≈ 5 dB más bajo) suena a «bajada de volumen» si cae al abrirse la app; en VID-0003 el estribillo sigue de 13,3 a 24,5 s bajo toda la demo. Mide la pista por tramos (`ebur128`, sonoridad a corto plazo) antes de elegir.

@@ -21,6 +21,12 @@ Cada fila es una corrección real de Ale o un fallo técnico de las sesiones del
 | Gancho «Imagina: es febrero» para el 1 de enero | El gancho tiene que funcionar el día en que se publica (GUIONES §3 bis) |
 | «Propósito» cuando Ale se pone «metas» | La confesión usa las palabras de Ale |
 | Guion sin la intención de cada frase | Cada guion lleva su GUION_BEATS (intención, energía, pausas, énfasis) |
+| Cortes «atropellados»: 0,15–0,27 s entre frases (VID-0003 v06 de la otra sesión) | 0,30–0,50 s de respiración entre frases (§3) |
+| «Cuando se abría la aplicación se hacía como una bajada de volumen» | La demo iba sobre el valle de la pista (−5 dB): tramos de energía pareja para las partes largas |
+| «No tiene la música de fondo» (13 dB bajo la voz + 5 de bajada) | Música ≈ 9 dB bajo la voz mientras hablas (`MUS_DB` 6, bajada ≈ 3 dB) |
+| «Suena el boom sin nada de contexto» | Cada efecto con algo que se ve; golpes de cine solo para un protagonista con imagen fuerte |
+| «No suena el efecto del teclado» | Sonidos continuos por su inicio, durante toda la acción y a −15 dBFS |
+| Look B «muy notorio» (otra vez, en la v06) | Sin filtro por defecto; Ale eligió además, en una comparación, una coloración muy suave (`eq` contraste 1,04, gamma 1,03): solo si la pide |
 
 ## Lo que encontró la autocrítica de Claude
 

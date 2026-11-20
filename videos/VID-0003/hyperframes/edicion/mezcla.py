@@ -27,10 +27,10 @@ MUS = os.path.join(preparar.TRABAJO, "musica.wav")
 D = preparar.D
 FPS, SR = 30.0, 48000
 VOZ_OBJ = -17.4
-MUS_DB = 13.0
-DUCK = dict(threshold=0.04, ratio=4, attack=60, release=350)
-DEMO = (12.93, 25.06)               # tn: música −2 dB
-SUBE = [(21.27, 21.88, 4.0), (28.80, 40.0, 4.0)]   # tn: sin voz, la música sube: el plan (pico 2) y la cola
+MUS_DB = 6.0                        # v06: con 13 dB (y ≈ 5 de bajada al hablar) la música no se oía en el celular
+DUCK = dict(threshold=0.05, ratio=2.5, attack=80, release=400)   # baja ≈ 3 dB al hablar: queda ≈ 9 dB bajo la voz
+DEMO = (0.0, 0.0)                   # sin bajada extra en la demo
+SUBE = [(21.27, 21.88, 2.0), (28.80, 40.0, 2.0)]   # tn: sin voz, la música sube: el plan (pico 2) y la cola
 
 TAP = ("screen-tap.mp3", 0.40, 0.70)
 POP = ("pop.mp3", 0.19, 0.31)
@@ -51,27 +51,26 @@ CUES = [
     (2.35, "page-turn.mp3", 0.0, 0.55, -18, "R01: la hoja de enero pasa"),
     nodo(3.79, 0, -17, "HICE"),
     nodo(4.10, 0, -16, "UNA"),
-    (4.42, "cinematic-impact-boom.mp3", 0.0, 1.92, -15, "pico 1: «APP» y entra la batería (golpe 1 de 3)"),
+    nodo(4.42, 0, -14, "pico 1: «APP» (la batería entra a la vez; sin boom de cine: Ale, «suena sin contexto»)"),
     (4.42, "whoosh_fast-simple-chop.mp3", 0.0, 0.55, -19, "el teléfono Plan B entra"),
     # S02 · el motivo
     nodo(7.32, 1, -17, "R04: tarjeta en el pecho"),
     # S03 · Plan B
     nodo(9.14, 0, -16, "etiqueta cerobytes"), flecha(9.55),
-    (10.20, "click-photos.mp3", 0.0, 0.84, -16, "«Plan B» llena el cuadro (estribillo)"),
+    (10.00, "benkirb-shine.mp3", 0.0, 1.20, -20, "«Plan B» nace de las manos (antes, un clic de cámara sin cámara)"),
     nodo(10.62, 1, -17, "MINIAPP 01"),
     (11.30, "scribble-pencil.mp3", 0.3, 0.75, -18, "precio tachado"),
     nodo(11.45, 1, -14, "GRATIS"),
-    (12.62, "whoosh_largo_misterioso.mp3", 0.47, 1.71, -16, "el teléfono flotante se convierte en el celular de la demo"),
+    (12.92, "whoosh_basico.mp3", 0.0, 0.94, -17, "el teléfono flotante crece hasta ser el celular de la demo"),
     # S04–S06 · demo de la app real: solo 4 toques con sonido (meta, «No tuve tiempo», «Ver mi plan», recordatorio);
     # 10 toques en 12 s sonaban a clics sin parar (autocrítica de la v02)
     toque(13.55, -13, "«Hacer ejercicio»"),
     (14.15, "page-turn.mp3", 0.0, 0.55, -20, "la app te lleva a febrero"),
     toque(14.95, -11, "«No tuve tiempo»"),
-    (17.95, "iphone_typing.mp3", 2.58, 3.98, -21, "tecleo «llego a casa después de las 20:00»"),
-    (19.75, "iphone_typing.mp3", 5.19, 6.39, -21, "tecleo «hago 5 minutos de estiramientos»"),
+    (17.95, "iphone_typing.mp3", 2.58, 2.58 + (19.30 - 17.95), -15, "tecleo «llego a casa después de las 20:00» (por su inicio, todo el tecleo)"),
+    (19.75, "iphone_typing.mp3", 5.19, 5.19 + (20.95 - 19.75), -15, "tecleo «hago 5 minutos de estiramientos» (por su inicio, todo el tecleo)"),
     toque(21.15, -13, "«Ver mi plan»"),
-    (21.34, "tension-riser.mp3", 1.78, 2.98, -19, "tensión antes del plan (se coloca por su final)"),
-    (21.37, "office-stamp-varios-veces.mp3", 0.0, 0.66, -10, "pico 2: aparece el plan con el estribillo 2 (golpe 2 de 3)"),
+    (21.37, "magic-spell.mp3", 0.0, 1.60, -15, "pico 2: aparece el plan con el estribillo 2 (antes, riser + sello: no hay sello en imagen)"),
     toque(22.40, -14, "«Añadir recordatorio»"),
     (22.90, "new-notification.mp3", 0.0, 1.38, -17, "hora 20:00: el recordatorio"),
     (23.40, "whoosh_basico.mp3", 0.0, 0.58, -19, "baja hasta el fondo de pantalla"),
@@ -80,7 +79,7 @@ CUES = [
     # S07 · cierre
     nodo(25.25, 1, -17, "hoja de calendario"), flecha(25.55),
     (26.30, "page-flip.mp3", 0.64, 1.77, -17, "la hoja pasa a FEBRERO"),
-    (26.81, "cinematic-riser-impact.mp3", "pk-0.05", 3.21, -10, "pico 3: «¿Y tú?» tras 0,47 s de silencio de la música (golpe 3 de 3)"),
+    (26.81, "cinematic-riser-impact.mp3", "pk-0.05", 3.21, -12, "pico 3: «¿Y tú?» tras 0,47 s de silencio de la música (golpe 3 de 3)"),
     nodo(27.85, 0, -15, "«sí.» del acento final"),
 ]
 
@@ -124,6 +123,8 @@ def mezclar(vI, musica, destino, work, log):
         i, p = peak(x)
         lag = i / SR
         start = t + 1 / FPS - lag
+        if "por su inicio" in note:                    # sonidos continuos (tecleo): empiezan con la acción
+            start = t
         if "por su final" in note:
             start = t - (b - a)
         gain = pk_db - 20 * math.log10(p / 32768)

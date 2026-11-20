@@ -6,7 +6,7 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 - Estado: EN_PRODUCCION
 - Bloqueo: NINGUNO
-- Siguiente_paso: Ale revisa la edición v04 (media/trabajo/edicion_v04.mp4). Es un ensayo: no se publica ni necesita OK-3. Después, estandarizar la edición (EDICION → Hacia un estándar estable)
+- Siguiente_paso: Ale escucha la edición v06 (media/trabajo/edicion_v06.mp4): la base estándar con la música audible y los efectos revisados. Es un ensayo: no se publica ni necesita OK-3
 - Perfil_visual: v2
 - Perfil_tecnico: 1080x1920 · 30 fps · H.264 · SDR BT.709 · AAC 48 kHz
 - Editor: PENDIENTE
@@ -56,6 +56,8 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 
 ## Historial
 
+- 2026-11-20 · Edición v06 (correcciones de sonido de la sesión del 2026-11-19 pasadas a la base, a petición de Ale): `media/trabajo/edicion_v06.mp4` y `edicion_v06_sin_musica.mp4`, misma imagen que la v05. Música 6 dB bajo la voz con bajada de ≈ 3 dB (antes 13 + 5: no se oía), el estribillo sigue bajo toda la demo (antes el valle: «bajada de volumen» al abrir la app) y +2 dB en los picos sin voz; efectos: fuera el boom del pico 1, el clic de cámara de «Plan B», el riser + sello del plan (ahora `magic-spell`) y el whoosh «misterioso»; tecleos por su inicio, durante todo el tecleo y a −15 dBFS; impacto de «¿Y tú?» a −12. Medido: −14,2 / −14,3 LUFS, pico −4,2 dBFS; pico 2 a −11,0 LUFS momentáneos (antes −17,8). **Mezcla medida, no escuchada por Claude.**
+- 2026-11-20 · Edición v05 (la base estándar `hyperframes/edicion/`, la de la v04, rehecha en la segunda computadora con `/edicion`): `media/trabajo/edicion_v05.mp4` y `edicion_v05_sin_musica.mp4` (29,72 s, 1080×1920, 30 fps; −14,3 LUFS los dos, pico −4,4 dBFS estéreo / −1,4 dBFS antes del AAC; 32 efectos). Se regeneraron aquí la transcripción (Parakeet sobre la voz alineada +25 ms: mismas palabras que la v04, tiempos ±0,08 s, y ahora «enero.» y «¿Y» bien marcados), el corte sin filtro, la voz, la música, los recursos y la demo real (390 fotogramas). Revisado: `lint` 0 errores, capturas en 18 momentos, hoja a 2 fps y sonoridad en los picos. **Mezcla medida, no escuchada por Claude.**
 - 2026-11-20 · Edición v04 (autocrítica aplicada, a petición de Ale): `media/trabajo/edicion_v04.mp4` y `edicion_v04_sin_musica.mp4`. Arranque con acercamiento (1,12 → 1,0 en 0,45 s); subtítulos siempre en caja dentro de la zona segura (1190 a cámara, 1420 con tarjeta, 1440 en la demo); promesa y acento por debajo de la barra superior de las apps; cierre «Este año, sí.»; la demo con 4 toques con sonido en vez de 10
 
 - 2026-11-20 · Edición v03: `media/trabajo/edicion_v03.mp4` y `edicion_v03_sin_musica.mp4`. Sin filtro, a petición de Ale: la toma y los recursos con su color original (solo recorte y escala) y sin viñeta. Medido: pared (107,102,130) frente a (106,101,128) en el original
@@ -67,4 +69,6 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 - 2026-11-19 · OK-2 · v01 · 1a610d493b2d · Ale en chat, 2026-11-19: «OK-2 para VID-0003»
 - 2026-11-20 · Estado → BORRADOR
 - 2026-11-20 · OK-2 · v02 · 67f48ea49520 · Ale en chat, 2026-11-20: «OK-2 para VID-0003»
+- 2026-11-20 · Estado → EN_PRODUCCION
+- 2026-11-20 · Estado → EN_PRODUCCION
 - 2026-11-20 · Estado → EN_PRODUCCION

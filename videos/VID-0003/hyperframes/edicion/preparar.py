@@ -71,9 +71,9 @@ SEG = [
     (2.265, 6.685),     # tn 0     → 4,42   intro mínima bajo la confesión
     (6.685, 11.645),    # tn 4,42  → 9,38   pico 1: entra la batería en «app» (3 compases)
     (12.475, 13.305),   # tn 9,38  → 10,21  relleno de 2 golpes antes del estribillo
-    (13.305, 16.615),   # tn 10,21 → 13,52  estribillo en «Plan B» (2 compases)
-    (26.545, 33.165),   # tn 13,52 → 20,14  valle (groove) bajo la demo (4 compases)
-    (51.795, 53.025),   # tn 20,14 → 21,37  subida de 3 golpes
+    (13.305, 24.465),   # tn 10,21 → 21,37  estribillo en «Plan B», que sigue bajo toda la demo (27 golpes)
+    # v06 (2026-11-20): antes la demo iba sobre el valle de la pista (26,5–33,2 s, ≈ 5 dB más bajo) y una subida: al
+    # abrirse la app sonaba a «bajada de volumen» (Ale, en VID-0003 v07). Ahora el estribillo sigue sin bajar.
     (53.025, 57.995),   # tn 21,37 → 26,34  pico 2: estribillo 2 cuando aparece el plan (12 golpes)
     None,               # tn 26,34 → 26,81  silencio antes de «¿Y tú?»
     (66.265, 69.165),   # tn 26,81 → 29,71  pico 3: golpe en «¿Y tú?» y 7 golpes hasta el final en seco
