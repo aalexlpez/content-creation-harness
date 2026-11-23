@@ -174,6 +174,27 @@ Las sugerencias de situación se escriben **sin «si»** y las de acción **sin 
 | Se me olvidó / I forgot | llega la hora y no me he acordado · salgo de mi rutina / the time comes and I haven't remembered · my routine changes | lo hago en cuanto vea el recordatorio · lo uno a algo que ya hago, como el café / I do it as soon as I see the reminder · I attach it to something I already do, like coffee |
 | Otra cosa / Something else | (sin sugerencias) | hago una versión de 5 minutos · lo muevo al día siguiente / I do a 5-minute version · I move it to the next day |
 
+### 6 bis. Pendiente: textos en español latinoamericano (2026-11-23)
+
+La app muestra expresiones de España que salen en pantalla en el vídeo y chocan con CONTENIDO-LATAM-001. La corrección está **hecha pero sin subir**: Ale la sube por su cuenta.
+
+- **Dónde está:** en la computadora de Ale, `C:/Users/aalex/Documents/proyectos/miminiapp`, rama local `copy/plan-b-es-latam` (commit `832abb2`), creada desde `staging` del repositorio `aalexlpez/miminiapp` (remoto `fork` en esa carpeta). La rama se subió a GitHub y se borró a petición de Ale: no está en GitHub.
+- **Archivo:** `src/miniapps/plan-b/i18n/es.ts`. Ningún otro archivo cambia; ninguna prueba de la app depende de estas frases (no se ejecutaron las pruebas: necesitan instalar las dependencias).
+
+| Antes | Ahora |
+|---|---|
+| Usar menos el móvil | Usar menos el celular |
+| dejo el móvil fuera de la cama | dejo el celular fuera de la cama |
+| dejo el móvil en otra habitación | dejo el celular en otro cuarto |
+| Es {month} y ya has abandonado tu propósito. | Es {month} y ya abandonaste tu propósito. |
+| Imagina que es 1 de {month} y lo has dejado. ¿Qué ha pasado? | Imagina que es 1 de {month} y lo dejaste. ¿Qué pasó? |
+| no me apetece nada | no tengo nada de ganas |
+| llega la hora y no me he acordado | llega la hora y no me acordé |
+
+**Para subirlo:** en esa carpeta, `git push -u fork copy/plan-b-es-latam` y abrir el pull request hacia `staging`. Si `staging` avanzó, antes `git rebase fork/staging`.
+
+**También:** la ficha del producto (`docs/product-specs/plan-b.md` en `soycerobytes/miminiapp`, fuente de verdad según PROD-17) tiene las mismas frases y conviene corregirla igual. La demo de VID-0003 se vuelve a grabar con los textos nuevos cuando estén en staging.
+
 ## 7. Ejemplo («Ver un ejemplo»)
 
 Rellena el estado con estos datos y lleva al **paso 1 con todo relleno**, para que se pueda avanzar tocando Siguiente y se vean las transiciones (es el recorrido del vídeo). Una etiqueta `ejemplo_etiqueta` se ve arriba mientras no se cambie ningún campo.

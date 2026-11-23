@@ -2,6 +2,7 @@
 
 ## Sin publicar
 
+- **Plan B: textos de la app en español latinoamericano, pendientes de subir** (2026-11-23): documentado en `proyectos/miminiapp/miniapps/P1-plan-b.md` §6 bis (rama local, siete cambios y cómo subirlos).
 - **Coherencia del marco** (2026-11-23): una sola versión de cada regla. Subtítulos en tres niveles y color de acento Señal en EDICION; color sin filtro por defecto en EDICION, SET y `marca/color/`; música ≈ 9 dB bajo la voz; un solo umbral de ritmo (≤ 3 s sin cambio, 1–2 s en el gancho) en GUIONES, MOTION y la revisión; la deriva de lo flotante como única excepción a «nada que respire»; −14 LUFS en todas partes; la palabra escenario puede repetirse; secciones de VID-0002 marcadas como historia; SET sin el Galaxy S24+; nota de scripts viejos en TECNICA; cómo cerrar un ensayo en FLUJO (VID-0002 → CANCELADO); comprobación de historia en la plantilla de GUION.
 - **Storytelling y estrategia (PR-004, propuesta)** (2026-11-23): `guias/GUIONES.md` §2 bis (personaje, conflicto y cambio; arco de cinco tiempos; comprobación de historia), `marca/PERSONAJE.md`, `proyectos/miminiapp/SERIE.md` y el plan de las primeras 8 piezas en `guias/EDITORIAL.md`.
 - **VID-0003 v07 y base de `/edicion` con la dirección v2** (2026-11-21): `videos/VID-0003/hyperframes/edicion/` (composición, efectos de sonido y `preparar.py --mates`) con texto en tres niveles, tratamientos A–J, paleta Señal y sombra sutil; la skill (`referencia.md`, `SKILL.md`, `errores.md`) y `guias/MOTION.md` §10.10 al día.
