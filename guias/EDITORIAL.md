@@ -68,14 +68,14 @@ Son rangos para experimentar, no reglas de las plataformas. El montaje sigue la 
 - **Tiempo por pieza: 3–4 h como máximo**, edición incluida. Se usa la base de `/edicion` sin rehacer el lenguaje en cada vídeo. Si una pieza pasa de 4 h, se anota por qué en PRODUCCION → Tiempo.
 - **Una variable por pieza** respecto a la anterior (EDITORIAL → Aprender de los datos).
 - **Fecha de inicio por decidir:** mediados de diciembre de 2026 es una posibilidad, no un compromiso (Ale, 2026-11-23). Las fechas de la tabla son orientativas. Las cuentas de las cinco redes ya están verificadas ([CUENTAS](../marca/CUENTAS.csv)).
-- **Antes del 1 de enero de 2027 no hay demo de Plan B** (no está publicada): las piezas previas son de proceso y comunidad, y sirven para que el canal tenga contexto y seguidores el día del lanzamiento.
+- **Antes del 1 de enero de 2027 no hay demo de Plan B** (Ale, 2026-11-23: el vídeo de Plan B es para el 1 de enero): las piezas previas son de proceso y comunidad, y sirven para que el canal tenga contexto y seguidores el día del lanzamiento.
 - Cada pieza se publica en TikTok, Reels y Shorts el mismo día; X solo enlaza (DIST-X-001).
 
 | # | Cuándo | Pieza | Pilar · familia | Hipótesis (una variable) |
 |---|---|---|---|---|
 | 1 | ≈ 15 dic | Soy cerobytes: de dónde sale el nombre y qué voy a construir (la serie de miniapps gratis) | PROCESO · B | Línea base: confesión en primera persona como gancho |
 | 2 | ≈ 18 dic | Cómo decidí la primera miniapp (de diez candidatas a Plan B) | PROCESO · B | Gancho de resultado frente al de la pieza 1 (problema) |
-| 3 | ≈ 22 dic | El error o la decisión más difícil construyendo Plan B | PROCESO · B | Con demo parcial de staging frente a solo cámara (si se permite enseñar staging como proceso) |
+| 3 | ≈ 22 dic | El error o la decisión más difícil construyendo Plan B | PROCESO · B | Con pantallas del diseño o del código frente a solo cámara (la app funcionando no se enseña hasta el 1 de enero) |
 | 4 | ≈ 26 dic | Pregunta: ¿qué te hace dejar tus metas? (opciones reales) | COMUNIDAD · D | Duración corta (15–25 s) frente a 30–40 s |
 | 5 | ≈ 30 dic | Cuenta atrás: «el 1 de enero sale» | PROCESO · B | CTA de seguir frente a CTA de comentar |
 | 6 | **1 ene 2027** | Plan B (VID-0003 final, regrabado) | UTILIDAD · A | Lanzamiento: la pieza más pulida, con la dirección v2 |
