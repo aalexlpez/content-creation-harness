@@ -55,6 +55,63 @@ Un guion de este marco es a la vez **texto para decir** y **plan de montaje**. C
 3. 2–4 pasos con terminal real y comandos ejecutados de verdad.
 4. Prueba de que terminó bien.
 
+## 2 bis. Storytelling: personaje, conflicto y cambio
+
+**Estado:** propuesta (PR-004). Las familias de §2 dicen *qué* contar; esta sección dice cómo convertirlo en una historia que se quiera ver hasta el final. Se aplica a todas las familias y se comprueba antes del OK-2.
+
+### Las tres piezas que no pueden faltar
+
+| Pieza | Pregunta | En VID-0003 |
+|---|---|---|
+| **Personaje con deseo** | ¿Quién quiere qué? | Ale quiere cumplir sus metas del año |
+| **Obstáculo con algo en juego** | ¿Qué se lo impide y qué pierde si falla? | Todos los años las deja en enero; el día que no tiene ganas, no hay plan |
+| **Cambio** | ¿Qué es distinto al final, para él y para quien mira? | Este año tiene un Plan B para ese día, y tú también puedes tenerlo |
+
+Si falta una, el vídeo es una explicación, no una historia. **El cambio tiene que ser verdad**: si todavía no ha pasado, se cuenta como intención o como proceso («este año lo voy a probar»), nunca como resultado.
+
+### El arco corto (20–45 s)
+
+Cinco tiempos. Encajan dentro de cualquier familia y se marcan en la tabla Escenas.
+
+1. **Antes** (0–3 s): una escena concreta del problema, en primera persona o en segunda («Todos los años dejo mis metas en enero»). Es el gancho.
+2. **Deseo y obstáculo** (3–8 s): qué se quiere y por qué no sale. Aquí entra el **«pero»** (§3 bis).
+3. **Giro** (8–12 s): la decisión, la idea o la herramienta. Aquí entra el **«por eso»**.
+4. **Prueba** (12–25 s): se ve funcionar. Es el tramo más largo y no se esconde el límite.
+5. **Después** (últimos 3–5 s): el cambio en una frase y la invitación. Responde a la primera frase para cerrar el bucle.
+
+La plantilla de una línea es **ABT** («Y… pero… por eso…»): si el guion no se puede resumir así, falta el conflicto.
+
+### Reglas de oficio
+
+- **Concreto antes que general.** Una escena, una hora, un objeto: «jueves, 8 de la noche, sin ganas», no «la falta de motivación».
+- **Lo que está en juego se dice o se ve.** Perder algo pequeño y cercano (la racha, el propósito, una noche) pesa más que una cifra abstracta.
+- **Vulnerabilidad solo si es verdad.** La confesión funciona porque es de Ale; se confirma con él y se registra en Claims como tipo O (C1 de VID-0003).
+- **Un solo personaje en primer plano.** Ale o quien mira, no los dos a la vez en la misma frase.
+- **Tensión antes de la respuesta.** Una pausa o un silencio de 0,3–0,6 s antes del giro o del resultado (los picos de §3 bis).
+- **Cada frase empuja a la siguiente** con «pero» o «por eso». «Y además» es señal de lista, no de historia.
+- **Callback.** El cierre repite una palabra o una imagen del principio, transformada («enero» → «este año, sí»).
+- **Bucles abiertos entre vídeos.** Una pregunta que solo responde el siguiente episodio, únicamente si ese episodio existe o está fechado (ver el arco de la serie en `proyectos/miminiapp/SERIE.md`).
+
+### Por familia
+
+| Familia | Personaje y deseo | Obstáculo | Cambio |
+|---|---|---|---|
+| A · Demo | Quien mira, con un problema cotidiano | La fricción concreta | El resultado en sus manos |
+| B · Proceso | Ale construyendo | Lo que no funcionaba (verdad) | La decisión y el avance verificable |
+| C · Experimento | Ale con una pregunta | La hipótesis que puede fallar | Lo que se aprendió, incluido si falló |
+| D · Comunidad | La comunidad | Una decisión abierta | Qué se hará con sus respuestas |
+| E · Tutorial | Quien desarrolla | El paso difícil | El resultado funcionando en su máquina |
+
+### Comprobación de historia (antes del OK-2)
+
+- [ ] Se resume en una línea ABT.
+- [ ] Hay personaje, deseo, obstáculo y cambio, y el cambio es verdad o se presenta como intención.
+- [ ] La primera escena es concreta y está en los primeros 3 s.
+- [ ] El giro está antes del 40 % del vídeo y la prueba antes del 70 %.
+- [ ] El cierre hace callback al principio.
+- [ ] Cada frase de la confesión y del cambio está en Claims con su tipo.
+- [ ] La voz coincide con [PERSONAJE](../marca/PERSONAJE.md) (tono, palabras propias, lo que no se dice).
+
 ## 3. Ganchos
 
 1. Escribe **dos**: uno desde el problema y otro desde el resultado. 18 palabras como máximo.

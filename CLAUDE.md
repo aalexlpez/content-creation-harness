@@ -23,6 +23,8 @@ En Windows, si `python` no responde, usa `py -3`.
 | Perfil técnico, ingesta, edición, exportación y QC | [guias/TECNICA.md](guias/TECNICA.md) |
 | Set de grabación (luz, cámara, micro) | [guias/SET.md](guias/SET.md) |
 | Identidad, kit de logos, alias y cuentas | [marca/IDENTIDAD.md](marca/IDENTIDAD.md), `marca/kit/`, `marca/CUENTAS.csv` |
+| Personaje y voz de Ale (historias confirmadas, palabras, lo que no se dice) | [marca/PERSONAJE.md](marca/PERSONAJE.md) |
+| Arco de la serie Miniapps | [proyectos/miminiapp/SERIE.md](proyectos/miminiapp/SERIE.md) |
 | Proyectos que aparecen en los vídeos | `proyectos/<id>/PROYECTO.md` |
 | Ideas, decisiones y métricas | `registro/IDEAS.csv`, [registro/DECISIONES.md](registro/DECISIONES.md), `registro/METRICAS.csv` |
 | Lote semanal | `semanas/AAAA-WNN/SEMANA.md` |

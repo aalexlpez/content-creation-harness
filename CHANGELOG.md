@@ -2,6 +2,7 @@
 
 ## Sin publicar
 
+- **Storytelling y estrategia (PR-004, propuesta)** (2026-11-23): `guias/GUIONES.md` §2 bis (personaje, conflicto y cambio; arco de cinco tiempos; comprobación de historia), `marca/PERSONAJE.md`, `proyectos/miminiapp/SERIE.md` y el plan de las primeras 8 piezas en `guias/EDITORIAL.md`.
 - **VID-0003 v07 y base de `/edicion` con la dirección v2** (2026-11-21): `videos/VID-0003/hyperframes/edicion/` (composición, efectos de sonido y `preparar.py --mates`) con texto en tres niveles, tratamientos A–J, paleta Señal y sombra sutil; la skill (`referencia.md`, `SKILL.md`, `errores.md`) y `guias/MOTION.md` §10.10 al día.
 - **Paleta «Señal» aprobada** (AV-014, 2026-11-21): degradado azul eléctrico de cerobytes (`#F5F6F8` → `#7DB4FF` → `#2E6BFF`, a 119°) y sombra sutil en todo texto sobre imagen, en `marca/IDENTIDAD.md` y `guias/MOTION.md` §10.4. Laboratorio de texto rehecho con ella (`videos/VID-0003/hyperframes/lab_texto/`).
 - **Paleta con degradados y laboratorio de texto** (2026-11-21): tras los comentarios de Ale, la propuesta AV-014 pasa a ser una paleta solo de cerobytes con degradados (Acero, Ignición, Señal o Ignición + Acero; tablero `videos/VID-0003/hyperframes/paleta_v21/`), sin colores de MiMiniApp fuera del celular, y un laboratorio con diez animaciones de texto para elegir (`videos/VID-0003/hyperframes/lab_texto/`, `guias/MOTION.md` §10.9).
