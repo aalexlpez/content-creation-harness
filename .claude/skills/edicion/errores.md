@@ -36,7 +36,7 @@ Cada fila es una corrección real de Ale o un fallo técnico de las sesiones del
 
 | Fallo | Regla |
 |---|---|
-| Subtítulos sobre el estampado rojo de la camiseta | Subtítulos siempre en caja navy |
+| Subtítulos sobre el estampado rojo de la camiseta | Frase por encima de la estampa (y ≈ 1035) con borde y sombra sutil; caja marina solo sobre la app (v07) |
 | Subtítulos y textos bajo la interfaz de TikTok / Reels | Zona segura: ≥ 168 px arriba, ≤ 1540 px abajo, 120 px libres a la derecha |
 | Dos frases en una línea de subtítulos («TENGO POR ESO HICE») | Los grupos cortan siempre en «.», «?», «!» |
 | «Este febrero, no.» cuando la voz dice «no las dejo en enero» | El texto en pantalla no contradice la voz: «Este año, sí.» |

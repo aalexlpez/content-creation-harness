@@ -72,6 +72,8 @@ HyperFrames es el motor de animación principal (AV-001). Si falla en una prueba
   - `composition_file_too_large`, porque un solo `index.html` con `render(t)` es más fácil de sincronizar.
 ### Aprendido el 2026-11-18 (edición v05 de VID-0002)
 
+> Los scripts que se citan (`cortes.py`, `mezcla_v05.py`, `revisar.py`) son de VID-0002. Hoy se usan los de la base de `/edicion`: `preparar.py`, `mezcla.py` y la revisión de la skill.
+
 - **Recortar a la persona:** `npx hyperframes@0.9.42 remove-background clip.mp4 -o assets/matte.webm --quality best`. La primera vez instala `onnxruntime-node` y baja el modelo (≈ 168 MB, con permiso de Ale). En CPU tarda ≈ 1,8 s por fotograma: recorta antes con ffmpeg solo la ventana que haga falta (114 fotogramas = 3,4 min). En la composición, un `<video>` con `data-layout-allow-occlusion` dentro del mismo contenedor que la toma, con el texto entre los dos y el **mismo filtro CSS** que la toma. Se muestra solo mientras el texto está visible (el WebM cambia un poco el color). Las capas WebM en `assets/` van fuera de Git (`.gitignore`).
 - **Piezas del catálogo (`hyperframes add`):** llegan con estilo genérico (degradados, sombras, glitch RGB) y cargan GSAP desde una CDN. Se toma su técnica (cómo se mueve) y se reescribe con la marca v2; no se montan tal cual.
 - **Ventana de la demo en la raíz** de la composición, no dentro del escenario (que recorta con `overflow: hidden`). Un rectángulo `[left, top, ancho, alto, radio]` por estado (tarjeta, ventana, pantalla completa, tarjeta de la serie) y `lerp` entre ellos; el zoom interno también se interpola para que la interfaz siga llenando el ancho.

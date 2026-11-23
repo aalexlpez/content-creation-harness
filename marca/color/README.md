@@ -1,6 +1,6 @@
 # Color
 
-Herramientas de color de la serie. El look vigente es el **look B** («cálido cinematográfico», elegido por Ale el 2026-11-19), que se aplica con ffmpeg en `videos/VID-0002/hyperframes/v06/preparar.py` (`LOOK_B` y `PIEL`). Reglas en [EDICION → Color](../../guias/EDICION.md#color) y ajustes de cámara en [SET → Configuración vigente](../../guias/SET.md#configuración-vigente-2026-11-19).
+Herramientas de color de la serie. Por defecto, **sin filtro** (desde el 2026-11-20, set nuevo). El **look B** («cálido cinematográfico», elegido por Ale el 2026-11-19 para VID-0002) queda como referencia, que se aplica con ffmpeg en `videos/VID-0002/hyperframes/v06/preparar.py` (`LOOK_B` y `PIEL`). Reglas en [EDICION → Color](../../guias/EDICION.md#color) y ajustes de cámara en [SET → Configuración vigente](../../guias/SET.md#configuración-vigente-2026-11-19).
 
 | Archivo | Qué es | Estado |
 |---|---|---|

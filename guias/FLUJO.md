@@ -54,6 +54,8 @@ El estado vive en `PRODUCCION.md → Control → Estado`. Cámbialo con `marco.p
 | BLOQUEADO | Parado por algo concreto | Motivo en `Bloqueo` (`--bloqueo "…"`) |
 | CANCELADO | Descartado | — |
 
+**Ensayos terminados:** un ensayo que ya no se va a seguir se mueve a `CANCELADO` con `Siguiente_paso` «Ensayo cerrado: …» y lo que dejó; así no aparece como pendiente.
+
 Mantén al día `Siguiente_paso` (`--siguiente "…"`). Es lo primero que se lee al retomar un vídeo en otra sesión o en otra herramienta.
 
 ## Cambios después de aprobar

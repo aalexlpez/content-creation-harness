@@ -55,7 +55,7 @@ Se encuadra **más abierto** de lo que se quiere ver: si en los bordes de la tom
 
 ### Color en edición
 
-- Look de la serie: **look B** (EDICION → Color), aplicado con ffmpeg antes de componer.
+- Color en edición: **sin filtro por defecto** (EDICION → Color); el look B queda como referencia de lo probado.
 - En prueba: el LUT **«cine cálido» v02** para tomas Rec.709 del celular (`marca/color/`; ver su README). Probado solo en una toma de oficina subexpuesta; falta probarlo en el set. No se aplica encima del look B (se suman).
 
 ## 1. Inventario consolidado
@@ -67,7 +67,7 @@ Se encuadra **más abierto** de lo que se quiere ver: si en los bordes de la tom
 | Control pasivo de luz | **PULUZ PU5111**, reflector plegable circular **5 en 1, Ø 60 cm**; adquirido en Goodio | **Comprado** | Rellenar o recortar sombras; también difundir luz |
 | Micrófono | **DJI Mic Mini 2**, kit **1 TX + 1 RX estándar**, según denominación de compra comunicada | **Comprado** | Captación inalámbrica de voz |
 | Trípode de cámara | **K&F Concept S254A3 + BV01**, referencia **KF09.154**, hasta **172 cm** | **Comprado** | Fijación del móvil, encuadres verticales y estabilidad |
-| Móvil principal sugerido | **Samsung Galaxy S24+** | **Disponible** | Cámara A, preferida para plano principal |
+| Móvil principal sugerido | **Samsung Galaxy S24+** | **Ya no disponible** (2026-11-19) | Cámara A, preferida para plano principal |
 | Móvil secundario sugerido | **Xiaomi POCO F5** | **Disponible** | Cámara B, segundo plano o toma auxiliar |
 | Luz de ambiente 1 | Lámpara LED RGB / RGBWW orientable, modelo por decidir | **Pendiente** | Acentuar pared o elemento de fondo |
 | Luz de ambiente 2 | Segunda lámpara LED RGB / RGBWW, opcional | **Pendiente / condicional** | Segundo acento visual si el fondo lo justifica |
@@ -193,7 +193,7 @@ Se encuadra **más abierto** de lo que se quiere ver: si en los bordes de la tom
 
 **Uso en la serie:** establecer encuadre vertical fijo, aprovechar el soporte de smartphone y el mando Bluetooth si son compatibles. Mantener la columna central lo más baja que permita el plano; las patas extendidas ofrecen mayor estabilidad que una columna central elevada al máximo.
 
-### 2.5. Teléfonos disponibles: Galaxy S24+ y POCO F5
+### 2.5. Teléfonos disponibles: Galaxy S24+ y POCO F5 (histórico: hoy solo está el POCO F5, ver el aviso del principio)
 
 | Característica | **Samsung Galaxy S24+** | **Xiaomi POCO F5** |
 |---|---|---|

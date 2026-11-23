@@ -7,7 +7,7 @@ Se hace sobre el render, no sobre el código. Lo que no se pudo comprobar se dic
 - [ ] `npx hyperframes@0.9.42 lint .`: 0 errores.
 - [ ] Capturas (`snapshot --at`) en cada momento cambiado y en: primer fotograma, cada recurso, cada protagonista, cada paso de la demo, cada flecha al terminar, último fotograma.
 - [ ] Hoja de contacto del máster a 2 fps (`fps=2,scale=120:-1,tile=20x3`): ritmo de cambios, nada vacío, nada solapado.
-- [ ] Cambios de plano medidos (`select='gt(scene,0.18)'`): nunca más de ≈ 4 s sin un cambio de imagen fuera de la demo.
+- [ ] Cambios de plano medidos (`select='gt(scene,0.18)'`): nunca más de 3 s sin un cambio de imagen o gráfico fuera de la demo (1–2 s en el gancho).
 - [ ] Ningún texto en la barra superior ni por debajo de 1540 px; nada sobre la boca; subtítulos legibles sobre la ropa.
 - [ ] Cada protagonista en su zona (sin solapes) y cada flecha con sus dos tarjetas.
 - [ ] El texto en pantalla dice lo mismo que la voz (ni contradice ni repite palabra por palabra).

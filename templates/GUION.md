@@ -44,6 +44,8 @@ Guion y dirección de montaje. Cómo rellenarlo: [GUIONES](../../guias/GUIONES.m
 
 ## Notas de revisión
 
+Comprobación de historia ([GUIONES §2 bis](../../guias/GUIONES.md)): línea «y… pero… por eso…»; personaje, deseo, obstáculo y cambio verdadero; giro antes del 40 % y prueba antes del 70 %; cierre que retoma el principio; voz según [PERSONAJE](../../marca/PERSONAJE.md).
+
 ## OK-2
 
 - Aprobador: PENDIENTE

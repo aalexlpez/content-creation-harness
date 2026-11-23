@@ -4,7 +4,7 @@ Cómo se decide el montaje desde el guion: texto en pantalla, música y efectos,
 
 ## Qué entrega Claude con cada guion
 
-Una **propuesta principal** que se pueda seguir en CapCut. Una variante solo si cambia una decisión importante (por ejemplo, música o voz sola). Los tiempos son aproximados hasta tener material.
+Una **propuesta principal** que se pueda montar con `/edicion` (o en CapCut, si Ale edita esa pieza). Una variante solo si cambia una decisión importante (por ejemplo, música o voz sola). Los tiempos son aproximados hasta tener material.
 
 | Dónde | Qué queda escrito |
 |---|---|
@@ -25,11 +25,12 @@ Una **propuesta principal** que se pueda seguir en CapCut. Una variante solo si 
 
 | Nivel | Uso | Pauta v2 |
 |---|---|---|
-| Subtítulo | Transcribe la voz | Plus Jakarta Sans Bold, mayúsculas, una línea y posición estable. La palabra que suena se invierte (caja blanco roto con texto negro). Revisa eñes, tildes y cifras en el celular |
-| Rótulo | Añade información: nombre, paso, cifra | Plus Jakarta Sans Bold sobre un bloque azul marino con el símbolo «/». Dirige la mirada a la demo |
-| Acento | Gancho, resultado o remate | Una frase corta; la palabra clave en Plus Jakarta Sans ExtraBold dentro de una caja blanco roto. Separado de subtítulos, cara e interfaz |
+| Frase (nivel 1) | Transcribe la voz | Plus Jakarta Sans Bold 50 px en minúsculas, palabra a palabra, por encima de la estampa de la ropa (a cámara y ≈ 1035); en caja marina solo sobre la app (y ≈ 1440). Revisa eñes, tildes y cifras en el celular |
+| Clave (nivel 2) | La palabra que carga el sentido | ExtraBold 128–170 px en el degradado Señal, debajo de la frase, con una entrada que depende de su significado ([MOTION §10.3](MOTION.md)) |
+| Escenario (nivel 3) | Titula un bloque | ExtraBold gigante en Señal suave, detrás de la persona (silueta de `remove-background`) |
+| Rótulo y acento | Información (nombre, paso) o remate | Píldora de cristal marino con el símbolo «/»; el acento final con la palabra clave en caja Señal oscura |
 
-La identidad v2 no tiene color de acento: el énfasis se logra por inversión de contraste, peso o tamaño. Colores, símbolo y kit: [IDENTIDAD](../marca/IDENTIDAD.md). La tipografía es Plus Jakarta Sans (AV-007, licencia OFL): los archivos están en `marca/fuentes/plus-jakarta-sans/`. Anota en Derechos la fuente y de dónde salió el archivo. En CapCut hay que instalarla en el sistema y comprobar que la reconoce.
+El acento de color es el **degradado Señal** (AV-014) y todo texto sobre imagen lleva la **sombra sutil**; los valores están en [IDENTIDAD](../marca/IDENTIDAD.md). Colores, símbolo y kit: [IDENTIDAD](../marca/IDENTIDAD.md). La tipografía es Plus Jakarta Sans (AV-007, licencia OFL): los archivos están en `marca/fuentes/plus-jakarta-sans/`. Anota en Derechos la fuente y de dónde salió el archivo. En CapCut hay que instalarla en el sistema y comprobar que la reconoce.
 
 ## Música y efectos
 
@@ -93,9 +94,11 @@ Cuando la miniapp existe (aunque sea en staging), la demo se graba de la app de 
 
 ## Color
 
+**Regla vigente:** la toma va **sin filtro por defecto** (recorte y escala, sin viñeta ni suavizado de piel); una coloración muy suave (`eq` contraste 1,04, gamma 1,03) solo si Ale la pide. Los looks de abajo quedan como referencia de lo probado.
+
 > **Aviso (2026-11-20, VID-0003):** en el set con la luz nueva Ale vio el look B demasiado notorio (pared violeta, piel naranja, negros aplastados, piel suavizada). VID-0003 usa un color «natural» (`videos/VID-0003/hyperframes/edicion/preparar.py`: `LOOK` y `PIEL`): curva muy suave, piel un poco más cálida, pared menos violeta y limpieza de ruido en vez de suavizar la piel. **Regla:** el color se mide en la toma (pared, piel, negros) y se corrige hacia lo natural; el look de la serie es un punto de partida, no un filtro fijo. Después Ale pidió **quitar el filtro** del todo (v03): la versión vigente de VID-0003 va con el color de la cámara, sin corrección ni viñeta. Con la luz del set bien puesta, la toma ya no necesita look.
 >
-> **Look de la serie (2026-11-19, VID-0002 v06f):** look B «cálido cinematográfico», elegido por Ale entre tres. Receta en `videos/VID-0002/hyperframes/v06/preparar.py` (`LOOK_B` y `PIEL`): se aplica con ffmpeg al corte antes de componer (no con filtros CSS), con suavizado de piel que respeta bordes solo en la toma de cámara y la misma curva y temperatura en los recursos.
+> **Histórico (2026-11-19, VID-0002 v06f):** look B «cálido cinematográfico», elegido por Ale entre tres. Receta en `videos/VID-0002/hyperframes/v06/preparar.py` (`LOOK_B` y `PIEL`): se aplica con ffmpeg al corte antes de componer (no con filtros CSS), con suavizado de piel que respeta bordes solo en la toma de cámara y la misma curva y temperatura en los recursos.
 
 El color se aplica a la **toma de cámara**. La captura de pantalla conserva su color original. Orden: exposición y balance de blancos primero, después contraste y saturación. Revisa la piel, los blancos y las luces del set comparando el mismo fotograma con el original. Si el original es HDR, primero conviértelo a SDR ([TECNICA](TECNICA.md)).
 
@@ -128,6 +131,8 @@ Técnicas que se pueden pedir por escena: tipografía cinética sincronizada, tr
 
 ## Edición continua
 
+> **Vigente desde 2026-11-21:** la dirección v2 ([MOTION §10](MOTION.md)), la paleta Señal (AV-014) y la base de `/edicion` (VID-0003 v07, `.claude/skills/edicion/referencia.md`). Donde una sección de abajo no coincida, mandan ellas; lo que queda abajo es historia de VID-0002 y sirve para entender por qué se decidió. En particular: subtítulos, color de acento, música y estilo.
+
 Propuesta AV-009, probada en el ensayo de edición del 2026-11-17 (`videos/VID-0001/hyperframes/ensayo-edicion/`). Nace de estudiar la técnica del creador Erik Taveras ([referencias/MOTION.md](../referencias/MOTION.md)); se copia el método, no su estilo.
 
 **El error que corrige:** planificar unas pocas piezas sueltas (una hoja, un rótulo, una maqueta) alrededor de la cara. Se ven pequeñas, compiten con el encuadre y dejan largos tramos sin nada. El nivel profesional sale de una **capa gráfica continua**, sencilla pero constante, ligada a lo que se dice.
@@ -141,7 +146,7 @@ Propuesta AV-009, probada en el ensayo de edición del 2026-11-17 (`videos/VID-0
 | Subtítulos propios en el escenario | Plus Jakarta Sans ExtraBold en mayúsculas, a y ≈ 868 px, la palabra que suena invertida. Ningún grupo de subtítulo menos de 0,4 s en pantalla |
 | Cambio de tramo | El escenario no sube y baja entre tramos seguidos: la barra «/» cruza en diagonal y el contenido cambia detrás de ella, como una cortina |
 | Tramos a cámara | Se usan para respirar y para lo que no conviene ilustrar (por ejemplo, un castigo que la ficha del producto evita). Pueden llevar elementos ligeros junto a la cara |
-| Sistema pequeño | Marca v2 sin color de acento, iconos lineales en blanco roto, la barra como conector, notas pequeñas en mayúsculas con tracking para la fuente de un dato |
+| Sistema pequeño | (Antes de AV-014) Marca v2 sin color de acento, iconos lineales en blanco roto, la barra como conector, notas pequeñas en mayúsculas con tracking para la fuente de un dato |
 | Cara siempre | La cara se ve en todo el vídeo (≥ 60 % del tiempo a pantalla, entera o abajo en el escenario). La pantalla completa sin cara es una excepción de ≤ 4 s. Presupuesto por tramo en el `PLAN.md` antes de animar: escenario ≤ 6 s seguidos con el mismo gráfico quieto |
 | La demo, en una ventana | La interfaz va en una ventana del escenario (y 330–850) con la cara abajo. La cámara trabaja por **planos de grupo de interfaz** (pregunta y campo, tarjetas, campos del plan, resultado…), medidos sobre la maqueta, con acercamientos y alejamientos de 0,5–0,6 s y zoom ≤ 0,9. Ningún plano parte un campo o un botón. La ventana cambia de ancho con el zoom para que no queden franjas |
 | Banda de subtítulos | Fija en cada modo (y ≈ 862 en el escenario, y ≈ 1190 a cámara) y nunca ocupada por gráficos ni interfaz. Si un grupo no cabe en 980 px, se encoge (estimación por caracteres, sin medir el DOM) |
@@ -154,7 +159,7 @@ Propuesta AV-009, probada en el ensayo de edición del 2026-11-17 (`videos/VID-0
 
 | paso | quién | qué | sale |
 |---|---|---|---|
-| 1 | Ale | Corta y limpia el bruto en CapCut: toma por frase y silencios fuera. Exporta solo **Video**, sin marcar la casilla Audio (que crea un `.aac` aparte), H.264, mp4 y 30 fps, sin música ni subtítulos, **en 4K si CapCut lo permite** (si no, 1080P y Ale deja el bruto 4K en `media/originales/`: Claude reconstruye el corte en 4K alineando el audio de cada tramo con el bruto) | `media/originales/<nombre>.mp4` |
+| 1 | Ale | **Hoy (estándar `/edicion`):** entrega la toma con holguras y la voz mejorada, y Claude corta en silencios medidos desde el 4K. **Antes:** cortaba y limpiaba el bruto en CapCut: toma por frase y silencios fuera. Exporta solo **Video**, sin marcar la casilla Audio (que crea un `.aac` aparte), H.264, mp4 y 30 fps, sin música ni subtítulos, **en 4K si CapCut lo permite** (si no, 1080P y Ale deja el bruto 4K en `media/originales/`: Claude reconstruye el corte en 4K alineando el audio de cada tramo con el bruto) | `media/originales/<nombre>.mp4` |
 | 2 | Claude | Ingesta: `inspeccionar --perfil ingesta`, `medios`, revisar marca de agua y subtítulos en tres fotogramas. Copia de trabajo H.264 con un fotograma clave por segundo y audio a WAV 48 kHz | `hyperframes/<pieza>/assets/corte.mp4`, `media/trabajo/corte.wav` |
 | 3 | Claude | Tiempos por palabra con Parakeet **frase a frase**, cortando en las pausas, y texto corregido a mano ([TECNICA](TECNICA.md#cómo-se-trabaja-aprendido-el-2026-11-17)) | `media/trabajo/corte_palabras.json` |
 | 4 | Claude | Si lo dicho no coincide con el guion: voz literal y claims nuevos en el GUION y subida de `Version` (el OK-2 se pide sobre lo grabado) | `GUION.md` vN |
@@ -162,7 +167,7 @@ Propuesta AV-009, probada en el ensayo de edición del 2026-11-17 (`videos/VID-0
 | 6 | Claude | Composición: un solo `index.html` con `render(t)`. Las maquetas ya hechas se re-anclan con un mapa de tiempos (`WARP`) y entran como video a pantalla completa | `index.html` |
 | 7 | Claude | `check`, capturas en ~30 instantes y revisión P0/P1 ([MOTION §7](MOTION.md#7-proceso-de-una-capa-de-motion)); se corrige y se vuelve a capturar | `media/trabajo/capturas*/` |
 | 8 | Claude | Render sin sonido añadido | `media/trabajo/edicion_vNN_sin_sfx.mp4` |
-| 9 | Claude | Mezcla con `mezcla.py`: tabla de efectos (evento, archivo, recorte, pico objetivo, nota), pico 1 fotograma después del evento, música en todo el vídeo 18 dB bajo la voz, −14 LUFS | `media/trabajo/edicion_vNN.mp4` + `_mezcla.json` |
+| 9 | Claude | Mezcla con `mezcla.py`: tabla de efectos (evento, archivo, recorte, pico objetivo, nota), pico 1 fotograma después del evento, música ≈ 9 dB bajo la voz mientras se habla (valores en la skill), −14 LUFS | `media/trabajo/edicion_vNN.mp4` + `_mezcla.json` |
 | 10 | Ale | Lo ve y lo escucha entero en el celular; una ronda de correcciones | PRODUCCION → Correcciones |
 
 **Lo que funcionó en VID-0002 (2026-11-17):**
@@ -197,13 +202,14 @@ Alternativa a E-01 cuando la pantalla dividida no aporta: la **cara a pantalla c
 - **Entrada y salida desenfocadas** (14 → 0 px), **deriva leve** (±5–14 px y ±1,6°, con fase propia) y **profundidad** (los lejanos, más pequeños, tenues y con 2 px de desenfoque).
 - **Flechas** que se dibujan con un punto de luz que viaja; las que cruzan el cuadro **dan la vuelta por encima de la cabeza**, nunca por el mentón.
 - **Un hilo conductor:** un elemento que reaparece (en VID-0002, el teléfono flotante, que se ensancha hasta ser la ventana de la demo y vuelve a encogerse).
-- **Resplandor** en blanco roto: es excepción a AV-007 (sin resplandores) y solo se usa tras la decisión de Ale.
+- **Resplandor** en blanco roto: es excepción a AV-007 (sin resplandores) y solo se usa tras la decisión de Ale (AV-013 sigue sin decidir; la v07 no lo usa).
+- **Deriva:** se mantiene leve y lenta (ver [MOTION §4](MOTION.md#4-movimiento)); nunca un latido o una respiración de escala.
 
 ## Hacia un estándar estable
 
 **Meta:** que un vídeo nuevo se edite con los mismos pasos, archivos y scripts, cambiando solo el contenido (palabras, eventos, recursos y música). **Se da por estable** cuando dos vídeos seguidos salen sin tocar los scripts ni las reglas.
 
-> **Estado (2026-11-20):** el proceso está escrito en la skill **`/edicion`** (`.claude/skills/edicion/`: pasos, valores de referencia, errores ya corregidos y lista de revisión) y la base canónica es `videos/VID-0003/hyperframes/edicion/` (v04, aprobada por Ale): un vídeo nuevo copia esa carpeta y cambia solo los datos. Motivo: una edición hecha en otra computadora solo con las guías salió poco pulida (transiciones, volúmenes, tarjetas, efectos), porque los valores finos vivían en el código de una sesión.
+> **Estado (2026-11-21):** el proceso está en la skill **`/edicion`** (`.claude/skills/edicion/`) y la base es `videos/VID-0003/hyperframes/edicion/` (v07, dirección v2). **Todavía no es «cambiar solo los datos»:** la composición tiene tiempos de VID-0003 escritos a mano (tratamientos, ventanas sin frase, encuadres de la demo); un vídeo nuevo los rehace. Pasarlos a un archivo de eventos anclado a palabras es el paso que falta (fila «Eventos» de abajo).
 
 | Pieza | Hoy (VID-0002) | Estable |
 |---|---|---|

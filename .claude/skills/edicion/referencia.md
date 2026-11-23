@@ -9,9 +9,9 @@ Los números que hacen que la edición salga pulida. Están en `videos/VID-0003/
 | 0–160 px arriba | Barra de la app («Siguiendo / Para ti»): nada importante |
 | ≥ 168 px | Primera línea útil: promesa (178), acento final (168) |
 | Cabeza | Tercio superior (≈ 240–950 px con el recorte 1,6×) |
-| 1190 px | Subtítulos a cámara (en caja, sobre la camiseta) |
+| 1035 / 1105 px | Frase (nivel 1) y clave (nivel 2) a cámara, por encima de la estampa de la ropa |
 | 1000–1400 px | Tarjeta `over` en el pecho (400×400, x 340) |
-| 1420 / 1440 px | Subtítulos con tarjeta / en la demo |
+| 1430 / 1440 px | Frase con tarjeta en el pecho / en la demo (en caja marina) |
 | > 1540 px y 120 px de la derecha | Descripción y botones de TikTok y Reels: nada importante |
 
 ## Marca y tipografía

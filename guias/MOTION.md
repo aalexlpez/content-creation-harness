@@ -2,7 +2,7 @@
 
 Propuesta AV-010 (2026-11-17). Reúne en reglas medibles lo que enseñan las dos fuentes de oficio que usamos: el **recetario video-shotcraft** y los **estándares y el catálogo de HyperFrames**. Va por encima de cualquier receta suelta y por debajo de la marca v2 ([IDENTIDAD](../marca/IDENTIDAD.md)) y del método de [Edición continua](EDICION.md#edición-continua) (E-01):
 
-**Orden de precedencia:** marca v2 → E-01 → este estándar → la receta concreta. Si una receta choca con la marca (neón, glitch, degradados, resplandores), gana la marca.
+**Orden de precedencia:** marca v2 → E-01 → este estándar → la receta concreta. Si una receta choca con la marca (neón, glitch, degradados que no son la Señal de AV-014, resplandores), gana la marca.
 
 Una regla puede romperse a propósito, pero hay que anotar cuál y por qué en el `PLAN.md` del vídeo.
 
@@ -63,10 +63,10 @@ Las carpetas `.md` de shotcraft están en chino. Se citan por el nombre de la ca
 
 **En la duda, más lento.** La primera versión casi siempre va rápida (R3). Una interacción simulada (escribir, tocar, elegir) va a velocidad humana: quien mira debería poder hacerla a la vez.
 
-**Una técnica, un protagonista.** Cada técnica (caer, apilar, girar, sellar) protagoniza **una sola vez** por vídeo. Lo que repite una idea ya dicha se corta (P4). Un plano, un efecto.
+**Una técnica, un protagonista.** Cada técnica (caer, apilar, girar, sellar) protagoniza **una sola vez** por vídeo. Excepción: la palabra escenario detrás de la persona puede volver (3–5 por vídeo), porque es el sistema que titula los bloques. Lo que repite una idea ya dicha se corta (P4). Un plano, un efecto.
 
 **Prohibido por delatar un vídeo generado** (HF motion, shotcraft Q3–Q4):
-- títulos o interfaz que respiran, flotan o laten en bucle;
+- títulos o interfaz que respiran o laten en bucle (escala u opacidad que suben y bajan). La única excepción es la **deriva** de los elementos flotantes (AV-013): desplazamiento de ±5–14 px y giro de ±1,6° con periodo ≥ 7 s, sin cambio de escala;
 - un zoom lento que avanza solo al final de un plano;
 - todo entra con fundido y subida;
 - anillos de clic;
@@ -110,7 +110,7 @@ Encima de AV-008 (solo sonidos reales):
 6. **Niveles:**
    - los golpes, 3–6 dB por encima de la cama;
    - música bajo la voz, ≈ −18 dB;
-   - mezcla entre −16 y −14 LUFS, pico real ≤ −1 dBTP.
+   - mezcla a −14 LUFS (±0,5), pico real ≤ −1 dBTP.
 
    Se mide con `hyperframes audio` sobre el render. Se dice siempre que se midió, no que se escuchó.
 7. **Prueba en contexto:** un sonido se juzga ya montado en el vídeo, nunca suelto (S1).
@@ -187,7 +187,7 @@ Piezas y recetas que ya salieron en un render real, con la marca v2: `text-state
 - [ ] Ningún tramo de más de 3 s sin cambio (`dead_stretch`) ni línea sin tiempo de lectura (`line_unread`).
 - [ ] Curvas según la función, salidas más cortas que las entradas y llegadas en grupo que aceleran y descansan 0,5 s.
 - [ ] 3–5 tipos de transición, cada uno con su causa.
-- [ ] Cada sonido tiene causa visible, pico un fotograma después de la imagen, licencia registrada; mezcla entre −16 y −14 LUFS y ≤ −1 dBTP.
+- [ ] Cada sonido tiene causa visible, pico un fotograma después de la imagen, licencia registrada; mezcla a −14 LUFS (±0,5) y ≤ −1 dBTP.
 - [ ] `check` limpio, `snapshot --review` mirado (hoja de 360 px incluida), `REVIEW.md` escrito y revisión independiente hecha.
 - [ ] La cara se ve ≥ 60 % del vídeo; ningún tramo a pantalla completa sin cara de más de 4 s.
 - [ ] Cada corte de voz cae en un silencio medido y en final de frase.
@@ -284,7 +284,7 @@ En cada edición, además de la revisión de la skill (`.claude/skills/edicion/r
 | Profundidad | Al menos una palabra escenario detrás de la persona |
 | Tarjetas vivas | ≥ 2 tarjetas que hacen algo; ninguna tarjeta solo con texto |
 | Iconos | El producto aparece con su icono real al nombrarlo |
-| Huecos | Fuera de la demo, nunca más de 1,5 s sin un cambio gráfico |
+| Huecos | Fuera de la demo, nunca más de 3 s sin un cambio de imagen o gráfico; en el gancho (0–5 s), uno cada 1–2 s |
 | Gestos | Cada gesto claro de Ale tiene su gráfico (nacer del gesto, señalar) |
 | CTA | El CTA es un componente animado |
 

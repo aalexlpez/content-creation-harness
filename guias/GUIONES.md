@@ -16,7 +16,7 @@ Un guion de este marco es a la vez **texto para decir** y **plan de montaje**. C
 | Duracion | Estimada en segundos. Se confirma leyendo en voz alta |
 | Ritmo | Cortes por escena, pausas, dónde se acelera o respira |
 | Musica | Carácter, entrada, bajada bajo la voz y salida, o «voz sola» |
-| Texto_en_pantalla | Jerarquía: subtítulo, rótulo y frase de acento |
+| Texto_en_pantalla | Los tres niveles de [MOTION §10.2](MOTION.md) (frase, clave y escenario): qué claves y qué escenarios, y el acento final |
 | Color | Tratamiento de la toma de cámara. La captura de pantalla conserva su color |
 | Perfil_visual | v2 (identidad aprobada, ver [IDENTIDAD](../marca/IDENTIDAD.md)) |
 
@@ -130,7 +130,7 @@ Reglas que se repiten en los vídeos cortos que retienen (sin cifras propias tod
 4. **Segundo gancho a los 3–6 s:** una frase que sube la apuesta cuando el espectador decide si se queda.
 5. **«Pero» o «por eso», no «y entonces»:** cada frase empuja a la siguiente con un giro o una consecuencia.
 6. **El valor antes del 70 %:** el resultado aparece pronto, no al final.
-7. **Tres picos, uno por tercio** (gancho, revelación y cierre), cada uno con golpe de música, corte y palabra protagonista. Entre picos, un cambio de imagen cada 2–4 s.
+7. **Tres picos, uno por tercio** (gancho, revelación y cierre), cada uno con golpe de música, corte y palabra protagonista. Entre picos, un cambio de imagen o gráfico como mucho cada 3 s (cada 1–2 s en el gancho), como en [MOTION](MOTION.md).
 8. **Final que responde al inicio:** la última frase cierra lo que abrió la primera y el último plano encaja con el primero, para el bucle.
 
 **Tipos de gancho:** confesión (primera persona, solo si es verdad), contraste («Planeaste X. ¿Planeaste Y?»), escena concreta, contraria («no falla por A, falla por B»), advertencia y pregunta directa. Se escriben varios, se puntúan y se graban 2–3 tomas del segundo mejor como alternativa. Un gancho tiene que funcionar **el día que se publica** (VID-0003: «Es febrero…» no servía para el 1 de enero).
