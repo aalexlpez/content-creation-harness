@@ -47,7 +47,17 @@ Complementos que usa el kit y no son oficiales: texto secundario sobre marino `#
 
 - **Tema claro:** fondo `#F5F6F8`, texto `#0B0B0D`, secundario `#1E2937`, marca `#0D213F`.
 - **Tema oscuro:** fondo `#0D213F` (alternativo `#0B0B0D`), texto `#F5F6F8`, superficies `#1E2937`, marca `#F5F6F8`.
-- **No hay color de acento oficial.** En vídeo, el énfasis se hace por inversión de contraste (caja blanco roto con texto negro), por peso o por tamaño.
+- **Degradado «Señal» (azul eléctrico, AV-014, 2026-11-21):** el acento de la marca para el texto animado y los detalles en vídeo. Va siempre a 119°, perpendicular a la barra «/».
+
+| Token | Degradado | Uso |
+|---|---|---|
+| Señal | `#F5F6F8` → `#7DB4FF` → `#2E6BFF` | Palabras clave, palabras escenario, insignias, botones |
+| Señal suave | `#FFFFFF` → `#CFE1FF` → `#7DB4FF` | Estructura: bordes de tarjetas, la barra «/» animada, escenarios discretos |
+| Señal oscura | `#5E9BFF` → `#2E6BFF` | Cajas con texto blanco roto encima |
+| Brillo | La Señal con una franja `#FFFFFF` que la cruza | Un solo brillo en un protagonista |
+
+- **Sombra del texto sobre imagen** (AV-014): `drop-shadow(0 2px 3px rgba(4,10,28,.45)) drop-shadow(0 8px 18px rgba(4,10,28,.32))`. Sutil: da relieve y lectura, no se ve como sombra.
+- Fuera del vídeo (kit, perfiles, miniaturas), el énfasis sigue siendo por contraste, peso o tamaño hasta que se rehaga el kit con la Señal.
 - **Contraste medido:** blanco roto sobre marino 14,9:1 y sobre negro 18,2:1. Carbón, marino y negro casi no se distinguen entre sí (1,1 a 1,3:1): sepáralos con un borde fino de blanco roto al 20 % o con el símbolo. La barra `#003571` sobre negro da solo 1,6:1: por eso en la v1.2 `logo-oscuro.svg` ya lleva la barra blanca, y el azul queda solo en los archivos `*-azul-referencia`, que no se usan sobre negro.
 - **Descartados (AV-006):** `#54E0EA`, `#AD8BFF`, `#D9F77A`.
 
@@ -85,7 +95,7 @@ Complementos que usa el kit y no son oficiales: texto secundario sobre marino `#
 
 ### Movimiento y sonido
 
-- **Movimiento:** el tablero no lo define. Propuesta sin aprobar, para los vídeos: la barra como motivo, entradas con barrido diagonal a ≈ 29° de la vertical y superficies planas, sin degradados ni resplandores. Detalle en `videos/VID-0001/GUION_BEATS.md`.
+- **Movimiento:** dirección v2 en [MOTION §10](../guias/MOTION.md): la barra como motivo (barridos y cortes a ≈ 29° de la vertical), texto en tres niveles con el degradado Señal y sombra sutil; sin resplandores salvo lo que decida AV-013. Detalle en `videos/VID-0001/GUION_BEATS.md`.
 - **Firma sonora:** no existe. Los efectos y la música de los ensayos son provisionales.
 
 ## Kit de activos v1.2
@@ -121,6 +131,8 @@ Los PNG con texto (rótulos, portada, plantillas, pantallas 9:16) están exporta
 Observación del kit: en `tarjeta-perfil-social` el avatar circular se solapa con el descriptor «TECNOLOGÍA / DESARROLLO / IDEAS». Es un defecto de la plantilla, no de la tipografía.
 
 ## Pendientes
+
+- **Kit con la Señal:** exportar variantes del kit (miniatura, cabeceras) con el degradado de AV-014.
 
 1. Maestro vectorial oficial del logo, con proporciones y espaciados definitivos (el wordmark actual es un trazado reconstruido).
 2. Valor exacto del azul de la barra diagonal.

@@ -40,3 +40,7 @@ desktop.ini
 
 # HyperFrames: capas con transparencia de trabajo (fuera de Git)
 videos/*/hyperframes/**/assets/*.webm
+
+# Fotogramas de la grabación usados por el tablero de paletas (se regeneran desde el corte)
+videos/*/hyperframes/paleta_v21/assets/fondo.png
+videos/*/hyperframes/paleta_v21/assets/persona.png

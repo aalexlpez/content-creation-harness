@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Muestrario v2 · VID-0003</title>
+<!--
+  MUESTRARIO de la dirección v2 de motion (guias/MOTION.md §10), sobre los primeros 12,95 s de VID-0003 (base
+  hyperframes/edicion/). No es una edición nueva: enseña el lenguaje para que Ale decida.
+  - Tres niveles de texto: frase (minúsculas, palabra a palabra) · clave (grande, en color, con su entrada) · escenario
+    (gigante detrás de la persona, con el matte de remove-background).
+  - Vocabulario: Subida (frase), Letras (METAS), Golpe (APP), Máquina (GANAS), Barrido (PLANEO), Deslizar (ENERO),
+    Rodar ($ → GRATIS), Pop de icono (Plan B), Nacer del gesto («Plan B» de la base).
+  - Color (PROPUESTA AV-014): el producto en su violeta (#6229EB) y su lima (#C8E65A); las demás claves en ámbar (#FFB547).
+  Todo es función del tiempo: render(t). Tiempos de las palabras: palabras.js (base).
+-->
+<style>
+  @font-face { font-family: "PJS"; font-weight: 500; src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 700; src: url("./fonts/PlusJakartaSans-Bold.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 800; src: url("./fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype"); }
+  :root { --navy: #0D213F; --ink: #0B0B0D; --off: #F5F6F8; --sec: #B7C0CC; --violet: #6229EB; --lime: #C8E65A; --amber: #FFB547; }
+  html, body { margin: 0; padding: 0; background: #000; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); font-family: "PJS", sans-serif; color: var(--off); }
+  .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #vwrap { transform-origin: 50% 30%; }
+  #vwrap video { object-fit: cover; }
+
+  /* Nivel 3 · palabra escenario, detrás de la persona */
+  .scene { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-weight: 800; font-size: 330px; letter-spacing: -0.04em; line-height: 1; color: rgba(245,246,248,0.62); white-space: nowrap; opacity: 0; }
+
+  /* Recursos (de la base) */
+  .br { opacity: 0; overflow: hidden; }
+  .br video { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; transform-origin: 50% 50%; }
+  .br.over { overflow: visible; }
+  .br .cd { position: absolute; left: 340px; top: 1000px; width: 400px; height: 400px; border-radius: 28px; overflow: hidden; box-sizing: border-box; border: 3px solid rgba(245,246,248,0.9); transform-origin: 50% 50%; }
+  .br .cd video { width: 400px; height: 400px; }
+
+  /* Promesa */
+  #prom { position: absolute; left: 60px; right: 60px; top: 178px; text-align: center; font-weight: 800; font-size: 46px; line-height: 1.12; color: var(--off); opacity: 0;
+    -webkit-text-stroke: 7px rgba(11,11,13,0.55); paint-order: stroke fill; }
+  #prom b { color: var(--ink); background: var(--amber); -webkit-text-stroke: 0; border-radius: 10px; padding: 0 12px; }
+
+  /* Nivel 1 · frase · Nivel 2 · clave */
+  #line { position: absolute; left: 40px; right: 40px; top: 0; height: 70px; display: flex; justify-content: center; align-items: center; gap: 14px; }
+  #line span { font-weight: 700; font-size: 50px; color: var(--off); white-space: nowrap; display: inline-block; -webkit-text-stroke: 7px rgba(11,11,13,0.6); paint-order: stroke fill; text-shadow: 0 3px 16px rgba(0,0,0,0.55); opacity: 0; }
+  .key { position: absolute; left: 0; right: 0; top: 0; text-align: center; font-weight: 800; font-size: 128px; letter-spacing: -0.02em; line-height: 1; white-space: nowrap; opacity: 0;
+    -webkit-text-stroke: 9px rgba(11,11,13,0.55); paint-order: stroke fill; }
+  .key .ch { display: inline-block; }
+  .key.amber { color: var(--amber); }
+  #kApp .box { display: inline-block; background: var(--violet); color: var(--off); border-radius: 26px; padding: 6px 34px 14px; -webkit-text-stroke: 0; }
+  #kGanas .cur { display: inline-block; width: 10px; height: 104px; margin-left: 8px; background: var(--amber); vertical-align: -6px; border-radius: 4px; }
+
+  /* Capa flotante */
+  .nd { position: absolute; left: 0; top: 0; opacity: 0; will-change: transform, filter; }
+  .gl { position: absolute; inset: 0; border: 3px solid rgba(245,246,248,0.92); background: rgba(11,18,38,0.74); backdrop-filter: blur(14px); border-radius: 30px; box-sizing: border-box; }
+  .gl.pill { border-radius: 999px; }
+  .tile { position: absolute; left: 25px; top: 0; width: 150px; height: 150px; border-radius: 36px; background: linear-gradient(160deg, #FFFFFF 0%, #ECEAF3 100%); box-shadow: 0 10px 30px rgba(0,0,0,0.35); overflow: hidden; }
+  .tile img { position: absolute; left: 27px; top: 28px; width: 96px; height: auto; }
+  .tile::after { content: ""; position: absolute; inset: 0; border-radius: 36px; box-shadow: inset 0 2px 0 rgba(255,255,255,0.9), inset 0 -3px 0 rgba(0,0,0,0.06); }
+  .tlab { position: absolute; left: 0; right: 0; top: 166px; margin: 0 auto; width: 150px; height: 46px; border-radius: 999px; background: rgba(11,18,38,0.74); border: 2px solid rgba(245,246,248,0.7); box-sizing: border-box; text-align: center; font-weight: 800; font-size: 26px; line-height: 42px; }
+  .txt { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; white-space: nowrap; line-height: 1; }
+  .roll { position: absolute; left: 0; right: 0; top: 52px; height: 74px; overflow: hidden; }
+  .roll div { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; font-size: 64px; line-height: 74px; }
+  #ar { pointer-events: none; }
+  #ar path { fill: none; stroke: var(--off); stroke-width: 4; stroke-linecap: round; }
+
+  /* «Plan B» nace de las manos (técnica de la base) */
+  #heroPB { position: absolute; left: 0; right: 0; top: 1330px; text-align: center; font-weight: 800; font-size: 230px; letter-spacing: -0.035em; line-height: 1; white-space: nowrap; opacity: 0; transform-origin: 50% 50%; }
+  #heroPB span { display: inline-block; } #heroPB .sp { width: 0.22em; } #hpB { color: var(--lime); }
+  .rv { position: absolute; top: 1320px; width: 5px; height: 250px; margin-left: -2px; border-radius: 3px; background: var(--off); opacity: 0; }
+  #flash { background: #F6F4EF; opacity: 0; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="12.95">
+  <div id="vwrap" class="full">
+    <video id="v" class="clip full" src="assets/corte.mp4" data-start="0" data-duration="12.95" data-track-index="0" muted playsinline></video>
+    <div class="scene" id="sEnero">ENERO</div>
+    <video id="pm" class="clip full" src="assets/persona_0_5.webm" data-start="0" data-duration="5" data-track-index="2" muted playsinline></video>
+  </div>
+
+  <div id="brs" class="full">
+    <div class="br full over" id="brR01"><div class="cd"><video id="r01" class="clip fv" src="assets/R01.mp4" data-start="1.900" data-duration="1.550" data-track-index="4" muted playsinline></video></div></div>
+    <div class="br full" id="brR02"><video id="r02" class="clip fv" src="assets/R02.mp4" data-start="5.250" data-duration="1.850" data-track-index="5" muted playsinline></video></div>
+    <div class="br full over" id="brR04"><div class="cd"><video id="r04" class="clip fv" src="assets/R04.mp4" data-start="7.320" data-duration="1.900" data-track-index="6" muted playsinline></video></div></div>
+  </div>
+
+  <div id="prom">Una app <b>gratis</b> para el día<br>que no tengas ganas</div>
+  <div id="fl" class="full"></div>
+  <svg id="ar" class="full" viewBox="0 0 1080 1920"></svg>
+
+  <div id="line"></div>
+  <div class="key amber" id="kMetas"><span class="ch">M</span><span class="ch">E</span><span class="ch">T</span><span class="ch">A</span><span class="ch">S</span></div>
+  <div class="key" id="kApp"><span class="box">APP</span></div>
+  <div class="key amber" id="kGanas"><span id="kGanasT"></span><span class="cur" id="kGanasC"></span></div>
+  <div class="key amber" id="kPlaneo">PLANEO</div>
+
+  <div id="heroPB"><span id="hpA">Plan</span><span class="sp"></span><span id="hpB">B</span></div>
+  <div class="rv" id="rvL"></div><div class="rv" id="rvR"></div>
+  <div id="flash" class="full"></div>
+</div>
+
+<script src="./palabras.js"></script>
+<script src="./lib/gsap.min.js"></script>
+<script>
+(function () {
+  const D = 12.95, W = window.PALABRAS;
+  const clamp01 = (x) => Math.max(0, Math.min(1, x));
+  const mix = (a, b, p) => a + (b - a) * p;
+  const prog = (t, a, d) => clamp01((t - a) / d);
+  const easeIO = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+  const easeIn = (p) => p * p * p;
+  const expoOut = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+  const backOut = (p, c1 = 1.7) => { const c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const $ = (id) => document.getElementById(id);
+  const TAU = Math.PI * 2;
+  const GLOW = "drop-shadow(0 0 10px rgba(245,246,248,0.5)) drop-shadow(0 0 24px rgba(245,246,248,0.2))";
+  const clean = (s) => s.replace(/[.,:;!?¿¡]/g, "");
+  const wt = (txt, k = 1) => W.filter((w) => clean(w[0]).toLowerCase() === txt)[k - 1][1];
+
+  // ── Recursos (de la base)
+  const BR = [{ c: "R01", a: 1.90, b: 3.25, m: "over" }, { c: "R02", a: 5.25, b: 6.90, m: "full" }, { c: "R04", a: 7.32, b: 9.02, m: "over" }];
+  BR.forEach((r) => { r.el = $("br" + r.c); r.v = r.el.querySelector(".fv"); r.cd = r.el.querySelector(".cd"); });
+  const brAt = (t) => BR.find((r) => t >= r.a && t < r.b);
+
+  // ── Nivel 1: frases (la palabra clave sale de la línea y va debajo, en grande)
+  const KEYS = { metas: "kMetas", app: "kApp", ganas: "kGanas", planeo: "kPlaneo" };
+  const GROUPS = [["todos", "los", "años"], ["dejo", "mis", "metas"], ["en", "enero"], ["pero", "este", "año"], ["hice", "una", "app"],
+    ["y", "no", "es", "falta", "de", "ganas"], ["solo", "que", "no", "planeo"], ["el", "día", "en", "que"], ["no", "las", "tengo"],
+    ["por", "eso", "hice"], ["es", "gratis", "y"], ["funciona", "así"]];
+  const G = []; { let i = 0;
+    GROUPS.forEach((g) => { const ws = []; g.forEach((tok) => { while (clean(W[i][0]).toLowerCase() !== tok) i++; ws.push(W[i]); i++; }); G.push(ws); });   // «plan B» se salta: va en las manos
+    G.forEach((g, k) => { const nx = G[k + 1]; g.a = g[0][1] - 0.04; g.b = nx ? Math.min(nx[0][1] - 0.04, g[g.length - 1][2] + 0.7) : D; });
+    G[1].b = Math.min(G[1].b, 1.90);                         // la tarjeta R01 llega en 1,90
+  }
+  const HIDE = [[9.86, 11.25]];                              // «Plan B» de las manos: sin subtítulos
+  const line = $("line"); let shown = -1;
+  function captions(t) {
+    let gi = -1; G.forEach((g, i) => { if (t >= g.a && t < g.b) gi = i; });
+    if (HIDE.some(([a, b]) => t >= a && t < b)) gi = -1;
+    if (gi !== shown) { line.innerHTML = gi < 0 ? "" : G[gi].filter((w) => !KEYS[clean(w[0]).toLowerCase()]).map((w) => `<span>${clean(w[0]).toLowerCase()}</span>`).join(""); shown = gi; }
+    if (gi < 0) return;
+    const g = G[gi], br = brAt(t), y = br && br.m === "over" ? 1430 : 1035;   // por encima de la estampa de la camiseta
+    line.style.top = y + "px";
+    const words = g.filter((w) => !KEYS[clean(w[0]).toLowerCase()]);
+    const out = easeIn(prog(t, g.b - 0.18, 0.18));
+    [...line.children].forEach((sp, i) => { const w = words[i]; const e = expoOut(prog(t, w[1] - 0.04, 0.32));
+      sp.style.opacity = (clamp01((t - w[1] + 0.04) / 0.12) * (1 - out)).toFixed(3);
+      sp.style.transform = `translateY(${(14 * (1 - e) - 18 * out).toFixed(1)}px)`;
+      sp.style.filter = `blur(${(6 * (1 - e) + 6 * out).toFixed(1)}px)`; });
+  }
+  const keyTop = () => 1105;   // las claves van fuera de las tarjetas: posición fija (no saltan cuando entra una)
+
+  // ── Capa flotante
+  const ICON = `<div class="tile"><img src="assets/planb_icon.png" alt=""></div><div class="tlab">Plan B</div>`;
+  const NODES = [
+    { id: "tile", x: 885, y: 640, w: 200, h: 214, d: 1.0, show: [[4.42, 5.25], [9.02, 12.95]], move: 0, ent: "pop" },
+    { id: "logo", x: 215, y: 330, w: 340, h: 100, d: 0.9, show: [[9.14, 11.30]], ent: "slideL", html: `<div class="gl pill"></div><img src="assets/logo-monocromo-blanco.svg" style="position:absolute;left:44px;top:26px;width:252px;height:auto" alt="">` },
+    { id: "mini", x: 885, y: 900, w: 300, h: 70, d: 0.9, show: [[10.62, 12.62]], ent: "letters",
+      html: `<div class="gl pill" style="background:var(--violet);border-color:var(--violet)"></div><div class="txt" id="miniT" style="top:18px;font-size:34px;letter-spacing:.06em"></div>` },
+    { id: "price", x: 885, y: 1060, w: 330, h: 150, d: 0.9, show: [[11.20, 12.62]], ent: "slideR",
+      html: `<div class="gl"></div><div class="txt" style="top:20px;font-size:26px;font-weight:700;color:#B7C0CC;letter-spacing:.08em">PRECIO</div><div class="roll"><div id="pA">$</div><div id="pB" style="color:var(--lime)">GRATIS</div></div>` },
+  ];
+  NODES[0].html = ICON;
+  const NB = {}; NODES.forEach((n, i) => { NB[n.id] = n; n.ph = (i * 2.399) % TAU; n.px = 3.4 + (i % 4) * 0.6; n.py = 4.2 + (i % 3) * 0.7; });
+  const fl = $("fl");
+  NODES.forEach((n) => { const el = document.createElement("div"); el.className = "nd"; el.style.width = n.w + "px"; el.style.height = n.h + "px"; el.innerHTML = n.html; fl.appendChild(el); n.el = el; });
+  { const m = $("miniT"); m.innerHTML = "MINIAPP 01".split("").map((c) => `<span class="ch" style="display:inline-block">${c === " " ? "&nbsp;" : c}</span>`).join(""); }
+  const pos = (n, t) => { const m = n.move === 0 ? 0 : 1; return [n.x + (5 + 9 * n.d) * m * Math.sin(TAU * t / (n.px * 2.2) + n.ph), n.y + (4 + 8 * n.d) * m * Math.sin(TAU * t / (n.py * 2.2) + n.ph * 1.7)]; };
+  const ivAt = (n, t) => n.show.find(([a, b]) => t >= a && t < b);
+
+  // Flecha (arco con punto que viaja): del logo al icono
+  const SV = "http://www.w3.org/2000/svg", ar = $("ar");
+  const ARW = { t0: 9.55, t1: 11.30 };
+  ARW.p = document.createElementNS(SV, "path"); ARW.p.setAttribute("pathLength", "1"); ARW.p.setAttribute("stroke-dasharray", "1 1"); ar.appendChild(ARW.p);
+  ARW.o = document.createElementNS(SV, "circle"); ARW.o.setAttribute("r", "7"); ARW.o.setAttribute("fill", "#C8E65A"); ar.appendChild(ARW.o);
+
+  // ── Cámara (de la base): arranque 1,12 → 1, pico 1 a 1,10, empalmes, deriva por plano
+  const ZP = [[4.42, 1.10], [4.85, 1.0], [9.02, 1.07]];
+  const SHOTS = [0, 4.42, 4.85, 6.90, 9.02, 12.62, D];
+  const zAt = (t) => { if (t < 4.42) return mix(1.12, 1, easeOut(prog(t, 0, 0.45))); let z = 1; ZP.forEach(([a, v]) => { if (t >= a) z = v; }); return z; };
+  const drift = (t) => { let i = 0; while (i < SHOTS.length - 1 && t >= SHOTS[i + 1]) i++; return 1 + 0.03 * easeIO(prog(t, SHOTS[i], SHOTS[i + 1] - SHOTS[i])); };
+
+  function render(t) {
+    // Cámara y golpe del pico 1
+    let shake = 0; if (t >= 4.42 && t < 4.8) shake = 7 * Math.exp(-12 * (t - 4.42)) * Math.sin(42 * (t - 4.42));
+    const grow = easeIn(prog(t, 12.62, 0.33));             // final: entramos en la app
+    $("vwrap").style.transform = `translateY(${shake.toFixed(2)}px) scale(${(zAt(t) * drift(t) * (1 + 0.25 * grow)).toFixed(4)})`;
+    $("vwrap").style.filter = grow > 0 ? `blur(${(14 * grow).toFixed(1)}px)` : "none";
+    $("pm").style.opacity = t < 4.85 ? 1 : 0;
+
+    // Nivel 3 · ENERO detrás de la persona: Deslizar desde la izquierda (pasado) y salir por la izquierda
+    { const el = $("sEnero"), a = 2.18, b = 3.05, e = expoOut(prog(t, a - 0.05, 0.42)), x = easeIn(prog(t, b, 0.3));
+      el.style.opacity = t < a - 0.05 || t > b + 0.3 ? 0 : (clamp01((t - a + 0.05) / 0.15) * (1 - x)).toFixed(3);
+      el.style.transform = `translateX(${(-420 * (1 - e) - 520 * x).toFixed(1)}px)`;
+      el.style.filter = `blur(${(16 * (1 - e) + 14 * x).toFixed(1)}px)`; }
+
+    // Recursos
+    const br = brAt(t);
+    BR.forEach((r) => {
+      if (r !== br) { r.el.style.opacity = 0; return; }
+      r.el.style.opacity = 1;
+      const e = expoOut(prog(t, r.a, 0.3)), x = easeIn(prog(t, r.b - 0.18, 0.18)), push = 1 + 0.05 * prog(t, r.a, r.b - r.a);
+      if (r.m === "full") r.v.style.transform = `scale(${(mix(1.08, 1, e) * push).toFixed(4)})`;
+      else { r.cd.style.transform = `translateY(${(40 * (1 - e) + 30 * x).toFixed(1)}px) rotate(${(-3 + 1.2 * prog(t, r.a, r.b - r.a)).toFixed(2)}deg) scale(${(mix(0.92, 1, e) * mix(1, 0.94, x)).toFixed(4)})`; r.cd.style.opacity = (1 - x).toFixed(3); }
+    });
+
+    // Promesa: Barrido de izquierda a derecha; sale hacia arriba cuando entra ENERO
+    { const p = $("prom"), a = 0.30, rev = easeOut(prog(t, a, 0.45)), x = easeIn(prog(t, 1.95, 0.25));
+      p.style.opacity = t < a ? 0 : (1 - x).toFixed(3);
+      p.style.clipPath = `inset(-20px ${(100 * (1 - rev)).toFixed(1)}% -20px -20px)`;
+      p.style.transform = `translateY(${(-40 * x).toFixed(1)}px)`; p.style.filter = `blur(${(8 * x).toFixed(1)}px)`; }
+
+    // Nivel 1
+    captions(t);
+
+    // Nivel 2 · METAS: Letras (cada letra sube con 1 fotograma de desfase); sale cayendo
+    { const el = $("kMetas"), a = wt("metas"), b = 1.88;
+      el.style.top = keyTop(t) + "px"; el.style.opacity = t >= a - 0.02 && t < b + 0.25 ? 1 : 0;
+      [...el.children].forEach((c, i) => { const e = backOut(prog(t, a + i * 0.033, 0.3), 1.2), x = easeIn(prog(t, b + i * 0.02, 0.2));
+        c.style.opacity = (prog(t, a + i * 0.033, 0.08) * (1 - x)).toFixed(3); c.style.transform = `translateY(${(60 * (1 - e) + 50 * x).toFixed(1)}px)`; }); }
+
+    // Nivel 2 · APP: Golpe en caja violeta (producto) con la batería del pico 1; sale empujada por el corte
+    { const el = $("kApp"), a = 4.34, b = 4.85, e = backOut(prog(t, a, 0.24), 2.0), x = easeIn(prog(t, b - 0.08, 0.12));
+      el.style.top = (keyTop(t) - 20) + "px"; el.style.opacity = t >= a && t < b + 0.05 ? (1 - x).toFixed(3) : 0;
+      el.style.transform = `scale(${(mix(1.6, 1, e) * mix(1, 0.85, x)).toFixed(3)})`; el.style.filter = `blur(${(10 * x).toFixed(1)}px)`; }
+
+    // Nivel 2 · GANAS: Máquina (una letra por fotograma, con cursor); se borra hacia atrás
+    { const el = $("kGanas"), a = wt("ganas"), b = 6.25, txt = "GANAS";
+      const n = t < a ? 0 : Math.min(txt.length, Math.floor((t - a) * 30 / 2) + 1), back = t >= b ? Math.min(txt.length, Math.floor((t - b) * 30)) : 0;
+      el.style.top = keyTop(t) + "px"; el.style.opacity = t >= a && t < b + 0.2 ? 1 : 0;
+      $("kGanasT").textContent = txt.slice(0, Math.max(0, n - back));
+      $("kGanasC").style.opacity = Math.floor(t * 4) % 2 === 0 || t < a + 0.35 ? 1 : 0; }
+
+    // Nivel 2 · PLANEO: Barrido (máscara de izquierda a derecha); sale barriéndose hacia la derecha
+    { const el = $("kPlaneo"), a = wt("planeo"), b = 7.28, r = easeOut(prog(t, a, 0.35)), x = easeIn(prog(t, b, 0.22));
+      el.style.top = keyTop(t) + "px"; el.style.opacity = t >= a && t < b + 0.22 ? 1 : 0;
+      el.style.clipPath = `inset(-30px ${(100 * (1 - r)).toFixed(1)}% -30px ${(100 * x).toFixed(1)}%)`;
+      el.style.transform = `translateX(${(-30 * (1 - r) + 40 * x).toFixed(1)}px)`; }
+
+    // Capa flotante (se apaga bajo los recursos)
+    NODES.forEach((n) => {
+      const iv = ivAt(n, t);
+      if (!iv || br) { n.el.style.opacity = 0; return; }
+      const [a, b] = iv, p = pos(n, t), e = prog(t, a, 0.5), x = easeIn(prog(t, b - 0.3, 0.3));
+      let tx = 0, ty = 0, sc = 1, bl = 0, op = 1;
+      if (n.ent === "pop") { sc = clamp01(backOut(prog(t, a, 0.42), 2.2)) * mix(1, 0.8, x); bl = 12 * (1 - expoOut(e)); ty = 20 * x; }
+      else if (n.ent === "slideL") { tx = -260 * (1 - expoOut(e)) - 200 * x; bl = 12 * (1 - expoOut(e)) + 10 * x; }
+      else if (n.ent === "slideR") { tx = 260 * (1 - expoOut(e)) + 200 * x; bl = 12 * (1 - expoOut(e)) + 10 * x; }
+      else if (n.ent === "letters") { sc = mix(0.9, 1, expoOut(e)); bl = 6 * x; ty = 20 * x; }
+      op = clamp01(e * 3) * (1 - x);
+      if (n.id === "tile" && t >= 12.62) { const g = easeIn(prog(t, 12.62, 0.33)); sc = mix(1, 3.2, g); tx = mix(0, 540 - p[0], g); ty = mix(0, 880 - p[1], g); op = 1; bl = 0; }
+      n.el.style.opacity = op.toFixed(3);
+      n.el.style.transform = `translate(${(p[0] - n.w / 2 + tx).toFixed(1)}px, ${(p[1] - n.h / 2 + ty).toFixed(1)}px) scale(${sc.toFixed(4)})`;
+      n.el.style.filter = bl > 0.05 ? `blur(${bl.toFixed(1)}px)` : "none";
+    });
+    // MINIAPP 01: Letras
+    { const a = 10.62; [...$("miniT").children].forEach((c, i) => { const e = expoOut(prog(t, a + 0.1 + i * 0.03, 0.28)); c.style.opacity = prog(t, a + 0.1 + i * 0.03, 0.06).toFixed(3); c.style.transform = `translateY(${(26 * (1 - e)).toFixed(1)}px)`; }); }
+    // PRECIO: Rodar «$ ——» → «GRATIS» en «gratis»
+    { const g0 = wt("gratis"), r = easeIO(prog(t, g0 + 0.05, 0.35));
+      $("pA").style.transform = `translateY(${(-74 * r).toFixed(1)}px)`; $("pB").style.transform = `translateY(${(74 * (1 - r)).toFixed(1)}px)`; }
+
+    // Arco del logo al icono
+    { const on = t >= ARW.t0 && t < ARW.t1 && !br, fade = 1 - prog(t, ARW.t1 - 0.3, 0.3);
+      if (!on) { ARW.p.style.opacity = 0; ARW.o.style.opacity = 0; } else {
+        const A = pos(NB.logo, t), B = pos(NB.tile, t); A[0] += 180; B[1] -= 115;
+        const cx = (A[0] + B[0]) / 2, cy = 170;
+        ARW.p.setAttribute("d", `M ${A[0].toFixed(1)} ${A[1].toFixed(1)} Q ${cx.toFixed(1)} ${cy} ${B[0].toFixed(1)} ${B[1].toFixed(1)}`);
+        ARW.p.setAttribute("stroke-dashoffset", (1 - easeOut(prog(t, ARW.t0, 0.55))).toFixed(3)); ARW.p.style.opacity = fade.toFixed(3);
+        const u = clamp01((t - ARW.t0 - 0.3) / 0.9), v = 1 - u;
+        ARW.o.setAttribute("cx", (v * v * A[0] + 2 * v * u * cx + u * u * B[0]).toFixed(1)); ARW.o.setAttribute("cy", (v * v * A[1] + 2 * v * u * cy + u * u * B[1]).toFixed(1));
+        ARW.o.style.opacity = (prog(t, ARW.t0 + 0.3, 0.1) * fade).toFixed(3); } }
+
+    // «Plan B» nace de las manos (REV medido en la base); la «B» en lima (producto)
+    const REV = [[9.92, 0], [10.00, 50], [10.10, 220], [10.20, 370], [10.30, 480], [10.38, 560]];
+    let half = 0; for (let i = 0; i < REV.length; i++) { if (t >= REV[i][0]) half = REV[i][1]; if (i > 0 && t >= REV[i - 1][0] && t < REV[i][0]) half = mix(REV[i - 1][1], REV[i][1], prog(t, REV[i - 1][0], REV[i][0] - REV[i - 1][0])); }
+    const hp = $("heroPB"), rp = clamp01(half / 420), hpO = prog(t, 11.10, 0.25), hpOn = t >= 9.92 && t < 11.4;
+    hp.style.opacity = hpOn ? (prog(t, 9.92, 0.05) * (1 - hpO)).toFixed(3) : 0;
+    hp.style.clipPath = `inset(-80px ${Math.max(0, 540 - half).toFixed(1)}px -80px ${Math.max(0, 540 - half).toFixed(1)}px)`;
+    hp.style.transform = `translateY(${(-60 * hpO).toFixed(1)}px) scaleX(${mix(0.62, 1, expoOut(rp)).toFixed(3)}) scaleY(${mix(0.9, 1, expoOut(rp)).toFixed(3)})`;
+    hp.style.filter = `blur(${(9 * (1 - rp) + 10 * hpO).toFixed(1)}px) ${GLOW}`;
+    $("hpB").style.transform = `scale(${t >= 10.62 ? mix(1.25, 1, backOut(prog(t, 10.62, 0.3), 1.6)).toFixed(3) : 1})`;
+    ["rvL", "rvR"].forEach((id, k) => { const el = $(id), on = hpOn && t < 10.45;
+      el.style.left = (540 + (k ? 1 : -1) * half).toFixed(1) + "px";
+      el.style.opacity = on ? (prog(t, 9.92, 0.05) * (1 - prog(t, 10.25, 0.18))).toFixed(3) : 0; el.style.filter = GLOW; });
+
+    $("flash").style.opacity = (0.9 * easeIn(prog(t, 12.70, 0.25))).toFixed(3);
+  }
+
+  const clock = { t: 0 };
+  const tl = gsap.timeline({ paused: true });
+  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(clock.t) }, 0);
+  render(0);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+})();
+</script>
+</body>
+</html>

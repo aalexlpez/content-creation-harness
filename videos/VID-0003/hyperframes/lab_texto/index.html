@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Laboratorio de texto · VID-0003</title>
+<!--
+  LABORATORIO de animaciones de texto (2026-11-21). Ale: el muestrario «quedó mejor, pero no es tan wow como el ejemplo».
+  Diez tratamientos con letra (A–J) sobre tres tramos de VID-0003 (0–4,95 · 9,0–12,95 · 24,95–29,72 s), para elegir.
+  Color: paleta «Señal» (azul eléctrico) de cerobytes, elegida por Ale el 2026-11-21 (AV-014): #F5F6F8 → #7DB4FF → #2E6BFF
+  a 119° (la dirección de la barra «/»); variante suave para estructura y variante oscura para cajas con texto claro.
+  Sombra sutil en todos los textos (Ale: «que no queden planas en imagen»): dos capas, 2 px y 8 px, azul muy oscuro.
+  Sin colores de MiMiniApp fuera del celular. Sin recursos (B-roll) ni demo: solo texto, para verlo limpio.
+  Todo es función del tiempo: render(t).
+-->
+<style>
+  @font-face { font-family: "PJS"; font-weight: 700; src: url("./fonts/PlusJakartaSans-Bold.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 800; src: url("./fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype"); }
+  :root { --sen: linear-gradient(119deg, #F5F6F8 0%, #7DB4FF 50%, #2E6BFF 100%); --sen-suave: linear-gradient(119deg, #FFFFFF 0%, #CFE1FF 50%, #7DB4FF 100%);
+    --sen-brillo: linear-gradient(119deg, #F5F6F8 0%, #7DB4FF 30%, #FFFFFF 42%, #7DB4FF 54%, #2E6BFF 100%); --sen-caja: linear-gradient(119deg, #5E9BFF 0%, #2E6BFF 100%);
+    --sombra: drop-shadow(0 2px 3px rgba(4,10,28,0.45)) drop-shadow(0 8px 18px rgba(4,10,28,0.32)); --off: #F5F6F8; --ink: #0B0B0D; }
+  html, body { margin: 0; padding: 0; background: #000; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); font-family: "PJS", sans-serif; color: var(--off); }
+  .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #vwrap { transform-origin: 50% 30%; } #vwrap video { object-fit: cover; }
+  .gtx { -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .big { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; white-space: nowrap; opacity: 0; }
+  .big .ch { display: inline-block; }
+  .shadow { filter: var(--sombra); }
+  #lab { box-shadow: 0 8px 20px rgba(4,10,28,0.35); position: absolute; left: 40px; top: 178px; height: 60px; padding: 0 26px 0 18px; border-radius: 999px; background: rgba(11,11,13,0.78); display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 30px; opacity: 0; }
+  #lab b { display: inline-flex; width: 42px; height: 42px; border-radius: 12px; align-items: center; justify-content: center; color: var(--ink); background: var(--sen); font-size: 28px; }
+  #line { position: absolute; left: 40px; right: 40px; top: 1035px; height: 70px; display: flex; justify-content: center; align-items: center; gap: 14px; }
+  #line span { font-weight: 700; font-size: 50px; white-space: nowrap; display: inline-block; -webkit-text-stroke: 4px rgba(11,11,13,0.45); paint-order: stroke fill; filter: var(--sombra); opacity: 0; }
+  /* D */
+  .mask { position: absolute; left: 0; right: 0; overflow: hidden; height: 140px; }
+  #dBox { position: absolute; left: 340px; top: 1190px; width: 400px; height: 170px; border-radius: 30px; background: var(--sen-caja); box-shadow: 0 4px 8px rgba(4,10,28,0.35), 0 14px 30px rgba(4,10,28,0.3); opacity: 0; }
+  #dApp { position: absolute; left: 0; right: 0; top: 1205px; text-align: center; font-weight: 800; font-size: 140px; line-height: 1; color: var(--off); filter: var(--sombra); opacity: 0; }
+  /* E */
+  .half { filter: var(--sombra); position: absolute; left: 0; right: 0; top: 1105px; text-align: center; font-weight: 800; font-size: 130px; line-height: 1; white-space: nowrap; opacity: 0; color: var(--off); -webkit-text-stroke: 8px rgba(11,11,13,0.5); paint-order: stroke fill; }
+  #eBar, #hBar { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; opacity: 0; }
+  /* F (de la base, con degradado) */
+  #heroPB { position: absolute; left: 0; right: 0; top: 1330px; text-align: center; font-weight: 800; font-size: 230px; letter-spacing: -0.035em; line-height: 1.05; white-space: nowrap; opacity: 0; transform-origin: 50% 50%; }
+  #heroPB .pw { display: inline-block; background-image: var(--sen-brillo); background-size: 300% 100%; }
+  .rv { position: absolute; top: 1320px; width: 5px; height: 250px; margin-left: -2px; border-radius: 3px; background: var(--off); opacity: 0; }
+  /* G */
+  #gSvg { position: absolute; left: 0; top: 1060px; width: 1080px; height: 220px; opacity: 0; overflow: visible; }
+  /* H */
+  .hHalf { position: absolute; left: 0; right: 0; top: 1080px; text-align: center; font-weight: 800; font-size: 210px; line-height: 1.05; letter-spacing: -0.03em; white-space: nowrap; opacity: 0; background-image: var(--sen-suave); }
+  /* I */
+  .yt.echo { background: none; color: transparent; -webkit-text-stroke: 3px rgba(125,180,255,0.9); }
+  .yt { position: absolute; left: 0; right: 0; top: 1060px; text-align: center; font-weight: 800; font-size: 210px; line-height: 1.05; letter-spacing: -0.02em; white-space: nowrap; opacity: 0; background-image: var(--sen); transform-origin: 50% 50%; }
+  /* J */
+  #cta { box-shadow: 0 6px 12px rgba(4,10,28,0.35), 0 20px 40px rgba(4,10,28,0.3); position: absolute; left: 110px; top: 1120px; width: 860px; height: 300px; border-radius: 40px; padding: 3px; box-sizing: border-box; background: var(--sen-suave); opacity: 0; }
+  #cta .in { position: absolute; inset: 3px; border-radius: 37px; background: rgba(11,18,38,0.86); backdrop-filter: blur(16px); }
+  #cta .t1 { filter: var(--sombra); position: absolute; left: 0; right: 0; top: 46px; text-align: center; font-weight: 800; font-size: 64px; }
+  #cta .btn { position: absolute; left: 190px; top: 160px; width: 480px; height: 96px; border-radius: 999px; background: var(--sen); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 16px; font-weight: 800; font-size: 40px; }
+  #cta .btn svg { width: 24px; height: 30px; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="29.72">
+  <div id="vwrap" class="full">
+    <video id="v" class="clip full" src="assets/corte.mp4" data-start="0" data-duration="29.72" data-track-index="0" muted playsinline></video>
+    <div class="big gtx" id="cEnero" style="top:330px;font-size:330px;letter-spacing:-0.04em"></div>
+    <video id="pm" class="clip full" src="assets/persona_0_5.webm" data-start="0" data-duration="5" data-track-index="2" muted playsinline></video>
+  </div>
+
+  <div id="line"></div>
+  <!-- A -->
+  <div class="big shadow" id="aTxt" style="top:1085px;font-size:96px"></div>
+  <!-- B -->
+  <div class="big gtx shadow" id="bTxt" style="top:1100px;font-size:170px;background-image:var(--sen-brillo);background-size:300% 100%">METAS</div>
+  <!-- D -->
+  <div id="dWords"></div>
+  <div id="dBox"></div><div id="dApp">APP</div>
+  <!-- E -->
+  <div class="half" id="eTop">POR ESO HICE</div><div class="half" id="eBot">POR ESO HICE</div>
+  <svg id="eBar" viewBox="0 0 1080 1920"><path id="eBarP" d="" fill="#FFFFFF"/></svg>
+  <!-- F -->
+  <div id="heroPB" class="shadow"><span id="hpA" class="pw gtx">Plan</span><span style="display:inline-block;width:0.22em"></span><span id="hpB" class="pw gtx">B</span></div>
+  <div class="rv" id="rvL"></div><div class="rv" id="rvR"></div>
+  <!-- G -->
+  <svg id="gSvg" viewBox="0 0 1080 220">
+    <defs>
+      <linearGradient id="gIgn" x1="0" y1="0" x2="1" y2="0.55"><stop offset="0" stop-color="#F5F6F8"/><stop offset="0.5" stop-color="#7DB4FF"/><stop offset="1" stop-color="#2E6BFF"/></linearGradient>
+      <clipPath id="gClip"><polygon id="gPoly" points="0,0 0,0 0,220 0,220"/></clipPath>
+    </defs>
+    <text id="gFill" x="540" y="175" text-anchor="middle" font-family="PJS" font-weight="800" font-size="190" letter-spacing="-4" fill="url(#gIgn)" clip-path="url(#gClip)">GRATIS</text>
+    <text id="gStroke" x="540" y="175" text-anchor="middle" font-family="PJS" font-weight="800" font-size="190" letter-spacing="-4" fill="none" stroke="#F5F6F8" stroke-width="4" stroke-dasharray="1400 1400" stroke-dashoffset="1400">GRATIS</text>
+  </svg>
+  <!-- H -->
+  <div class="hHalf gtx shadow" id="hA">ENERO</div><div class="hHalf gtx shadow" id="hB">ENERO</div>
+  <svg id="hBar" viewBox="0 0 1080 1920"><defs><linearGradient id="hAce" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#7DB4FF"/></linearGradient></defs><path id="hBarP" d="" fill="url(#hAce)"/></svg>
+  <!-- I -->
+  <div class="yt echo" id="yE3">¿Y TÚ?</div><div class="yt echo" id="yE2">¿Y TÚ?</div><div class="yt echo" id="yE1">¿Y TÚ?</div><div class="yt gtx shadow" id="yMain">¿Y TÚ?</div>
+  <!-- J -->
+  <div id="cta"><div class="in"></div><div class="t1" id="ctaT">Link en mi perfil</div>
+    <div class="btn" id="ctaB"><svg viewBox="0 0 109 134"><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="#0B0B0D"/></svg>cerobytes</div></div>
+
+  <div id="lab"><b id="labL">A</b><span id="labN"></span></div>
+</div>
+
+<script src="./palabras.js"></script>
+<script src="./lib/gsap.min.js"></script>
+<script>
+(function () {
+  const D = 29.72, W = window.PALABRAS;
+  const clamp01 = (x) => Math.max(0, Math.min(1, x));
+  const mix = (a, b, p) => a + (b - a) * p;
+  const prog = (t, a, d) => clamp01((t - a) / d);
+  const easeIO = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+  const easeIn = (p) => p * p * p;
+  const expoOut = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+  const backOut = (p, c1 = 1.7) => { const c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const $ = (id) => document.getElementById(id);
+  const clean = (s) => s.replace(/[.,:;!?¿¡]/g, "");
+  const SOMBRA = "drop-shadow(0 2px 3px rgba(4,10,28,0.45)) drop-shadow(0 8px 18px rgba(4,10,28,0.32))";   // = --sombra
+  const wt = (txt, k = 1) => W.filter((w) => clean(w[0]).toLowerCase() === txt)[k - 1][1];
+  const letters = (el, text, grad) => { const n = text.replace(/ /g, "").length; let k = 0;
+    el.innerHTML = text.split("").map((c) => { if (c === " ") return `<span class="ch" style="width:0.28em"></span>`;
+      const s = `<span class="ch gtx" style="background-image:${grad};background-size:${n * 100}% 100%;background-position-x:${n > 1 ? (k / (n - 1)) * 100 : 0}%">${c}</span>`; k++; return s; }).join(""); };
+
+  // Etiquetas de cada tratamiento
+  const LABS = [[0.10, 1.62, "A", "Cascada 3D"], [1.62, 2.16, "B", "Impacto + brillo"], [2.16, 3.40, "C", "Letras que se juntan, detrás"],
+    [3.70, 4.95, "D", "Máscara con estela + barrido diagonal"], [9.05, 9.90, "E", "Corte en dos + barra"], [9.90, 11.35, "F", "Nace de las manos + brillo"],
+    [11.35, 12.95, "G", "Trazo que se rellena"], [25.10, 26.80, "H", "La barra «/» que corta"], [26.80, 27.55, "I", "Golpe con eco"], [27.55, 29.72, "J", "CTA como componente"]];
+
+  // Frases (nivel 1) donde no hay tratamiento grande
+  const PHR = [[["pero", "este", "año"], 2.86, 3.70], [["es"], 11.33, 11.42], [["este", "año", "no", "las", "dejo"], 25.24, 26.30]];
+  const line = $("line"); let shownP = -1;
+  function phrases(t) {
+    let pi = -1; PHR.forEach((p, i) => { if (t >= p[1] - 0.04 && t < p[2]) pi = i; });
+    if (pi !== shownP) { line.innerHTML = pi < 0 ? "" : PHR[pi][0].map((w) => `<span>${w}</span>`).join(""); shownP = pi; }
+    if (pi < 0) return;
+    const ws = W.filter((w) => w[1] >= PHR[pi][1] - 0.05 && w[1] < PHR[pi][2]);
+    const out = easeIn(prog(t, PHR[pi][2] - 0.18, 0.18));
+    [...line.children].forEach((sp, i) => { const w = ws[i] || ws[ws.length - 1]; const e = expoOut(prog(t, w[1] - 0.04, 0.32));
+      sp.style.opacity = (clamp01((t - w[1] + 0.04) / 0.12) * (1 - out)).toFixed(3);
+      sp.style.transform = `translateY(${(14 * (1 - e) - 18 * out).toFixed(1)}px)`; sp.style.filter = `blur(${(6 * (1 - e) + 6 * out).toFixed(1)}px)`; });
+  }
+
+  letters($("aTxt"), "TODOS LOS AÑOS", "var(--sen)");
+  letters($("cEnero"), "ENERO", "var(--sen-suave)");
+  { const d = $("dWords"); d.innerHTML = ["hice", "una"].map((w, i) => `<div class="mask" style="top:${1040}px"><div class="big" id="dW${i}" style="top:0;font-size:120px;color:#F5F6F8;-webkit-text-stroke:5px rgba(11,11,13,.4);paint-order:stroke fill;filter:drop-shadow(0 2px 3px rgba(4,10,28,.45)) drop-shadow(0 8px 18px rgba(4,10,28,.32));opacity:1"></div></div>`).join(""); }
+
+  // Cámara: la de la base + golpes de los tratamientos
+  const ZP = [[4.42, 1.10], [4.85, 1.0], [9.02, 1.07], [25.06, 1.03], [26.81, 1.18], [27.46, 1.07]];
+  const SHOTS = [0, 4.42, 4.85, 9.02, 12.62, 25.06, 26.81, 27.46, D];
+  const zAt = (t) => { if (t < 4.42) return mix(1.12, 1, easeOut(prog(t, 0, 0.45))); let z = 1; ZP.forEach(([a, v]) => { if (t >= a) z = v; }); return z; };
+  const drift = (t) => { let i = 0; while (i < SHOTS.length - 1 && t >= SHOTS[i + 1]) i++; return 1 + 0.03 * easeIO(prog(t, SHOTS[i], SHOTS[i + 1] - SHOTS[i])); };
+  const punch = (t, a, amt = 0.045) => (t >= a ? amt * Math.exp(-9 * (t - a)) : 0);
+
+  const T = { A: 0.16, B: wt("metas"), C: wt("enero"), D1: wt("hice"), D2: 4.34, E: 9.14, F: 9.92, G: wt("gratis"), H: 26.41, I: 26.81, J: 27.61 };
+
+  function render(t) {
+    // Cámara
+    let shake = 0;
+    [[4.42, 7], [26.81, 9], [T.H + 0.12, 5]].forEach(([a, amp]) => { if (t >= a && t < a + 0.4) shake += amp * Math.exp(-12 * (t - a)) * Math.sin(42 * (t - a)); });
+    const z = zAt(t) * drift(t) * (1 + punch(t, T.B) + punch(t, T.G + 0.35, 0.03));
+    $("vwrap").style.transform = `translateY(${shake.toFixed(2)}px) scale(${z.toFixed(4)})`;
+    $("pm").style.opacity = t < 4.85 ? 1 : 0;
+
+    // Etiqueta
+    { const l = LABS.find(([a, b]) => t >= a && t < b); const lab = $("lab");
+      if (!l) lab.style.opacity = 0; else { $("labL").textContent = l[2]; $("labN").textContent = l[3]; lab.style.opacity = (prog(t, l[0], 0.12) * (1 - prog(t, l[1] - 0.1, 0.1))).toFixed(3); } }
+
+    phrases(t);
+
+    // A · Cascada 3D: cada letra gira desde abajo (rotateX −100° → 0) con 1 fotograma de desfase; sale girando hacia delante
+    { const el = $("aTxt"), a = T.A, b = 1.45; el.style.opacity = t >= a && t < b + 0.4 ? 1 : 0;
+      [...el.children].forEach((c, i) => { const e = backOut(prog(t, a + i * 0.035, 0.42), 1.3), x = easeIn(prog(t, b + i * 0.02, 0.22));
+        c.style.transformOrigin = "50% 100%";
+        c.style.transform = `perspective(700px) translateY(${(30 * (1 - e)).toFixed(1)}px) rotateX(${(-100 * (1 - e) + 95 * x).toFixed(1)}deg)`;
+        c.style.opacity = (prog(t, a + i * 0.035, 0.1) * (1 - x)).toFixed(3); }); }
+
+    // B · Impacto + brillo: de 260 % y desenfocada a su tamaño en 0,18 s, golpe de cámara, un brillo cruza a 29°; sale estirándose hacia arriba
+    { const el = $("bTxt"), a = T.B, b = 2.08, e = expoOut(prog(t, a, 0.2)), x = easeIn(prog(t, b, 0.14));
+      el.style.opacity = t >= a && t < b + 0.14 ? (clamp01((t - a) / 0.06) * (1 - x)).toFixed(3) : 0;
+      el.style.transform = `translateY(${(-90 * x).toFixed(1)}px) scale(${mix(2.6, 1, e).toFixed(3)}, ${(mix(2.6, 1, e) * (1 + 0.5 * x)).toFixed(3)})`;
+      el.style.filter = `blur(${(18 * (1 - e) + 8 * x).toFixed(1)}px) ${SOMBRA}`;
+      el.style.backgroundPosition = `${mix(100, 0, easeIO(prog(t, a + 0.15, 0.35))).toFixed(1)}% 0`; }
+
+    // C · Letras que se juntan, detrás de la persona: interletraje 0,9 em → −0,04 em, escala 1,3 → 1, desenfoque; salen dispersándose
+    { const el = $("cEnero"), a = T.C - 0.06, b = 3.02, e = expoOut(prog(t, a, 0.6)), x = easeIn(prog(t, b, 0.32));
+      el.style.opacity = t >= a && t < b + 0.32 ? (clamp01((t - a) / 0.15) * 0.92 * (1 - x)).toFixed(3) : 0;
+      el.style.letterSpacing = `${mix(0.9, -0.04, e).toFixed(3)}em`;
+      el.style.transform = `scale(${mix(1.3, 1, e).toFixed(3)})`; el.style.filter = `blur(${(20 * (1 - e)).toFixed(1)}px) ${SOMBRA}`;
+      const n = el.children.length; [...el.children].forEach((c, i) => { const d = i - (n - 1) / 2; const xi = easeIn(prog(t, b + Math.abs(d) * 0.03, 0.3));
+        c.style.transform = `translate(${(d * 160 * xi).toFixed(1)}px, ${(-60 * xi).toFixed(1)}px) rotate(${(d * 8 * xi).toFixed(1)}deg)`; c.style.filter = `blur(${(14 * xi).toFixed(1)}px)`; }); }
+
+    // D · Máscara con estela: «hice», «una» suben desde una línea con 3 copias de estela; «APP» entra con un barrido diagonal (29°) en caja degradada
+    { ["hice", "una"].forEach((w, i) => { const el = $("dW" + i), a = i ? wt("una") : T.D1, x = prog(t, 4.30, 0.12);
+        const off = i ? 170 : -170; const e = expoOut(prog(t, a, 0.32));
+        el.parentNode.style.opacity = t >= a && t < 4.45 ? 1 : 0;
+        el.style.left = (off) + "px"; el.textContent = w;
+        el.style.transform = `translateY(${(140 * (1 - e) - 140 * easeIn(x)).toFixed(1)}px) scaleY(${(1 + 0.35 * (1 - e)).toFixed(3)})`;
+        el.style.textShadow = `0 ${(46 * (1 - e)).toFixed(0)}px 0 rgba(125,180,255,${(0.35 * (1 - e)).toFixed(2)}), 0 ${(92 * (1 - e)).toFixed(0)}px 0 rgba(46,107,255,${(0.2 * (1 - e)).toFixed(2)})`; });
+      const a = T.D2, w = easeOut(prog(t, a, 0.22)), on = t >= a && t < 4.85;
+      const bx = $("dBox"); bx.style.opacity = on ? 1 : 0;
+      const L = -200 + 1480 * w;                                     // borde del barrido, inclinado 29°
+      bx.style.clipPath = `polygon(-200px -50px, ${L}px -50px, ${L - 120}px 220px, -200px 220px)`;
+      bx.style.transform = `scale(${mix(1.25, 1, expoOut(prog(t, a, 0.3))).toFixed(3)})`;
+      const ap = $("dApp"), pe = backOut(prog(t, a + 0.10, 0.24), 2.0);
+      ap.style.opacity = on && t >= a + 0.10 ? 1 : 0; ap.style.transform = `scale(${mix(1.5, 1, pe).toFixed(3)})`; }
+
+    // E · Corte en dos: la mitad de arriba entra por la izquierda y la de abajo por la derecha; al encajar, una barra «/» cruza; salen separándose
+    { const a = T.E, b = 9.84, e1 = expoOut(prog(t, a, 0.38)), e2 = expoOut(prog(t, a + 0.06, 0.38)), x = easeIn(prog(t, b, 0.14)), on = t >= a && t < b + 0.14;
+      const top = $("eTop"), bot = $("eBot");
+      top.style.opacity = bot.style.opacity = on ? (1 - x).toFixed(3) : 0;
+      top.style.clipPath = "inset(-20px 0 50% 0)"; bot.style.clipPath = "inset(50% 0 -20px 0)";
+      top.style.transform = `translate(${(-700 * (1 - e1)).toFixed(1)}px, ${(-60 * x).toFixed(1)}px)`;
+      bot.style.transform = `translate(${(700 * (1 - e2)).toFixed(1)}px, ${(60 * x).toFixed(1)}px)`;
+      const bp = prog(t, a + 0.36, 0.22); const bar = $("eBar"); bar.style.opacity = bp > 0 && bp < 1 ? (Math.sin(Math.PI * bp)).toFixed(3) : 0;
+      const cx = mix(-100, 1180, easeIO(bp)); $("eBarP").setAttribute("d", `M ${cx + 40} 1080 L ${cx + 70} 1080 L ${cx - 30} 1260 L ${cx - 60} 1260 Z`); }
+
+    // F · «Plan B» nace de las manos (REV medido en la base), en degradado, y un brillo lo cruza cuando llega la «B»
+    { const REV = [[9.92, 0], [10.00, 50], [10.10, 220], [10.20, 370], [10.30, 480], [10.38, 560]];
+      let half = 0; for (let i = 0; i < REV.length; i++) { if (t >= REV[i][0]) half = REV[i][1]; if (i > 0 && t >= REV[i - 1][0] && t < REV[i][0]) half = mix(REV[i - 1][1], REV[i][1], prog(t, REV[i - 1][0], REV[i][0] - REV[i - 1][0])); }
+      const hp = $("heroPB"), rp = clamp01(half / 420), hpO = prog(t, 11.10, 0.25), on = t >= 9.92 && t < 11.4;
+      hp.style.opacity = on ? (prog(t, 9.92, 0.05) * (1 - hpO)).toFixed(3) : 0;
+      hp.style.clipPath = `inset(-80px ${Math.max(0, 540 - half).toFixed(1)}px -80px ${Math.max(0, 540 - half).toFixed(1)}px)`;
+      hp.style.transform = `translateY(${(-60 * hpO).toFixed(1)}px) scaleX(${mix(0.62, 1, expoOut(rp)).toFixed(3)}) scaleY(${mix(0.9, 1, expoOut(rp)).toFixed(3)})`;
+      hp.style.filter = `blur(${(9 * (1 - rp) + 10 * hpO).toFixed(1)}px) ${SOMBRA}`;
+      const bpos = `${mix(100, 0, easeIO(prog(t, 10.62, 0.45))).toFixed(1)}% 0`; $("hpA").style.backgroundPosition = bpos; $("hpB").style.backgroundPosition = bpos;
+      $("hpB").style.transform = `scale(${t >= 10.62 ? mix(1.3, 1, backOut(prog(t, 10.62, 0.3), 1.8)).toFixed(3) : 1})`;
+      ["rvL", "rvR"].forEach((id, k) => { const el = $(id), o = on && t < 10.45;
+        el.style.left = (540 + (k ? 1 : -1) * half).toFixed(1) + "px"; el.style.opacity = o ? (prog(t, 9.92, 0.05) * (1 - prog(t, 10.25, 0.18))).toFixed(3) : 0; }); }
+
+    // G · Trazo que se rellena: el contorno se dibuja y el degradado entra con un barrido a 29°; se asienta con un golpe leve
+    { const a = T.G, b = 12.55, s = $("gSvg"), on = t >= a - 0.02 && t < b + 0.2;
+      s.style.opacity = on ? (1 - prog(t, b, 0.2)).toFixed(3) : 0;
+      $("gStroke").setAttribute("stroke-dashoffset", (1400 * (1 - easeOut(prog(t, a, 0.4)))).toFixed(1));
+      $("gStroke").setAttribute("stroke-opacity", (1 - 0.6 * prog(t, a + 0.55, 0.3)).toFixed(3));
+      const f = easeIO(prog(t, a + 0.32, 0.32)), X = -150 + 1400 * f;
+      $("gPoly").setAttribute("points", `-150,-20 ${X},-20 ${X - 140},240 -150,240`);
+      s.style.transform = `scale(${(1 + 0.06 * Math.exp(-8 * Math.max(0, t - a - 0.62)) * (t > a + 0.62 ? 1 : 0)).toFixed(4)})`;
+      s.style.filter = `blur(${(6 * prog(t, b, 0.2)).toFixed(1)}px) ${SOMBRA}`; }
+
+    // H · La barra «/» que corta: «ENERO» cae, la barra lo atraviesa en diagonal y las dos mitades se separan
+    { const a = T.H - 0.12, cut = T.H + 0.10, e = backOut(prog(t, a, 0.2), 1.6), on = t >= a && t < 26.82;
+      const A = $("hA"), B = $("hB"), sp = easeOut(prog(t, cut + 0.02, 0.24));
+      // diagonal paralela a la barra (29° de la vertical): por el centro de la palabra
+      A.style.clipPath = "polygon(-10% -20%, 58% -20%, 42% 120%, -10% 120%)"; B.style.clipPath = "polygon(58% -20%, 110% -20%, 110% 120%, 42% 120%)";
+      [A, B].forEach((el, k) => { const dir = k ? 1 : -1;
+        el.style.opacity = on ? (clamp01((t - a) / 0.05) * (1 - prog(t, cut + 0.20, 0.12))).toFixed(3) : 0;
+        el.style.transform = `translate(${(dir * 200 * sp).toFixed(1)}px, ${(dir * -110 * sp + 40 * (1 - e)).toFixed(1)}px) rotate(${(dir * 9 * sp).toFixed(2)}deg) scale(${mix(1.3, 1, e).toFixed(3)})`; });
+      const bp = prog(t, cut - 0.06, 0.2), bar = $("hBar"); bar.style.opacity = bp > 0 && bp < 1 ? Math.min(1, Math.sin(Math.PI * bp) * 1.5).toFixed(3) : 0;
+      const yy = mix(700, 1500, easeIO(bp)), xx = 540 + (yy - 1190) * 0.554;  // tan(29°)
+      $("hBarP").setAttribute("d", `M ${xx + 30 + 120} ${yy - 220} L ${xx + 70 + 120} ${yy - 220} L ${xx - 70 - 120} ${yy + 220} L ${xx - 110 - 120} ${yy + 220} Z`); }
+
+    // I · Golpe con eco: la palabra cae de 1,8 a 1 y tres copias se expanden hacia fuera
+    { const a = T.I, b = 27.40, on = t >= a && t < b + 0.15, x = easeIn(prog(t, b, 0.14));
+      const m = $("yMain"), e = backOut(prog(t, a, 0.24), 2.0);
+      m.style.opacity = on ? (1 - x).toFixed(3) : 0; m.style.transform = `scale(${mix(1.8, 1, e).toFixed(3)})`;
+      m.style.filter = `blur(${(10 * x).toFixed(1)}px) ${SOMBRA}`;
+      ["yE1", "yE2", "yE3"].forEach((id, k) => { const el = $(id), p = prog(t, a + 0.10 + k * 0.05, 0.5);
+        el.style.opacity = on && p > 0 ? ((1 - p) * (0.85 - 0.2 * k)).toFixed(3) : 0; el.style.transform = `scale(${mix(1, 1.7 + 0.25 * k, easeOut(p)).toFixed(3)})`; }); }
+
+    // J · CTA como componente: tarjeta con borde degradado que sube, el botón se pulsa en «perfil»
+    { const a = T.J, c = $("cta"), e = expoOut(prog(t, a, 0.5)), on = t >= a;
+      c.style.opacity = on ? clamp01((t - a) / 0.15).toFixed(3) : 0;
+      c.style.transform = `translateY(${(180 * (1 - e)).toFixed(1)}px) scale(${mix(0.92, 1, e).toFixed(3)})`; c.style.filter = `blur(${(12 * (1 - e)).toFixed(1)}px)`;
+      const tp = wt("perfil"), press = t >= tp ? Math.sin(Math.PI * prog(t, tp, 0.22)) : 0;
+      $("ctaB").style.transform = `scale(${(1 - 0.07 * press).toFixed(3)})`;
+      $("ctaB").style.opacity = prog(t, a + 0.25, 0.2).toFixed(3); $("ctaT").style.opacity = prog(t, a + 0.15, 0.2).toFixed(3); }
+  }
+
+  const clock = { t: 0 };
+  const tl = gsap.timeline({ paused: true });
+  tl.to(clock, { t: D, duration: D, ease: "none", onUpdate: () => render(clock.t) }, 0);
+  render(0);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["root"] = tl;
+})();
+</script>
+</body>
+</html>

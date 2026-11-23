@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Paleta v2.1 · cerobytes</title>
+<!--
+  Tablero de PROPUESTA para la paleta de cerobytes con degradados (Ale, 2026-11-21: «la paleta de cerobytes la
+  actualicemos con más degradados», sin mezclar colores de MiMiniApp). Cada segundo es una opción sobre el mismo fotograma
+  de VID-0003: palabra escenario detrás de la persona, frase, palabra clave y píldora.
+  Respeta la identidad v2: base marino / negro / blanco roto, Plus Jakarta Sans, la barra «/» a 29° (los degradados van
+  en esa dirección), y lo excluido en IDENTIDAD (degradado violeta-azul; #54E0EA, #AD8BFF, #D9F77A).
+-->
+<style>
+  @font-face { font-family: "PJS"; font-weight: 700; src: url("./fonts/PlusJakartaSans-Bold.ttf") format("truetype"); }
+  @font-face { font-family: "PJS"; font-weight: 800; src: url("./fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype"); }
+  html, body { margin: 0; background: #000; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "PJS", sans-serif; color: #F5F6F8; }
+  .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .opt { opacity: 0; }
+  .scene { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-weight: 800; font-size: 330px; letter-spacing: -0.04em; line-height: 1; white-space: nowrap;
+    -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0.85; }
+  .line { position: absolute; left: 0; right: 0; top: 1035px; text-align: center; font-weight: 700; font-size: 50px; -webkit-text-stroke: 7px rgba(11,11,13,0.6); paint-order: stroke fill; text-shadow: 0 3px 16px rgba(0,0,0,0.55); }
+  .key { position: absolute; left: 0; right: 0; top: 1105px; text-align: center; font-weight: 800; font-size: 150px; letter-spacing: -0.02em; line-height: 1.05; white-space: nowrap;
+    -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.5)); }
+  .pill { position: absolute; left: 640px; top: 700px; width: 380px; height: 86px; border-radius: 999px; padding: 3px; box-sizing: border-box; }
+  .pill div { width: 100%; height: 100%; border-radius: 999px; background: rgba(11,18,38,0.82); display: flex; align-items: center; justify-content: center; gap: 14px; font-weight: 800; font-size: 34px; letter-spacing: .06em; }
+  .pill svg { width: 22px; height: 28px; }
+  .tag { position: absolute; left: 60px; right: 60px; top: 175px; height: 96px; border-radius: 26px; background: rgba(11,11,13,0.78); display: flex; align-items: center; gap: 22px; padding: 0 30px; box-sizing: border-box; }
+  .tag .n { font-weight: 800; font-size: 40px; } .tag .sw { display: flex; gap: 8px; margin-left: auto; } .tag .sw i { display: block; width: 46px; height: 46px; border-radius: 12px; }
+  .tag .bar { width: 200px; height: 30px; border-radius: 999px; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="4">
+  <img class="full" src="assets/fondo.png" alt="">
+  <div id="opts"></div>
+</div>
+<script src="./lib/gsap.min.js"></script>
+<script>
+(function () {
+  // Degradados a 119° (perpendicular a la barra «/», que va a 29° de la vertical)
+  const OPC = [
+    { n: "1 · Acero", key: ["#FFFFFF", "#C9D4E6", "#7F9CC9"], scene: ["#FFFFFF", "#C9D4E6", "#7F9CC9"], nota: "frío, extiende el marino" },
+    { n: "2 · Ignición", key: ["#FFE08A", "#FF9F43", "#FF5E3A"], scene: ["#FFE08A", "#FF9F43", "#FF5E3A"], nota: "cálido sobre el marino" },
+    { n: "3 · Señal", key: ["#F5F6F8", "#7DB4FF", "#2E6BFF"], scene: ["#F5F6F8", "#7DB4FF", "#2E6BFF"], nota: "azul eléctrico, sin violeta" },
+    { n: "4 · Ignición + Acero", key: ["#FFE08A", "#FF9F43", "#FF5E3A"], scene: ["#FFFFFF", "#C9D4E6", "#7F9CC9"], nota: "claves cálidas, estructura fría" },
+  ];
+  const g = (c) => `linear-gradient(119deg, ${c[0]} 0%, ${c[1]} 52%, ${c[2]} 100%)`;
+  const SLASH = (c) => `<svg viewBox="0 0 109 134"><defs><linearGradient id="s${c[2].slice(1)}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c[0]}"/><stop offset="1" stop-color="${c[2]}"/></linearGradient></defs><path d="M 73 4 L 109 4 L 36 134 L 0 134 Z" fill="url(#s${c[2].slice(1)})"/></svg>`;
+  const box = document.getElementById("opts");
+  OPC.forEach((o, i) => {
+    const d = document.createElement("div"); d.className = "opt full"; d.id = "o" + i;
+    d.innerHTML = `<div class="scene" style="background-image:${g(o.scene)}">ENERO</div>
+      <img class="full" src="assets/persona.png" alt="">
+      <div class="tag"><span class="n">${o.n}</span><span style="font-weight:700;font-size:28px;color:#B7C0CC">${o.nota}</span><span class="sw">${o.key.concat(o.scene.join() === o.key.join() ? [] : o.scene).map((c) => `<i style="background:${c}"></i>`).join("")}</span></div>
+      <div class="pill" style="background:${g(o.scene)}"><div>${SLASH(o.key)}MINIAPP 01</div></div>
+      <div class="line">dejo mis</div>
+      <div class="key" style="background-image:${g(o.key)}">METAS</div>`;
+    box.appendChild(d);
+  });
+  function render(t) { OPC.forEach((o, i) => { document.getElementById("o" + i).style.opacity = Math.floor(t) === i ? 1 : 0; }); }
+  const clock = { t: 0 }, tl = gsap.timeline({ paused: true });
+  tl.to(clock, { t: 4, duration: 4, ease: "none", onUpdate: () => render(clock.t) }, 0);
+  render(0);
+  window.__timelines = window.__timelines || {}; window.__timelines["root"] = tl;
+})();
+</script>
+</body>
+</html>

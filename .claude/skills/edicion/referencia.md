@@ -1,4 +1,4 @@
-# Valores de referencia de la edición (VID-0003 v04, aprobada por Ale el 2026-11-20)
+# Valores de referencia de la edición (VID-0003 v04 aprobada el 2026-11-20; texto y color de la v07, dirección v2 aprobada el 2026-11-21)
 
 Los números que hacen que la edición salga pulida. Están en `videos/VID-0003/hyperframes/edicion/` (`index.html`, `preparar.py`, `mezcla.py`); aquí se explican para no tener que adivinarlos. Si cambias uno en la base, cámbialo aquí.
 
@@ -16,11 +16,15 @@ Los números que hacen que la edición salga pulida. Están en `videos/VID-0003/
 
 ## Marca y tipografía
 
-- Paleta: `#0B0B0D` (tinta), `#1E2937`, `#0D213F` (navy), `#F5F6F8` (blanco roto), `#B7C0CC` (secundario). Solo **Plus Jakarta Sans** (Medium 500, Bold 700, ExtraBold 800). MiMiniApp (violeta, lima) solo dentro del celular.
-- Subtítulos: ExtraBold 66 px, mayúsculas, caja navy con la palabra activa invertida (blanco roto, texto tinta), palabras siguientes en `#B7C0CC`. Grupos de 2–4 palabras, que caben en 980 px (escala automática), cortan siempre en «.», «?», «!». Entran en 0,16 s (expo) y salen en 0,12 s.
-- Palabras protagonistas: ExtraBold 120–250 px, mayúsculas, borde de 10 px `rgba(11,11,13,.55)`, entrada con rebote (`backOut2`, 0,22–0,24 s, escala 1,5 → 1) y `GLOW` = `drop-shadow(0 0 10px rgba(245,246,248,.55)) drop-shadow(0 0 26px rgba(245,246,248,.22))`. Máximo 3–4 por vídeo.
-- Promesa: ExtraBold 46 px, dos líneas, borde 8 px; una palabra clave en caja blanca («**gratis**»). De 0,4 a 3,0 s, entrada con desenfoque 8 → 0 px.
-- Acento final: «Este año, *sí*.» (Bold 64 + ExtraBold 96 en caja blanca con `GLOW`), se revela de izquierda a derecha en 0,45 s y la palabra en caja cae con rebote 0,3 s después.
+- Paleta: `#0B0B0D` (tinta), `#1E2937`, `#0D213F` (navy), `#F5F6F8` (blanco roto), `#B7C0CC` (secundario) **+ degradado «Señal» (AV-014)**: `--sen` `#F5F6F8` → `#7DB4FF` → `#2E6BFF`, `--sen-suave` `#FFFFFF` → `#CFE1FF` → `#7DB4FF` (escenarios, bordes, barra), `--sen-caja` `#5E9BFF` → `#2E6BFF` (cajas con texto blanco roto), `--sen-brillo` (con una franja blanca que cruza). Siempre a **119°** (perpendicular a la barra «/»). Solo **Plus Jakarta Sans** (Medium 500, Bold 700, ExtraBold 800). MiMiniApp y Plan B (violeta, lima) **solo dentro del celular**.
+- **Sombra sutil en todo texto sobre imagen** (AV-014): `--sombra` = `drop-shadow(0 2px 3px rgba(4,10,28,.45)) drop-shadow(0 8px 18px rgba(4,10,28,.32))`; en tarjetas, `box-shadow: 0 6px 14px rgba(4,10,28,.35)`.
+- **Texto en tres niveles** ([MOTION §10.2](../../../guias/MOTION.md)):
+  - *Frase* (nivel 1): Bold 50 px, **minúsculas**, borde 4 px `rgba(11,11,13,.45)` + `--sombra`; palabra a palabra (sube 14 px y aparece en 0,32 s, `expo`), sale subiendo 18 px en 0,18 s. A cámara y = 1035 (por encima de la estampa de la camiseta), con tarjeta en el pecho 1430, en la demo 1440 **en caja navy** (`#line.boxed`). Grupos de 2–4 palabras, que cortan siempre en «.», «?», «!». Se apaga donde hay un tratamiento grande (`QUIET`).
+  - *Clave* (nivel 2): ExtraBold 128–170 px en `--sen`, a y = 1105, **fuera de la línea de la frase**; una por frase como mucho, con la entrada de su significado (vocabulario §10.3 y laboratorio §10.9).
+  - *Escenario* (nivel 3): ExtraBold 250–330 px en `--sen-suave`, a y = 330–350, **detrás de la persona** (matte `assets/persona_*.webm`); letras que se juntan (interletraje 0,9 → −0,04 em en 0,6 s) y salen dispersándose. VID-0003: «ENERO» y «ESTE AÑO».
+- Tratamientos de VID-0003 v07 (código en `index.html`, uno por bloque): A cascada 3D («TODOS LOS AÑOS», `rotateX` −100° → 0, 35 ms entre letras) · B impacto + brillo («METAS», 260 % → 100 % en 0,2 s, golpe de cámara 4,5 %) · C escenario · D máscara con estela + barrido diagonal a 29° («hice una APP», caja `--sen-caja`) · Máquina («GANAS», 1 letra / 2 fotogramas, cursor) · Barrido («PLANEO») · E corte en dos + barra («POR ESO HICE») · F nace de las manos (`REV`) con brillo · G trazo que se rellena («GRATIS», SVG, contorno 0,4 s + relleno a 29°) · H la barra «/» que corta («ENERO») · I golpe con eco («¿Y TÚ?», 1,8 → 1 y tres contornos) · J CTA como componente (tarjeta con borde `--sen-suave`, botón `--sen` que se pulsa en «perfil»). **Sin resplandor** (AV-013 sigue sin decidir): el relieve lo da `--sombra`.
+- Promesa: ExtraBold 46 px, dos líneas, `--sombra`; «**gratis**» en caja `--sen-caja`. Entra con un barrido de izquierda a derecha (0,45 s) a los 0,3 s y sale subiendo y desenfocándose cuando entra el primer escenario (≈ 2 s).
+- Acento final: «Este año, *sí*.» (Bold 64 + ExtraBold 96 en caja `--sen-caja`, con `--sombra`), se revela de izquierda a derecha en 0,45 s y la palabra en caja cae con rebote 0,3 s después.
 
 ## Capa flotante
 

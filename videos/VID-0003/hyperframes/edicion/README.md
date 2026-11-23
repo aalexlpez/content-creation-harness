@@ -1,4 +1,10 @@
-# VID-0003 · Edición v01 (2026-11-20)
+# VID-0003 · Edición (base estándar de `/edicion`)
+
+**v07 (2026-11-21):** dirección v2 de motion (`guias/MOTION.md` §10): texto en tres niveles, tratamientos A–J del laboratorio, paleta Señal (AV-014) y sombra sutil. Las palabras escenario necesitan las siluetas: `python preparar.py --mates` (genera `assets/persona_0_5.webm` y `assets/persona_25_30.webm`).
+
+## Historia
+
+### v01 (2026-11-20)
 
 Edición del ensayo 3 con el estilo de VID-0002 v06f. Orden: `python preparar.py` → `npx hyperframes@0.9.42 render . -q delivery -o ../../media/trabajo/edicion_v01_imagen.mp4` → `python mezcla.py ../../media/trabajo/edicion_v01_imagen.mp4 ../../media/trabajo/edicion_v01`. La demo se graba antes, con `node demo/grabar.mjs ../../media/trabajo/demo_real/toma1` (variables `NPXNM` y `CHROME`, ver el script) y se copia a `assets/demo_real.mp4` con 0,8 s de último fotograma.
 

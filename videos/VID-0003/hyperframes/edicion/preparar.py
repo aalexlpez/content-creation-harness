@@ -185,6 +185,20 @@ def palabras(salida):
     print(f"palabras.js: {len(out)} palabras")
 
 
+# Siluetas para las palabras escenario detrás de la persona (dirección v2): tramos (inicio en tn, duración) del corte.
+MATES = [(0.0, 5.0, "persona_0_5.webm"), (24.9, 4.82, "persona_25_30.webm")]
+
+
+def mates(assets):
+    """Recorta a Ale del fondo en los tramos de MATES (npx hyperframes remove-background, modelo local en la caché). Tarda minutos."""
+    for a, d, nombre in MATES:
+        tmp = os.path.join(TRABAJO, f"corte_{a:g}_{d:g}.mp4")
+        ffmpeg("-ss", f"{a}", "-i", os.path.join(assets, "corte.mp4"), "-t", f"{d}", "-c:v", "libx264", "-crf", "12", "-pix_fmt", "yuv420p", "-g", "30", tmp)
+        r = subprocess.run(["npx", "--yes", "hyperframes@0.9.42", "remove-background", tmp, "-o", os.path.join(assets, nombre)], shell=os.name == "nt")
+        if r.returncode:
+            raise SystemExit(f"remove-background falló en {nombre}")
+
+
 def main():
     assets = os.path.join(AQUI, "assets")
     os.makedirs(assets, exist_ok=True); os.makedirs(TRABAJO, exist_ok=True)
@@ -197,4 +211,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if "--mates" in sys.argv:
+        mates(os.path.join(AQUI, "assets"))
+    else:
+        main()

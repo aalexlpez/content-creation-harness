@@ -46,41 +46,48 @@ def flecha(t, db=-21):
 
 # (tn, archivo, recorte inicio, recorte fin, pico objetivo dBFS, nota). «pk-0.05» = empieza 0,05 s antes del pico.
 CUES = [
+    # v07 (dirección v2 de motion, MOTION §10): cada efecto con algo que se ve
     # S01 · confesión
-    nodo(0.42, 1, -19, "promesa en pantalla"),
-    (2.35, "page-turn.mp3", 0.0, 0.55, -18, "R01: la hoja de enero pasa"),
-    nodo(3.79, 0, -17, "HICE"),
-    nodo(4.10, 0, -16, "UNA"),
-    nodo(4.42, 0, -14, "pico 1: «APP» (la batería entra a la vez; sin boom de cine: Ale, «suena sin contexto»)"),
+    nodo(0.42, 1, -20, "promesa en pantalla (barrido)"),
+    nodo(1.70, 0, -15, "B · «METAS» cae con impacto"),
+    (2.06, "whoosh_esquiva.mp3", 0.0, 0.53, -21, "C · «ENERO» se junta detrás de la cabeza"),
+    nodo(3.79, 0, -17, "D · «hice» sube"),
+    nodo(4.10, 0, -16, "D · «una» sube"),
+    nodo(4.42, 0, -14, "pico 1: «APP» en caja con el barrido diagonal (la batería entra a la vez)"),
     (4.42, "whoosh_fast-simple-chop.mp3", 0.0, 0.55, -19, "el teléfono Plan B entra"),
     # S02 · el motivo
+    (5.83, "iphone_typing.mp3", 2.58, 3.00, -17, "Máquina: «GANAS» se escribe (por su inicio)"),
+    (7.03, "whoosh_fast-simple-chop.mp3", 0.0, 0.55, -21, "Barrido: «PLANEO»"),
     nodo(7.32, 1, -17, "R04: tarjeta en el pecho"),
     # S03 · Plan B
-    nodo(9.14, 0, -16, "etiqueta cerobytes"), flecha(9.55),
-    (10.00, "benkirb-shine.mp3", 0.0, 1.20, -20, "«Plan B» nace de las manos (antes, un clic de cámara sin cámara)"),
+    (9.14, "whoosh_fast-simple-chop.mp3", 0.0, 0.55, -19, "E · «POR ESO HICE» entra en dos mitades"),
+    nodo(9.20, 0, -18, "etiqueta cerobytes"), flecha(9.55),
+    (10.00, "benkirb-shine.mp3", 0.0, 1.20, -20, "F · «Plan B» nace de las manos"),
     nodo(10.62, 1, -17, "MINIAPP 01"),
-    (11.30, "scribble-pencil.mp3", 0.3, 0.75, -18, "precio tachado"),
-    nodo(11.45, 1, -14, "GRATIS"),
+    (11.42, "scribble-pencil.mp3", 0.3, 0.75, -18, "G · el contorno de «GRATIS» se dibuja (por su inicio)"),
+    nodo(11.76, 1, -14, "G · el degradado llena «GRATIS»"),
     (12.92, "whoosh_basico.mp3", 0.0, 0.94, -17, "el teléfono flotante crece hasta ser el celular de la demo"),
-    # S04–S06 · demo de la app real: solo 4 toques con sonido (meta, «No tuve tiempo», «Ver mi plan», recordatorio);
-    # 10 toques en 12 s sonaban a clics sin parar (autocrítica de la v02)
+    # S04–S06 · demo de la app real: solo 4 toques con sonido (meta, «No tuve tiempo», «Ver mi plan», recordatorio)
     toque(13.55, -13, "«Hacer ejercicio»"),
     (14.15, "page-turn.mp3", 0.0, 0.55, -20, "la app te lleva a febrero"),
     toque(14.95, -11, "«No tuve tiempo»"),
     (17.95, "iphone_typing.mp3", 2.58, 2.58 + (19.30 - 17.95), -15, "tecleo «llego a casa después de las 20:00» (por su inicio, todo el tecleo)"),
     (19.75, "iphone_typing.mp3", 5.19, 5.19 + (20.95 - 19.75), -15, "tecleo «hago 5 minutos de estiramientos» (por su inicio, todo el tecleo)"),
     toque(21.15, -13, "«Ver mi plan»"),
-    (21.37, "magic-spell.mp3", 0.0, 1.60, -15, "pico 2: aparece el plan con el estribillo 2 (antes, riser + sello: no hay sello en imagen)"),
+    (21.37, "magic-spell.mp3", 0.0, 1.60, -15, "pico 2: aparece el plan con el estribillo 2"),
     toque(22.40, -14, "«Añadir recordatorio»"),
     (22.90, "new-notification.mp3", 0.0, 1.38, -17, "hora 20:00: el recordatorio"),
     (23.40, "whoosh_basico.mp3", 0.0, 0.58, -19, "baja hasta el fondo de pantalla"),
     (24.75, "whoosh_fast-simple-chop.mp3", 0.0, 0.55, -17, "el celular se encoge hasta el teléfono flotante"),
-    nodo(25.12, 0, -16, "el teléfono vuelve"),
+    nodo(25.12, 0, -17, "el teléfono vuelve"),
     # S07 · cierre
-    nodo(25.25, 1, -17, "hoja de calendario"), flecha(25.55),
-    (26.30, "page-flip.mp3", 0.64, 1.77, -17, "la hoja pasa a FEBRERO"),
-    (26.81, "cinematic-riser-impact.mp3", "pk-0.05", 3.21, -12, "pico 3: «¿Y tú?» tras 0,47 s de silencio de la música (golpe 3 de 3)"),
+    (25.18, "whoosh_esquiva.mp3", 0.0, 0.53, -21, "«ESTE AÑO» se junta detrás de la cabeza"),
+    nodo(26.29, 0, -16, "H · «ENERO» cae"),
+    (26.47, "whoosh_fast-simple-chop.mp3", 0.0, 0.55, -16, "H · la barra «/» corta «ENERO»"),
+    (26.81, "cinematic-riser-impact.mp3", "pk-0.05", 3.21, -12, "pico 3: I · «¿Y tú?» con eco, tras 0,47 s de silencio de la música"),
+    nodo(27.60, 1, -17, "J · la tarjeta del CTA sube"),
     nodo(27.85, 0, -15, "«sí.» del acento final"),
+    (28.42, "mouse-click-sfx.mp3", 0.0, 0.25, -18, "J · se pulsa el botón en «perfil»"),
 ]
 
 

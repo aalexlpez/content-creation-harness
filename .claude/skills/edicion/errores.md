@@ -27,6 +27,10 @@ Cada fila es una corrección real de Ale o un fallo técnico de las sesiones del
 | «Suena el boom sin nada de contexto» | Cada efecto con algo que se ve; golpes de cine solo para un protagonista con imagen fuerte |
 | «No suena el efecto del teclado» | Sonidos continuos por su inicio, durante toda la acción y a −15 dBFS |
 | Look B «muy notorio» (otra vez, en la v06) | Sin filtro por defecto; Ale eligió además, en una comparación, una coloración muy suave (`eq` contraste 1,04, gamma 1,03): solo si la pide |
+| Texto y motion «bastante planos» frente a un reel de referencia | Dirección v2 (MOTION §10): tres niveles de texto, vocabulario de entradas y salidas, auditoría de dinamismo |
+| Mezclar el violeta y el lima de MiMiniApp con la marca cerobytes | Paleta Señal de cerobytes (AV-014); los colores del producto, solo dentro del celular |
+| Letras «planas en imagen» | Sombra sutil de dos capas en todo texto sobre imagen (`--sombra`) |
+| Animaciones que «no son tan wow» | Laboratorio de tratamientos con letra para elegir (`hyperframes/lab_texto/`) antes de pasarlos a la base |
 
 ## Lo que encontró la autocrítica de Claude
 

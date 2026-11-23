@@ -6,7 +6,7 @@ Rodaje, ingesta, animación y montaje. Referencias: [TECNICA](../../guias/TECNIC
 
 - Estado: EN_PRODUCCION
 - Bloqueo: NINGUNO
-- Siguiente_paso: Ale escucha la edición v06 (media/trabajo/edicion_v06.mp4): la base estándar con la música audible y los efectos revisados. Es un ensayo: no se publica ni necesita OK-3
+- Siguiente_paso: Ale ve la edición v07 (media/trabajo/edicion_v07.mp4: dirección v2 con la paleta Señal). Es un ensayo: no se publica ni necesita OK-3
 - Perfil_visual: v2
 - Perfil_tecnico: 1080x1920 · 30 fps · H.264 · SDR BT.709 · AAC 48 kHz
 - Editor: PENDIENTE
@@ -56,6 +56,7 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 
 ## Historial
 
+- 2026-11-21 · Edición v07 (dirección v2 de motion aprobada por Ale: «este nuevo ejemplo está bastante bien. Hazlo con la opción de azul electrico… letras con sombra sutil»; «Sí, edítalo»): `media/trabajo/edicion_v07.mp4` y `edicion_v07_sin_musica.mp4` (29,72 s, 1080×1920, 30 fps; −14,2 / −14,3 LUFS, pico −4,4 dBFS estéreo; 37 efectos). Texto en tres niveles (frases en minúsculas, claves en el degradado Señal, «ENERO» y «ESTE AÑO» detrás de la persona con las siluetas de `remove-background`), tratamientos A–J del laboratorio más Máquina y Barrido, sombra sutil en todo texto, efectos de sonido rehechos para la imagen nueva. Salen el recurso R01 y la hoja de calendario del cierre. Revisado en capturas de 26 momentos y hoja a 2 fps. **Mezcla medida, no escuchada por Claude.**
 - 2026-11-20 · Edición v06 (correcciones de sonido de la sesión del 2026-11-19 pasadas a la base, a petición de Ale): `media/trabajo/edicion_v06.mp4` y `edicion_v06_sin_musica.mp4`, misma imagen que la v05. Música 6 dB bajo la voz con bajada de ≈ 3 dB (antes 13 + 5: no se oía), el estribillo sigue bajo toda la demo (antes el valle: «bajada de volumen» al abrir la app) y +2 dB en los picos sin voz; efectos: fuera el boom del pico 1, el clic de cámara de «Plan B», el riser + sello del plan (ahora `magic-spell`) y el whoosh «misterioso»; tecleos por su inicio, durante todo el tecleo y a −15 dBFS; impacto de «¿Y tú?» a −12. Medido: −14,2 / −14,3 LUFS, pico −4,2 dBFS; pico 2 a −11,0 LUFS momentáneos (antes −17,8). **Mezcla medida, no escuchada por Claude.**
 - 2026-11-20 · Edición v05 (la base estándar `hyperframes/edicion/`, la de la v04, rehecha en la segunda computadora con `/edicion`): `media/trabajo/edicion_v05.mp4` y `edicion_v05_sin_musica.mp4` (29,72 s, 1080×1920, 30 fps; −14,3 LUFS los dos, pico −4,4 dBFS estéreo / −1,4 dBFS antes del AAC; 32 efectos). Se regeneraron aquí la transcripción (Parakeet sobre la voz alineada +25 ms: mismas palabras que la v04, tiempos ±0,08 s, y ahora «enero.» y «¿Y» bien marcados), el corte sin filtro, la voz, la música, los recursos y la demo real (390 fotogramas). Revisado: `lint` 0 errores, capturas en 18 momentos, hoja a 2 fps y sonoridad en los picos. **Mezcla medida, no escuchada por Claude.**
 - 2026-11-20 · Edición v04 (autocrítica aplicada, a petición de Ale): `media/trabajo/edicion_v04.mp4` y `edicion_v04_sin_musica.mp4`. Arranque con acercamiento (1,12 → 1,0 en 0,45 s); subtítulos siempre en caja dentro de la zona segura (1190 a cámara, 1420 con tarjeta, 1440 en la demo); promesa y acento por debajo de la barra superior de las apps; cierre «Este año, sí.»; la demo con 4 toques con sonido en vez de 10
@@ -72,3 +73,4 @@ Originales intactos en `media/originales/`. Comprobación: `python scripts/marco
 - 2026-11-20 · Estado → EN_PRODUCCION
 - 2026-11-20 · Estado → EN_PRODUCCION
 - 2026-11-20 · Estado → EN_PRODUCCION
+- 2026-11-23 · Estado → EN_PRODUCCION

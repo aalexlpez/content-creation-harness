@@ -13,6 +13,11 @@ Se hace sobre el render, no sobre el código. Lo que no se pudo comprobar se dic
 - [ ] El texto en pantalla dice lo mismo que la voz (ni contradice ni repite palabra por palabra).
 - [ ] Color: el corte coincide con el original (medir pared y negros) o con el look que Ale pidió.
 
+## 1 bis. Dinamismo
+
+- [ ] Auditoría de dinamismo de [MOTION §10.7](../../../guias/MOTION.md): ≥ 16 de 20, o se dice qué falta y por qué.
+- [ ] Hoja de contacto lado a lado con la referencia elegida (`referencias/edicion/`).
+
 ## 2. Sonido
 
 - [ ] Másteres a −14 LUFS (±0,3) y pico ≤ −1 dBFS.

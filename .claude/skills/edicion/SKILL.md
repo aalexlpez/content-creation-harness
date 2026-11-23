@@ -12,7 +12,7 @@ Esta skill recoge todo lo aprendido editando VID-0002 (v01–v06f) y VID-0003 (v
 
 **Base canónica:** `videos/VID-0003/hyperframes/edicion/` (edición v04 aprobada por Ale). Un vídeo nuevo **copia esa carpeta** y cambia solo los datos (tiempos, palabras, recursos, música, acciones de la demo y textos). No se reescriben los componentes ni las curvas: si algo falla, se corrige en la base y se anota en [errores.md](errores.md).
 
-Antes de nada lee: [referencia.md](referencia.md) (valores exactos), [errores.md](errores.md) (lo que ya salió mal y no se repite) y [revision.md](revision.md) (cómo se revisa antes de entregar).
+Antes de nada lee: la **dirección v2 de motion** ([MOTION §10](../../../guias/MOTION.md): tres niveles de texto, vocabulario de entradas y salidas, tarjetas vivas y auditoría de dinamismo), [referencia.md](referencia.md) (valores exactos), [errores.md](errores.md) (lo que ya salió mal y no se repite) y [revision.md](revision.md) (cómo se revisa antes de entregar).
 
 ---
 
@@ -78,8 +78,8 @@ Los medios no van a Git. `MEDIOS.csv` se completa **añadiendo filas** (ruta, by
 Todo es función del tiempo (`render(t)`, t = tiempo del corte, leído de `palabras.js`). Se cambian **solo datos**: `NODES` (show, textos), `ARROWS` (máx. 3), `FRAMES`, `ZP` y `SHOTS`, tiempos de protagonistas, promesa y acento. Valores en [referencia.md](referencia.md). Reglas que no se tocan:
 
 - Cara a pantalla completa; el celular de la demo nace del teléfono flotante y vuelve a él; la cara detrás se desenfoca (18 px) y oscurece al 50 %.
-- **Subtítulos siempre en caja** (navy, palabra activa invertida), una línea que cabe en el ancho, **nunca dos frases en una línea**, dentro de la zona segura (a cámara 1190, con tarjeta 1420, en la demo 1440). Se apagan mientras hay una palabra protagonista.
-- **Protagonistas**: máximo 3–4 por vídeo, con resplandor contenido (`GLOW`); el resto sin resplandor. Si Ale hace un gesto (manos que se abren), la palabra **nace del gesto**: se mide la apertura fotograma a fotograma y se usa como máscara (`REV`).
+- **Texto en tres niveles** (MOTION §10.2): frase en minúsculas palabra a palabra (a cámara 1035, con tarjeta 1430, en la demo 1440 y en caja), clave grande en degradado Señal con su entrada, y palabra escenario detrás de la persona. **Nunca dos frases en una línea**; la frase se apaga donde hay un tratamiento grande. Todo texto sobre imagen lleva `--sombra`.
+- **Tratamientos**: cada bloque tiene su entrada y su salida del vocabulario (MOTION §10.3, laboratorio §10.9), nunca el mismo par dos veces seguidas. Color: solo la paleta Señal de cerobytes (AV-014); los colores de un producto, solo dentro del celular. Sin resplandor mientras AV-013 siga sin decidir. Si Ale hace un gesto (manos que se abren), la palabra **nace del gesto**: se mide la apertura fotograma a fotograma y se usa como máscara (`REV`).
 - **Deriva de cámara** 100 → 103 % por plano, que **solo se reinicia en cortes reales** (`SHOTS`).
 - Las flechas **nunca sobreviven a sus tarjetas** (`showEnd`). Nada de anillos de toque ni dedos simulados.
 - Textos fijos (promesa, acento) **por debajo de la barra superior de las apps** (≥ 168 px) y nada importante por debajo de ≈ 1540 px ni en los 120 px de la derecha.

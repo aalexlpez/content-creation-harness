@@ -194,3 +194,148 @@ Piezas y recetas que ya salieron en un render real, con la marca v2: `text-state
 - [ ] Ningún subtítulo se sale del ancho ni pisa la interfaz; la banda de subtítulos está libre en todos los modos.
 - [ ] En la demo, ningún plano parte un campo o un botón y nada se lee por debajo de 28 px en el render.
 - [ ] Hay dos másteres: sin música (para sonidos de tendencia en la app) y con música libre.
+
+## 10. Dirección v2: dinamismo (2026-11-21)
+
+Ale, al comparar con un reel bien editado ([REF-001](../referencias/edicion/REF-001_reel-edits/DESGLOSE.md)): «nuestra edición de textos y motion graphics es bastante plana… necesito una buena dirección de edición». Esta sección es esa dirección. Las piezas que cambian la marca (color de acento, degradados) son una **propuesta (AV-014)** hasta que Ale decida.
+
+### 10.1 Autocrítica: VID-0003 v06 frente a REF-001
+
+| Dimensión | Nosotros (v06) | REF-001 | Regla nueva |
+|---|---|---|---|
+| Ritmo de cambios | Algo nuevo cada 1–1,7 s fuera de la demo | Igual | Se mantiene |
+| Subtítulos | Un solo estilo para todo: mayúsculas, caja navy, palabra activa invertida, misma posición y entrada | Dos niveles: frase pequeña + palabra clave grande en color; a veces otro estilo para una frase | **Tres niveles de texto** (§10.2) |
+| Entradas y salidas | Casi todo entra igual (escala 0,78 → 1 + desenfoque) y sale igual (se disuelve). Es lo que §4 prohíbe: «todo entra con fundido y subida» | Cada elemento entra desde un sitio y se va a otro; letras, barridos, golpes | **Vocabulario con nombre** y nunca dos iguales seguidos (§10.3) |
+| Color | Monocromo (navy y blanco roto): las claves no resaltan | Un acento cálido para las claves y el degradado de cada marca en su nombre | **Acento + color del producto** (AV-014, §10.4) |
+| Profundidad | Todo encima de la imagen | Palabras gigantes detrás de la persona | **Palabra escenario** detrás (matte) |
+| Iconos | Dibujados por nosotros (teléfono con «/», hoja de calendario) | Iconos reales en baldosa con brillo y etiqueta | **Icono real del producto** (Plan B: `/brand/plan-b/icon.png` de la app) |
+| Tarjetas | Píldoras de cristal con texto | Tarjetas que hacen algo: gráfica, interruptores, terminal, caja de comentario | **Tarjetas vivas** (§10.5) |
+| CTA | Texto «El link está en mi perfil» | Componente de interfaz (píldora + caja de comentario) | El CTA es un componente |
+| Lo que ya está bien | Demo con la app real, el celular que nace del teléfono flotante, «Plan B» que sale de las manos, picos con silencio y golpe | — | Se mantiene |
+
+### 10.2 Tres niveles de texto
+
+| Nivel | Qué es | Estilo | Cuándo |
+|---|---|---|---|
+| 1 · Frase | Lo que dice la voz, palabra a palabra | Plus Jakarta Sans Bold 46–52 px, minúsculas (como se habla), blanco roto con borde suave; sin caja salvo sobre fondos difíciles. Entra palabra a palabra (subida de 8 px y enfoque, 60–90 ms entre palabras) | Siempre, a y ≈ 1150–1250 |
+| 2 · Clave | Una palabra por frase, la que carga el sentido | ExtraBold 96–130 px, color de acento (o el del producto si nombra el producto), **debajo** de la frase. Su entrada depende de lo que significa (§10.3) | Una por frase, como mucho |
+| 3 · Escenario | Una palabra que titula el bloque | ExtraBold 260–360 px, mayúsculas, detrás de la persona (matte), acento o blanco al 40–60 %. Entra deslizándose con desenfoque, se queda 2–4 s mientras siguen las frases y sale desenfocándose cuando cambia la idea | 3–5 por vídeo, nunca en la demo |
+
+Las palabras protagonistas de ahora («HICE UNA APP», «¿Y TÚ?») pasan a ser **claves con golpe** o **escenarios**; el resplandor (AV-013) solo si Ale lo aprueba.
+
+### 10.3 Vocabulario de entradas y salidas
+
+Cada elemento tiene una entrada y una salida con nombre. **Nunca el mismo par dos veces seguidas**, al menos 5 tipos distintos por vídeo, y la salida va en la dirección que pide el siguiente elemento (o lo empuja).
+
+| Nombre | Entrada | Salida | Para qué |
+|---|---|---|---|
+| Subida | 20–40 px desde abajo + enfoque 10 → 0 px, `expo.out` 0,35 s | Sube y se desenfoca, `power3.in` 0,2 s | Frase (nivel 1) |
+| Barrido | Máscara de izquierda a derecha, 0,3–0,45 s | Barrido hacia el otro lado | Revelar: un resultado, una lista |
+| Golpe | Escala 1,6 → 1 con rebote corto (0,22 s) + sacudida de 6–9 px | Corte seco o empujón | Palabras fuertes y picos (≤ 3 por vídeo) |
+| Máquina | Letra a letra con cursor (1 letra / fotograma) | Se borra hacia atrás o se desenfoca | Verbos de acción («escribes», «automatiza») |
+| Letras | Cada letra sube desde abajo con 1 fotograma de desfase | Bajan en orden inverso | Nombres (Plan B, MiniApp 01) |
+| Deslizar | Entra desde el lado con desenfoque de movimiento (12 px horizontal), 0,3 s | Sale por el lado contrario | Palabra escenario; pasado ← izquierda, futuro → derecha |
+| Rodar | Una palabra rueda a la siguiente en su hueco (máscara vertical) | — | Cambios: «$ → GRATIS», «enero → febrero» |
+| Nacer del gesto | Sale del punto donde la mano se abre o señala | Se desenfoca | Cuando Ale hace un gesto |
+| Pop de icono | Escala 0 → 1,12 → 1 con desenfoque, 0,4 s; los grupos con 60–80 ms de desfase | Encoge a 0,8 y cae 20 px | Iconos y baldosas |
+| Empujar | El elemento nuevo entra y desplaza al anterior | — | Encadenar ideas sin vacío |
+
+Curvas y tiempos: los de §4 (llegadas más lentas que salidas, rebote solo en posición y escala).
+
+### 10.4 Color: paleta de cerobytes con degradados (AV-014, aprobada: «Señal»)
+
+Ale, 2026-11-21: no mezclar colores de MiMiniApp con los de cerobytes; **actualizar la paleta de cerobytes con degradados**. Los colores de un producto (violeta y lima de Plan B) siguen **solo dentro del celular**.
+
+Reglas de la propuesta: la base no cambia (marino `#0D213F`, negro `#0B0B0D`, carbón `#1E2937`, blanco roto `#F5F6F8`); los degradados van a **119°**, la dirección perpendicular a la barra «/» (29° de la vertical); nada del degradado violeta-azul ni de los colores descartados en AV-006 (`#54E0EA`, `#AD8BFF`, `#D9F77A`); y en vídeo el texto en degradado lleva una sombra oscura suave para leerse sobre la imagen. Opciones (tablero: `videos/VID-0003/hyperframes/paleta_v21/`):
+
+| Opción | Degradado | Carácter |
+|---|---|---|
+| 1 · Acero | `#FFFFFF` → `#C9D4E6` → `#7F9CC9` | Frío, extiende el marino; elegante y discreto |
+| 2 · Ignición | `#FFE08A` → `#FF9F43` → `#FF5E3A` | Cálido, complementario del marino: es el que más resalta sobre la camiseta y la pared |
+| 3 · Señal ✅ **elegida por Ale** (2026-11-21) | `#F5F6F8` → `#7DB4FF` → `#2E6BFF` | Azul eléctrico sin violeta. Sobre ropa oscura necesita la sombra sutil |
+| 4 · Ignición + Acero | Claves en Ignición; palabras escenario, bordes de tarjetas y la barra en Acero | Un acento cálido para lo que importa y una estructura fría que es la marca de siempre |
+
+### 10.5 Iconos, tarjetas vivas, profundidad y transiciones
+
+- **Iconos reales:** baldosa de 140–160 px, radio 34, el icono del producto (Plan B, de la propia app) o el de la herramienta que se nombra, con una etiqueta en píldora debajo. Enmarcan la cara (izquierda / derecha, a la altura de los ojos) y se conectan con un arco y un punto que viaja (máx. 3 arcos por vídeo).
+- **Tarjetas vivas:** cada tarjeta hace algo mientras está: una notificación que llega, una línea que se dibuja, un interruptor que se enciende, una lista que se marca con ✓, un precio que rueda, una caja de comentario que se escribe. Una tarjeta solo con texto se cambia por un subtítulo de nivel 2.
+- **Escena de proceso:** cuando el guion cuenta un proceso que no es la demo, una interfaz inventada lo enseña paso a paso (interruptores, progreso, terminal). Nunca se presenta como si fuera la app real (CONTENIDO: nada inventado).
+- **Profundidad:** la palabra escenario va detrás de la persona con el matte de `npx hyperframes@0.9.42 remove-background` (ya probado en VID-0002 v05).
+- **CTA como componente:** píldora con la acción y una caja que se escribe sola («Comenta PLAN B»), en lugar de una frase suelta.
+- **Transiciones:** además de §5, empujar (el nuevo desplaza al viejo), del objeto al mundo y corte en el gesto; cada palabra escenario cambia con la idea, no con la frase.
+
+### 10.6 Piezas del catálogo de HyperFrames para empezar
+
+Se instalan con `npx hyperframes@0.9.42 add <nombre>` y se adaptan a la marca (fuente, colores, tiempos): `caption-editorial-emphasis` (dos niveles de texto), `mk-emphasis-type` y `caption-parallax-layers` (palabra detrás de la persona), `typewriter`, `text-stagger`, `text-state-swap` y `kinetic-type-swap` (rodar), `caption-kinetic-slam` (direcciones alternas), `badge-pop` e `icon-swap` (iconos), `macos-notification` y `notification-pileup` (tarjeta que llega), `mk-line-graph` (línea que se dibuja), `settings-toggle-flow` y `toggle-flip` (interruptores), `physical-exit` (salidas con inercia), `arc-motion-path` (algo que viaja por un arco).
+
+### 10.7 Autocrítica constante
+
+En cada edición, además de la revisión de la skill (`.claude/skills/edicion/revision.md`):
+
+1. **Antes de editar:** elegir 1–2 referencias de `referencias/edicion/` y apuntar en el plan qué técnicas se toman de cada una (préstamos).
+2. **Tras el primer render:** hoja de contacto lado a lado con la referencia (`snapshot --against <referencia>` si hay vídeo, o capturas) y la **auditoría de dinamismo**, 0–2 puntos cada fila:
+
+| Criterio | 2 puntos |
+|---|---|
+| Jerarquía | Cada frase tiene clave (nivel 2); 3–5 palabras escenario |
+| Variedad | ≥ 5 tipos de entrada; ningún par entrada/salida repetido dos veces seguidas |
+| Salidas | ≥ 80 % de los elementos salen con dirección (no solo fundido) |
+| Color | Claves y escenarios con la Señal (AV-014), todo texto con la sombra sutil; ningún color de producto fuera del celular |
+| Profundidad | Al menos una palabra escenario detrás de la persona |
+| Tarjetas vivas | ≥ 2 tarjetas que hacen algo; ninguna tarjeta solo con texto |
+| Iconos | El producto aparece con su icono real al nombrarlo |
+| Huecos | Fuera de la demo, nunca más de 1,5 s sin un cambio gráfico |
+| Gestos | Cada gesto claro de Ale tiene su gráfico (nacer del gesto, señalar) |
+| CTA | El CTA es un componente animado |
+
+Se entrega con ≥ 16 de 20 o se dice qué falta y por qué.
+3. **Cada corrección de Ale** va a `errores.md` de la skill y, si es una técnica nueva, a este vocabulario.
+4. **Cada mes**, dos técnicas nuevas sacadas de referencias nuevas.
+
+### 10.8 Muestrario (2026-11-21)
+
+Los primeros 12,95 s de VID-0003 rehechos con este lenguaje, para decidir viéndolo: `videos/VID-0003/hyperframes/muestrario_v2/` (composición) y `media/trabajo/muestrario_v2.mp4` (con el sonido de la edición v06, que no se rediseñó). Lo que enseña:
+
+| t (s) | Técnica |
+|---|---|
+| 0,3 | Promesa con Barrido; «gratis» en caja ámbar |
+| 0,16–9,9 | Frases en minúsculas palabra a palabra (Subida), por encima de la estampa de la camiseta |
+| 1,70 | Clave «METAS» en ámbar con Letras; sale cayendo |
+| 2,18 | Escenario «ENERO» detrás de la cabeza (matte), Deslizar desde la izquierda; sale por la izquierda en «pero» |
+| 4,34 | Clave «APP» en caja violeta (producto) con Golpe y sacudida; entra el icono real de Plan B con Pop |
+| 5,83 | Clave «GANAS» con Máquina sobre el recurso; se borra hacia atrás |
+| 7,03 | Clave «PLANEO» con Barrido; sale barriéndose |
+| 9,14 | Logo con Deslizar y arco con un punto lima hasta el icono |
+| 9,92 | «Plan B» nace de las manos (de la base), con la «B» en lima |
+| 10,62 | Píldora violeta «MINIAPP 01» con Letras |
+| 11,42 | Tarjeta viva «PRECIO»: «$» rueda a «GRATIS» |
+| 12,62 | El icono crece hacia la cámara: entrada a la demo |
+
+⚠ El color del muestrario (violeta y lima de Plan B, ámbar) quedó **descartado por Ale** (2026-11-21): mezclaba MiMiniApp con cerobytes. Ver §10.4 y el laboratorio (§10.9).
+
+**Auditoría de dinamismo (§10.7)** sobre lo que cabe en 13 s: jerarquía 1 (4 claves en 12 frases; 1 escenario) · variedad 2 · salidas 2 · color 2 (con la propuesta AV-014) · profundidad 2 · tarjetas vivas 1 (solo el precio) · icono 2 · huecos 2 · gestos 1 · CTA sin evaluar (no está en el tramo): **15 de 18**. Para una edición completa faltaría: una clave en casi cada frase, 3–5 escenarios, una segunda tarjeta viva (el recordatorio de las 20:00 o el plan que se escribe) y el CTA como componente.
+
+### 10.9 Laboratorio de texto (2026-11-21)
+
+Ale sobre el muestrario: «quedó mejor, pero no son tan wow como el ejemplo». Diez tratamientos de texto más potentes, cada uno con su letra para elegir, sobre tres tramos de VID-0003: `videos/VID-0003/hyperframes/lab_texto/` y `media/trabajo/lab_texto.mp4` (13,7 s, con el sonido de la v06). Color: opción 4 de §10.4.
+
+| Letra | Tratamiento | Cómo | Dónde |
+|---|---|---|---|
+| A | Cascada 3D | Cada letra gira desde abajo (`rotateX` −100° → 0, perspectiva 700) con 1 fotograma de desfase y rebote corto; sale girando hacia delante | «TODOS LOS AÑOS» |
+| B | Impacto + brillo | Entra al 260 % y desenfocada y cae a su tamaño en 0,2 s con golpe de cámara; un brillo cruza a 29°; sale estirándose hacia arriba | «METAS» |
+| C | Letras que se juntan, detrás | Palabra escenario detrás de la persona: interletraje 0,9 em → −0,04 em con desenfoque; sale dispersándose desde el centro | «ENERO» |
+| D | Máscara con estela + barrido diagonal | Las palabras suben desde una línea con estela; «APP» entra con un barrido a 29° en una caja degradada | «hice una APP» |
+| E | Corte en dos + barra | Mitad de arriba por la izquierda, mitad de abajo por la derecha; al encajar cruza la barra «/»; salen separándose | «POR ESO HICE» |
+| F | Nace de las manos + brillo | La técnica de la base, en degradado, con un brillo cuando llega la «B» | «Plan B» |
+| G | Trazo que se rellena | El contorno se dibuja y el degradado entra con un barrido a 29°; golpe leve al asentarse | «GRATIS» |
+| H | La barra «/» que corta | La palabra cae, la barra de la marca la atraviesa y las dos mitades se separan | «ENERO» (antes de «¿Y tú?») |
+| I | Golpe con eco | Cae de 1,8 a 1 con sacudida y tres contornos se expanden hacia fuera | «¿Y TÚ?» |
+| J | CTA como componente | Tarjeta con borde degradado que sube; el botón se pulsa en «perfil» | «El link está en mi perfil» |
+
+**Ale, 2026-11-21:** «este nuevo ejemplo está bastante bien», con la paleta Señal y una sombra sutil en todas las letras (`media/trabajo/lab_texto_senal.mp4`). Tokens y sombra en [IDENTIDAD](../marca/IDENTIDAD.md).
+
+Lo que se elija pasa a la base (`hyperframes/edicion/`) como funciones reutilizables, con su entrada y su salida, y a `referencia.md` de la skill.
+
+### 10.10 Aplicado en VID-0003 v07 (2026-11-21)
+
+Ale: «Sí, edítalo». La base `videos/VID-0003/hyperframes/edicion/` pasa a la dirección v2 (es la base de `/edicion`): frases en minúsculas, claves en Señal, escenarios «ENERO» y «ESTE AÑO» detrás de la persona, los tratamientos A–J, Máquina y Barrido, sombra sutil en todo texto y los efectos de sonido rehechos para que cada uno tenga algo que se ve. Sale el recurso R01 («ENERO» detrás de la cabeza cuenta lo mismo) y la hoja de calendario del cierre (la cuenta la barra que corta «ENERO»). Entrega: `media/trabajo/edicion_v07.mp4`.
