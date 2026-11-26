@@ -70,12 +70,14 @@ Son rangos para experimentar, no reglas de las plataformas. El montaje sigue la 
 - **Fecha de inicio por decidir:** mediados de diciembre de 2026 es una posibilidad, no un compromiso (Ale, 2026-11-23). Las fechas de la tabla son orientativas. Las cuentas de las cinco redes ya están verificadas ([CUENTAS](../marca/CUENTAS.csv)).
 - **Antes del 1 de enero de 2027 no hay demo de Plan B** (Ale, 2026-11-23: el vídeo de Plan B es para el 1 de enero): las piezas previas son de proceso y comunidad, y sirven para que el canal tenga contexto y seguidores el día del lanzamiento.
 - Cada pieza se publica en TikTok, Reels y Shorts el mismo día; X solo enlaza (DIST-X-001).
+- **En diciembre todo se cuenta en futuro** («el 1 de enero empiezo»), para que quien llegue sepa quién es cerobytes y qué empieza (Ale, 2026-11-26: «me gusta el plan»). Las piezas 1 y 2 anuncian; la 3 enseña que se está construyendo. Extras si sobran horas: «Por qué mis miniapps son gratis y sin cuenta» y «Armé un sistema con IA para no abandonar este reto» (esta, solo si Ale acepta enseñar el marco).
+- **Cómo se dice el reto: pendiente de Ale.** Como promesa («cada viernes, una miniapp») o como intento («me reto a… y te voy a contar si fallo»). Recomendación: intento, porque SERIE-001 sigue en propuesta.
 
 | # | Cuándo | Pieza | Pilar · familia | Hipótesis (una variable) |
 |---|---|---|---|---|
-| 1 | ≈ 15 dic | Soy cerobytes: de dónde sale el nombre y qué voy a construir (la serie de miniapps gratis) | PROCESO · B | Línea base: confesión en primera persona como gancho |
-| 2 | ≈ 18 dic | Cómo decidí la primera miniapp (de diez candidatas a Plan B) | PROCESO · B | Gancho de resultado frente al de la pieza 1 (problema) |
-| 3 | ≈ 22 dic | El error o la decisión más difícil construyendo Plan B | PROCESO · B | Con pantallas del diseño o del código frente a solo cámara (la app funcionando no se enseña hasta el 1 de enero) |
+| 1 | ≈ 15 dic | Soy cerobytes: el nombre gamer, 8 años de software y por qué ahora construyo en público; cierra con «el 1 de enero empiezo algo» (I-0002) | PROCESO · B | Línea base: confesión en primera persona como gancho |
+| 2 | ≈ 18 dic | El reto de 2027: «empieza en viernes y tiene 53; el 1 de enero empiezo una miniapp gratis cada viernes», contado en futuro (I-0003) | PROCESO · B | Gancho de resultado (los 53 viernes) frente al de la pieza 1 (problema) |
+| 3 | ≈ 22 dic | Detrás de la primera miniapp: cómo la elegí (de diez candidatas a Plan B) y la decisión más difícil al construirla | PROCESO · B | Con pantallas del diseño o del código frente a solo cámara (la app funcionando no se enseña hasta el 1 de enero) |
 | 4 | ≈ 26 dic | Pregunta: ¿qué te hace dejar tus metas? (opciones reales) | COMUNIDAD · D | Duración corta (15–25 s) frente a 30–40 s |
 | 5 | ≈ 30 dic | Cuenta atrás: «el 1 de enero sale» | PROCESO · B | CTA de seguir frente a CTA de comentar |
 | 6 | **1 ene 2027** | Plan B (VID-0003 final, regrabado) | UTILIDAD · A | Lanzamiento: la pieza más pulida, con la dirección v2 |
